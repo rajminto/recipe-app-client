@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import logo from './logo.svg'
+import './App.css'
 
 // Component Import
 import Recipe from './components/Recipe'
-
 
 class App extends Component {
   constructor(props) {
@@ -27,8 +26,8 @@ class App extends Component {
       <div className="App">
         <Recipe recipe={this.state.recipe} />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
