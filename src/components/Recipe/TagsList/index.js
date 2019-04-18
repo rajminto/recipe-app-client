@@ -1,4 +1,5 @@
 import React from 'react'
+import './tags-list.css'
 
 // Component Imports
 import Tag from './Tag'

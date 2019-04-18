@@ -4,6 +4,7 @@ import './recipe.css'
 // Component Imports
 import TagsList from './TagsList'
 import RecipeHeader from './RecipeHeader'
+import RecipeDescription from './RecipeDescription'
 
 
 const Recipe = ({ recipe }) => {
@@ -27,6 +28,11 @@ const Recipe = ({ recipe }) => {
         img_url={img_url}
       />
       <TagsList tags={tags} />
+      <RecipeDescription
+        description={description}
+        prep_time={prep_time}
+        cook_time={cook_time}
+      />
     </div>
   )
 }
