@@ -22,8 +22,11 @@ const Recipe = ({ recipe }) => {
 
   return (
     <div>
-      <h1>{name}</h1>
-      <h2>By: {user_name}</h2>
+      <RecipeHeader
+        name={name}
+        user_name={user_name}
+      />
+      
       <img src={logo} className="App-logo" alt="logo" />
 
     </div>
