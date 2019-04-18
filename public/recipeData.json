@@ -1,0 +1,92 @@
+{
+  "id": 1,
+  "name": "Delicious Beef Chili",
+  "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+  "img_url": "http://www.placeholder.com",
+  "prep_time": "20 minutes",
+  "cook_time": "1 hour",
+  "user_id": 1,
+  "user_name": "Matt Winzer",
+  "instructions": [
+    {
+      "instruction_id": 1,
+      "description": "Do something",
+      "order": 1
+    },
+    {
+      "instruction_id": 2,
+      "description": "Do anothing thing",
+      "order": 2
+    },
+    {
+      "instruction_id": 3,
+      "description": "Do something else",
+      "order": 3
+    },
+    {
+      "instruction_id": 4,
+      "description": "Wait some time",
+      "order": 4
+    },
+    {
+      "instruction_id": 5,
+      "description": "Finishing touches",
+      "order": 5
+    }
+  ],
+  "ingredients": [
+    {
+      "ingredient_id": 1,
+      "name": "cloves of garlic",
+      "quantity": 2
+    },
+    {
+      "ingredient_id": 2,
+      "name": "tablespoons of olive oil",
+      "quantity": 2
+    },
+    {
+      "ingredient_id": 3,
+      "name": "large white onions",
+      "quantity": 3
+    },
+    {
+      "ingredient_id": 4,
+      "name": "pound of ground beef",
+      "quantity": 1
+    },
+    {
+      "ingredient_id": 5,
+      "name": "cans of cannellini",
+      "quantity": 2
+    },
+    {
+      "ingredient_id": 6,
+      "name": "can of red kidney beans",
+      "quantity": 1
+    },
+    {
+      "ingredient_id": 7,
+      "name": "cans of pinto beans",
+      "quantity": 2
+    }
+  ],
+  "tags": [
+    {
+      "tag_id": 1,
+      "name": "italian"
+    },
+    {
+      "tag_id": 2,
+      "name": "comfort-food"
+    },
+    {
+      "tag_id": 3,
+      "name": "hot"
+    },
+    {
+      "tag_id": 4,
+      "name": "healthy"
+    }
+  ]
+}
