@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import logo from './logo.svg'
 import './App.css'
 
 // Component Import
@@ -9,7 +8,8 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      recipe: {}
+      recipe: {},
+      isLoaded: false
     }
   }
 
@@ -17,14 +17,20 @@ class App extends Component {
     fetch('/recipeData.json')
       .then(res => res.json())
       .then(recipe => {
-        this.setState({ recipe })
+        this.setState({
+          recipe: recipe,
+          isLoaded: true
+        })
       })
   }
 
   render() {
     return (
       <div className="App">
-        <Recipe recipe={this.state.recipe} />
+        {this.state.isLoaded
+          ? <Recipe recipe={this.state.recipe} />
+          : <h2>Loading...</h2>
+        }
       </div>
     )
   }

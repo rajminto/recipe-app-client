@@ -1,5 +1,4 @@
 import React from 'react'
-import logo from '../../logo.svg'
 import './recipe.css'
 
 // Component Imports
@@ -25,10 +24,9 @@ const Recipe = ({ recipe }) => {
       <RecipeHeader
         name={name}
         user_name={user_name}
+        img_url={img_url}
       />
-      
-      <img src={logo} className="App-logo" alt="logo" />
-
+      <TagsList tags={tags} />
     </div>
   )
 }
