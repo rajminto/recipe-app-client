@@ -3,7 +3,8 @@ import logo from '../../logo.svg'
 import './recipe.css'
 
 // Component Imports
-import Tags from './Tags'
+import TagsList from './TagsList'
+import RecipeHeader from './RecipeHeader'
 
 
 const Recipe = ({ recipe }) => {
