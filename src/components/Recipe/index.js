@@ -5,6 +5,7 @@ import './recipe.css'
 import TagsList from './TagsList'
 import RecipeHeader from './RecipeHeader'
 import RecipeDescription from './RecipeDescription'
+import RecipeIngredientsList from './RecipeIngredientsList'
 
 
 const Recipe = ({ recipe }) => {
@@ -32,6 +33,9 @@ const Recipe = ({ recipe }) => {
         description={description}
         prep_time={prep_time}
         cook_time={cook_time}
+      />
+      <RecipeIngredientsList
+        ingredients={ingredients}
       />
     </div>
   )

@@ -26,7 +26,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div>
         {this.state.isLoaded
           ? <Recipe recipe={this.state.recipe} />
           : <h2>Loading...</h2>
