@@ -6,8 +6,10 @@ const RecipeDescription = ({ description, prep_time, cook_time }) => {
     <Fragment>
       <h2>Recipe Description</h2>
       <p>{description}</p>
-      <h4>Prep Time: {prep_time}</h4>
-      <h4>Cook Time: {cook_time}</h4>
+      <div className="recipe-times-container">
+        <p>Prep Time: {prep_time}</p>
+        <p>Cook Time: {cook_time}</p>
+      </div>
     </Fragment>
   )
 }

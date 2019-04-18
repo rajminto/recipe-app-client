@@ -2,7 +2,7 @@ import React from 'react'
 import './tag.css'
 
 const Tag = ({ name }) => (
-  <span>#{name} </span>
+  <strong>#{name} </strong>
 )
 
 export default Tag
