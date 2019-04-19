@@ -6,7 +6,7 @@ import TagsList from './TagsList'
 import RecipeHeader from './RecipeHeader'
 import RecipeDescription from './RecipeDescription'
 import RecipeIngredientsList from './RecipeIngredientsList'
-
+import RecipeInstructionsList from './RecipeInstructionsList';
 
 const Recipe = ({ recipe }) => {
   const { 
@@ -36,6 +36,9 @@ const Recipe = ({ recipe }) => {
       />
       <RecipeIngredientsList
         ingredients={ingredients}
+      />
+      <RecipeInstructionsList
+        instructions={instructions}
       />
     </div>
   )
