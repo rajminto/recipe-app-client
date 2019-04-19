@@ -13,7 +13,6 @@ const RecipeIngredientsList = ({ ingredients }) => {
     />
   ))
 
-
   return (
     <div>
       <h2>Recipe Ingredients</h2>
