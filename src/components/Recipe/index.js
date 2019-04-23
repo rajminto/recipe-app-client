@@ -15,7 +15,7 @@ const Recipe = ({ recipe }) => {
     img_url,
     prep_time,
     cook_time,
-    user_name,
+    user,
     instructions,
     ingredients,
     tags
@@ -25,7 +25,7 @@ const Recipe = ({ recipe }) => {
     <div>
       <RecipeHeader
         name={name}
-        user_name={user_name}
+        user_name={user.name}
         img_url={img_url}
       />
       <TagsList tags={tags} />

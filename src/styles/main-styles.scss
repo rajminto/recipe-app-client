@@ -1,0 +1,17 @@
+/* GLOBAL STYLE / FONT IMPORTS */
+@import url('https://fonts.googleapis.com/css?family=Montserrat:100,300,400,500');
+
+/* PARTIALS IMPORTS */
+@import 'variables';
+@import 'add-recipe';
+
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html{
+  background-color: $main-background;
+  font-family: $main-font;
+}
+
