@@ -1,3 +1,5 @@
+@import './variables';
+
 .add-rec-form-wrapper{
   padding: 3em;
   width: 40em;
@@ -10,6 +12,7 @@
     display: flex;
     flex-direction: column;
     font-size: 1.4em;
+    color: $dark-night;
     input{
       font-size: 1.4em;
       margin: .5em 0;
@@ -17,12 +20,6 @@
     textarea{
       font-size: 1em;
       margin: .5em 0;
-    }
-    button{
-      height: 2em;
-      width: auto;
-      font-size: 1.4em;
-      margin-top: 2em;
     }
   }
 }

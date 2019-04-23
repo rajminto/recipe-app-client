@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Button from '../../../shared/Button';
+import { TweenLite, TimelineLite, Back, Power1 } from 'gsap';
 //
 
 class RecipeForm extends Component {
@@ -12,6 +13,11 @@ class RecipeForm extends Component {
       prep_time: '',
       cook_time: ''
     }
+    this.container = null;
+  }
+  //
+  componentDidMount() {
+    TweenLite.from(this.container, 0.7, { autoAlpha: 0, y: 100 });
   }
   //
   onInputChange = (e) => {
@@ -47,7 +53,7 @@ class RecipeForm extends Component {
   render() {
     const { name, description, prep_time, cook_time } = this.state;
     return (
-      <div className="add-rec-form-wrapper">
+      <div className="add-rec-form-wrapper" ref={container => this.container = container}>
         <h1>Describe Your Recipe:</h1>
         <form className="add-rec-form" onSubmit={this.addNewRecipe}>
           <label>Recipe Title:</label>
