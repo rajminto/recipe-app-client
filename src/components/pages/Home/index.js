@@ -23,7 +23,7 @@ class Home extends Component {
   //
   render() {
     return (
-      <div>
+      <div className="home-container">
         {this.state.isLoaded
           ? <Recipe recipe={this.state.recipe} />
           : <h2>Loading...</h2>

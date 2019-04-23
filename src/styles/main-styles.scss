@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'add-recipe';
 
 *{
   box-sizing: border-box;
@@ -9,25 +10,4 @@ html{
   // font-size: 1vw; /* for now */
   background-color: $main-background;
 }
-.container {
-  max-width: 90%;
-  margin: 0 auto;
-  padding: 1rem;
-  border: 2px solid black;
-}
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
