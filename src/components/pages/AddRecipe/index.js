@@ -19,15 +19,19 @@ class AddRecipe extends Component {
     })
   }
   //
-  addNewRecipe = (e) => {
-    console.log('Recipe Added:::', this.state);
-    e.preventDefault();
+  clearForm = () => {
     this.setState({
       name: '',
       description: '',
       prep_time: '',
       cook_time: ''
     })
+  }
+  //
+  addNewRecipe = (e) => {
+    console.log('Recipe Added:::', this.state);
+    e.preventDefault();
+    this.clearForm();
   }
   //
   render() {
