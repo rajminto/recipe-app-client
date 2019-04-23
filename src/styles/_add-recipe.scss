@@ -2,6 +2,10 @@
   padding: 3em;
   width: 40em;
   box-shadow: 0px 0px 5px 2px rgb(165, 164, 164);
+  border-radius: .2em;
+  h1{
+    margin-bottom: 1em;
+  }
   .add-rec-form{
     display: flex;
     flex-direction: column;
@@ -10,11 +14,15 @@
       font-size: 1.4em;
       margin: .5em 0;
     }
+    textarea{
+      font-size: 1em;
+      margin: .5em 0;
+    }
     button{
       height: 2em;
       width: auto;
       font-size: 1.4em;
-      margin-top: 3em;
+      margin-top: 2em;
     }
   }
 }

@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-
+import Button from '../../../shared/Button';
 //
 
 class RecipeForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userId: 1,
       name: '',
       description: '',
       prep_time: '',
@@ -47,21 +48,23 @@ class RecipeForm extends Component {
     const { name, description, prep_time, cook_time } = this.state;
     return (
       <div className="add-rec-form-wrapper">
+        <h1>Describe Your Recipe:</h1>
         <form className="add-rec-form" onSubmit={this.addNewRecipe}>
-          <label>Name:</label>
+          <label>Recipe Title:</label>
           <input
             type="text"
             name="name"
             value={name}
             onChange={this.onInputChange}>
           </input>
-          <label>Description</label>
-          <input
-            type="text"
+          <label>Description of your recipe:</label>
+          <textarea
+            type="textarea"
+            rows="5"
             name="description"
             value={description}
             onChange={this.onInputChange}>
-          </input>
+          </textarea>
           <label>Prep Time:</label>
           <input
             type="text"
@@ -76,7 +79,9 @@ class RecipeForm extends Component {
             value={cook_time}
             onChange={this.onInputChange}>
           </input>
-          <button className="ui-btn" type="submit">Add Recipe!</button>
+          <Button
+            text="Continue"
+          />
         </form>
       </div>
     )
