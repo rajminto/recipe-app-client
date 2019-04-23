@@ -1,37 +1,24 @@
 import React, { Component } from 'react'
-import './App.css'
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import Header from './components/Header/index';
+import PageContent from './components/PageContent/index';
+import './styles/main-styles.scss'
 
-// Component Import
-import Recipe from './components/Recipe'
 
 class App extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      recipe: {},
-      isLoaded: false
-    }
-  }
-
-  componentDidMount() {
-    fetch('/recipeData.json')
-      .then(res => res.json())
-      .then(recipe => {
-        this.setState({
-          recipe: recipe,
-          isLoaded: true
-        })
-      })
+    this.state = {}
   }
 
   render() {
     return (
-      <div className="container">
-        {this.state.isLoaded
-          ? <Recipe recipe={this.state.recipe} />
-          : <h2>Loading...</h2>
-        }
-      </div>
+      <Router>
+        <div className="container">
+          <Route path="/" component={Header} />
+          <Route path="/" component={PageContent} />
+        </div>
+      </Router>
     )
   }
 }
