@@ -1,0 +1,29 @@
+@import '../../../styles/variables';
+
+.container{
+  height: 50%;
+  width: 25em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  background-color: $backup;
+  transition: height 1s ease-in-out;
+  .menuWrap{
+    display: flex;
+    flex-direction: column;
+    padding-left: 3em;
+    margin-top: 3em;
+    a{
+      margin: 1em;
+      font-size: 1.4em;
+      text-decoration: none;
+      cursor: pointer;
+      color: $dark-night;
+    }
+  }
+  .closed{
+    height: 0;
+    transition: height 1s ease-in-out;
+  }
+}

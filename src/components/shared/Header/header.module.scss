@@ -2,7 +2,23 @@
 
 .container{
   background-color: $secondary;
+  padding: 0 1%;
   height: 6em;
   display: flex;
-  // box-shadow: 2px .1px 3px 2px rgb(131, 131, 131);
+  align-items: center;
+  .iconBox{
+    height: 5em;
+    width: 5em;
+    margin-left: 2em;
+    transition: 1s ease-in-out;
+    cursor: pointer;
+    svg{
+      height: 100%;
+      width: 100%;
+    }
+  }
+  .closed{
+    transition: 1s ease-in-out;
+    transform: rotate(90deg);
+  }
 }

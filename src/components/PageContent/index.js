@@ -6,7 +6,7 @@ import styles from './page-content.module.scss';
 import Home from '../pages/Home';
 import AddRecipe from '../pages/AddRecipe';
 import NotFound from '../pages/NotFound';
-
+import Navigator from '../shared/Navigator';
 
 class PageContent extends Component {
   constructor(props){
@@ -18,6 +18,7 @@ class PageContent extends Component {
     const { container } = styles;
     return (
       <div className={container}>
+        <Navigator />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/add" component={AddRecipe} />
