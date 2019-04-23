@@ -5,7 +5,7 @@ import styles from './page-content.module.scss';
 // COMPONENT IMPORT //
 import Home from '../pages/Home';
 import AddRecipe from '../pages/AddRecipe';
-import NotFound from '../NotFound';
+import NotFound from '../pages/NotFound';
 
 
 class PageContent extends Component {

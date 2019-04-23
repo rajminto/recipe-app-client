@@ -11,11 +11,11 @@ class Home extends Component {
   }
   //
   componentDidMount() {
-    fetch('/recipeData.json')
+    fetch('https://recipe-app-server.herokuapp.com/api/recipes/1')
       .then(res => res.json())
       .then(recipe => {
         this.setState({
-          recipe: recipe,
+          recipe: recipe.recipe,
           isLoaded: true
         })
       })
