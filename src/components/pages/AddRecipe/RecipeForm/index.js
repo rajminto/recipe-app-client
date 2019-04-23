@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Button from '../../../shared/Button';
-import { TweenLite, TimelineLite, Back, Power1 } from 'gsap';
+import { TweenLite, TimelineLite, Back, Power3, Power4 } from 'gsap';
 //
 
 class RecipeForm extends Component {
@@ -24,6 +24,10 @@ class RecipeForm extends Component {
     this.setState({
       [e.target.name]: e.target.value
     })
+  }
+  //
+  animateOff = () => {
+    TweenLite.to(this.container, 0.3, { x: -700, autoAlpha: 0, ease: Power3.easeOut });
   }
   //
   clearForm = () => {
@@ -87,6 +91,7 @@ class RecipeForm extends Component {
           </input>
           <Button
             text="Continue"
+            clickFunc={this.animateOff}
           />
         </form>
       </div>
