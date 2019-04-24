@@ -17,6 +17,7 @@ class RecipeForm extends Component {
     }
     this.container = null;
     this.innerContainer = null;
+    this.rcd = null;
   }
   //
   componentDidMount() {
@@ -40,8 +41,10 @@ class RecipeForm extends Component {
   }
   //
   reverseAnimate = () => {
-    TweenLite.to(this.container, .8, { className: '-=expanded-display', ease: Power4.easeIn });
-    TweenLite.to(this.innerContainer, 1, ({ autoAlpha: 1 }));
+    TweenLite.to(this.rcd, .3, { autoAlpha: 0, onComplete: () => {
+      TweenLite.to(this.container, .8, { className: '-=expanded-display', ease: Power4.easeIn });
+      TweenLite.to(this.innerContainer, 0.1, { className: '-=displayNone', autoAlpha: 1 })
+    }});
   }
   //
   clearForm = () => {
@@ -111,7 +114,9 @@ class RecipeForm extends Component {
             />
           </form>
         </div>
-        {this.state.expandedDisplay ? <RecipeCreateDetails /> : null}
+        <div ref={rcd => this.rcd = rcd} className="rcd-contain">
+          {this.state.expandedDisplay ? <RecipeCreateDetails close={this.reverseAnimate} /> : null}
+        </div>
       </div>
     )
   }

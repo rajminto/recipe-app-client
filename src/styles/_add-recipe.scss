@@ -89,6 +89,15 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    .return-icon{
+      height: 3em;
+      width: 3em;
+      cursor: pointer;
+      svg{
+        height: 100%;
+        width: 100%;
+      }
+    }
     .recipe-info{
       p{
         margin: 1em;

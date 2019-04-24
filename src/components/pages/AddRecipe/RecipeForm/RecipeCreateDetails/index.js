@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import IngredientForm from '../../IngredientForm';
 import { TweenLite } from 'gsap';
+import { ReactComponent as ReturnIcon } from '../../../../../assets/svgs/return.svg'
+//
 
 class RecipeCreateDetails extends Component {
   constructor(props){
@@ -32,6 +34,9 @@ class RecipeCreateDetails extends Component {
   render() {
     return (
       <div className="recipe-create-details" ref={container => this.container = container}>
+        <div className="return-icon" onClick={this.props.close}>
+          <ReturnIcon />
+        </div>
         <div className="recipe-info-top">
           <div className="recipe-info">
             <h1>Ingredients and Procedures:</h1>
