@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Button from '../../../shared/Button';
-import IngredientForm from '../IngredientForm';
-import { TweenLite, TimelineLite, Back, Power3, Power4 } from 'gsap';
+import RecipeCreateDetails from './RecipeCreateDetails';
+import { TweenLite, Back, Power4 } from 'gsap';
 //
 
 class RecipeForm extends Component {
@@ -31,9 +31,10 @@ class RecipeForm extends Component {
   //
   enterRecipeDisplay = () => {
     TweenLite.to(this.container, .8, { className: '+=expanded-display', ease: Power4.easeIn });
-    TweenLite.to(this.innerContainer, .5, ({ autoAlpha: 0 }));
+    TweenLite.to(this.innerContainer, .5, ({ autoAlpha: 0, onComplete: () => {
+      TweenLite.to(this.innerContainer, 0.1, { className: '+=displayNone' })
+    } }));
     TweenLite.delayedCall(1, () => {
-      console.log('show new display');
       this.setState({ expandedDisplay: !this.state.expandedDisplay })
     })
   }
@@ -65,6 +66,7 @@ class RecipeForm extends Component {
       .then(res => res.json())
       .then((res) => console.log('RESPONSE:::', res))
     this.clearForm();
+    localStorage.setItem('recipe_details', JSON.stringify(this.state));
   }
   //
   render() {
@@ -109,7 +111,7 @@ class RecipeForm extends Component {
             />
           </form>
         </div>
-        {this.state.expandedDisplay ? <IngredientForm /> : null}
+        {this.state.expandedDisplay ? <RecipeCreateDetails /> : null}
       </div>
     )
   }

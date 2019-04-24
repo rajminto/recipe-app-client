@@ -44,9 +44,9 @@ class IngredientForm extends Component {
   render() {
     const { ingredients } = this.state;
     return (
-      <div className="add-rec-form-wrapper" ref={container => this.container = container}>
+      <div className="add-ing-form-wrapper" ref={container => this.container = container}>
         <h1>Please add your ingredients:</h1>
-        <form onSubmit={this.handleSubmit} onChange={this.handleChange} className="add-rec-form">
+        <form onSubmit={this.handleSubmit} onChange={this.handleChange} className="add-ing-form">
           {
             ingredients.map((ingredient, i) => {
               let ingredientId = `ing-${i}`, descId = `desc-${i}`
