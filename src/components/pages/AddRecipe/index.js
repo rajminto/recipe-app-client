@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import RecipeForm from './RecipeForm';
+import DynamicForm from './IngredientForm';
 //
 
 class AddRecipe extends Component {
@@ -7,12 +8,14 @@ class AddRecipe extends Component {
     super(props);
     this.state = { }
   }
+  
   //
   render() {
     return (
-      <div>
+      <Fragment>
         <RecipeForm />
-      </div>
+        {/* <DynamicForm /> */}
+      </Fragment>
     )
   }
 }

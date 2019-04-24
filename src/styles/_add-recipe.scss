@@ -1,5 +1,6 @@
 @import './variables';
 
+
 .add-rec-form-wrapper{
   padding: 3em;
   width: 40em;
@@ -12,15 +13,55 @@
   .add-rec-form{
     display: flex;
     flex-direction: column;
-    font-size: 1.4em;
+    font-size: 1.3em;
     color: $dark-night;
+    max-height: 40rem;
+    overflow: scroll;
+    padding: 0 .5em;
     input{
-      font-size: 1.4em;
+      font-size: 1.2em;
       margin: .5em 0;
     }
     textarea{
       font-size: 1em;
       margin: .5em 0;
     }
+    .button-container{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      margin-top: 3em;
+      border: none;
+      height: auto;
+      padding: 0 2em;
+      // button:hover{
+      //   background-color: transparent;
+      //   
+      // }
+      button:focus{
+        outline: 0;
+      }
+    }
+    .ingredient-field{
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      border-bottom: 1px solid $dark-night;
+      padding: 2em 0;
+      span{
+        margin-right: .4em;
+      }
+    }
+  }
+}
+.expanded-display{
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr 2fr 2fr;
+  .add-rec-form{
+    grid-column: 1;
   }
 }
