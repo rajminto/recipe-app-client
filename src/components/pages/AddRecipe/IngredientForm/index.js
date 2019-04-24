@@ -27,7 +27,7 @@ class IngredientForm extends Component {
   }
   addNewIngredient = (e) => {
     this.setState((prevState) => ({
-      ingredients: [...prevState.ingredients, { name: '', age: '' }],
+      ingredients: [...prevState.ingredients, { name: '', description: '' }],
     }));
   }
   //
