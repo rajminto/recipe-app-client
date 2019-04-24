@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import RecipeForm from './RecipeForm';
+import MasterForm from './MasterForm';
 //
 
 class AddRecipe extends Component {
@@ -12,7 +12,7 @@ class AddRecipe extends Component {
   render() {
     return (
       <Fragment>
-        <RecipeForm />
+        <MasterForm />
       </Fragment>
     )
   }

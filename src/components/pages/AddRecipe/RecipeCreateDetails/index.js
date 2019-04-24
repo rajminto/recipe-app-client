@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react'
-import IngredientForm from '../../IngredientForm';
+import IngredientForm from '../IngredientForm';
 import { TweenLite } from 'gsap';
-import { ReactComponent as ReturnIcon } from '../../../../../assets/svgs/return.svg'
+import { ReactComponent as ReturnIcon } from '../../../../assets/svgs/return.svg'
 //
 
 class RecipeCreateDetails extends Component {
@@ -14,7 +14,7 @@ class RecipeCreateDetails extends Component {
   }
   componentDidMount(){
     this.hydrateFromLocalStorage();
-    TweenLite.from(this.container, .8, ({ autoAlpha: 0 }));
+    // TweenLite.from(this.container, .8, ({ autoAlpha: 0 }));
   }
   hydrateFromLocalStorage = () => {
     let prevFormData = JSON.parse(localStorage.getItem('recipe_details'));
@@ -34,7 +34,7 @@ class RecipeCreateDetails extends Component {
   render() {
     return (
       <div className="recipe-create-details" ref={container => this.container = container}>
-        <div className="return-icon" onClick={this.props.close}>
+        <div className="return-icon" onClick={() => this.props.exitRecipeDisplay(this.container)}>
           <ReturnIcon />
         </div>
         <div className="recipe-info-top">
