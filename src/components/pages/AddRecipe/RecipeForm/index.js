@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Button from '../../../shared/Button';
-import { TweenLite, TimelineLite, Back, Power3, Power4 } from 'gsap';
+import RecipeCreateDetails from './RecipeCreateDetails';
+import { TweenLite, Back, Power4 } from 'gsap';
 //
 
 class RecipeForm extends Component {
@@ -11,9 +12,11 @@ class RecipeForm extends Component {
       name: '',
       description: '',
       prep_time: '',
-      cook_time: ''
+      cook_time: '',
+      expandedDisplay: false
     }
     this.container = null;
+    this.innerContainer = null;
   }
   //
   componentDidMount() {
@@ -26,8 +29,19 @@ class RecipeForm extends Component {
     })
   }
   //
-  animateOff = () => {
-    TweenLite.to(this.container, 0.3, { x: -700, autoAlpha: 0, ease: Power3.easeOut });
+  enterRecipeDisplay = () => {
+    TweenLite.to(this.container, .8, { className: '+=expanded-display', ease: Power4.easeIn });
+    TweenLite.to(this.innerContainer, .5, ({ autoAlpha: 0, onComplete: () => {
+      TweenLite.to(this.innerContainer, 0.1, { className: '+=displayNone' })
+    } }));
+    TweenLite.delayedCall(1, () => {
+      this.setState({ expandedDisplay: !this.state.expandedDisplay })
+    })
+  }
+  //
+  reverseAnimate = () => {
+    TweenLite.to(this.container, .8, { className: '-=expanded-display', ease: Power4.easeIn });
+    TweenLite.to(this.innerContainer, 1, ({ autoAlpha: 1 }));
   }
   //
   clearForm = () => {
@@ -52,50 +66,54 @@ class RecipeForm extends Component {
       .then(res => res.json())
       .then((res) => console.log('RESPONSE:::', res))
     this.clearForm();
+    localStorage.setItem('recipe_details', JSON.stringify(this.state));
   }
   //
   render() {
     const { name, description, prep_time, cook_time } = this.state;
     return (
       <div className="add-rec-form-wrapper" ref={container => this.container = container}>
-        <h1>Describe Your Recipe:</h1>
-        <form className="add-rec-form" onSubmit={this.addNewRecipe}>
-          <label>Recipe Title:</label>
-          <input
-            type="text"
-            name="name"
-            value={name}
-            onChange={this.onInputChange}>
-          </input>
-          <label>Description of your recipe:</label>
-          <textarea
-            type="textarea"
-            rows="5"
-            name="description"
-            value={description}
-            onChange={this.onInputChange}>
-          </textarea>
-          <label>Prep Time:</label>
-          <input
-            type="text"
-            name="prep_time"
-            value={prep_time}
-            onChange={this.onInputChange}>
-          </input>
-          <label>Cook Time:</label>
-          <input
-            type="text"
-            name="cook_time"
-            value={cook_time}
-            onChange={this.onInputChange}>
-          </input>
-          <Button
-            text="Continue"
-            clickFunc={this.animateOff}
-          />
-        </form>
+        <div ref={subCon => this.innerContainer = subCon} className="inner-form-section">
+          <h1>Describe Your Recipe:</h1>
+          <form className="add-rec-form" onSubmit={this.addNewRecipe}>
+            <label>Recipe Title:</label>
+            <input
+              type="text"
+              name="name"
+              value={name}
+              onChange={this.onInputChange}>
+            </input>
+            <label>Description of your recipe:</label>
+            <textarea
+              type="textarea"
+              rows="5"
+              name="description"
+              value={description}
+              onChange={this.onInputChange}>
+            </textarea>
+            <label>Prep Time:</label>
+            <input
+              type="text"
+              name="prep_time"
+              value={prep_time}
+              onChange={this.onInputChange}>
+            </input>
+            <label>Cook Time:</label>
+            <input
+              type="text"
+              name="cook_time"
+              value={cook_time}
+              onChange={this.onInputChange}>
+            </input>
+            <Button
+              text="Continue"
+              clickFunc={this.enterRecipeDisplay}
+            />
+          </form>
+        </div>
+        {this.state.expandedDisplay ? <RecipeCreateDetails /> : null}
       </div>
     )
   }
 }
-export default RecipeForm;
+export default RecipeForm;    

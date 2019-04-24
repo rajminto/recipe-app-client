@@ -1,10 +1,15 @@
 @import '../../../styles/variables';
 
 .ui-btn{
+  cursor: pointer;
   background-color: $secondary;
+  font-size: 1.3em;
   height: 2em;
   width: auto;
-  font-size: 1.4em;
   margin-top: 2em;
   color: $dark-night;
+  padding: 0 1em;
+  font-family: $main-font;
+  border-radius: .3em;
+  border: none;
 }

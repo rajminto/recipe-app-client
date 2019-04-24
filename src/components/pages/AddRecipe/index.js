@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import RecipeForm from './RecipeForm';
 //
 
@@ -7,12 +7,13 @@ class AddRecipe extends Component {
     super(props);
     this.state = { }
   }
+  
   //
   render() {
     return (
-      <div>
+      <Fragment>
         <RecipeForm />
-      </div>
+      </Fragment>
     )
   }
 }
