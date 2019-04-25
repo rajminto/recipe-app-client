@@ -27,6 +27,7 @@ class MasterForm extends Component {
   //
   reverseAnimate = (target) => {
     TweenLite.to(target, .1, { autoAlpha: 0, onComplete: () => {
+      TweenLite.to(this.container, { minHeight: 'calc(100vh - 6em)' });
       TweenLite.to(this.container, .5, { className: '-=expanded-display', width: "40%", height: '45em', ease: Power2.easeOut, onComplete: () => {
         this.setState({ expanded: !this.state.expanded })
       } });
