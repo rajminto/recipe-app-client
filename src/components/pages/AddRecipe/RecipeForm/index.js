@@ -20,7 +20,7 @@ class RecipeForm extends Component {
     this.rcd = null;
   }
   componentDidMount(){
-    // TweenLite.from(this.innerContainer, .5, { autoAlpha: 0 });
+    TweenLite.from(this.innerContainer, .5, { autoAlpha: 0 });
   }
   //
   onInputChange = (e) => {
@@ -109,7 +109,7 @@ class RecipeForm extends Component {
                 onChange={this.onInputChange}>
               </input>
               <Button
-                text="Continue"
+                text="Next"
                 clickFunc={() => {
                   this.props.enterRecipeDisplay(this.innerContainer)
                 }}

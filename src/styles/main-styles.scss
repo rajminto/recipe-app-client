@@ -13,10 +13,11 @@
 html{
   background-color: $main-background;
   font-family: $main-font;
-  background-image: url('../assets/background.jpg');
+  // background-image: url('../assets/background.jpg'); 
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  font-size: 1vw;
 }
 
 

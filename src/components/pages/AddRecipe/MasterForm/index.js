@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import RecipeForm from '../RecipeForm';
 import RecipeCreateDetails from '../RecipeCreateDetails';
-import { TweenLite, Back, Power4 } from 'gsap';
+import { TweenLite, Back, Power4, Power2, Bounce } from 'gsap';
 import { CSSTransition } from 'react-transition-group';
 //
 
@@ -18,7 +18,7 @@ class MasterForm extends Component {
   }
   //
   enterRecipeDisplay = (target) => {
-    TweenLite.to(this.container, .8, { className: '+=expanded-display', width: '100%', ease: Power4.easeIn });
+    TweenLite.to(this.container, .8, { className: '+=expanded-display', width: '100vw', height: '100vh', ease: Power4.easeIn });
     TweenLite.to(target, .5, { autoAlpha: 0 });
     TweenLite.delayedCall(1, () => {
       this.setState({ expanded: !this.state.expanded })
@@ -26,8 +26,8 @@ class MasterForm extends Component {
   }
   //
   reverseAnimate = (target) => {
-    TweenLite.to(target, .5, { autoAlpha: 0, onComplete: () => {
-      TweenLite.to(this.container, .8, { className: '-=expanded-display', width: "40em", ease: Power4.easeIn, onComplete: () => {
+    TweenLite.to(target, .1, { autoAlpha: 0, onComplete: () => {
+      TweenLite.to(this.container, .5, { className: '-=expanded-display', width: "40%", height: '45em', ease: Power2.easeOut, onComplete: () => {
         this.setState({ expanded: !this.state.expanded })
       } });
     }});
@@ -46,7 +46,7 @@ class MasterForm extends Component {
               enterRecipeDisplay={this.enterRecipeDisplay} 
               expanded={this.state.expanded} 
             />
-            </CSSTransition> 
+          </CSSTransition> 
         : 
           <CSSTransition
             in={this.state.expanded}
@@ -58,7 +58,7 @@ class MasterForm extends Component {
               exitRecipeDisplay={this.reverseAnimate} 
             />
           </CSSTransition>}
-      </div>
+      </div>    
     )
   }
 }
