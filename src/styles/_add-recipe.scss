@@ -7,7 +7,6 @@
   box-shadow: 0px 0px 5px 2px rgb(165, 164, 164);
   border-radius: .2em;
   background-color: $main-background;
-  // margin: auto auto;
   .add-rec-form-wrapper{
     h1{
       margin-bottom: 1em;
@@ -18,7 +17,6 @@
       font-size: 1.3em;
       color: $dark-night;
       max-height: 40rem;
-      // overflow: scroll;
       padding: 0 .5em;
       input{
         font-size: 1.2em;
@@ -56,13 +54,16 @@
   .add-ing-form-wrapper{
     box-shadow: unset;
     flex-direction: row;
+    h1{
+      margin-bottom: 1em;
+    }
     input{
       font-size: 1.2em;
       margin: .5em 1em;
     }
     .ingredient-field{
-      border-bottom: 1px solid $dark-night;
-      padding: 2em 0;
+      padding: .3em 0;
+      font-size: .9em;
       span{
         margin-right: .4em;
       }
@@ -104,16 +105,42 @@
       p{
         margin: 1em;
         font-size: 1.2em;
-        font-weight: 700;
+        font-weight: 500;
+      }
+      span{
+        margin-left: 1em;
+        font-weight: 300;
+        font-style: italic;
       }
     }
     .recipe-info-top{
       width: 100%;
       height: auto;
+      min-height: 23em;
       display: flex;
       flex-direction: row;
+      justify-content: space-between;
       padding: 2em 0;
       overflow: hidden;
+      .current-list{
+        display: flex;
+        justify-content: flex-start;
+        width: 80em;
+        max-width: 50%;
+        justify-content: space-around;
+        div{
+          margin: 0 1em;
+          width: 50%;
+          height: auto;
+          overflow-wrap: break-word;
+          ol{
+            padding-left: 2em;
+          }
+          li{
+            margin: 1em 0;
+          }
+        }
+      }
     }
     .recipe-info-bot{
       width: 100%;
@@ -123,8 +150,3 @@
     }
   }
 }
-// .displayNone{
-//   visibility: hidden;
-//   display: none;
-//   opacity: 0;
-// }

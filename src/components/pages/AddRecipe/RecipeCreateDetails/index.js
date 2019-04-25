@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import IngredientForm from '../IngredientForm';
-import { TweenLite } from 'gsap';
 import { ReactComponent as ReturnIcon } from '../../../../assets/svgs/return.svg'
 //
 
@@ -20,14 +19,17 @@ class RecipeCreateDetails extends Component {
     let prevFormData = JSON.parse(localStorage.getItem('recipe_details'));
     this.setState({ prevFormData: prevFormData });
   }
+  getIngredientsFromInputs = (items) => {
+    this.setState({ ingredientItemsForList: items })
+  }
   createDetailHeaders = () => {
     const { prevFormData } = this.state;
     return(
       <Fragment>
-        <p>Recipe Name: {prevFormData.name}</p>
-        <p>Description: {prevFormData.description}</p>
-        <p>Preparation Duration: {prevFormData.prep_time}</p>
-        <p>Cooking Duration: {prevFormData.cook_time}</p>
+        <p>Recipe Name: <span>{prevFormData.name}</span></p>
+        <p>Description: <span>{prevFormData.description}</span></p>
+        <p>Preparation Duration: <span>{prevFormData.prep_time}</span></p>
+        <p>Cooking Duration: <span>{prevFormData.cook_time}</span></p>
       </Fragment>
     )
   }
@@ -43,11 +45,32 @@ class RecipeCreateDetails extends Component {
             {this.createDetailHeaders()}
           </div>
           <div className="current-list">
-            <h1>I AM CURRENTLY DISPLAYING YOUR LIST!!!</h1>
+            <div className="current-ingredients">
+              <h1>Ingredients:</h1>
+              <ol>
+                {this.state.ingredientItemsForList ? this.state.ingredientItemsForList.map((ing, i) => {
+                  return(
+                    <li>{`${ing.description} -- ${ing.name}`}</li>
+                  )
+                }) : null}
+              </ol>
+            </div>
+            <div className="current-procedures">
+              <h1>Directions:</h1>
+              <ol>
+                {this.state.ingredientItemsForList ? this.state.ingredientItemsForList.map((ing, i) => {
+                  return(
+                    <li>{ing.name}</li>
+                  )
+                }) : null}
+              </ol>
+            </div>
           </div>
         </div>
         <div className="recipe-info-bot">
-          <IngredientForm />
+          <IngredientForm 
+            sendIngredients={this.getIngredientsFromInputs}
+          />
         </div>
       </div>
     )

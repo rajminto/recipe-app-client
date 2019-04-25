@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import Button from '../../../shared/Button';
-import RecipeCreateDetails from '../RecipeCreateDetails';
-import { TweenLite, Back, Power4 } from 'gsap';
-import { CSSTransition } from 'react-transition-group';
+import { TweenLite } from 'gsap';
 //
 
 class RecipeForm extends Component {
@@ -28,24 +26,6 @@ class RecipeForm extends Component {
       [e.target.name]: e.target.value
     })
   }
-  //
-  // enterRecipeDisplay = () => {
-  //   // TweenLite.to(this.container, .8, { className: '+=expanded-display', ease: Power4.easeIn });
-  //   // TweenLite.to(this.innerContainer, .5, ({ autoAlpha: 0, onComplete: () => {
-  //   //   TweenLite.to(this.innerContainer, 0.1, { className: '+=displayNone' })
-  //   // }}));
-  //   // TweenLite.delayedCall(1, () => {
-  //   //   this.setState({ expandedDisplay: !this.state.expandedDisplay })
-  //   // })
-  //   // this.setState({ expandedDisplay: !this.state.expandedDisplay })
-  // }
-  //
-  // reverseAnimate = () => {
-  //   TweenLite.to(this.rcd, .3, { autoAlpha: 0, onComplete: () => {
-  //     TweenLite.to(this.container, .8, { className: '-=expanded-display', width: "40em", height: 'auto', ease: Power4.easeIn });
-  //     TweenLite.to(this.innerContainer, 0.1, { className: '-=displayNone', autoAlpha: 1 })
-  //   }});
-  // }
   //
   clearForm = () => {
     this.setState({

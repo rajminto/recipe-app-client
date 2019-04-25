@@ -20,7 +20,7 @@ class IngredientForm extends Component {
     if (['name', 'description'].includes(e.target.className)) {
       let ingredients = [...this.state.ingredients]
       ingredients[e.target.dataset.id][e.target.className] = e.target.value.toUpperCase()
-      this.setState({ ingredients }, () => console.log(this.state.ingredients))
+      this.setState({ ingredients }, () => this.props.sendIngredients(this.state.ingredients))
     } else {
       this.setState({ [e.target.name]: e.target.value.toUpperCase() })
     }
