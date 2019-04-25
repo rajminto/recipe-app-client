@@ -2,13 +2,14 @@ import React, { Component } from 'react'
 import Button from '../../../shared/Button';
 import { TweenLite } from 'gsap';
 import { ReactComponent as DeleteIcon } from '../../../../assets/svgs/delete.svg';
+
 //
 
-class IngredientForm extends Component {
+class ProcedureForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ingredients: [{ name: '', description: '' }]
+      procedures: [{ name: '', description: '' }]
     }
     this.container = null;
   }
@@ -19,29 +20,24 @@ class IngredientForm extends Component {
   //
   handleChange = (e) => {
     if (['name', 'description'].includes(e.target.className)) {
-      let ingredients = [...this.state.ingredients]
-      ingredients[e.target.dataset.id][e.target.className] = e.target.value.toUpperCase()
-      this.setState({ ingredients })
+      let procedures = [...this.state.procedures]
+      procedures[e.target.dataset.id][e.target.className] = e.target.value.toUpperCase()
+      this.setState({ procedures })
     } else {
       this.setState({ [e.target.name]: e.target.value.toUpperCase() })
     }
   }
-  addNewIngredient = (e) => {
+  addNewProcedure = (e) => {
     this.setState((prevState) => ({
-      ingredients: [...prevState.ingredients, { name: '', description: '' }],
+      procedures: [...prevState.procedures, { name: '', description: '' }],
     }));
-    this.props.sendIngredients(this.state.ingredients)
+    this.props.sendProcedures(this.state.procedures)
   }
   //
   removeClick(i) {
-    let ingredients = [...this.state.ingredients];
-    if(i === 0){
-      return
-    } else {
-
-      ingredients.splice(i, 1);
-      this.setState({ ingredients }, () => this.props.sendIngredients(this.state.ingredients));
-    }
+    let procedures = [...this.state.procedures];
+    procedures.splice(i, 1);
+    this.setState({ procedures });
   }
   //
   handleSubmit = (e) => {
@@ -49,13 +45,13 @@ class IngredientForm extends Component {
   }
   //
   render() {
-    const { ingredients } = this.state;
+    const { procedures } = this.state;
     return (
       <div className="add-ing-form-wrapper" ref={container => this.container = container}>
-        <h1>Please add your ingredients:</h1>
+        <h1>Please add your procedures:</h1>
         <form onSubmit={this.handleSubmit} onChange={this.handleChange} className="add-ing-form">
           {
-            ingredients.map((ingredient, i) => {
+            procedures.map((ingredient, i) => {
               let ingredientId = `ing-${i}`, descId = `desc-${i}`
               return (
                 <div className="ingredient-field" key={i}>
@@ -84,12 +80,12 @@ class IngredientForm extends Component {
           }
           <div className="button-container">
             <Button
-              text="Add Ingredient"
-              clickFunc={this.addNewIngredient}
+              text="Add Procedure"
+              clickFunc={this.addNewProcedure}
             />
             <Button
               text="Submit"
-              clickFunc={() => console.log('ingredient submitted')}
+              clickFunc={() => console.log('procedure submitted')}
             />
           </div>
         </form>
@@ -97,4 +93,4 @@ class IngredientForm extends Component {
     )
   }
 }
-export default IngredientForm;
+export default ProcedureForm;
