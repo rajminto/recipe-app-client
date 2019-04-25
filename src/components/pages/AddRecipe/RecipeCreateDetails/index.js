@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import IngredientForm from '../IngredientForm';
+import ProcedureForm from '../ProcedureForm';
 import { ReactComponent as ReturnIcon } from '../../../../assets/svgs/return.svg'
 //
 
@@ -21,6 +22,9 @@ class RecipeCreateDetails extends Component {
   }
   getIngredientsFromInputs = (items) => {
     this.setState({ ingredientItemsForList: items })
+  }
+  getProceduresFromInputs = (items) => {
+    this.setState({ procedureItemsForList: items })
   }
   createDetailHeaders = () => {
     const { prevFormData } = this.state;
@@ -50,7 +54,7 @@ class RecipeCreateDetails extends Component {
               <ol>
                 {this.state.ingredientItemsForList ? this.state.ingredientItemsForList.map((ing, i) => {
                   return(
-                    <li>{`${ing.description} -- ${ing.name}`}</li>
+                    <li key={i}>{`${ing.description} -- ${ing.name}`}</li>
                   )
                 }) : null}
               </ol>
@@ -58,9 +62,9 @@ class RecipeCreateDetails extends Component {
             <div className="current-procedures">
               <h1>Directions:</h1>
               <ol>
-                {this.state.ingredientItemsForList ? this.state.ingredientItemsForList.map((ing, i) => {
+                {this.state.procedureItemsForList ? this.state.procedureItemsForList.map((dir, i) => {
                   return(
-                    <li>{ing.name}</li>
+                    <li key={i}>{`${dir.description} -- ${dir.name}`}</li>
                   )
                 }) : null}
               </ol>
@@ -70,6 +74,9 @@ class RecipeCreateDetails extends Component {
         <div className="recipe-info-bot">
           <IngredientForm 
             sendIngredients={this.getIngredientsFromInputs}
+          />
+          <ProcedureForm 
+            sendProcedures={this.getProceduresFromInputs}
           />
         </div>
       </div>
