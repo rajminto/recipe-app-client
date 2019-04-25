@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import RecipeForm from '../RecipeForm';
 import RecipeCreateDetails from '../RecipeCreateDetails';
-import { TweenLite, Back, Power4, Power2, Bounce } from 'gsap';
+import { TweenLite, Back, Power4, Power2 } from 'gsap';
 import { CSSTransition } from 'react-transition-group';
 //
 
@@ -34,31 +34,31 @@ class MasterForm extends Component {
     }});
   }
   render() {
+    const { expanded } = this.state;
     return (
       <div className="master-form-container" ref={container => this.container = container}>
-        {!this.state.expanded ? 
-          <CSSTransition
-            in={!this.state.expanded}
-            appear={true}
-            timeout={1000}
-            classNames="fade" 
-          >
-            <RecipeForm 
-              enterRecipeDisplay={this.enterRecipeDisplay} 
-              expanded={this.state.expanded} 
-            />
-          </CSSTransition> 
-        : 
-          <CSSTransition
-            in={this.state.expanded}
-            appear={true}
-            timeout={1000}
-            classNames="fade" 
-          >
-            <RecipeCreateDetails 
-              exitRecipeDisplay={this.reverseAnimate} 
-            />
-          </CSSTransition>}
+        {!expanded 
+          ? <CSSTransition
+              in={!expanded}
+              appear={true}
+              timeout={1000}
+              classNames="fade" 
+            >
+              <RecipeForm 
+                enterRecipeDisplay={this.enterRecipeDisplay} 
+                expanded={expanded} 
+              />
+            </CSSTransition>
+          : <CSSTransition
+              in={expanded}
+              appear={true}
+              timeout={1000}
+              classNames="fade" 
+            >
+              <RecipeCreateDetails 
+                exitRecipeDisplay={this.reverseAnimate} 
+              />
+            </CSSTransition>}
       </div>    
     )
   }
