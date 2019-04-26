@@ -66,3 +66,28 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+
+
+<!-- 
+{
+"userId": 2,
+"name": "Pasta and Meatballs",
+"description": "Ball tip ground round chuck kevin. Corned beef spare ribs brisket sirloin picanha pork belly, jowl doner ground round biltong pig. Meatball fatback boudin jerky ham hock pork bacon andouille. Ground round leberkas bresaola pig short loin drumstick cow pork chop turkey cupim kevin turducken andouille pancetta rump. T-bone ham hock corned beef porchetta capicola.",
+"prep_time": "30 minutes",
+"cook_time": "1 hour",
+"ingredients": [
+    { "name": "Cup of Apple Cider Vinegar", "quantity": 1 },
+    { "name": "Tablespoon of Sweet and Sour Sauce", "quantity": 2 },
+    { "name": "Box of Noodles", "quantity": 1 }
+    ],
+    "instructions": [
+    { "description": "One thing", "order": 1 },
+    { "description": "Two things", "order": 2 },
+    { "description": "Three things", "order": 3 }
+    ],
+    "tags": [
+    { "name": "Tag1" },
+    { "name": "Tag2" }
+    ]
+} -->

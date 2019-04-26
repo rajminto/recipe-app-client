@@ -33,6 +33,21 @@ class MasterForm extends Component {
       } });
     }});
   }
+  //
+  // addNewRecipe = (e) => {
+  //   e.preventDefault();
+  //   fetch('https://recipe-app-server.herokuapp.com/api/recipes', {
+  //     method: 'POST',
+  //     headers: {
+  //       'content-type': 'application/json',
+  //       'accept': 'application/json'
+  //     },
+  //     body: JSON.stringify(this.state)
+  //   })
+  //     .then(res => res.json())
+  //     .then((res) => console.log('RESPONSE:::', res))
+  // }
+
   render() {
     const { expanded } = this.state;
     return (
@@ -47,6 +62,7 @@ class MasterForm extends Component {
               <RecipeForm 
                 enterRecipeDisplay={this.enterRecipeDisplay} 
                 expanded={expanded} 
+                // addNewRecipe={this.addNewRecipe}
               />
             </CSSTransition>
           : <CSSTransition
@@ -57,6 +73,7 @@ class MasterForm extends Component {
             >
               <RecipeCreateDetails 
                 exitRecipeDisplay={this.reverseAnimate} 
+                // addNewRecipe={this.addNewRecipe}
               />
             </CSSTransition>}
       </div>    

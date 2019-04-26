@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Button from '../../../shared/Button';
+import { Context } from '../../../../context';
 import { TweenLite } from 'gsap';
 import { ReactComponent as DeleteIcon } from '../../../../assets/svgs/delete.svg';
 //
@@ -21,7 +22,7 @@ class IngredientForm extends Component {
     if (['name', 'description'].includes(e.target.className)) {
       let ingredients = [...this.state.ingredients]
       ingredients[e.target.dataset.id][e.target.className] = e.target.value.toUpperCase()
-      this.setState({ ingredients })
+      this.setState({ ingredients }, () => console.log(this.state))
     } else {
       this.setState({ [e.target.name]: e.target.value.toUpperCase() })
     }
@@ -31,10 +32,12 @@ class IngredientForm extends Component {
       ingredients: [...prevState.ingredients, { name: '', description: '' }],
     }));
     this.props.sendIngredients(this.state.ingredients)
+    localStorage.setItem('recipe_ingredients', JSON.stringify(this.state.ingredients));
+    this.context.sendToContextState('recipe_ingredients', this.state.ingredients);
   }
   //
   removeClick(i) {
-    let ingredients = [...this.state.ingredients];
+    let ingredients = [...this.state.ingredients];  
     if(i === 0){
       return
     } else {
@@ -59,14 +62,6 @@ class IngredientForm extends Component {
               let ingredientId = `ing-${i}`, descId = `desc-${i}`
               return (
                 <div className="ingredient-field" key={i}>
-                  <label htmlFor={ingredientId}><span>{`#${i + 1}`}</span>Name/Varietal:</label>
-                  <input
-                    type="text"
-                    name={ingredientId}
-                    data-id={i}
-                    id={ingredientId}
-                    className="name"
-                  />
                   <label htmlFor={descId}>Quantity:</label>
                   <input
                     type="text"
@@ -74,6 +69,14 @@ class IngredientForm extends Component {
                     data-id={i}
                     id={descId}
                     className="description"
+                  />
+                  <label htmlFor={ingredientId}><span>{`#${i + 1}`}</span>Name/Varietal:</label>
+                  <input
+                    type="text"
+                    name={ingredientId}
+                    data-id={i}
+                    id={ingredientId}
+                    className="name"
                   />
                   <div className="delete-btn" onClick={() => this.removeClick(i)}>
                     <DeleteIcon />
@@ -97,4 +100,5 @@ class IngredientForm extends Component {
     )
   }
 }
+IngredientForm.contextType = Context;
 export default IngredientForm;

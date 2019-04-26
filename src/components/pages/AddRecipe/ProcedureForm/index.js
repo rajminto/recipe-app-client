@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Button from '../../../shared/Button';
 import { TweenLite } from 'gsap';
 import { ReactComponent as DeleteIcon } from '../../../../assets/svgs/delete.svg';
+import { Context } from '../../../../context';
 
 //
 
@@ -9,7 +10,8 @@ class ProcedureForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      procedures: [{ name: '', description: '' }]
+      procedures: [{ description: '' }],
+      order: 0
     }
     this.container = null;
   }
@@ -19,7 +21,7 @@ class ProcedureForm extends Component {
   }
   //
   handleChange = (e) => {
-    if (['name', 'description'].includes(e.target.className)) {
+    if (['description'].includes(e.target.className)) {
       let procedures = [...this.state.procedures]
       procedures[e.target.dataset.id][e.target.className] = e.target.value.toUpperCase()
       this.setState({ procedures })
@@ -28,10 +30,14 @@ class ProcedureForm extends Component {
     }
   }
   addNewProcedure = (e) => {
+    
     this.setState((prevState) => ({
-      procedures: [...prevState.procedures, { name: '', description: '' }],
+      procedures: [...prevState.procedures, { description: '', order: 0 }],
+      order: this.state.order + 1
     }));
-    this.props.sendProcedures(this.state.procedures)
+    this.props.sendProcedures(this.state.procedures);
+    localStorage.setItem('recipe_procedures', JSON.stringify(this.state.procedures));
+    this.context.sendToContextState('recipe_procedures', this.state.procedures);
   }
   //
   removeClick(i) {
@@ -52,25 +58,20 @@ class ProcedureForm extends Component {
         <form onSubmit={this.handleSubmit} onChange={this.handleChange} className="add-ing-form">
           {
             procedures.map((ingredient, i) => {
-              let ingredientId = `ing-${i}`, descId = `desc-${i}`
+              let descId = `desc-${i}`
               return (
                 <div className="ingredient-field" key={i}>
-                  <label htmlFor={ingredientId}><span>{`#${i + 1}`}</span>Name/Varietal:</label>
-                  <input
-                    type="text"
-                    name={ingredientId}
-                    data-id={i}
-                    id={ingredientId}
-                    className="name"
-                  />
-                  <label htmlFor={descId}>Quantity:</label>
-                  <input
-                    type="text"
+                  <label htmlFor={descId}>Step Description:</label>
+                  <textarea
+                    type="textarea"
+                    rows="3"
+                    cols="20"
                     name={descId}
                     data-id={i}
                     id={descId}
                     className="description"
-                  />
+                  >
+                  </textarea>
                   <div className="delete-btn" onClick={() => this.removeClick(i)}>
                     <DeleteIcon />
                   </div>
@@ -93,4 +94,5 @@ class ProcedureForm extends Component {
     )
   }
 }
+ProcedureForm.contextType = Context;
 export default ProcedureForm;

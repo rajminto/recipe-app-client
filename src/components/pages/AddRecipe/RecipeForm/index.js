@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Button from '../../../shared/Button';
 import { TweenLite } from 'gsap';
+import { Context } from '../../../../context';
 //
 
 class RecipeForm extends Component {
@@ -36,20 +37,11 @@ class RecipeForm extends Component {
     })
   }
   //
-  addNewRecipe = (e) => {
+  sendToLocalStorage = (e) => {
     e.preventDefault();
-    fetch('https://recipe-app-server.herokuapp.com/api/recipes', {
-      method: 'POST',
-      headers: {
-        'content-type': 'application/json',
-        'accept': 'application/json'
-      },
-      body: JSON.stringify(this.state)
-    })
-      .then(res => res.json())
-      .then((res) => console.log('RESPONSE:::', res))
-    this.clearForm();
     localStorage.setItem('recipe_details', JSON.stringify(this.state));
+    this.context.sendToContextState('recipe_details', this.state);
+    this.clearForm();
   }
   //
   render() {
@@ -58,7 +50,7 @@ class RecipeForm extends Component {
         <div className="add-rec-form-wrapper"  ref={innerContainer => this.innerContainer = innerContainer}>
           <div className="inner-form-section">
             <h1>Describe Your Recipe:</h1>
-            <form className="add-rec-form" onSubmit={this.addNewRecipe}>
+            <form className="add-rec-form" onSubmit={this.sendToLocalStorage}>
               <label>Recipe Title:</label>
               <input
                 type="text"
@@ -100,4 +92,5 @@ class RecipeForm extends Component {
     )
   }
 }
+RecipeForm.contextType = Context;
 export default RecipeForm;    

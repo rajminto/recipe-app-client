@@ -54,6 +54,12 @@
   .add-ing-form-wrapper{
     box-shadow: unset;
     flex-direction: row;
+    width: 50%;
+    margin-left: 3em;
+    textarea{
+      width: 50%;
+      font-size: 1.1em;
+    }
     h1{
       margin-bottom: 1em;
     }

@@ -37,6 +37,7 @@ class RecipeCreateDetails extends Component {
       </Fragment>
     )
   }
+  
   render() {
     return (
       <div className="recipe-create-details" ref={container => this.container = container}>
