@@ -5,7 +5,8 @@ export const Context = React.createContext();
 export class Provider extends Component{
   state = {
     developers: ['matt', 'ross'],
-    recipeCrafterInfo: {}
+    recipeCrafterInfo: {},
+    currentUserId: 1
   }
 
   sendToContextState = (key, value) => {

@@ -55,7 +55,7 @@ class RecipeCreateDetails extends Component {
               <ol>
                 {this.state.ingredientItemsForList ? this.state.ingredientItemsForList.map((ing, i) => {
                   return(
-                    <li key={i}>{`${ing.description} -- ${ing.name}`}</li>
+                    <li key={i}>{`${ing.quantity} -- ${ing.name}`}</li>
                   )
                 }) : null}
               </ol>
@@ -65,7 +65,7 @@ class RecipeCreateDetails extends Component {
               <ol>
                 {this.state.procedureItemsForList ? this.state.procedureItemsForList.map((dir, i) => {
                   return(
-                    <li key={i}>{`${dir.description} -- ${dir.name}`}</li>
+                    <li key={i}>{`${dir.description}`}</li>
                   )
                 }) : null}
               </ol>
@@ -79,6 +79,7 @@ class RecipeCreateDetails extends Component {
           <ProcedureForm 
             sendProcedures={this.getProceduresFromInputs}
           />
+          <button onClick={this.props.constructRecipe}></button>
         </div>
       </div>
     )

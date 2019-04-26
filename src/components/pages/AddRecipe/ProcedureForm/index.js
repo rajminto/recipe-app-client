@@ -10,8 +10,7 @@ class ProcedureForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      procedures: [{ description: '' }],
-      order: 0
+      procedures: [{ description: '' }]
     }
     this.container = null;
   }
@@ -23,28 +22,27 @@ class ProcedureForm extends Component {
   handleChange = (e) => {
     if (['description'].includes(e.target.className)) {
       let procedures = [...this.state.procedures]
-      procedures[e.target.dataset.id][e.target.className] = e.target.value.toUpperCase()
-      this.setState({ procedures })
+      procedures[e.target.dataset.id][e.target.className] = e.target.value.toUpperCase();
+      procedures[e.target.dataset.id]['order'] = parseInt(e.target.dataset.id) + 1;
+      this.setState({ procedures: procedures })
     } else {
       this.setState({ [e.target.name]: e.target.value.toUpperCase() })
     }
   }
-  addNewProcedure = (e) => {
-    
+  addNewProcedure = (e) => { 
     this.setState((prevState) => ({
-      procedures: [...prevState.procedures, { description: '', order: 0 }],
-      order: this.state.order + 1
+      procedures: [...prevState.procedures, { description: '' }]
     }));
     this.props.sendProcedures(this.state.procedures);
     localStorage.setItem('recipe_procedures', JSON.stringify(this.state.procedures));
     this.context.sendToContextState('recipe_procedures', this.state.procedures);
   }
   //
-  removeClick(i) {
+  removeProcedure(i) {
     let procedures = [...this.state.procedures];
     procedures.splice(i, 1);
     this.setState({ procedures });
-  }
+  } 
   //
   handleSubmit = (e) => {
     e.preventDefault()
@@ -72,7 +70,7 @@ class ProcedureForm extends Component {
                     className="description"
                   >
                   </textarea>
-                  <div className="delete-btn" onClick={() => this.removeClick(i)}>
+                  <div className="delete-btn" onClick={() => this.removeProcedure(i)}>
                     <DeleteIcon />
                   </div>
                 </div>

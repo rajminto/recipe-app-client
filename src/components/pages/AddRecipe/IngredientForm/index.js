@@ -9,7 +9,7 @@ class IngredientForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      ingredients: [{ name: '', description: '' }]
+      ingredients: [{ name: '', quantity: null }]
     }
     this.container = null;
   }
@@ -19,29 +19,32 @@ class IngredientForm extends Component {
   }
   //
   handleChange = (e) => {
-    if (['name', 'description'].includes(e.target.className)) {
+    if (['name', 'quantity'].includes(e.target.className)) {
       let ingredients = [...this.state.ingredients]
-      ingredients[e.target.dataset.id][e.target.className] = e.target.value.toUpperCase()
-      this.setState({ ingredients }, () => console.log(this.state))
+      if(e.target.className === 'quantity'){
+        ingredients[e.target.dataset.id][e.target.className] = parseInt(e.target.value);
+      } else {
+        ingredients[e.target.dataset.id][e.target.className] = e.target.value.toUpperCase()
+      }
+      this.setState({ ingredients })
     } else {
       this.setState({ [e.target.name]: e.target.value.toUpperCase() })
     }
   }
   addNewIngredient = (e) => {
     this.setState((prevState) => ({
-      ingredients: [...prevState.ingredients, { name: '', description: '' }],
+      ingredients: [...prevState.ingredients, { name: '', quantity: '' }],
     }));
     this.props.sendIngredients(this.state.ingredients)
     localStorage.setItem('recipe_ingredients', JSON.stringify(this.state.ingredients));
     this.context.sendToContextState('recipe_ingredients', this.state.ingredients);
   }
   //
-  removeClick(i) {
+  removeIngredient(i) {
     let ingredients = [...this.state.ingredients];  
     if(i === 0){
       return
     } else {
-
       ingredients.splice(i, 1);
       this.setState({ ingredients }, () => this.props.sendIngredients(this.state.ingredients));
     }
@@ -64,11 +67,11 @@ class IngredientForm extends Component {
                 <div className="ingredient-field" key={i}>
                   <label htmlFor={descId}>Quantity:</label>
                   <input
-                    type="text"
+                    type="number"
                     name={descId}
                     data-id={i}
                     id={descId}
-                    className="description"
+                    className="quantity"
                   />
                   <label htmlFor={ingredientId}><span>{`#${i + 1}`}</span>Name/Varietal:</label>
                   <input
@@ -78,7 +81,7 @@ class IngredientForm extends Component {
                     id={ingredientId}
                     className="name"
                   />
-                  <div className="delete-btn" onClick={() => this.removeClick(i)}>
+                  <div className="delete-btn" onClick={() => this.removeIngredient(i)}>
                     <DeleteIcon />
                   </div>
                 </div>
