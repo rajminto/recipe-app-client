@@ -1,5 +1,5 @@
 import React from 'react'
-import './recipe-instruction.css'
+import './recipe-instruction.module.scss'
 
 const RecipeInstruction = ({ description, order }) => (
   <div>

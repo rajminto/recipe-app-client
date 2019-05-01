@@ -34,12 +34,14 @@ const Recipe = ({ recipe }) => {
         prep_time={prep_time}
         cook_time={cook_time}
       />
-      <RecipeIngredientsList
-        ingredients={ingredients}
-      />
-      <RecipeInstructionsList
-        instructions={instructions}
-      />
+      <div className="bot-recipe-info">
+        <RecipeIngredientsList
+          ingredients={ingredients}
+        />
+        <RecipeInstructionsList
+          instructions={instructions}
+        />
+      </div>
     </div>
   )
 }

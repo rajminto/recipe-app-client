@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import styles from './header.module.scss';
-import { ReactComponent as MenuIcon } from '../../../assets/svgs/menu.svg';
+// import { ReactComponent as MenuIcon } from '../../../assets/svgs/menu.svg';
 import { Consumer, Context } from '../../../context';
+import MenuIcon from '../MenuIcon';
 //
 
 class Header extends Component {
@@ -11,6 +12,7 @@ class Header extends Component {
       menuOpen: false
     }
   }
+
   // 
   render(){
     const { container, iconBox, closed } = styles;
@@ -20,7 +22,7 @@ class Header extends Component {
           <div className={container}>
             <div className={context.state.isMenuOpen ? iconBox : `${iconBox} ${closed}`} 
               onClick={context.toggleMenu}>
-              <MenuIcon />
+              <MenuIcon menuOpen={this.state.menuOpen} />
             </div>
           </div>
         )}

@@ -1,16 +1,16 @@
-import React, { Fragment } from 'react'
-import './recipe-description.css'
+import React from 'react'
+import styles from './recipe-description.module.scss'
 
 const RecipeDescription = ({ description, prep_time, cook_time }) => {
   return (
-    <Fragment>
+    <div className={styles.recipeDescription}>
       <h2>Recipe Description</h2>
       <p>{description}</p>
-      <div className="recipe-times-container">
+      <div className={styles.recipeTimesContainer}>
         <p>Prep Time: {prep_time}</p>
         <p>Cook Time: {cook_time}</p>
       </div>
-    </Fragment>
+    </div>
   )
 }
 

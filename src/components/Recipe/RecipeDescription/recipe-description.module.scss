@@ -1,0 +1,17 @@
+@import '../../../styles/variables';
+
+.recipeDescription{
+  margin-bottom: .5em;
+  background-color: $sand;
+  padding: 1em;
+  display: inline-block;
+  h2{
+    margin-bottom: 1em;
+  }
+  p{
+    margin-bottom: 1em;
+  }
+}
+.recipeTimesContainer p {
+  margin: .5rem 0;
+}
