@@ -36,7 +36,7 @@ class Home extends Component {
     return (
       <div className="home-container">
         <Alert 
-          alert={this.state.showAlert}
+          showAlert={this.state.showAlert}
           text="HEY FROM ALERT"
           subText="FROM ROSS"
           onClose={this.onClose}

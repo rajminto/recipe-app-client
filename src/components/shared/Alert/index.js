@@ -12,28 +12,28 @@ class Alert extends Component {
   }
   //
   render() {
-    const { alert } = this.props;
+    const { showAlert, text, subText, onClose } = this.props;
     const { container, transitionWrap } = styles;
     return (
       <Transition
         timeout={1000}
         mountOnEnter
         unmountOnExit
-        in={alert}
+        in={showAlert}
         addEndListener={(node, done) => {
           TweenMax.to(node, 0.5, {
-            y: alert ? 0 : 400,
-            autoAlpha: alert ? 1 : 0,
-            ease: alert ? Back.easeOut : Back.easeIn,
+            y: showAlert ? 0 : 400,
+            autoAlpha: showAlert ? 1 : 0,
+            ease: showAlert ? Back.easeOut : Back.easeIn,
             onComplete: done
           });
         }}
       >
         <div className={`${container} ${transitionWrap}`}>
-          <h1>{this.props.text}</h1>
-          <p>{this.props.subText}</p>
+          <h1>{text}</h1>
+          <p>{subText}</p>
           <Button
-            clickFunc={this.props.onClose}
+            clickFunc={onClose}
           />
         </div>
       </Transition>
