@@ -7,7 +7,7 @@ export class Provider extends Component{
     developers: ['matt', 'ross'],
     recipeCrafterInfo: {},
     currentUserId: 1,
-    isMenuOpen: true
+    isMenuOpen: false
   }
   //
   sendToContextState = (key, value) => {

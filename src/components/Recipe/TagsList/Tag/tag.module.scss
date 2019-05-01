@@ -1,0 +1,15 @@
+@import '../../../../styles/variables';
+
+.tagShape{
+  height: 2em;
+  min-width: 10em;
+  padding: .3em;
+  padding-left: 1em;
+  display: flex;
+  align-items: center;
+  -webkit-clip-path: polygon(84% 0, 100% 38%, 85% 100%, 0 100%, 0 0);
+  clip-path: polygon(84% 0, 100% 38%, 85% 100%, 0 100%, 0 0);
+  background-color: $icon-blue;
+  color: $sand;
+  border-radius: 3px;
+}

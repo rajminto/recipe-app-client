@@ -22,13 +22,12 @@ class Home extends Component {
           isLoaded: true
         })
       })
-    setTimeout(() => {
-      this.setState({ showAlert: !this.state.showAlert })
-    }, 2000)
+    // setTimeout(() => {
+    //   this.setState({ showAlert: !this.state.showAlert })
+    // }, 2000)
   }
 
   onClose = () => {
-    console.log('clicked');
     this.setState({ showAlert: !this.state.showAlert })
   }
   //
@@ -37,8 +36,7 @@ class Home extends Component {
       <div className="home-container">
         <Alert 
           showAlert={this.state.showAlert}
-          text="HEY FROM ALERT"
-          subText="FROM ROSS"
+          subText="Please Create A Recipe"
           onClose={this.onClose}
         />
         {this.state.isLoaded

@@ -1,8 +1,10 @@
 import React from 'react'
-import './tag.css'
+import styles from './tag.module.scss';
 
 const Tag = ({ name }) => (
-  <strong>#{name} </strong>
+  <div className={styles.tagShape}>
+    <strong>#{name} </strong>
+  </div>
 )
 
 export default Tag
