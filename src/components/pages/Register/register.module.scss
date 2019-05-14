@@ -1,0 +1,19 @@
+.registerFormContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%; // Override default of 45vh from .master-form-container
+
+  .registerForm {
+    display: flex;
+    flex-direction: column;
+    
+    label {
+      margin: 1rem 0;
+      font-size: 1.3rem;
+    }
+    input {
+      margin-bottom: 1rem;
+      height: 2rem;
+    }
+  }
+}

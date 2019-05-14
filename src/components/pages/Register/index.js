@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react'
+import styles from './register.module.scss'
 
 class Register extends Component {
   constructor(props) {
@@ -25,9 +26,9 @@ class Register extends Component {
 
   render() {
     return (
-      <Fragment>
+      <div className={`master-form-container ${styles.registerFormContainer}`}>
         <h1>Create an Account</h1>
-        <form onSubmit={this.handleSubmit} >
+        <form onSubmit={this.handleSubmit} className={styles.registerForm}>
           <label>Name:</label>
           <input
             type="text"
@@ -64,7 +65,7 @@ class Register extends Component {
           />
           <button type="submit">Submit</button>
         </form>
-      </Fragment>
+      </div>
     )
   }
 }
