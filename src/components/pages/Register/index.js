@@ -1,35 +1,81 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import styles from './register.module.scss'
 
 import Button from '../../shared/Button'
 
+const baseUrl = 'http://localhost:3000/api'
+
+// TODO?: use context api to control form
 class Register extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: '',
-      email: '',
-      password: '',
-      password2: ''
+      message: '',
+      form: {
+        name: '',
+        email: '',
+        password: '',
+        password2: ''
+      }
     }
   }
 
   handleChange = (e) => {
     this.setState({
-      [e.target.name]: e.target.value
+      form: {
+        ...this.state.form,
+        [e.target.name]: e.target.value
+      }
     })
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log('submitting...');
-    
+    const user = this.state.form
+
+    this.validatePasswords(user)
+      .then(() => this.submitNewUser(user))
+      .then(res => res.json())
+      .then(response => {
+        this.setState({
+          message: response.message
+        })
+        // TODO: redirect to signup page if successful
+        // TODO: clear form if successful
+      })
+      .catch(console.log)    
+  }
+
+  submitNewUser = (user) => {
+    return fetch(`${baseUrl}/auth/register`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'accept': 'application/json'
+      },
+      body: JSON.stringify(user)
+    })
+  }
+
+  // TODO: improve validation
+  validatePasswords = ({ password, password2 }) => {
+    return new Promise((resolve, reject) => {
+      (password !== password2)
+        ? reject('Passwords must match')
+        : resolve('valid')
+    })
   }
 
   render() {
+    const { message } = this.state
+    
     return (
       <div className={`master-form-container ${styles.registerFormContainer}`}>
         <h1>Create an Account</h1>
+
+        {/* TODO: refactor to use a Message component */}
+        {message && <h3>{this.state.message}</h3>}
+
         <form onSubmit={this.handleSubmit} className={styles.registerForm}>
           <label>Name:</label>
           <input
