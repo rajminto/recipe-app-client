@@ -43,7 +43,13 @@ class Register extends Component {
         // TODO: redirect to signup page if successful
         // TODO: clear form if successful
       })
-      .catch(console.log)    
+      .catch(err => {
+        if (typeof err === 'string') {
+          this.setState({
+            message: err
+          })
+        }
+      })
   }
 
   submitNewUser = (user) => {
@@ -61,7 +67,7 @@ class Register extends Component {
   validatePasswords = ({ password, password2 }) => {
     return new Promise((resolve, reject) => {
       (password !== password2)
-        ? reject('Passwords must match')
+        ? reject('Passwords do not match.')
         : resolve('valid')
     })
   }
