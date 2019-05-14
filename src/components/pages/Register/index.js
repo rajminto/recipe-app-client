@@ -51,6 +51,7 @@ class Register extends Component {
             onChange={this.handleChange}
             value={this.state.password}
             required
+            minLength="6"
           />
           <label>Password Check:</label>
           <input
@@ -59,6 +60,7 @@ class Register extends Component {
             onChange={this.handleChange}
             value={this.state.password2}
             required
+            minLength="6"
           />
           <button type="submit">Submit</button>
         </form>
