@@ -1,6 +1,8 @@
 import React, { Component, Fragment } from 'react'
 import styles from './register.module.scss'
 
+import Button from '../../shared/Button'
+
 class Register extends Component {
   constructor(props) {
     super(props)
@@ -54,7 +56,7 @@ class Register extends Component {
             required
             minLength="6"
           />
-          <label>Password Check:</label>
+          <label>Repeat Password:</label>
           <input
             type="password"
             name="password2"
@@ -63,7 +65,7 @@ class Register extends Component {
             required
             minLength="6"
           />
-          <button type="submit">Submit</button>
+          <Button text={'Register'}/>
         </form>
       </div>
     )
