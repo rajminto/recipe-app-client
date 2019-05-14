@@ -34,6 +34,7 @@ class Register extends Component {
             name="name"
             onChange={this.handleChange}
             value={this.state.name}
+            required
           />
           <label>Email:</label>
           <input
@@ -41,6 +42,7 @@ class Register extends Component {
             name="email"
             onChange={this.handleChange}
             value={this.state.email}
+            required
           />
           <label>Password:</label>
           <input
@@ -48,13 +50,15 @@ class Register extends Component {
             name="password"
             onChange={this.handleChange}
             value={this.state.password}
+            required
           />
-          <label>Password:</label>
+          <label>Password Check:</label>
           <input
             type="password"
             name="password2"
             onChange={this.handleChange}
             value={this.state.password2}
+            required
           />
           <button type="submit">Submit</button>
         </form>
