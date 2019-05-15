@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styles from './register.module.scss'
+import { Redirect } from 'react-router-dom'
 
 import Button from '../../shared/Button'
 
@@ -11,6 +12,7 @@ class Register extends Component {
     super(props)
     this.state = {
       message: '',
+      registrationSuccess: false,
       form: {
         name: '',
         email: '',
@@ -37,14 +39,13 @@ class Register extends Component {
       .then(() => this.submitNewUser(user))
       .then(res => res.json())
       .then(response => {
-        this.setState({
-          message: response.message
-        })
-        // TODO: redirect to signup page if successful
-        // TODO: clear form if successful
+        // Registration succeeded: redirect to signup page
+        // Registration failed: display response message
+        response.success
+          ? this.setState({ registrationSuccess: true })
+          : this.setState({ message: response.message })
       })
       .catch(err => {
-        console.log(err);
         if (typeof err === 'string') {
           this.setState({
             message: err
@@ -74,7 +75,11 @@ class Register extends Component {
   }
 
   render() {
-    const { message } = this.state
+    const { message, registrationSuccess } = this.state
+
+    if (registrationSuccess) {
+      return <Redirect to='/login' />
+    }
     
     return (
       <div className={`master-form-container ${styles.registerFormContainer}`}>
