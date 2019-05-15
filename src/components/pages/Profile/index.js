@@ -35,7 +35,7 @@ class Profile extends Component {
       .then(response => {
         response.user
           ? this.setState({ isLoaded: true, user: response.user })
-          : this.setState({ loginFailure: true })
+          : this.setState({ isLoaded: true, loginFailure: true })
       })
       .catch(console.error)
   }
@@ -43,11 +43,11 @@ class Profile extends Component {
   render() {
     const { loginFailure, isLoaded, user } = this.state
 
-    // Redirect to login page if user cannot be authenticated
-    if (loginFailure) return <LoginFailureCard />
-    
     // TODO: create and use spinner/loader component here
     if (!isLoaded) return <h1>Loading...</h1>
+
+    // Login Failed: present options to register or login
+    if (loginFailure) return <LoginFailureCard />
 
     return (
       <Card className={styles.profileHeaderContainer}>
