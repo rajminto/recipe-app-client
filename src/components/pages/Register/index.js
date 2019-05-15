@@ -44,6 +44,7 @@ class Register extends Component {
         // TODO: clear form if successful
       })
       .catch(err => {
+        console.log(err);
         if (typeof err === 'string') {
           this.setState({
             message: err
