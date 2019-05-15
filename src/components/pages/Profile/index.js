@@ -39,8 +39,12 @@ class Profile extends Component {
   }
 
   render() {
-    const { loggedIn, user } = this.state
+    const { loggedIn, isLoaded, user } = this.state
 
+    // TODO: create and use spinner/loader component here
+    if (!isLoaded) return <h1>Loading...</h1>
+
+    if (!loggedIn) return <h1>You must be logged in to view your profile!</h1>
 
     return (
       <Card className={styles.profileHeaderContainer}>
