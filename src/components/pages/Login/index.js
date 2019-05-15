@@ -79,6 +79,29 @@ class Login extends Component {
       <div className={`master-form-container`}>
         <h1>Login to Account</h1>
 
+        {/* TODO: refactor to use a Message component */}
+        {message && <h3>{this.state.message}</h3>}
+
+        <form onSubmit={this.handleSubmit} >
+          <label>Email:</label>
+          <input
+            type="email"
+            name="email"
+            onChange={this.handleChange}
+            value={this.state.email}
+            required
+          />
+          <label>Password:</label>
+          <input
+            type="password"
+            name="password"
+            onChange={this.handleChange}
+            value={this.state.password}
+            required
+            minLength="6"
+          />
+          <Button text={'Login'} />
+        </form>
       </div>
     )
   }
