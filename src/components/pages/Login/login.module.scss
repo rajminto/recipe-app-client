@@ -3,7 +3,7 @@
 .loginFormContainer {
   display: flex;
   flex-direction: column;
-  min-height: 100%; // Override default of 45vh from .master-form-container
+  width: 40%;
 
   h1 {
     margin-bottom: 1rem;
