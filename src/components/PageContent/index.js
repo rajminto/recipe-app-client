@@ -7,6 +7,7 @@ import Home from '../pages/Home';
 import AddRecipe from '../pages/AddRecipe';
 import NotFound from '../pages/NotFound';
 import Register from '../pages/Register';
+import Login from '../pages/Login';
 import Navigator from '../shared/Navigator';
 
 class PageContent extends Component {
@@ -24,6 +25,7 @@ class PageContent extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/add" component={AddRecipe} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/login" component={Login} />
           <Route component={NotFound} />
         </Switch>
       </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './navigator.module.scss';
 import { NavLink } from 'react-router-dom';
 
-const Navigator =  () => {
+const Navigator = () => {
   return (
     <div className={styles.container}>
       <div className={styles.menuWrap}>
