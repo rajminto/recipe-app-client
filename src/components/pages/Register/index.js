@@ -36,7 +36,7 @@ class Register extends Component {
     const user = this.state.form
 
     this.validatePasswords(user)
-      .then(() => this.submitNewUser(user))
+      .then(this.submitNewUser)
       .then(res => res.json())
       .then(response => {
         // Registration succeeded: redirect to signup page
@@ -46,11 +46,7 @@ class Register extends Component {
           : this.setState({ message: response.message })
       })
       .catch(err => {
-        if (typeof err === 'string') {
-          this.setState({
-            message: err
-          })
-        }
+        if (typeof err === 'string') this.setState({ message: err })
       })
   }
 
@@ -65,21 +61,19 @@ class Register extends Component {
     })
   }
 
-  // TODO: improve validation
-  validatePasswords = ({ password, password2 }) => {
+  // TODO?: improve validation
+  validatePasswords = (user) => {
     return new Promise((resolve, reject) => {
-      (password !== password2)
+      (user.password !== user.password2)
         ? reject('Passwords do not match.')
-        : resolve('valid')
+        : resolve(user)
     })
   }
 
   render() {
     const { message, registrationSuccess } = this.state
 
-    if (registrationSuccess) {
-      return <Redirect to='/login' />
-    }
+    if (registrationSuccess) return <Redirect to='/login' />
     
     return (
       <div className={`master-form-container ${styles.registerFormContainer}`}>
