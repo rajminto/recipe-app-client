@@ -13,12 +13,10 @@ class Login extends Component {
     super(props)
     this.state = {
       message: '',
-      registrationSuccess: false,
+      loginSuccess: false,
       form: {
-        name: '',
         email: '',
-        password: '',
-        password2: ''
+        password: ''
       }
     }
   }
@@ -36,23 +34,24 @@ class Login extends Component {
     e.preventDefault()
     const user = this.state.form
 
-    this.validatePasswords(user)
-      .then(this.submitNewUser)
+    this.submitUser(user)
       .then(res => res.json())
       .then(response => {
+        console.log(response);
+        this.setState({ message: response.message })
         // Registration succeeded: redirect to signup page
         // Registration failed: display response message
-        response.success
-          ? this.setState({ registrationSuccess: true })
-          : this.setState({ message: response.message })
+        // response.success
+        //   ? this.setState({ loginSuccess: true })
+        //   : this.setState({ message: response.message })
       })
       .catch(err => {
         if (typeof err === 'string') this.setState({ message: err })
       })
   }
 
-  submitNewUser = (user) => {
-    return fetch(`${baseUrl}/auth/register`, {
+  submitUser = (user) => {
+    return fetch(`${baseUrl}/auth/login`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -72,7 +71,7 @@ class Login extends Component {
   }
 
   render() {
-    const { message, registrationSuccess } = this.state
+    const { message, loginSuccess } = this.state
 
     // TODO: add redirect to profile page on login success
 
