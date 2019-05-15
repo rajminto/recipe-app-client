@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-// import styles from './register.module.scss'
+import styles from './login.module.scss'
 import { Redirect } from 'react-router-dom'
 
 import Button from '../../shared/Button'
@@ -76,13 +76,13 @@ class Login extends Component {
     // TODO: add redirect to profile page on login success
 
     return (
-      <div className={`master-form-container`}>
+      <div className={`master-form-container ${styles.loginFormContainer}`}>
         <h1>Login to Account</h1>
 
         {/* TODO: refactor to use a Message component */}
         {message && <h3>{this.state.message}</h3>}
 
-        <form onSubmit={this.handleSubmit} >
+        <form onSubmit={this.handleSubmit} className={styles.loginForm}>
           <label>Email:</label>
           <input
             type="email"
