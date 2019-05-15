@@ -11,6 +11,7 @@ const Navigator =  () => {
         <NavLink to="/search" className="nav-link">search recipes</NavLink>
         <NavLink to="/profile" className="nav-link">your profile</NavLink>
         <NavLink to="/register" className="nav-link">register</NavLink>
+        <NavLink to="/login" className="nav-link">login</NavLink>
       </div>      
     </div>
   )
