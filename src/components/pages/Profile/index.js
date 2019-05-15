@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
+import { Redirect } from 'react-router-dom'
 import styles from './profile.module.scss'
 
 import Button from '../../shared/Button'
 import Card from '../../shared/Card'
+import LoginFailureCard from '../../shared/LoginFailureCard'
 
 // TODO: store user/loggedIn information in context api
 class Profile extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      loggedIn: false,
+      loginFailure: false,
       isLoaded: false,
       user: {
         id: 0,
@@ -32,19 +34,20 @@ class Profile extends Component {
       .then(res => res.json())
       .then(response => {
         response.user
-          ? this.setState({ isLoaded: true, loggedIn: true, user: response.user })
-          : this.setState({ isLoaded: true, loggedIn: false })
+          ? this.setState({ isLoaded: true, user: response.user })
+          : this.setState({ loginFailure: true })
       })
       .catch(console.error)
   }
 
   render() {
-    const { loggedIn, isLoaded, user } = this.state
+    const { loginFailure, isLoaded, user } = this.state
 
+    // Redirect to login page if user cannot be authenticated
+    if (loginFailure) return <LoginFailureCard />
+    
     // TODO: create and use spinner/loader component here
     if (!isLoaded) return <h1>Loading...</h1>
-
-    if (!loggedIn) return <h1>You must be logged in to view your profile!</h1>
 
     return (
       <Card className={styles.profileHeaderContainer}>
