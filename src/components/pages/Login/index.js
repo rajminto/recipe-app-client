@@ -3,6 +3,7 @@ import styles from './login.module.scss'
 import { Redirect } from 'react-router-dom'
 
 import Button from '../../shared/Button'
+import Card from '../../shared/Card'
 
 const baseUrl = 'http://localhost:3000/api'
 
@@ -78,6 +79,7 @@ class Login extends Component {
     return (
       <div className={`master-form-container ${styles.loginFormContainer}`}>
         <h1>Login to Account</h1>
+        <Card />
 
         {/* TODO: refactor to use a Message component */}
         {message && <h3>{this.state.message}</h3>}
