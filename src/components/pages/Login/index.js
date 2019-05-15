@@ -64,7 +64,7 @@ class Login extends Component {
   render() {
     const { message, loginSuccess } = this.state
 
-    // TODO: add redirect to profile page on login success
+    if (loginSuccess) return <Redirect to='/profile' />
 
     return (
       <Card className={styles.loginFormContainer}>
