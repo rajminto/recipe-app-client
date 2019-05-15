@@ -38,12 +38,11 @@ class Login extends Component {
       .then(res => res.json())
       .then(response => {
         console.log(response);
-        this.setState({ message: response.message })
-        // Registration succeeded: redirect to signup page
-        // Registration failed: display response message
-        // response.success
-        //   ? this.setState({ loginSuccess: true })
-        //   : this.setState({ message: response.message })
+        // Login succeeded: redirect to signup page
+        // Login failed: display response message
+        response.success
+          ? this.setState({ loginSuccess: true })
+          : this.setState({ message: response.message })
       })
       .catch(err => {
         if (typeof err === 'string') this.setState({ message: err })
@@ -53,20 +52,12 @@ class Login extends Component {
   submitUser = (user) => {
     return fetch(`${baseUrl}/auth/login`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'content-type': 'application/json',
         'accept': 'application/json'
       },
       body: JSON.stringify(user)
-    })
-  }
-
-  // TODO?: improve validation
-  validatePasswords = (user) => {
-    return new Promise((resolve, reject) => {
-      (user.password !== user.password2)
-        ? reject('Passwords do not match.')
-        : resolve(user)
     })
   }
 
