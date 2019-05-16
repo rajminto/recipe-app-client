@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import styles from './loginFailureCard.module.scss'
 import { NavLink } from 'react-router-dom';
 
