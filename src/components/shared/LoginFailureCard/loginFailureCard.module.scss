@@ -1,0 +1,17 @@
+.loginFailureContainer {
+  width: 40%;
+
+  h1 {
+    margin-bottom: 2rem;
+  }
+
+  .buttonContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+  button {
+      width: 100%;
+    }
+  }
+}
