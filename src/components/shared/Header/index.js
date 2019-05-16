@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import styles from './header.module.scss';
-import { ReactComponent as MenuIcon } from '../../../assets/svgs/menu.svg';
+// import { ReactComponent as MenuIcon } from '../../../assets/svgs/menu.svg';
+import { Consumer, Context } from '../../../context';
+import MenuIcon from '../MenuIcon';
+//
 
 class Header extends Component {
   constructor(props){
@@ -9,18 +12,23 @@ class Header extends Component {
       menuOpen: false
     }
   }
-  toggleMenu = () => {
-    this.setState({ menuOpen: !this.state.menuOpen })
-  }
+
+  // 
   render(){
     const { container, iconBox, closed } = styles;
     return (
-      <div className={container}>
-        <div className={this.state.menuOpen ? iconBox : `${iconBox} ${closed}`} onClick={this.toggleMenu}>
-          <MenuIcon />
-        </div>
-      </div>
+      <Consumer>
+        {(context) => (
+          <div className={container}>
+            <div className={context.state.isMenuOpen ? iconBox : `${iconBox} ${closed}`} 
+              onClick={context.toggleMenu}>
+              <MenuIcon menuOpen={this.state.menuOpen} />
+            </div>
+          </div>
+        )}
+      </Consumer>
     )
   }
 }
+Header.contextType = Context;
 export default Header;

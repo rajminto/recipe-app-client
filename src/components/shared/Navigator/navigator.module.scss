@@ -22,8 +22,8 @@
       color: $dark-night;
     }
   }
-  .closed{
-    height: 0;
-    transition: height 1s ease-in-out;
-  }
+}
+.menuClosed{
+  height: 0;
+  transition: height 1s ease-in-out;
 }

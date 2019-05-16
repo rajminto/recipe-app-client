@@ -1,5 +1,5 @@
 import React from 'react'
-import './recipe.css'
+import './recipe.scss'
 
 // Component Imports
 import TagsList from './TagsList'
@@ -22,7 +22,7 @@ const Recipe = ({ recipe }) => {
   } = recipe
 
   return (
-    <div>
+    <div className="recipe-container">
       <RecipeHeader
         name={name}
         user_name={user.name}
@@ -34,12 +34,14 @@ const Recipe = ({ recipe }) => {
         prep_time={prep_time}
         cook_time={cook_time}
       />
-      <RecipeIngredientsList
-        ingredients={ingredients}
-      />
-      <RecipeInstructionsList
-        instructions={instructions}
-      />
+      <div className="bot-recipe-info">
+        <RecipeIngredientsList
+          ingredients={ingredients}
+        />
+        <RecipeInstructionsList
+          instructions={instructions}
+        />
+      </div>
     </div>
   )
 }

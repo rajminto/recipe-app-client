@@ -1,12 +1,13 @@
 import React from 'react'
-import logo from './logo.svg'
-import './recipe-header.css'
+import styles from './recipe-header.module.scss'
 
 const RecipeHeader = ({ name, user_name, img_url }) => (
-  <div className="recipe-header">
+  <div className={styles.recipeHeader}>
     <h1>{name}</h1>
     <h2>By: {user_name}</h2>
-    <img src={logo} className="App-logo" alt="logo" />
+    <div className={styles.thumbContainer}>
+      <img src={img_url} className={styles.recThumb} alt="food_pic" />
+    </div>
   </div>
 )
 

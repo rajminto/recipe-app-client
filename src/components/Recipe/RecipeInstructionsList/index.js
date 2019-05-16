@@ -1,5 +1,5 @@
 import React from 'react'
-import './recipe-instructions-list.css'
+import styles from './recipe-instructions-list.module.scss'
 
 // Component Imports
 import RecipeInstruction from './RecipeInstruction'
@@ -14,7 +14,7 @@ const RecipeInstructionsList = ({ instructions }) => {
   ))
   
   return (
-    <div>
+    <div className={styles.container}>
       <h2>Recipe Instructions</h2>
       {instructionsCompononents}
     </div>

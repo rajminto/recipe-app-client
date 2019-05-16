@@ -1,0 +1,14 @@
+@import '../../../styles/variables';
+
+.tagList{
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  background-color: $secondary;
+  width: 90%;
+  margin: 0 auto;
+  div{
+    margin: 1em;
+  }
+}

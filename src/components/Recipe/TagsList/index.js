@@ -1,5 +1,5 @@
 import React from 'react'
-import './tags-list.css'
+import styles from './tags-list.module.scss'
 
 // Component Imports
 import Tag from './Tag'
@@ -8,7 +8,7 @@ const TagsList = ({ tags }) => {
   const tagComponents = tags.map(tag => <Tag key={tag.id} name={tag.name} />)
 
   return (
-    <div>
+    <div className={styles.tagList}>
       {tagComponents}
     </div>
   )
