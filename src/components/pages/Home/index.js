@@ -22,9 +22,9 @@ class Home extends Component {
           isLoaded: true
         })
       })
-    // setTimeout(() => {
-    //   this.setState({ showAlert: !this.state.showAlert })
-    // }, 2000)
+    setTimeout(() => {
+      this.setState({ showAlert: !this.state.showAlert })
+    }, 2000)
   }
 
   onClose = () => {

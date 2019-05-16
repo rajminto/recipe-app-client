@@ -10,32 +10,60 @@
   margin: 0;
   padding: 0;
 }
+
 html{
-  background-color: $main-background;
+  background-color: $light-night;
   font-family: $main-font;
-  background-image: url('../assets/background.jpg'); 
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
-  font-size: 1vw;
+  // font-size: 1rem;              //Default Font Size For Site
 }
+
+h1, h2, h3, p, li{
+  color: $dark-night;
+}
+
+h1{
+  font-size: 3rem;
+}
+
+h2{
+  font-size: 2.5rem;
+}
+
+h3{
+  font-size: 1.6rem;
+}
+
+p{
+  font-size: 1.3rem;
+  line-height: 1.5;
+}
+
+li{
+  font-size: 1.1rem;
+  margin-top: .6rem;
+  //ADD POTENTIAL RIGHT MARGIN TO BEFORE's
+}
+
+
+
+
 
 
 /* TRANSITION GROUP CLASSES */
 
-.fade-appear{
-  opacity: 0;
-  z-index: 1;
-}
-.fade-appear.fade-appear-active{
-  opacity: 1;
-  transition: opacity 800ms linear;
-}
-.fade-enter{
-  opacity: 0;
-  z-index: 1;
-}
-.fade-enter.fade-enter-active{
-  opacity: 1;
-  transition: opacity 800ms linear;
-}
+// .fade-appear{
+//   opacity: 0;
+//   z-index: 1;
+// }
+// .fade-appear.fade-appear-active{
+//   opacity: 1;
+//   transition: opacity 800ms linear;
+// }
+// .fade-enter{
+//   opacity: 0;
+//   z-index: 1;
+// }
+// .fade-enter.fade-enter-active{
+//   opacity: 1;
+//   transition: opacity 800ms linear;
+// }
