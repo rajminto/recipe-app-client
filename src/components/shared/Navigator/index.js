@@ -2,9 +2,8 @@ import React from 'react'
 import styles from './navigator.module.scss';
 import { NavLink } from 'react-router-dom';
 import { Consumer } from '../../../context';
-//
 
-const Navigator =  () => {
+const Navigator = () => {
   return (
     <Consumer>
       {(context) => (
@@ -14,6 +13,8 @@ const Navigator =  () => {
             <NavLink to="/add" className="nav-link" onClick={context.toggleMenu}>add recipe</NavLink>
             <NavLink to="/search" className="nav-link" onClick={context.toggleMenu}>search recipes</NavLink>
             <NavLink to="profile" className="nav-link" onClick={context.toggleMenu}>your profile</NavLink>
+            <NavLink to="/register" className="nav-link">register</NavLink>
+            <NavLink to="/login" className="nav-link">login</NavLink>
           </div>
         </div>
       )}
