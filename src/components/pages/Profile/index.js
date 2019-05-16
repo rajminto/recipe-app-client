@@ -5,6 +5,7 @@ import styles from './profile.module.scss'
 import Button from '../../shared/Button'
 import Card from '../../shared/Card'
 import LoginFailureCard from '../../shared/LoginFailureCard'
+import Loader from '../../shared/Loader'
 
 // TODO: store user/loggedIn information in context api
 class Profile extends Component {
@@ -44,7 +45,7 @@ class Profile extends Component {
     const { loginFailure, isLoaded, user } = this.state
 
     // TODO: create and use spinner/loader component here
-    if (!isLoaded) return <h1>Loading...</h1>
+    if (!isLoaded) return <Loader />
 
     // Login Failed: present options to register or login
     if (loginFailure) return <LoginFailureCard />

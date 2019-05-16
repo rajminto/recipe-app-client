@@ -1,14 +1,14 @@
 @import '../../../styles/variables';
 
 .container{
-  // height: 50%;
+  height: 50vh;
   width: 25em;
   position: absolute;
   top: 0;
   left: 0;
   overflow: hidden;
   background-color: $backup;
-  transition: height 1s ease-in-out;
+  transition: height .5s ease-in-out;
   .menuWrap{
     display: flex;
     flex-direction: column;
@@ -25,5 +25,5 @@
 }
 .menuClosed{
   height: 0;
-  transition: height 1s ease-in-out;
+  transition: height .5s ease-in-out;
 }
