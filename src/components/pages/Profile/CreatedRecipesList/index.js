@@ -1,12 +1,19 @@
 import React from 'react'
+import styles from './createdRecipesList.module.scss'
 
 import Card from '../../../shared/Card'
+import RecipeCardSmall from '../../../shared/RecipeCardSmall'
 
 const CreatedRecipesList = ({ recipes }) => {
-  console.log(recipes)
+  const recipeComponents = recipes.map(recipe => (
+    <RecipeCardSmall recipe={recipe} />
+  ))
   return (
     <Card>
       <h2>Created Recipes</h2>
+      <div className={styles.createdRecipesContainer}>
+        {recipeComponents}
+      </div>
     </Card>
   )
 }
