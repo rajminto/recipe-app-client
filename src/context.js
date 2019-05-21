@@ -18,8 +18,8 @@ export class Provider extends Component{
     this.setState({ isMenuOpen: !this.state.isMenuOpen })
   }
   //
-  funcGun = (fire) => {
-    this.setState({ funcLoaded: fire })
+  funcGun = (ammoFunc) => {
+    this.setState({ funcLoaded: ammoFunc })
   }
   //
   render(){
