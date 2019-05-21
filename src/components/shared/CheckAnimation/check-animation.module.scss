@@ -1,0 +1,22 @@
+@import '../../../styles/variables';
+
+.animationContainer{
+  width: 5rem;
+  height: 5rem;
+  // margin-right: 1rem;
+}
+.circle, .check {
+  fill: none;
+  stroke: rgb(39, 169, 39);
+  stroke-miterlimit: 10;
+}
+
+.circle {
+  stroke-width: 34px;
+  stroke: $secondary;
+}
+
+.check {
+  stroke-linecap: round;
+  stroke-width: 84px;
+}
