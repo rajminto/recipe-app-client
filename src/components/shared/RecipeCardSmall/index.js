@@ -1,5 +1,5 @@
 import React from 'react'
-import styles from './recipeCardSmall.module.scss'
+import styles from './recipe-card-small.module.scss'
 
 import Card from '../Card'
 

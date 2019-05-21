@@ -57,7 +57,7 @@ class Profile extends Component {
   }
 
   render() {
-    const { loginFailure, isLoaded, user, createdRecipes, savedRecipes } = this.state
+    const { isLoaded, loginFailure, user, createdRecipes, savedRecipes } = this.state
 
     // TODO: create and use spinner/loader component here
     if (!isLoaded) return <Loader />
@@ -67,16 +67,16 @@ class Profile extends Component {
 
     return (
       <div className={styles.profileContainer}>
-      <ProfileHeader user={user} />
-      {createdRecipes.length
-        // TODO: If no recipes, show button to create
-        ? <RecipesList title={'Created Recipes'} recipes={createdRecipes} />
-        : <Card><h2>No created recipes currently.</h2></Card>
-      }
-      {savedRecipes.length
-        ? <RecipesList title={'Saved Recipes'} recipes={savedRecipes} />
-        : <Card><h2>No saved recipes currently.</h2></Card>
-      }
+        <ProfileHeader user={user} />
+        {createdRecipes.length
+          // TODO?: If no recipes, show button to create
+          ? <RecipesList title={'Created Recipes'} recipes={createdRecipes} />
+          : <Card><h2>No created recipes currently.</h2></Card>
+        }
+        {savedRecipes.length
+          ? <RecipesList title={'Saved Recipes'} recipes={savedRecipes} />
+          : <Card><h2>No saved recipes currently.</h2></Card>
+        }
       </div>
     )
   }
