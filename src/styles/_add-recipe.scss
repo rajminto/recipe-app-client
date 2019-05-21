@@ -61,7 +61,7 @@
       width: 50%;
       font-size: 1.1em;
     }
-    h1{
+    h2{
       margin-bottom: 1em;
     }
     input{
@@ -80,6 +80,7 @@
       .delete-btn{
         height: 2em;
         width: 2em;
+        margin-right: 1rem;
         justify-self: flex-end;
         cursor: pointer;
         svg{
@@ -169,5 +170,13 @@
       flex-direction: row;
       justify-content: space-between;
     }
+  }
+}
+.submit-rec-container{
+  display: flex;
+  justify-content: flex-end;
+  button{
+    background-color: rgb(150, 187, 150);
+    margin-right: 1rem;
   }
 }

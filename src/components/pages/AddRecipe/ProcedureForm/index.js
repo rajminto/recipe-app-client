@@ -52,7 +52,7 @@ class ProcedureForm extends Component {
     const { procedures } = this.state;
     return (
       <div className="add-ing-form-wrapper" ref={container => this.container = container}>
-        <h1>Please add your procedures:</h1>
+        <h2>Please add your procedures:</h2>
         <form onSubmit={this.handleSubmit} onChange={this.handleChange} className="add-ing-form">
           {
             procedures.map((ingredient, i) => {
@@ -81,10 +81,6 @@ class ProcedureForm extends Component {
             <Button
               text="Add Procedure"
               clickFunc={this.addNewProcedure}
-            />
-            <Button
-              text="Submit"
-              clickFunc={() => console.log('procedure submitted')}
             />
           </div>
         </form>
