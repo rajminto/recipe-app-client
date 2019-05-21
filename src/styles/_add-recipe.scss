@@ -58,16 +58,25 @@
     width: 50%;
     margin-left: 3em;
     textarea{
-      width: 50%;
+      width: 70%;
       font-size: 1.1em;
-      margin: 0 4em;
+      margin: 1em 4em 0 0;
     }
+
     h2{
       margin-bottom: 1em;
     }
+
+    label{
+      font-size: 1.1rem;
+      // margin-bottom: 4rem;
+    }
+
     input{
       font-size: 1.2em;
-      margin: .5em 4em;
+      margin: .5em 0;
+      margin-right: 4em;
+      width: 70%;
     }
     .ingredient-field{
       padding: .1em 0;

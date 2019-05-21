@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import Button from '../../../shared/Button';
 import { Context } from '../../../../context';
 import { TweenLite } from 'gsap';
@@ -64,19 +64,21 @@ class IngredientForm extends Component {
             ingredients.map((ingredient, i) => {
               let ingredientId = `ing-${i}`, descId = `desc-${i}`
               return (
-                <div className="ingredient-field" key={i}>
+                <Fragment>
                   <label htmlFor={ingredientId}><span>{`#${i + 1}`}</span>Name/Varietal & Quantity:</label>
-                  <input
-                    type="text"
-                    name={ingredientId}
-                    data-id={i}
-                    id={ingredientId}
-                    className="name"
-                  />
-                  <div className="delete-btn" onClick={() => this.removeIngredient(i)}>
-                    <DeleteIcon />
+                  <div className="ingredient-field" key={i}>
+                    <input
+                      type="text"
+                      name={ingredientId}
+                      data-id={i}
+                      id={ingredientId}
+                      className="name"
+                    />
+                    <div className="delete-btn" onClick={() => this.removeIngredient(i)}>
+                      <DeleteIcon />
+                    </div>
                   </div>
-                </div>
+                </Fragment>
               )
             })
           }
