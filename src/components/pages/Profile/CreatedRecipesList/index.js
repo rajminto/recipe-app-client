@@ -6,7 +6,10 @@ import RecipeCardSmall from '../../../shared/RecipeCardSmall'
 
 const CreatedRecipesList = ({ recipes }) => {
   const recipeComponents = recipes.map(recipe => (
-    <RecipeCardSmall recipe={recipe} />
+    <RecipeCardSmall
+      key={recipe.id}
+      recipe={recipe}
+    />
   ))
   return (
     <Card className={styles.createdRecipesCard}>

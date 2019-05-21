@@ -1,12 +1,9 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
 import styles from './profile.module.scss'
 
-import Button from '../../shared/Button'
 import Card from '../../shared/Card'
 import LoginFailureCard from '../../shared/LoginFailureCard'
 import Loader from '../../shared/Loader'
-
 import CreatedRecipesList from './CreatedRecipesList'
 
 // TODO: store user/loggedIn information in context api
@@ -27,12 +24,17 @@ class Profile extends Component {
 
   componentDidMount() {
     this.ensureAuthenticted()
-      .then(user => {
-        if (user) return fetch(`http://localhost:3000/api/users/${user.id}/recipes`)
+      .then(this.fetchUserRecipes)
+      .then(({ recipes }) => this.setState({ isLoaded: true, recipes }))
+      .catch(err => {
+        // TODO: display message on error
+        if (err.message === 'user not found') console.log('You must be logged in to view profile')
       })
-      .then(res => res.json())
-      .then(({recipes}) => this.setState({ recipes }))
-      .catch(console.log)
+  }
+
+  fetchUserRecipes = (user) => {
+    if (user) return fetch(`http://localhost:3000/api/users/${user.id}/recipes`).then(res => res.json())
+    else throw new Error('user not found')
   }
 
   ensureAuthenticted = () => {
@@ -43,7 +45,7 @@ class Profile extends Component {
       .then(res => res.json())
       .then(response => {
         if (response.user) {
-          this.setState({ isLoaded: true, user: response.user })
+          this.setState({ user: response.user })
           return response.user
         } else {
           this.setState({ isLoaded: true, loginFailure: true })

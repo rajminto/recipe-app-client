@@ -7,9 +7,9 @@ const RecipeCardSmall = ({ recipe }) => {
   return (
     <Card className={styles.recipeCardSmallContainer}>
       <h3>{recipe.name}</h3>
-      <img className={styles.recipeImage} src={recipe.img_url} alt='recipe image' />
-      <p>{recipe.description}</p>
-      <p>{recipe.cook_time}</p>
+      <img className={styles.recipeImage} src={recipe.img_url} alt='recipe' />
+      <p>Prep: {recipe.prep_time}</p>
+      <p>Cook: {recipe.cook_time}</p>
     </Card>
   )
 }
