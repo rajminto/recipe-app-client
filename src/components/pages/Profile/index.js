@@ -4,7 +4,7 @@ import styles from './profile.module.scss'
 import Card from '../../shared/Card'
 import LoginFailureCard from '../../shared/LoginFailureCard'
 import Loader from '../../shared/Loader'
-import CreatedRecipesList from './CreatedRecipesList'
+import RecipesList from '../../shared/RecipesList'
 
 // TODO: store user/loggedIn information in context api
 class Profile extends Component {
@@ -14,7 +14,8 @@ class Profile extends Component {
       loginFailure: false,
       isLoaded: false,
       user: {},
-      recipes: []
+      createdRecipes: [],
+      savedRecipes: []
     }
   }
 
@@ -49,11 +50,13 @@ class Profile extends Component {
   }
 
   setRecipesOnState = ({ recipes }) => {
-    this.setState({ isLoaded: true, recipes })
+    const createdRecipes = recipes.filter(recipe => recipe.userRecipes.createdBy === true)
+    const savedRecipes = recipes.filter(recipe => recipe.userRecipes.createdBy === false)
+    this.setState({ isLoaded: true, createdRecipes, savedRecipes })
   }
 
   render() {
-    const { loginFailure, isLoaded, user, recipes } = this.state
+    const { loginFailure, isLoaded, user, createdRecipes, savedRecipes } = this.state
 
     // TODO: create and use spinner/loader component here
     if (!isLoaded) return <Loader />
@@ -73,7 +76,15 @@ class Profile extends Component {
           <li>View recipes you have created and saved</li>
         </ul>
       </Card>
-      <CreatedRecipesList recipes={recipes} />
+      {createdRecipes.length
+        // TODO: If no recipes, show button to create
+        ? <RecipesList title={'Created Recipes'} recipes={createdRecipes} />
+        : <Card><h2>No created recipes currently.</h2></Card>
+      }
+      {savedRecipes.length
+        ? <RecipesList title={'Saved Recipes'} recipes={savedRecipes} />
+        : <Card><h2>No saved recipes currently.</h2></Card>
+      }
       </div>
     )
   }

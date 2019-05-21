@@ -1,10 +1,10 @@
 import React from 'react'
-import styles from './createdRecipesList.module.scss'
+import styles from './recipesList.module.scss'
 
-import Card from '../../../shared/Card'
-import RecipeCardSmall from '../../../shared/RecipeCardSmall'
+import Card from '../Card'
+import RecipeCardSmall from '../RecipeCardSmall'
 
-const CreatedRecipesList = ({ recipes }) => {
+const RecipesList = ({ title, recipes }) => {
   const recipeComponents = recipes.map(recipe => (
     <RecipeCardSmall
       key={recipe.id}
@@ -13,7 +13,7 @@ const CreatedRecipesList = ({ recipes }) => {
   ))
   return (
     <Card className={styles.createdRecipesCard}>
-      <h2>Created Recipes</h2>
+      <h2>{title}</h2>
       <div className={styles.createdRecipesContainer}>
         {recipeComponents}
       </div>
@@ -21,4 +21,4 @@ const CreatedRecipesList = ({ recipes }) => {
   )
 }
 
-export default CreatedRecipesList
+export default RecipesList
