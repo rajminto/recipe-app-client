@@ -15,7 +15,7 @@ class Home extends Component {
   }
   //
   componentDidMount() {
-    fetch('https://recipe-app-server.herokuapp.com/api/recipes/1')
+    fetch('http://localhost:3000/api/recipes/1')
       .then(res => res.json())
       .then(recipe => {
         this.setState({
@@ -23,6 +23,7 @@ class Home extends Component {
           isLoaded: true
         })
       })
+      .catch(console.log)
     // setTimeout(() => {
     //   this.setState({ showAlert: !this.state.showAlert })
     // }, 2000)
