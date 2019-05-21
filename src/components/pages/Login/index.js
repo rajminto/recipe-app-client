@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom'
 
 import Button from '../../shared/Button'
 import Card from '../../shared/Card'
+import CheckAnimation from '../../shared/CheckAnimation'
 
 const baseUrl = 'http://localhost:3000/api'
 
@@ -74,6 +75,7 @@ class Login extends Component {
         {message && <h3>{this.state.message}</h3>}
 
         <form onSubmit={this.handleSubmit} className={styles.loginForm}>
+          <CheckAnimation />
           <label>Email:</label>
           <input
             type="email"

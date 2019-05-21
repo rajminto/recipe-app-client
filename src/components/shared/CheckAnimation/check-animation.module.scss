@@ -1,0 +1,18 @@
+.animationContainer{
+  width: 5rem;
+  height: 5rem;
+}
+.circle, .check {
+  fill: none;
+  stroke: #000;
+  stroke-miterlimit: 10;
+}
+
+.circle {
+  stroke-width: 34px;
+}
+
+.check {
+  stroke-linecap: round;
+  stroke-width: 84px;
+}
