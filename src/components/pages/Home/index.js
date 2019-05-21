@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Recipe from '../../Recipe';
 import Alert from '../../shared/Alert';
+import Loader from '../../shared/Loader';
 //
 
 class Home extends Component {
@@ -22,9 +23,9 @@ class Home extends Component {
           isLoaded: true
         })
       })
-    setTimeout(() => {
-      this.setState({ showAlert: !this.state.showAlert })
-    }, 2000)
+    // setTimeout(() => {
+    //   this.setState({ showAlert: !this.state.showAlert })
+    // }, 2000)
   }
 
   onClose = () => {
@@ -41,7 +42,7 @@ class Home extends Component {
         />
         {this.state.isLoaded
           ? <Recipe recipe={this.state.recipe} />
-          : <h2>Loading...</h2>
+          : <Loader />
         }
       </div>
     )

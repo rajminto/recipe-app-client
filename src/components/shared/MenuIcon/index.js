@@ -20,9 +20,9 @@ class MenuIcon extends Component {
   componentDidMount() {
     this.tl = new TimelineLite({ paused: true, reversed: true });
     this.tl
-      .to(this.spoon, .5, { rotation: 45, ease: Power1.easeInOut }, 'menu')
-      .to(this.fork, .5, { rotation: -45, ease: Power1.easeInOut }, 'menu')
-      .to(this.knife, .5, { autoAlpha: 0 }, 'menu');
+      .to(this.spoon, .5, { transformOrigin: "14.385px 70%", rotation: 45, x: 100, y: -50, ease: Power1.easeInOut }, 'menu')
+      .to(this.knife, .5, { transformOrigin: "68.77px 70%", rotation: -45, x: -100, y: -50, ease: Power1.easeInOut }, 'menu')
+      .to(this.fork, .4, { autoAlpha: 0 }, 'menu');
   }
   //
   burgerToggle = () => {
