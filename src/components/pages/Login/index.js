@@ -15,6 +15,7 @@ class Login extends Component {
     this.state = {
       message: '',
       loginSuccess: false,
+      formValid: false,
       form: {
         email: '',
         password: ''
@@ -23,12 +24,13 @@ class Login extends Component {
   }
 
   handleChange = (e) => {
+    
     this.setState({
       form: {
         ...this.state.form,
         [e.target.name]: e.target.value
       }
-    })
+    }, () => this.isFormValid())
   }
 
   handleSubmit = (e) => {
@@ -50,6 +52,15 @@ class Login extends Component {
       })
   }
 
+  isFormValid = () => {
+    if (this.state.form.password.length > 5 && this.state.formValid === false) {
+      this.setState({ formValid: true })
+    }
+    else if (this.state.form.password.length <= 5 && this.state.formValid === true) {
+      this.setState({ formValid: false })
+    }
+  }
+
   submitUser = (user) => {
     return fetch(`${baseUrl}/auth/login`, {
       method: 'POST',
@@ -63,15 +74,15 @@ class Login extends Component {
   }
 
   render() {
-    const { message, loginSuccess } = this.state
+    const { message, loginSuccess, formValid } = this.state
 
     if (loginSuccess) return <Redirect to='/profile' />
-
+    // console.log('render from parent')
     return (
       <Card className={styles.loginFormContainer}>
         <div className={styles.validator}>
           <h1>Login to Account</h1>
-          <CheckAnimation />
+          {formValid && <CheckAnimation />}
         </div>
 
         {/* TODO: refactor to use a Message component */}

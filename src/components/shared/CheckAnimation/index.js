@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { TimelineLite } from 'gsap'
+import { TimelineMax } from 'gsap'
 import { DrawSVGPlugin } from '../../../utils/gsap/DrawSVGPlugin'
 import styles from './check-animation.module.scss'
-import TweenLite, { Power1 } from 'gsap/TweenLite';
+import TweenLite, { Power1 } from 'gsap/TweenLite'
+import { Transition } from 'react-transition-group'
 
 
 class CheckAnimation extends Component {
@@ -11,22 +12,21 @@ class CheckAnimation extends Component {
     this.state = {}
     this.circle = null
     this.check = null
+    this.tl = new TimelineMax()
   }
   componentDidMount(){
-    this.setCheck()
-  }
-
-  setCheck = () => {
     TweenLite.set(this.circle, { drawSVG: "0%" })
     TweenLite.set(this.check, { drawSVG: "0%" })
     this.animateCheck()
   }
 
-  animateCheck = () => {
-    let tl = new TimelineLite()
-    tl.to(this.circle, .6, { drawSVG: "0% 100%", ease: Power1.easeIn })
+
+  animateCheck() {
+    this.tl
+      .to(this.circle, .6, { drawSVG: "0% 100%", ease: Power1.easeIn })
       .to(this.check, .4, { drawSVG: "0% 100%", ease: Power1.easeIn })
   }
+
 
   render() {
     const { animationContainer, circle, check } = styles
