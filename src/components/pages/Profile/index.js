@@ -13,11 +13,7 @@ class Profile extends Component {
     this.state = {
       loginFailure: false,
       isLoaded: false,
-      user: {
-        id: 0,
-        name: '',
-        email: ''
-      },
+      user: {},
       recipes: []
     }
   }
@@ -26,20 +22,11 @@ class Profile extends Component {
     this.ensureAuthenticted()
       .then(this.checkForUser)
       .then(this.fetchUserRecipes)
-      .then(({ recipes }) => this.setState({ isLoaded: true, recipes }))
+      .then(this.setRecipesOnState)
       .catch(err => {
         if (err.message === 'no user') this.setState({ isLoaded: true, loginFailure: true })
+        else console.log(err)
       })
-  }
-
-  fetchUserRecipes = (user) => {
-    return fetch(`http://localhost:3000/api/users/${user.id}/recipes`)
-      .then(res => res.json())
-  }
-
-  checkForUser = ({ user }) => {
-    if (!user) throw new Error('no user')
-    return user
   }
 
   ensureAuthenticted = () => {
@@ -48,6 +35,21 @@ class Profile extends Component {
       credentials: 'include'
     })
       .then(res => res.json())
+  }
+
+  checkForUser = ({ user }) => {
+    if (!user) throw new Error('no user')
+    this.setState({ user })
+    return user
+  }
+
+  fetchUserRecipes = (user) => {
+    return fetch(`http://localhost:3000/api/users/${user.id}/recipes`)
+      .then(res => res.json())
+  }
+
+  setRecipesOnState = ({ recipes }) => {
+    this.setState({ isLoaded: true, recipes })
   }
 
   render() {
