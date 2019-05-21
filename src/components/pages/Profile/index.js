@@ -25,18 +25,29 @@ class Profile extends Component {
 
   componentDidMount() {
     this.ensureAuthenticted()
+      .then(user => {
+        console.log(user)
+        if (user) return fetch(`http://localhost:3000/api/users/${user.id}/recipes`)
+      })
+      .then(res => res.json())
+      .then(recipes => this.setState({ recipes }, () => console.log(this.state)))
+      .catch(console.log)
   }
 
   ensureAuthenticted = () => {
-    fetch('http://localhost:3000/api/auth/test', {
+    return fetch('http://localhost:3000/api/auth/test', {
       method: 'GET',
       credentials: 'include'
     })
       .then(res => res.json())
       .then(response => {
-        response.user
-          ? this.setState({ isLoaded: true, user: response.user })
-          : this.setState({ isLoaded: true, loginFailure: true })
+        if (response.user) {
+          this.setState({ isLoaded: true, user: response.user })
+          return response.user
+        } else {
+          this.setState({ isLoaded: true, loginFailure: true })
+          return false
+        }
       })
       .catch(console.error)
   }
@@ -53,6 +64,7 @@ class Profile extends Component {
     return (
       <Card className={styles.profileHeaderContainer}>
         <h1>Profile - {user.name}</h1>
+        <h2>{user.id}</h2>
         <p>Welcome! From here you can:</p>
         <ul>
           <li>Create new recipes</li>
