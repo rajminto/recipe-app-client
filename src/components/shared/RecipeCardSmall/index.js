@@ -1,10 +1,14 @@
 import React from 'react'
 
+import Card from '../Card'
+
 const RecipeCardSmall = ({ recipe }) => {
   return (
-    <div>
-      <p>{recipe.name}</p>
-    </div>
+    <Card>
+      <h3>{recipe.name}</h3>
+      <p>{recipe.description}</p>
+      <p>{recipe.cook_time}</p>
+    </Card>
   )
 }
 

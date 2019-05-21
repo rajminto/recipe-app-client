@@ -9,7 +9,7 @@ const CreatedRecipesList = ({ recipes }) => {
     <RecipeCardSmall recipe={recipe} />
   ))
   return (
-    <Card>
+    <Card className={styles.createdRecipesCard}>
       <h2>Created Recipes</h2>
       <div className={styles.createdRecipesContainer}>
         {recipeComponents}
