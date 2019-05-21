@@ -69,13 +69,15 @@ class Login extends Component {
 
     return (
       <Card className={styles.loginFormContainer}>
-        <h1>Login to Account</h1>
+        <div className={styles.validator}>
+          <h1>Login to Account</h1>
+          <CheckAnimation />
+        </div>
 
         {/* TODO: refactor to use a Message component */}
         {message && <h3>{this.state.message}</h3>}
 
         <form onSubmit={this.handleSubmit} className={styles.loginForm}>
-          <CheckAnimation />
           <label>Email:</label>
           <input
             type="email"

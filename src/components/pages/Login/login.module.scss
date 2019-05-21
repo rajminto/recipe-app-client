@@ -5,13 +5,22 @@
   flex-direction: column;
   width: 40%;
 
-  h1 {
-    margin-bottom: 1rem;
-  }
+  .validator {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+    }
 
   .loginForm {
     display: flex;
     flex-direction: column;
+
+    .labelContainer {
+      display: flex;
+      margin: 1em 0;
+      align-items: center;
+    }
     
     label {
       margin: 1rem 0;
@@ -42,5 +51,7 @@
         border-left-color: $secondary;
       }
     }
+
+    
   }
 }
