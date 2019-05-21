@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { Redirect } from 'react-router-dom'
 import styles from './profile.module.scss'
 
-import Button from '../../shared/Button'
+import ProfileHeader from './ProfileHeader'
 import Card from '../../shared/Card'
 import LoginFailureCard from '../../shared/LoginFailureCard'
 import Loader from '../../shared/Loader'
+import RecipesList from '../../shared/RecipesList'
 
 // TODO: store user/loggedIn information in context api
 class Profile extends Component {
@@ -14,35 +14,50 @@ class Profile extends Component {
     this.state = {
       loginFailure: false,
       isLoaded: false,
-      user: {
-        id: 0,
-        name: '',
-        email: ''
-      },
-      recipes: []
+      user: {},
+      createdRecipes: [],
+      savedRecipes: []
     }
   }
 
   componentDidMount() {
     this.ensureAuthenticted()
+      .then(this.checkForUser)
+      .then(this.fetchUserRecipes)
+      .then(this.setRecipesOnState)
+      .catch(err => {
+        if (err.message === 'no user') this.setState({ isLoaded: true, loginFailure: true })
+        else console.log(err)
+      })
   }
 
   ensureAuthenticted = () => {
-    fetch('http://localhost:3000/api/auth/test', {
+    return fetch('http://localhost:3000/api/auth/test', {
       method: 'GET',
       credentials: 'include'
     })
       .then(res => res.json())
-      .then(response => {
-        response.user
-          ? this.setState({ isLoaded: true, user: response.user })
-          : this.setState({ isLoaded: true, loginFailure: true })
-      })
-      .catch(console.error)
+  }
+
+  checkForUser = ({ user }) => {
+    if (!user) throw new Error('no user')
+    this.setState({ user })
+    return user
+  }
+
+  fetchUserRecipes = (user) => {
+    return fetch(`http://localhost:3000/api/users/${user.id}/recipes`)
+      .then(res => res.json())
+  }
+
+  setRecipesOnState = ({ recipes }) => {
+    const createdRecipes = recipes.filter(recipe => recipe.userRecipes.createdBy)
+    const savedRecipes = recipes.filter(recipe => !recipe.userRecipes.createdBy)
+    this.setState({ isLoaded: true, createdRecipes, savedRecipes })
   }
 
   render() {
-    const { loginFailure, isLoaded, user } = this.state
+    const { isLoaded, loginFailure, user, createdRecipes, savedRecipes } = this.state
 
     // TODO: create and use spinner/loader component here
     if (!isLoaded) return <Loader />
@@ -51,16 +66,18 @@ class Profile extends Component {
     if (loginFailure) return <LoginFailureCard />
 
     return (
-      <Card className={styles.profileHeaderContainer}>
-        <h1>Profile - {user.name}</h1>
-        <p>Welcome! From here you can:</p>
-        <ul>
-          <li>Create new recipes</li>
-          <li>View recipes you have created</li>
-          <li>Edit recipes you have created</li>
-          <li>Delete recipes you have created</li>
-        </ul>
-      </Card>
+      <div className={styles.profileContainer}>
+        <ProfileHeader user={user} />
+        {createdRecipes.length
+          // TODO?: If no recipes, show button to create
+          ? <RecipesList title={'Created Recipes'} recipes={createdRecipes} />
+          : <Card><h2>No created recipes currently.</h2></Card>
+        }
+        {savedRecipes.length
+          ? <RecipesList title={'Saved Recipes'} recipes={savedRecipes} />
+          : <Card><h2>No saved recipes currently.</h2></Card>
+        }
+      </div>
     )
   }
 }
