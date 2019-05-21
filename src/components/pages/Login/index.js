@@ -82,7 +82,7 @@ class Login extends Component {
       <Card className={styles.loginFormContainer}>
         <div className={styles.validator}>
           <h1>Login to Account</h1>
-          {formValid && <CheckAnimation />}
+            <CheckAnimation formValid={formValid} />
         </div>
 
         {/* TODO: refactor to use a Message component */}

@@ -18,12 +18,17 @@ export class Provider extends Component{
     this.setState({ isMenuOpen: !this.state.isMenuOpen })
   }
   //
+  funcGun = (fire) => {
+    this.setState({ funcLoaded: fire })
+  }
+  //
   render(){
     return(
       <Context.Provider value={{
         state: this.state,
         sendToContextState: this.sendToContextState,
-        toggleMenu: this.toggleMenu
+        toggleMenu: this.toggleMenu,
+        funcGun: this.funcGun
       }}>
         {this.props.children}
       </Context.Provider>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styles from './header.module.scss';
-// import { ReactComponent as MenuIcon } from '../../../assets/svgs/menu.svg';
 import { Consumer, Context } from '../../../context';
 import MenuIcon from '../MenuIcon';
 //
@@ -15,7 +14,7 @@ class Header extends Component {
 
   // 
   render(){
-    const { container, iconBox, closed } = styles;
+    const { container, iconBox, closed, companyName, mainLogo } = styles;
     return (
       <Consumer>
         {(context) => (
@@ -23,6 +22,9 @@ class Header extends Component {
             <div className={context.state.isMenuOpen ? iconBox : `${iconBox} ${closed}`} 
               onClick={context.toggleMenu}>
               <MenuIcon menuOpen={this.state.menuOpen} />
+            </div>
+            <div className={mainLogo}>
+              <h1 className={companyName}>SAVVOR</h1>
             </div>
           </div>
         )}
