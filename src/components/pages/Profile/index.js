@@ -24,17 +24,22 @@ class Profile extends Component {
 
   componentDidMount() {
     this.ensureAuthenticted()
+      .then(this.checkForUser)
       .then(this.fetchUserRecipes)
       .then(({ recipes }) => this.setState({ isLoaded: true, recipes }))
       .catch(err => {
-        // TODO: display message on error
-        if (err.message === 'user not found') console.log('You must be logged in to view profile')
+        if (err.message === 'no user') this.setState({ isLoaded: true, loginFailure: true })
       })
   }
 
   fetchUserRecipes = (user) => {
-    if (user) return fetch(`http://localhost:3000/api/users/${user.id}/recipes`).then(res => res.json())
-    else throw new Error('user not found')
+    return fetch(`http://localhost:3000/api/users/${user.id}/recipes`)
+      .then(res => res.json())
+  }
+
+  checkForUser = ({ user }) => {
+    if (!user) throw new Error('no user')
+    return user
   }
 
   ensureAuthenticted = () => {
@@ -43,16 +48,6 @@ class Profile extends Component {
       credentials: 'include'
     })
       .then(res => res.json())
-      .then(response => {
-        if (response.user) {
-          this.setState({ user: response.user })
-          return response.user
-        } else {
-          this.setState({ isLoaded: true, loginFailure: true })
-          return false
-        }
-      })
-      .catch(console.error)
   }
 
   render() {
