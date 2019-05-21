@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import styles from './profile.module.scss'
 
+import ProfileHeader from './ProfileHeader'
 import Card from '../../shared/Card'
 import LoginFailureCard from '../../shared/LoginFailureCard'
 import Loader from '../../shared/Loader'
@@ -50,8 +51,8 @@ class Profile extends Component {
   }
 
   setRecipesOnState = ({ recipes }) => {
-    const createdRecipes = recipes.filter(recipe => recipe.userRecipes.createdBy === true)
-    const savedRecipes = recipes.filter(recipe => recipe.userRecipes.createdBy === false)
+    const createdRecipes = recipes.filter(recipe => recipe.userRecipes.createdBy)
+    const savedRecipes = recipes.filter(recipe => !recipe.userRecipes.createdBy)
     this.setState({ isLoaded: true, createdRecipes, savedRecipes })
   }
 
@@ -66,16 +67,7 @@ class Profile extends Component {
 
     return (
       <div className={styles.profileContainer}>
-      <Card className={styles.profileHeaderContainer}>
-        <h1>Profile - {user.name}</h1>
-        <p>Welcome! From here you can:</p>
-        <ul>
-          <li>Create new recipes</li>
-          <li>Edit recipes you have created</li>
-          <li>Delete recipes you have created</li>
-          <li>View recipes you have created and saved</li>
-        </ul>
-      </Card>
+      <ProfileHeader user={user} />
       {createdRecipes.length
         // TODO: If no recipes, show button to create
         ? <RecipesList title={'Created Recipes'} recipes={createdRecipes} />
