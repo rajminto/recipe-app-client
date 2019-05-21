@@ -7,6 +7,8 @@ import Card from '../../shared/Card'
 import LoginFailureCard from '../../shared/LoginFailureCard'
 import Loader from '../../shared/Loader'
 
+import CreatedRecipesList from './CreatedRecipesList'
+
 // TODO: store user/loggedIn information in context api
 class Profile extends Component {
   constructor(props) {
@@ -26,11 +28,10 @@ class Profile extends Component {
   componentDidMount() {
     this.ensureAuthenticted()
       .then(user => {
-        console.log(user)
         if (user) return fetch(`http://localhost:3000/api/users/${user.id}/recipes`)
       })
       .then(res => res.json())
-      .then(recipes => this.setState({ recipes }, () => console.log(this.state)))
+      .then(({recipes}) => this.setState({ recipes }))
       .catch(console.log)
   }
 
@@ -53,7 +54,7 @@ class Profile extends Component {
   }
 
   render() {
-    const { loginFailure, isLoaded, user } = this.state
+    const { loginFailure, isLoaded, user, recipes } = this.state
 
     // TODO: create and use spinner/loader component here
     if (!isLoaded) return <Loader />
@@ -62,17 +63,19 @@ class Profile extends Component {
     if (loginFailure) return <LoginFailureCard />
 
     return (
+      <div className={styles.profileContainer}>
       <Card className={styles.profileHeaderContainer}>
         <h1>Profile - {user.name}</h1>
-        <h2>{user.id}</h2>
         <p>Welcome! From here you can:</p>
         <ul>
           <li>Create new recipes</li>
-          <li>View recipes you have created</li>
           <li>Edit recipes you have created</li>
           <li>Delete recipes you have created</li>
+          <li>View recipes you have created and saved</li>
         </ul>
       </Card>
+      <CreatedRecipesList recipes={recipes} />
+      </div>
     )
   }
 }
