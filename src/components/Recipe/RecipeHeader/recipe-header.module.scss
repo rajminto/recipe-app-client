@@ -15,12 +15,12 @@ div.recipeHeaderContainer {
     margin-top: 1rem;
     display: grid;
     grid-template-columns: 1fr 2fr;
-    grid-auto-rows: auto;
     grid-gap: 1rem;
 
     .headerCard {
       padding: 1.5rem;
       background-color: $sand;
+      margin: 0;
     }
 
     .timesContainer {
