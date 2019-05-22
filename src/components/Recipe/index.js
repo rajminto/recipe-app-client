@@ -28,13 +28,11 @@ const Recipe = ({ recipe }) => {
         user_name={users[0].name}
         img_url={img_url}
         tags={tags}
-      />
-      {/* <TagsList tags={tags} /> */}
-      <RecipeDescription
         description={description}
         prep_time={prep_time}
         cook_time={cook_time}
       />
+      {/* <TagsList tags={tags} /> */}
       <div className="bot-recipe-info">
         <RecipeIngredientsList
           ingredients={ingredients}
