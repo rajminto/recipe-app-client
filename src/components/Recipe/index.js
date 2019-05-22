@@ -15,7 +15,7 @@ const Recipe = ({ recipe }) => {
     img_url,
     prep_time,
     cook_time,
-    user,
+    users,
     instructions,
     ingredients,
     tags
@@ -25,15 +25,14 @@ const Recipe = ({ recipe }) => {
     <div className="recipe-container">
       <RecipeHeader
         name={name}
-        user_name={user.name}
+        user_name={users[0].name}
         img_url={img_url}
-      />
-      <TagsList tags={tags} />
-      <RecipeDescription
+        tags={tags}
         description={description}
         prep_time={prep_time}
         cook_time={cook_time}
       />
+      {/* <TagsList tags={tags} /> */}
       <div className="bot-recipe-info">
         <RecipeIngredientsList
           ingredients={ingredients}
