@@ -2,7 +2,17 @@
   width: 100%;
   line-height: 1.5;
 
-  h1 {
+  .headerContent {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-gap: 1rem;
+
+    img {
+      min-width: 100%;
+    }
+  }
+
+  h1, h2 {
     margin-bottom: 1rem;
   }
 
