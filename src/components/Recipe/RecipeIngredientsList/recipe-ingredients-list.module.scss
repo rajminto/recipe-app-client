@@ -1,15 +1,14 @@
 @import '../../../styles/variables';
 
-.ingredientList{
-  background-color: $sand;
-  padding: 1em;
-  width: 50%;
-  height: auto;
-  margin-right: .25em;
-  h2{
-    margin-bottom: 1em;
-  }
-  p{
-    margin-bottom: 1em;
+.ingredientsListContainer {
+
+  .ingredientsListCard {
+    background-color: $sand;
+    margin: 0;
+    margin-top: 1.5rem;
+    
+    p {
+      margin-bottom: 1rem;
+    }
   }
 }
