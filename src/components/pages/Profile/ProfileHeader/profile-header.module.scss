@@ -1,3 +1,5 @@
+@import '../../../../styles/variables';
+
 .profileHeaderContainer {
   width: 100%;
   line-height: 1.5;
@@ -9,6 +11,12 @@
 
     img {
       min-width: 100%;
+    }
+
+    .headerCard {
+      background-color: $sand;
+      margin: 0;
+      padding: 1.5rem;
     }
   }
 
