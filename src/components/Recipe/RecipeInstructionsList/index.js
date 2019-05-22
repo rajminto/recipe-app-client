@@ -17,7 +17,7 @@ const RecipeInstructionsList = ({ instructions }) => {
   return (
     <Card className={styles.container}>
       <h2>Recipe Instructions</h2>
-      <Card className={styles.ingredientsListCard}>
+      <Card className={styles.instructionsListCard}>
         {instructionsCompononents}
       </Card>
     </Card>
