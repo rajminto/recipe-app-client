@@ -1,15 +1,11 @@
 @import '../../../styles/variables';
 
-.container{
-  background-color: $sand;
-  padding: 1em;
-  width: 50%;
-  height: auto;
-  margin-left: .25em;
-  h2{
+.container {
+
+  h2 {
     margin-bottom: 1em;
   }
-  p{
+  p {
     margin-bottom: 1em;
   }
 }
