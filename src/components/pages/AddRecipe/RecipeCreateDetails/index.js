@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react'
 import IngredientForm from '../IngredientForm';
 import ProcedureForm from '../ProcedureForm';
 import { ReactComponent as ReturnIcon } from '../../../../assets/svgs/return.svg'
+import Button from '../../../shared/Button'
+
 //
 
 class RecipeCreateDetails extends Component {
@@ -14,18 +16,21 @@ class RecipeCreateDetails extends Component {
   }
   componentDidMount(){
     this.hydrateFromLocalStorage();
-    // TweenLite.from(this.container, .8, ({ autoAlpha: 0 }));
   }
+
   hydrateFromLocalStorage = () => {
     let prevFormData = JSON.parse(localStorage.getItem('recipe_details'));
     this.setState({ prevFormData: prevFormData });
   }
+
   getIngredientsFromInputs = (items) => {
     this.setState({ ingredientItemsForList: items })
   }
+
   getProceduresFromInputs = (items) => {
     this.setState({ procedureItemsForList: items })
   }
+
   createDetailHeaders = () => {
     const { prevFormData } = this.state;
     return(
@@ -46,22 +51,22 @@ class RecipeCreateDetails extends Component {
         </div>
         <div className="recipe-info-top">
           <div className="recipe-info">
-            <h1>Ingredients and Procedures:</h1>
+            <h2>Ingredients and Procedures:</h2>
             {this.createDetailHeaders()}
           </div>
           <div className="current-list">
             <div className="current-ingredients">
-              <h1>Ingredients:</h1>
+              <h2>Ingredients:</h2>
               <ol>
                 {this.state.ingredientItemsForList ? this.state.ingredientItemsForList.map((ing, i) => {
                   return(
-                    <li key={i}>{`${ing.quantity} -- ${ing.name}`}</li>
+                    <li key={i}>{`${ing.name}`}</li>
                   )
                 }) : null}
               </ol>
             </div>
             <div className="current-procedures">
-              <h1>Directions:</h1>
+              <h2>Directions:</h2>
               <ol>
                 {this.state.procedureItemsForList ? this.state.procedureItemsForList.map((dir, i) => {
                   return(
@@ -79,7 +84,12 @@ class RecipeCreateDetails extends Component {
           <ProcedureForm 
             sendProcedures={this.getProceduresFromInputs}
           />
-          <button onClick={this.props.constructRecipe}></button>
+        </div>
+        <div className="submit-rec-container">
+          <Button 
+            text="Create Recipe!"
+            clickFunc={this.props.constructRecipe}
+          />
         </div>
       </div>
     )

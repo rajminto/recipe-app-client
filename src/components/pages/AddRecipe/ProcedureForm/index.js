@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import Button from '../../../shared/Button';
 import { TweenLite } from 'gsap';
 import { ReactComponent as DeleteIcon } from '../../../../assets/svgs/delete.svg';
@@ -52,28 +52,30 @@ class ProcedureForm extends Component {
     const { procedures } = this.state;
     return (
       <div className="add-ing-form-wrapper" ref={container => this.container = container}>
-        <h1>Please add your procedures:</h1>
+        <h2>Please add your procedures:</h2>
         <form onSubmit={this.handleSubmit} onChange={this.handleChange} className="add-ing-form">
           {
             procedures.map((ingredient, i) => {
               let descId = `desc-${i}`
               return (
-                <div className="ingredient-field" key={i}>
+                <Fragment>
                   <label htmlFor={descId}>Step Description:</label>
-                  <textarea
-                    type="textarea"
-                    rows="3"
-                    cols="20"
-                    name={descId}
-                    data-id={i}
-                    id={descId}
-                    className="description"
-                  >
-                  </textarea>
-                  <div className="delete-btn" onClick={() => this.removeProcedure(i)}>
-                    <DeleteIcon />
+                  <div className="ingredient-field" key={i}>
+                    <textarea
+                      type="textarea"
+                      rows="3"
+                      cols="20"
+                      name={descId}
+                      data-id={i}
+                      id={descId}
+                      className="description"
+                    >
+                    </textarea>
+                    <div className="delete-btn" onClick={() => this.removeProcedure(i)}>
+                      <DeleteIcon />
+                    </div>
                   </div>
-                </div>
+                </Fragment>
               )
             })
           }
@@ -81,10 +83,6 @@ class ProcedureForm extends Component {
             <Button
               text="Add Procedure"
               clickFunc={this.addNewProcedure}
-            />
-            <Button
-              text="Submit"
-              clickFunc={() => console.log('procedure submitted')}
             />
           </div>
         </form>

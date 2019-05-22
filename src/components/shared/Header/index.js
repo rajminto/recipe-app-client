@@ -24,7 +24,7 @@ class Header extends Component {
               <MenuIcon menuOpen={this.state.menuOpen} />
             </div>
             <div className={mainLogo}>
-              <h1 className={companyName}>SAVVOR</h1>
+              <h1 className={companyName}>SAVVORED</h1>
             </div>
           </div>
         )}

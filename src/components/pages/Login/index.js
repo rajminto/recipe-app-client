@@ -24,7 +24,6 @@ class Login extends Component {
   }
 
   handleChange = (e) => {
-    
     this.setState({
       form: {
         ...this.state.form,

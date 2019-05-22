@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import Button from '../../../shared/Button';
 import { Context } from '../../../../context';
 import { TweenLite } from 'gsap';
@@ -58,33 +58,27 @@ class IngredientForm extends Component {
     const { ingredients } = this.state;
     return (
       <div className="add-ing-form-wrapper" ref={container => this.container = container}>
-        <h1>Please add your ingredients:</h1>
+        <h2>Please add your ingredients:</h2>
         <form onSubmit={this.handleSubmit} onChange={this.handleChange} className="add-ing-form">
           {
             ingredients.map((ingredient, i) => {
               let ingredientId = `ing-${i}`, descId = `desc-${i}`
               return (
-                <div className="ingredient-field" key={i}>
-                  <label htmlFor={descId}>Quantity:</label>
-                  <input
-                    type="number"
-                    name={descId}
-                    data-id={i}
-                    id={descId}
-                    className="quantity"
-                  />
-                  <label htmlFor={ingredientId}><span>{`#${i + 1}`}</span>Name/Varietal:</label>
-                  <input
-                    type="text"
-                    name={ingredientId}
-                    data-id={i}
-                    id={ingredientId}
-                    className="name"
-                  />
-                  <div className="delete-btn" onClick={() => this.removeIngredient(i)}>
-                    <DeleteIcon />
+                <Fragment>
+                  <label htmlFor={ingredientId}><span>{`#${i + 1}`}</span>Name/Varietal & Quantity:</label>
+                  <div className="ingredient-field" key={i}>
+                    <input
+                      type="text"
+                      name={ingredientId}
+                      data-id={i}
+                      id={ingredientId}
+                      className="name"
+                    />
+                    <div className="delete-btn" onClick={() => this.removeIngredient(i)}>
+                      <DeleteIcon />
+                    </div>
                   </div>
-                </div>
+                </Fragment>
               )
             })
           }
@@ -92,10 +86,6 @@ class IngredientForm extends Component {
             <Button
               text="Add Ingredient"
               clickFunc={this.addNewIngredient}
-            />
-            <Button
-              text="Submit"
-              clickFunc={() => console.log('ingredient submitted')}
             />
           </div>
         </form>
