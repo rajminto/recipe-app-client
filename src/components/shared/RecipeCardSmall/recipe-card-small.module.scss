@@ -6,8 +6,12 @@
   margin: 0;
   background-color: $sand;
 
+  h3 {
+    margin-bottom: 1rem;
+  }
+
   .recipeImage {
     max-width: 100%;
-    margin: 1rem 0;
+    margin-bottom: 1rem;
   }
 }

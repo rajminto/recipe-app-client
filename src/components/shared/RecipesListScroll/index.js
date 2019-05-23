@@ -2,12 +2,12 @@ import React from 'react'
 import styles from './recipes-list-scroll.module.scss'
 
 import Card from '../Card'
-import RecipeCardSmall from '../RecipeCardSmall'
+import RecipeCardHorizontal from '../RecipeCardHorizontal'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 const RecipesListScroll = ({ title, recipes, fetchRecipes, moreRecipes }) => {
   const recipeComponents = recipes.map(recipe => (
-    <RecipeCardSmall
+    <RecipeCardHorizontal
       key={recipe.id}
       recipe={recipe}
     />
