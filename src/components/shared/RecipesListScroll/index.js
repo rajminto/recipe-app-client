@@ -5,7 +5,8 @@ import Card from '../Card'
 import RecipeCardSmall from '../RecipeCardSmall'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
-const RecipesListScroll = ({ title, recipes, fetchMoreRecipes }) => {
+const RecipesListScroll = ({ title, recipes, fetchRecipes, moreRecipes }) => {
+  console.log(moreRecipes)
   const recipeComponents = recipes.map(recipe => (
     <RecipeCardSmall
       key={recipe.id}
@@ -18,8 +19,8 @@ const RecipesListScroll = ({ title, recipes, fetchMoreRecipes }) => {
       <InfiniteScroll
         className={styles.recipesContainer}
         dataLength={recipes.length}
-        next={fetchMoreRecipes}
-        hasMore={true}
+        next={fetchRecipes}
+        hasMore={moreRecipes}
         loader={<h4>Loading...</h4>}
       >
         {recipeComponents}

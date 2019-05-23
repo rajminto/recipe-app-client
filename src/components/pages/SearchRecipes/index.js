@@ -13,6 +13,7 @@ export class SearchRecipes extends Component {
     super(props)
     this.state = {
       isLoaded: false,
+      moreRecipes: true,
       offset: 0,
       limit: 12,
       recipes: []
@@ -20,28 +21,35 @@ export class SearchRecipes extends Component {
   }
 
   componentDidMount() {
-    this.fetchMoreRecipes()
+    this.fetchRecipes()
   }
 
-  fetchMoreRecipes = () => {
+  fetchRecipes = () => {
     const { offset, limit, recipes } = this.state
+    console.log('fetching')
     this.setState({ offset: offset + limit })
     fetch(`${baseUrl}/api/recipes?offset=${offset}&limit=${limit}`)
       .then(res => res.json())
       .then(response => {
-        this.setState({ isLoaded: true, recipes: recipes.concat(response.recipes) })
+        response.success
+          ? this.setState({ isLoaded: true, recipes: recipes.concat(response.recipes) })
+          : this.setState({ moreRecipes: false })
       })
   }
 
   render() {
-    const { isLoaded, recipes } = this.state
+    const { isLoaded, recipes, moreRecipes } = this.state
 
     if (!isLoaded) return <Loader />
 
     return (
       <div className={styles.recipesListContainer}>
         <SearchRecipesHeader />
-        <RecipesListScroll title='Results' recipes={recipes} fetchMoreRecipes={this.fetchMoreRecipes}/>
+        <RecipesListScroll
+          title='Results'
+          recipes={recipes}
+          moreRecipes={moreRecipes}
+          fetchRecipes={this.fetchRecipes}/>
       </div>
     )
   }
