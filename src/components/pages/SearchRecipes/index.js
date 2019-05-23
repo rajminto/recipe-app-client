@@ -28,8 +28,7 @@ export class SearchRecipes extends Component {
     this.setState({ offset: offset + limit })
     fetch(`${baseUrl}/api/recipes?offset=${offset}&limit=${limit}`)
       .then(res => res.json())
-      .then((response) => {
-        console.log(response)
+      .then(response => {
         this.setState({ isLoaded: true, recipes: recipes.concat(response.recipes) })
       })
   }

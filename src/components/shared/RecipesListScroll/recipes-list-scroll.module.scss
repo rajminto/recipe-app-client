@@ -7,7 +7,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 1rem;
-    overflow: none;
-    // padding: 5px; // Fix for overflow: auto on InfiniteScroll
+    overflow: visible !important; // Fix for overflow: auto on InfiniteScroll
   }
 }
