@@ -2,6 +2,11 @@ import React, { Component } from 'react'
 import { baseUrl } from '../../api'
 import styles from './search-recipes.module.scss'
 
+// Component Imports
+import '../../shared/RecipesList'
+import SearchRecipesHeader from './SearchRecipesHeader';
+import RecipesList from '../../shared/RecipesList';
+
 export class SearchRecipes extends Component {
   constructor(props) {
     super(props)
@@ -13,15 +18,18 @@ export class SearchRecipes extends Component {
   componentDidMount() {
     fetch(`${baseUrl}/api/recipes`)
       .then(res => res.json())
-      .then(response => {
-        console.log(response)
+      .then(({ recipes }) => {
+        this.setState({ recipes })
       })
   }
 
   render() {
+    const { recipes } = this.state
+
     return (
-      <div>
-        <h1>Search Recipes</h1>
+      <div className={styles.recipesListContainer}>
+        <SearchRecipesHeader />
+        <RecipesList title='Search Recipes' recipes={recipes} />
       </div>
     )
   }
