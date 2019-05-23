@@ -10,6 +10,7 @@ import Register from '../pages/Register';
 import Login from '../pages/Login';
 import Profile from '../pages/Profile';
 import Navigator from '../shared/Navigator';
+import SearchRecipes from '../pages/SearchRecipes';
 
 class PageContent extends Component {
   constructor(props){
@@ -26,6 +27,7 @@ class PageContent extends Component {
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/add" component={AddRecipe} />
+          <Route exact path="/search" component={SearchRecipes} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import styles from './search-recipes.module.scss'
 import { baseUrl } from '../../api'
+import styles from './search-recipes.module.scss'
 
 export class SearchRecipes extends Component {
   constructor(props) {
@@ -11,13 +11,17 @@ export class SearchRecipes extends Component {
   }
 
   componentDidMount() {
-
+    fetch(`${baseUrl}/api/recipes`)
+      .then(res => res.json())
+      .then(response => {
+        console.log(response)
+      })
   }
 
   render() {
     return (
       <div>
-        
+        <h1>Search Recipes</h1>
       </div>
     )
   }
