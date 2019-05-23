@@ -5,31 +5,44 @@ import styles from './search-recipes.module.scss'
 // Component Imports
 import '../../shared/RecipesList'
 import SearchRecipesHeader from './SearchRecipesHeader';
-import RecipesList from '../../shared/RecipesList';
+import RecipesListScroll from '../../shared/RecipesListScroll';
+import Loader from '../../shared/Loader';
 
 export class SearchRecipes extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      isLoaded: false,
+      offset: 0,
+      limit: 12,
       recipes: []
     }
   }
 
   componentDidMount() {
-    fetch(`${baseUrl}/api/recipes`)
+    this.fetchMoreRecipes()
+  }
+
+  fetchMoreRecipes = () => {
+    const { offset, limit, recipes } = this.state
+    this.setState({ offset: offset + limit })
+    fetch(`${baseUrl}/api/recipes?offset=${offset}&limit=${limit}`)
       .then(res => res.json())
-      .then(({ recipes }) => {
-        this.setState({ recipes })
+      .then((response) => {
+        console.log(response)
+        this.setState({ isLoaded: true, recipes: recipes.concat(response.recipes) })
       })
   }
 
   render() {
-    const { recipes } = this.state
+    const { isLoaded, recipes } = this.state
+
+    if (!isLoaded) return <Loader />
 
     return (
       <div className={styles.recipesListContainer}>
         <SearchRecipesHeader />
-        <RecipesList title='Results' recipes={recipes} />
+        <RecipesListScroll title='Results' recipes={recipes} fetchMoreRecipes={this.fetchMoreRecipes}/>
       </div>
     )
   }
