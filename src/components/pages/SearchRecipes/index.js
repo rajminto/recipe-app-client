@@ -29,7 +29,7 @@ export class SearchRecipes extends Component {
     return (
       <div className={styles.recipesListContainer}>
         <SearchRecipesHeader />
-        <RecipesList title='Search Recipes' recipes={recipes} />
+        <RecipesList title='Results' recipes={recipes} />
       </div>
     )
   }
