@@ -26,7 +26,6 @@ export class SearchRecipes extends Component {
 
   fetchRecipes = () => {
     const { offset, limit, recipes } = this.state
-    console.log('fetching')
     this.setState({ offset: offset + limit })
     fetch(`${baseUrl}/api/recipes?offset=${offset}&limit=${limit}`)
       .then(res => res.json())

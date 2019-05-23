@@ -6,7 +6,6 @@ import RecipeCardSmall from '../RecipeCardSmall'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
 const RecipesListScroll = ({ title, recipes, fetchRecipes, moreRecipes }) => {
-  console.log(moreRecipes)
   const recipeComponents = recipes.map(recipe => (
     <RecipeCardSmall
       key={recipe.id}
