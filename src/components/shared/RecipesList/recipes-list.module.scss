@@ -1,0 +1,11 @@
+.recipesCard {
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  .recipesContainer {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1rem;
+  }
+}
