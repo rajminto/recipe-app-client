@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { baseUrl } from '../../api'
+import { baseUrl } from '../../../api'
 import styles from './search-recipes.module.scss'
 
 // Component Imports
@@ -15,7 +15,7 @@ export class SearchRecipes extends Component {
       isLoaded: false,
       moreRecipes: true,
       offset: 0,
-      limit: 12,
+      limit: 20,
       recipes: []
     }
   }
