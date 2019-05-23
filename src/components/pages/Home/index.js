@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
+import { baseUrl } from '../../../api'
+
+// Component imports
 import Recipe from '../../Recipe';
 import Alert from '../../shared/Alert';
 import Loader from '../../shared/Loader';
-//
 
 class Home extends Component {
   constructor(props){
@@ -10,23 +12,33 @@ class Home extends Component {
     this.state = {
       recipe: {},
       isLoaded: false,
+      error: false,
+      message: '',
       showAlert: false
     }
   }
   //
   componentDidMount() {
-    fetch('http://localhost:3000/api/recipes/1')
-      .then(res => res.json())
-      .then(recipe => {
-        this.setState({
-          recipe: recipe.recipe,
-          isLoaded: true
-        })
-      })
-      .catch(console.log)
+    // Capture id, set default at 1 if not found
+    const { id } = this.props.match.params || 1
+    this.fetchRecipeById(id)
+
     // setTimeout(() => {
     //   this.setState({ showAlert: !this.state.showAlert })
     // }, 2000)
+  }
+
+  fetchRecipeById(id) {
+    fetch(`${baseUrl}/api/recipes/${id}`)
+      .then(res => res.json())
+      .then(response => {
+        console.log(response)
+        response.success
+          ? this.setState({ isLoaded: true, recipe: response.recipe })
+          : this.setState({ isLoaded: true, error: true, message: response.message })
+        
+      })
+      .catch(console.log)
   }
 
   onClose = () => {
@@ -34,6 +46,10 @@ class Home extends Component {
   }
   //
   render() {
+    const { error } = this.state
+
+    if (error) return <h1>No recipe found. Please try again.</h1>
+
     return (
       <div className="home-container">
         <Alert 

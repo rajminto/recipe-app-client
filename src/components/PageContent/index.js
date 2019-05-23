@@ -31,6 +31,7 @@ class PageContent extends Component {
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
+          <Route path="/recipes/:id" component={Home} />
           <Route component={NotFound} />
         </Switch>
       </div>
