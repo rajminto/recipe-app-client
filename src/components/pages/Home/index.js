@@ -17,7 +17,7 @@ class Home extends Component {
       showAlert: false
     }
   }
-  //
+
   componentDidMount() {
     // Capture id from url params
     const { id } = this.props.match.params
@@ -32,7 +32,6 @@ class Home extends Component {
     fetch(`${baseUrl}/api/recipes/${id}`)
       .then(res => res.json())
       .then(response => {
-        console.log(response)
         response.success
           ? this.setState({ isLoaded: true, recipe: response.recipe })
           : this.setState({ isLoaded: true, error: true, message: response.message })
@@ -44,7 +43,7 @@ class Home extends Component {
   onClose = () => {
     this.setState({ showAlert: !this.state.showAlert })
   }
-  //
+
   render() {
     const { error, isLoaded, message } = this.state
 
