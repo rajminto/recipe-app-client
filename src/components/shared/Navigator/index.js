@@ -21,7 +21,7 @@ const Navigator = () => {
               context.toggleMenu()
               context.state.funcLoaded()
             }}>search recipes</NavLink>
-            <NavLink to="profile" className="nav-link" onClick={() => {
+            <NavLink to="/profile" className="nav-link" onClick={() => {
               context.toggleMenu()
               context.state.funcLoaded()
             }}>your profile</NavLink>
