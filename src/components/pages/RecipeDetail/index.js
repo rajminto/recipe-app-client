@@ -21,11 +21,11 @@ class RecipeDetail extends Component {
   componentDidMount() {
     // Capture id from url params
     const { id } = this.props.match.params
-    this.fetchRecipeById(id)
-
-    // setTimeout(() => {
-    //   this.setState({ showAlert: !this.state.showAlert })
-    // }, 2000)
+    // Validate id: ensure it is a number
+    if (!parseInt(id)) this.setState({ error: true, message: 'Recipe not found. Please enter a valid ID.'})
+    else {
+      this.fetchRecipeById(id)
+    }
   }
 
   fetchRecipeById(id = 1) {
