@@ -10,7 +10,8 @@ const RecipesList = ({ title, recipes }) => {
     <NavLink
       className={styles.navLink}
       key={recipe.id}
-      to={`/recipes/${recipe.id}`}>
+      to={`/recipes/${recipe.id}`}
+    >
       <RecipeCardSmall
         recipe={recipe}
       />
