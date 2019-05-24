@@ -19,8 +19,8 @@ class Home extends Component {
   }
   //
   componentDidMount() {
-    // Capture id, set default at 1 if not found
-    const { id } = this.props.match.params || 1
+    // Capture id from url params
+    const { id } = this.props.match.params
     this.fetchRecipeById(id)
 
     // setTimeout(() => {
@@ -28,7 +28,7 @@ class Home extends Component {
     // }, 2000)
   }
 
-  fetchRecipeById(id) {
+  fetchRecipeById(id = 1) {
     fetch(`${baseUrl}/api/recipes/${id}`)
       .then(res => res.json())
       .then(response => {
@@ -46,9 +46,10 @@ class Home extends Component {
   }
   //
   render() {
-    const { error } = this.state
+    const { error, isLoaded, message } = this.state
 
-    if (error) return <h1>No recipe found. Please try again.</h1>
+    // TODO: Replace with component with options to search again, go back to profile, etc.
+    if (error) return <h1>{message}</h1>
 
     return (
       <div className="home-container">
@@ -57,7 +58,7 @@ class Home extends Component {
           subText="Please Create A Recipe"
           onClose={this.onClose}
         />
-        {this.state.isLoaded
+        {isLoaded
           ? <Recipe recipe={this.state.recipe} />
           : <Loader />
         }
