@@ -9,7 +9,6 @@ const RecipesList = ({ title, recipes }) => {
   const recipeComponents = recipes.map(recipe => (
     <NavLink key={recipe.id} to={`/recipes/${recipe.id}`}>
       <RecipeCardSmall
-        key={recipe.id}
         recipe={recipe}
       />
     </NavLink>
