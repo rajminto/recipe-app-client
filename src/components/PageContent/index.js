@@ -11,6 +11,7 @@ import Login from '../pages/Login';
 import Profile from '../pages/Profile';
 import Navigator from '../shared/Navigator';
 import SearchRecipes from '../pages/SearchRecipes';
+import RecipeDetail from '../pages/RecipeDetail';
 
 class PageContent extends Component {
   constructor(props){
@@ -31,7 +32,7 @@ class PageContent extends Component {
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/register" component={Register} />
           <Route exact path="/login" component={Login} />
-          <Route path="/recipes/:id" component={Home} />
+          <Route path="/recipes/:id" component={RecipeDetail} />
           <Route component={NotFound} />
         </Switch>
       </div>

@@ -9,35 +9,13 @@ import Loader from '../../shared/Loader';
 class Home extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      recipe: {},
-      isLoaded: false,
-      error: false,
-      message: '',
-      showAlert: false
-    }
+    this.state = {}
   }
 
   componentDidMount() {
-    // Capture id from url params
-    const { id } = this.props.match.params
-    this.fetchRecipeById(id)
-
-    // setTimeout(() => {
-    //   this.setState({ showAlert: !this.state.showAlert })
-    // }, 2000)
-  }
-
-  fetchRecipeById(id = 1) {
-    fetch(`${baseUrl}/api/recipes/${id}`)
-      .then(res => res.json())
-      .then(response => {
-        response.success
-          ? this.setState({ isLoaded: true, recipe: response.recipe })
-          : this.setState({ isLoaded: true, error: true, message: response.message })
-        
-      })
-      .catch(console.log)
+    setTimeout(() => {
+      this.setState({ showAlert: !this.state.showAlert })
+    }, 2000)
   }
 
   onClose = () => {
@@ -45,11 +23,6 @@ class Home extends Component {
   }
 
   render() {
-    const { error, isLoaded, message } = this.state
-
-    // TODO: Replace with component with options to search again, go back to profile, etc.
-    if (error) return <h1>{message}</h1>
-
     return (
       <div className="home-container">
         <Alert 
@@ -57,10 +30,7 @@ class Home extends Component {
           subText="Please Create A Recipe"
           onClose={this.onClose}
         />
-        {isLoaded
-          ? <Recipe recipe={this.state.recipe} />
-          : <Loader />
-        }
+        <h1>Welcome Home</h1>
       </div>
     )
   }
