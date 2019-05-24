@@ -7,7 +7,10 @@ import RecipeCardSmall from '../RecipeCardSmall'
 
 const RecipesList = ({ title, recipes }) => {
   const recipeComponents = recipes.map(recipe => (
-    <NavLink key={recipe.id} to={`/recipes/${recipe.id}`}>
+    <NavLink
+      className={styles.navLink}
+      key={recipe.id}
+      to={`/recipes/${recipe.id}`}>
       <RecipeCardSmall
         recipe={recipe}
       />
