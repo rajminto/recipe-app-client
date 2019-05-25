@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import { baseUrl } from '../../../api'
 
 // Component imports
-import Recipe from '../../Recipe';
-import Alert from '../../shared/Alert';
-import Loader from '../../shared/Loader';
+import Alert from '../../shared/Alert'
+import Loader from '../../shared/Loader'
 
 class Home extends Component {
   constructor(props){
-    super(props);
+    super(props)
     this.state = {}
   }
 
@@ -35,5 +34,5 @@ class Home extends Component {
     )
   }
 }
-export default Home;
+export default Home
 
