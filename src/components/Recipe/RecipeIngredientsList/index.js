@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './recipe-ingredients-list.module.scss'
 
-// Component Imports
+// Component imports
 import RecipeIngredient from './RecipeIngredient'
 import Card from '../../shared/Card'
 
@@ -15,7 +15,7 @@ const RecipeIngredientsList = ({ ingredients }) => {
 
   return (
     <Card className={styles.ingredientsListContainer}>
-      <h2>Recipe Ingredients</h2>
+      <h2>Ingredients</h2>
       <Card className={styles.ingredientsListCard}>
         {ingredientComponents}
       </Card>

@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { baseUrl } from '../../../api'
 
 // Component imports
 import Alert from '../../shared/Alert'
-import Loader from '../../shared/Loader'
+// import Loader from '../../shared/Loader'
 
 class Home extends Component {
   constructor(props){
