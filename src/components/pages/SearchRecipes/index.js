@@ -51,7 +51,8 @@ export class SearchRecipes extends Component {
       .then(response => {
         response.success
           ? this.setState({ isLoaded: true, recipes: response.recipes })
-          : this.setState({ moreRecipes: false })
+          : this.setState({ moreRecipes: false, recipes: [] })
+          // Reset recipes to empty array to display 'No recipes found' in RecipesListScroll
       })
   }
 

@@ -22,15 +22,19 @@ const RecipesListScroll = ({ title, recipes, fetchMoreRecipes, moreRecipes }) =>
   return (
     <Card className={styles.recipesCard}>
       <h2>{title}</h2>
-      <InfiniteScroll
-        className={styles.recipesContainer}
-        dataLength={recipes.length}
-        next={fetchMoreRecipes}
-        hasMore={moreRecipes}
-        loader={<h4>Loading...</h4>}
-      >
-        {recipeComponents}
-      </InfiniteScroll>
+      {recipes.length
+        ? <InfiniteScroll
+          className={styles.recipesContainer}
+          dataLength={recipes.length}
+          next={fetchMoreRecipes}
+          hasMore={moreRecipes}
+          loader={<h4>Loading...</h4>}
+          >
+            {recipeComponents}
+          </InfiniteScroll>
+        : <p>No recipes found.</p>
+      }
+      
     </Card>
   )
 }
