@@ -27,7 +27,6 @@ export class SearchRecipes extends Component {
   }
 
   fetchMoreRecipes = () => {
-    console.log('fetching more recipes')
     const { offset, limit, recipes, searchType, searchQuery } = this.state
     this.setState({ offset: offset + limit })
     fetch(`${baseUrl}/api/recipes?offset=${offset}&limit=${limit}&type=${searchType}&query=${searchQuery}`)
@@ -44,14 +43,15 @@ export class SearchRecipes extends Component {
   }
 
   searchRecipes = () => {
-    const { offset, limit, searchType, searchQuery } = this.state
+    const { searchType, searchQuery } = this.state
     // Reset offset and limit on state to reset infinite scroll
     this.setState({ offset: 0, limit: 20 })
     fetch(`${baseUrl}/api/recipes?type=${searchType}&query=${searchQuery}`)
       .then(res => res.json())
       .then(response => {
+        // TODO: refactor to set moreRecipes: t/f based on length of recipes being > or < than offset/limit (could save an API call)
         response.success
-          ? this.setState({ moreRecipes: true, isLoaded: true, recipes: response.recipes, offset: this.state.offset + this.state.limit }, () => console.log(this.state))
+          ? this.setState({ moreRecipes: true, isLoaded: true, recipes: response.recipes, offset: this.state.offset + this.state.limit })
           : this.setState({ moreRecipes: false, recipes: [] })
           // Reset recipes to empty array to display 'No recipes found' in RecipesListScroll
       })
