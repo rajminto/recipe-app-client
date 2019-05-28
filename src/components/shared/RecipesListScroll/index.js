@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import styles from './recipes-list-scroll.module.scss'
 
 import Card from '../Card'
@@ -7,10 +8,16 @@ import InfiniteScroll from 'react-infinite-scroll-component'
 
 const RecipesListScroll = ({ title, recipes, fetchRecipes, moreRecipes }) => {
   const recipeComponents = recipes.map(recipe => (
-    <RecipeCardHorizontal
+    <NavLink
+      className={styles.navLink}
       key={recipe.id}
-      recipe={recipe}
-    />
+      to={`/recipes/${recipe.id}`}
+    >
+      <RecipeCardHorizontal
+        key={recipe.id}
+        recipe={recipe}
+      />
+    </NavLink>
   ))
   return (
     <Card className={styles.recipesCard}>
