@@ -6,7 +6,7 @@ import Card from '../Card'
 import RecipeCardHorizontal from '../RecipeCardHorizontal'
 import InfiniteScroll from 'react-infinite-scroll-component'
 
-const RecipesListScroll = ({ title, recipes, fetchRecipes, moreRecipes }) => {
+const RecipesListScroll = ({ title, recipes, fetchMoreRecipes, moreRecipes }) => {
   const recipeComponents = recipes.map(recipe => (
     <NavLink
       className={styles.navLink}
@@ -25,7 +25,7 @@ const RecipesListScroll = ({ title, recipes, fetchRecipes, moreRecipes }) => {
       <InfiniteScroll
         className={styles.recipesContainer}
         dataLength={recipes.length}
-        next={fetchRecipes}
+        next={fetchMoreRecipes}
         hasMore={moreRecipes}
         loader={<h4>Loading...</h4>}
       >

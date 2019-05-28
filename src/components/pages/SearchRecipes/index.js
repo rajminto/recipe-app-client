@@ -17,22 +17,23 @@ export class SearchRecipes extends Component {
       offset: 0,
       limit: 20,
       recipes: [],
-      ingredientSearch: ''
+      searchQuery: '',
+      searchType: 'ingredient'
     }
   }
 
   componentDidMount() {
-    this.fetchRecipes()
+    this.setState({ isLoaded: true })
   }
 
-  fetchRecipes = () => {
-    const { offset, limit, recipes } = this.state
+  fetchMoreRecipes = () => {
+    const { offset, limit, recipes, searchType, searchQuery } = this.state
     this.setState({ offset: offset + limit })
-    fetch(`${baseUrl}/api/recipes?offset=${offset}&limit=${limit}`)
+    fetch(`${baseUrl}/api/recipes?offset=${offset}&limit=${limit}&type=${searchType}&query=${searchQuery}`)
       .then(res => res.json())
       .then(response => {
         response.success
-          ? this.setState({ isLoaded: true, recipes: recipes.concat(response.recipes) })
+          ? this.setState({ isLoaded: true, recipes: recipes.concat(response.recipes), moreRecipes: true })
           : this.setState({ moreRecipes: false })
       })
   }
@@ -41,22 +42,42 @@ export class SearchRecipes extends Component {
     this.setState({ [e.target.name]: e.target.value })
   }
 
+  searchRecipes = () => {
+    const { searchType, searchQuery } = this.state
+    // Reset offset and limit on state to reset infinite scroll
+    this.setState({ offset: 0, limit: 20 })
+    fetch(`${baseUrl}/api/recipes?type=${searchType}&query=${searchQuery}`)
+      .then(res => res.json())
+      .then(response => {
+        response.success
+          ? this.setState({ isLoaded: true, recipes: response.recipes })
+          : this.setState({ moreRecipes: false })
+      })
+  }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    console.log('search query:', this.state.searchQuery)
+    this.searchRecipes()
+  }
+
   render() {
-    const { isLoaded, recipes, moreRecipes, ingredientSearch } = this.state
+    const { isLoaded, recipes, moreRecipes, searchQuery } = this.state
 
     if (!isLoaded) return <Loader />
 
     return (
       <div className={styles.recipesListContainer}>
         <SearchRecipesHeader
-          ingredientSearch={ingredientSearch}
+          searchQuery={searchQuery}
           handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
         />
         <RecipesListScroll
           title='Results'
           recipes={recipes}
           moreRecipes={moreRecipes}
-          fetchRecipes={this.fetchRecipes}/>
+          fetchMoreRecipes={this.fetchMoreRecipes}/>
       </div>
     )
   }
