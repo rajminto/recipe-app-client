@@ -16,7 +16,8 @@ export class SearchRecipes extends Component {
       moreRecipes: true,
       offset: 0,
       limit: 20,
-      recipes: []
+      recipes: [],
+      ingredientSearch: ''
     }
   }
 
@@ -37,13 +38,13 @@ export class SearchRecipes extends Component {
   }
 
   render() {
-    const { isLoaded, recipes, moreRecipes } = this.state
+    const { isLoaded, recipes, moreRecipes, ingredientSearch } = this.state
 
     if (!isLoaded) return <Loader />
 
     return (
       <div className={styles.recipesListContainer}>
-        <SearchRecipesHeader />
+        <SearchRecipesHeader ingredientSearch={ingredientSearch} />
         <RecipesListScroll
           title='Results'
           recipes={recipes}
