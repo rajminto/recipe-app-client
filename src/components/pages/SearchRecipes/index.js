@@ -59,7 +59,6 @@ export class SearchRecipes extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log('search query:', this.state.searchQuery)
     this.searchRecipes()
   }
 

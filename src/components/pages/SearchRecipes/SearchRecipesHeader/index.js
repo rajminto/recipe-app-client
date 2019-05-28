@@ -9,7 +9,7 @@ const SearchRecipesHeader = ({ searchQuery, handleChange, handleSubmit }) => {
     <Card className={styles.headerContainer}>
       <h1>Search Recipes</h1>
       <p>Enter a search term below to search for recipes.</p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className={styles.searchForm}>
         <label htmlFor=''>Ingredient:</label>
         <input 
           type='text'
@@ -17,7 +17,9 @@ const SearchRecipesHeader = ({ searchQuery, handleChange, handleSubmit }) => {
           value={searchQuery}
           onChange={handleChange}
         />
-        <Button text={'Submit'}/>
+        <div>
+          <Button text={'Submit'}/>
+        </div>
       </form>
     </Card>
   )
