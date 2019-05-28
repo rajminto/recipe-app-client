@@ -37,6 +37,10 @@ export class SearchRecipes extends Component {
       })
   }
 
+  handleChange = (e) => {
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
   render() {
     const { isLoaded, recipes, moreRecipes, ingredientSearch } = this.state
 
@@ -44,7 +48,10 @@ export class SearchRecipes extends Component {
 
     return (
       <div className={styles.recipesListContainer}>
-        <SearchRecipesHeader ingredientSearch={ingredientSearch} />
+        <SearchRecipesHeader
+          ingredientSearch={ingredientSearch}
+          handleChange={this.handleChange}
+        />
         <RecipesListScroll
           title='Results'
           recipes={recipes}

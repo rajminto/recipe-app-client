@@ -3,7 +3,7 @@ import styles from './search-recipes-header.module.scss'
 
 import Card from '../../../shared/Card'
 
-const SearchRecipesHeader = ({ ingredientSearch }) => {
+const SearchRecipesHeader = ({ ingredientSearch, handleChange }) => {
   return (
     <Card className={styles.headerContainer}>
       <h1>Search Recipes</h1>
@@ -12,7 +12,9 @@ const SearchRecipesHeader = ({ ingredientSearch }) => {
         <label htmlFor="">Ingredient:</label>
         <input 
           type="text"
+          name="ingredientSearch"
           value={ingredientSearch}
+          onChange={handleChange}
         />
       </form>
     </Card>
