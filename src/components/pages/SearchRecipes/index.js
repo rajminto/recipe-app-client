@@ -28,21 +28,12 @@ export class SearchRecipes extends Component {
 
   fetchMoreRecipes = () => {
     const { offset, limit, recipes, searchType, searchQuery } = this.state
+    // Set new offset on state for subsequent queries
     this.setState({ offset: offset + limit })
     fetch(`${baseUrl}/api/recipes?offset=${offset}&limit=${limit}&type=${searchType}&query=${searchQuery}`)
       .then(res => res.json())
-      .then(response => {
-        if (response.success && response.recipes.length === limit) {
-          // Recipes found and more are available
-          this.setState({ moreRecipes: true, isLoaded: true, recipes: recipes.concat(response.recipes), offset: offset + limit })
-        } else if (response.success && response.recipes.length < limit) {
-          // Recipes found but no more are available
-          this.setState({ moreRecipes: false, isLoaded: true, recipes: recipes.concat(response.recipes), offset: this.state.offset + this.state.limit })
-        } else {
-          // No recipes found: reset offset and limit
-          this.setState({ moreRecipes: false, offset: 0, limit: 20 })
-        }
-      })
+      .then(response => this.handleFetchMoreRecipesResponse(response, recipes, offset, limit))
+      .catch(console.error)
   }
 
   handleChange = (e) => {
@@ -55,7 +46,7 @@ export class SearchRecipes extends Component {
     this.setState({ offset: 0, limit: 20 })
     fetch(`${baseUrl}/api/recipes?type=${searchType}&query=${searchQuery}`)
       .then(res => res.json())
-      .then(this.updateStateFromSearchResponse)
+      .then(this.handleSearchResponse)
       .catch(console.error)
   }
 
@@ -64,7 +55,7 @@ export class SearchRecipes extends Component {
     this.searchRecipes()
   }
 
-  updateStateFromSearchResponse = (response) => {
+  handleSearchResponse = (response) => {
     const { offset, limit } = this.state
 
     if (response.success && response.recipes.length === limit) {
@@ -76,6 +67,19 @@ export class SearchRecipes extends Component {
     } else {
       // No recipes found: reset recipes to empty array to display 'No recipes found' in RecipesListScroll
       this.setState({ moreRecipes: false, recipes: [] })
+    }
+  }
+
+  handleFetchMoreRecipesResponse = (response, recipes, offset, limit) => {
+    if (response.success && response.recipes.length === limit) {
+      // Recipes found and more are available
+      this.setState({ moreRecipes: true, isLoaded: true, recipes: recipes.concat(response.recipes), offset: offset + limit })
+    } else if (response.success && response.recipes.length < limit) {
+      // Recipes found but no more are available
+      this.setState({ moreRecipes: false, isLoaded: true, recipes: recipes.concat(response.recipes), offset: this.state.offset + this.state.limit })
+    } else {
+      // No recipes found: reset offset and limit
+      this.setState({ moreRecipes: false, offset: 0, limit: 20 })
     }
   }
 
