@@ -10,8 +10,9 @@ const SearchRecipesHeader = ({ searchQuery, handleChange, handleSubmit }) => {
       <h1>Search Recipes</h1>
       <p>Enter a search term below to search for recipes.</p>
       <form onSubmit={handleSubmit} className={styles.searchForm}>
-        <label htmlFor=''>Ingredient:</label>
-        <input 
+        <label htmlFor='search-query'>Ingredient:</label>
+        <input
+          id='search-query'
           type='text'
           name='searchQuery'
           value={searchQuery}
