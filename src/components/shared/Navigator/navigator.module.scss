@@ -9,6 +9,7 @@
   overflow: hidden;
   background-color: $backup;
   transition: height .5s ease-in-out;
+  z-index: 99;
   .menuWrap{
     display: flex;
     flex-direction: column;
