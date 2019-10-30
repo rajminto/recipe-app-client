@@ -6,7 +6,7 @@ import Button from '../../shared/Button'
 import Card from '../../shared/Card'
 import CheckAnimation from '../../shared/CheckAnimation'
 
-const baseUrl = 'http://localhost:3000/api'
+import { baseUrl } from '../../../api'
 
 // TODO?: use context api to control form
 class Login extends Component {
@@ -61,7 +61,7 @@ class Login extends Component {
   }
 
   submitUser = (user) => {
-    return fetch(`${baseUrl}/auth/login`, {
+    return fetch(`${baseUrl}/api/auth/login`, {
       method: 'POST',
       credentials: 'include',
       headers: {
