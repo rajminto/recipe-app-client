@@ -1,8 +1,9 @@
 @import '../../../styles/variables';
+@import '../../../styles/mixins';
 
 .cardContainer {
-  padding: 3em;
-  // box-shadow: 0px 0px 5px 2px rgb(165, 164, 164);  
+  @include box-shadow-mat;
+  padding: 3em;  
   border-radius: .2em;
   background-color: $light-grey-base;
   margin: 1rem 0;
