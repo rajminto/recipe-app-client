@@ -1,9 +1,11 @@
+@import '../../../styles/variables';
+
 .container{
   height: 100%;
   width: 100%;
   svg{
     height: 100%;
     width: 100%;
-    fill: black;
+    fill: $dark-highlight;
   }
 }
