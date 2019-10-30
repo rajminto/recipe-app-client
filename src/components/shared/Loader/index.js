@@ -1,26 +1,34 @@
 import React, { Component } from 'react'
 import styles from './loader.module.scss';
-import { TimelineMax, TweenLite } from 'gsap';
+import { TimelineMax, TweenLite, Power3 } from 'gsap';
 
 class Loader extends Component {
   constructor(props){
-    super(props);
+    super(props)
     this.state = {}
-    this.leftFlame = null;
-    this.rightFlame = null;
-    this.centerFlame = null;
+    this.leftFlame = null
+    this.rightFlame = null
+    this.centerFlame = null
   }
   componentDidMount() {
     TweenLite.set(this.leftFlame, { autoAlpha: 0 })
     TweenLite.set(this.rightFlame, { autoAlpha: 0 })
     TweenLite.set(this.centerFlame, { autoAlpha: 0 })
-    this.fireAnimation();
+    this.fireAnimation()
   }
 
   fireAnimation = () => {
-    let tl = new TimelineMax({ repeat: -1 });
-    tl.staggerTo([this.leftFlame, this.centerFlame, this.rightFlame], .7, { autoAlpha: 1 }, .13)
-      .staggerTo([this.leftFlame, this.centerFlame, this.rightFlame], .5, { autoAlpha: 0 }, .13, "-=.3")
+    let tl = new TimelineMax({ repeat: -1 })
+    let flames = [this.leftFlame, this.rightFlame, this.centerFlame]
+    tl
+      .staggerTo(flames, .5, { 
+        autoAlpha: 1, 
+        ease: Power3.easeInOut 
+      }, .13, '-=.1')
+      .staggerTo(flames, .5, { 
+        autoAlpha: 0, 
+        ease: Power3.easeInOut 
+      }, .13, '-=.1')
   }
 
   render() {
@@ -59,4 +67,4 @@ class Loader extends Component {
     )
   }
 }
-export default Loader;
+export default Loader

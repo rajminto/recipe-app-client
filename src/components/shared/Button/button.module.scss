@@ -12,5 +12,11 @@
   padding: 0 1em;
   font-family: $main-font;
   border-radius: .3em;
-  // border: none;
+  transition: .2s ease-in-out;
+
+  &:hover{
+    color: $light-grey-base;
+    background-color: $dark-highlight;
+    transition: .2s ease-in-out;
+  }
 }
