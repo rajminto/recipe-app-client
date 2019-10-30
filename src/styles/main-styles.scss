@@ -12,17 +12,18 @@
 }
 
 html{
-  background-color: $light-night;
+  background-color: $dark-base;
   font-family: $main-font;
   // font-size: 1rem;              //Default Font Size For Site
 }
 
-h1, h2, h3, p, li{
-  color: $dark-night;
+h1, h2, h3, p, li, label{
+  color: $text-color;
 }
 
 h1{
   font-size: 3rem;
+  color: $dark-highlight;
 }
 
 h2{
@@ -44,6 +45,16 @@ li{
   //ADD POTENTIAL RIGHT MARGIN TO BEFORE's
 }
 
+input, textarea{
+  background-color: $light-grey-base;
+  border: none;
+  color: $text-color;
+
+  input:focus, textarea:focus{
+    outline: none;
+    border: none;
+  }
+}
 
 
 

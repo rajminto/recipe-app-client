@@ -7,13 +7,13 @@
 
 .circle, .check {
   fill: none;
-  stroke: rgb(39, 169, 39);
+  stroke: $dark-highlight;
   stroke-miterlimit: 10;
 }
 
 .circle {
   stroke-width: 34px;
-  stroke: $secondary;
+  stroke: $dark-highlight-2;
 }
 
 .check {

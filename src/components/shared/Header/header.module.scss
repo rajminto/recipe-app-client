@@ -1,23 +1,28 @@
 @import '../../../styles/variables';
+@import '../../../styles/mixins';
 
 .container{
-  background-color: $secondary;
+  background-color: $dark-grey-base;
   padding: 0 1%;
   height: 6em;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-between;  
+  @include box-shadow-mat;
+
   .iconBox{
     height: 5em;
     width: 5em;
     margin-left: 2em;
     transition: 1s ease-in-out;
     cursor: pointer;
+
     svg{
       height: 100%;
       width: 100%;
     }
   }
+
   .mainLogo{
     margin-right: 2em;
   }

@@ -4,9 +4,9 @@
   padding: 3em;
   width: 40%;
   min-height: 45em;
-  box-shadow: 0px 0px 5px 2px rgb(165, 164, 164);
+  // box-shadow: 0px 0px 5px 2px rgb(165, 164, 164);
   border-radius: .2em;
-  background-color: $main-background;
+  background-color: $light-grey-base;
   margin: auto 0;
   .add-rec-form-wrapper{
     h1{
@@ -16,7 +16,7 @@
       display: flex;
       flex-direction: column;
       font-size: 1.3em;
-      color: $dark-night;
+      color: $dark-highlight;
       max-height: 40rem;
       padding: 0 .5em;
       input{
@@ -44,7 +44,7 @@
         display: flex;
         justify-content: center;
         flex-direction: column;
-        border-bottom: 1px solid $dark-night;
+        border-bottom: 1px solid $dark-highlight;
         padding: 2em 0;
         span{
           margin-right: .4em;
