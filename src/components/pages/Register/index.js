@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom'
 
 import Button from '../../shared/Button'
 
-const baseUrl = 'http://localhost:3000/api'
+import { baseUrl } from '../../../api'
 
 // TODO?: use context api to control form
 class Register extends Component {
@@ -51,7 +51,7 @@ class Register extends Component {
   }
 
   submitNewUser = (user) => {
-    return fetch(`${baseUrl}/auth/register`, {
+    return fetch(`${baseUrl}/api/auth/register`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',

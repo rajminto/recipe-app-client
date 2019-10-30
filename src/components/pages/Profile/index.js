@@ -7,6 +7,8 @@ import LoginFailureCard from '../../shared/LoginFailureCard'
 import Loader from '../../shared/Loader'
 import RecipesList from '../../shared/RecipesList'
 
+import { baseUrl } from '../../../api'
+
 // TODO: store user/loggedIn information in context api
 class Profile extends Component {
   constructor(props) {
@@ -32,7 +34,7 @@ class Profile extends Component {
   }
 
   ensureAuthenticted = () => {
-    return fetch('http://localhost:3000/api/auth/test', {
+    return fetch(`${baseUrl}/api/auth/test`, {
       method: 'GET',
       credentials: 'include'
     })
@@ -46,7 +48,7 @@ class Profile extends Component {
   }
 
   fetchUserRecipes = (user) => {
-    return fetch(`http://localhost:3000/api/users/${user.id}/recipes`)
+    return fetch(`${baseUrl}/api/users/${user.id}/recipes`)
       .then(res => res.json())
   }
 
