@@ -2,14 +2,15 @@
 
 .ui-btn{
   cursor: pointer;
-  background-color: $secondary;
+  background-color: $light-grey-base;
   font-size: 1.3em;
   height: 2em;
   width: auto;
   margin-top: 2em;
-  color: $dark-night;
+  color: $dark-highlight;
+  border: 2px solid $dark-highlight;
   padding: 0 1em;
   font-family: $main-font;
   border-radius: .3em;
-  border: none;
+  // border: none;
 }

@@ -7,20 +7,22 @@
   top: 0;
   left: 0;
   overflow: hidden;
-  background-color: $backup;
+  background-color: $dark-grey-menu;
   transition: height .5s ease-in-out;
   z-index: 99;
+  
   .menuWrap{
     display: flex;
     flex-direction: column;
     padding-left: 3em;
     margin-top: 3em;
+    
     a{
       margin: 1em;
       font-size: 1.4em;
       text-decoration: none;
       cursor: pointer;
-      color: $dark-night;
+      color: $dark-highlight;
     }
   }
 }
