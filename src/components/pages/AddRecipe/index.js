@@ -2,11 +2,15 @@ import React, { useState } from 'react'
 import styles from './AddRecipe.module.scss'
 import Card from '../../shared/Card'
 import Button from '../../shared/Button'
+import ToggleButton from '../../shared/ToggleButton'
 
 const AddRecipe = () => {
   const { 
+    addNewButtonWrapper,
     createRecipeForm,
     createRecipeFormContainer, 
+    deleteButtonWrapper,
+    ingredientInput,
     ingredientInputWrapper 
   } = styles
 
@@ -60,6 +64,16 @@ const AddRecipe = () => {
   const handleIngredientChange = (value, i) => {
     updateIngredientList(i, value)
   }
+
+  const addNewIngredient = () => {
+    setIngredients([...ingredients, { name: '' }])
+  }
+
+  const deleteIngredient = (index) => {
+    const newIngredients = ingredients.filter((ingredient, i) => i !== index)
+    setIngredients(newIngredients)
+  }
+
   
   return (
     <Card className={createRecipeFormContainer}>
@@ -116,13 +130,23 @@ const AddRecipe = () => {
         <h1>Add Ingredients</h1>
         {ingredients.map((ingredient, i) => (
           <div className={ingredientInputWrapper}>
-            <input 
-              type="text"
-              value={ingredients[i].name}
-              onChange={(e) => handleIngredientChange(e.target.value, i)}
-            />
+            <label>{i + 1}. </label>
+            <div className={ingredientInput}>
+              <input 
+                type="text"
+                value={ingredients[i].name}
+                onChange={(e) => handleIngredientChange(e.target.value, i)}
+              />
+              <div className={deleteButtonWrapper} onClick={() => deleteIngredient(i)}>
+                <ToggleButton variant="delete" />
+              </div>
+            </div>
           </div>
         ))}
+        <div className={addNewButtonWrapper} onClick={addNewIngredient}>
+          <label>Add New Ingredient</label>
+          <ToggleButton variant="plus" />
+        </div>
         <Button text='Submit'/>
       </form>
     </Card>
