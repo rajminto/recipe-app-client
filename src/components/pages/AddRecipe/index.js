@@ -4,10 +4,10 @@ import Card from '../../shared/Card'
 import Button from '../../shared/Button'
 
 const AddRecipe = () => {
-
   const { 
+    createRecipeForm,
     createRecipeFormContainer, 
-    createRecipeForm 
+    ingredientInputWrapper 
   } = styles
 
   const [recipeInfo, setRecipeInfo] = useState({ 
@@ -17,9 +17,9 @@ const AddRecipe = () => {
     prep_time: '', 
     cook_time: '', 
     userId: null, 
-  }) 
-  
+  })   
   const [isRecipePrivate, setRecipePrivate] = useState(false)
+  const [ingredients, setIngredients] = useState([{ name: '' }])
 
   const handleInputChange = (e) => {
     setRecipeInfo({ ...recipeInfo, [e.target.name]: e.target.value })
@@ -27,7 +27,6 @@ const AddRecipe = () => {
 
   const handleFormSubmit = (e) => {
     e.preventDefault()
-    console.log('Recipe Info:', recipeInfo, isRecipePrivate)
     clearForm()
   }
 
@@ -45,6 +44,21 @@ const AddRecipe = () => {
 
   const handleIsPrivate = () => {
     setRecipePrivate(!isRecipePrivate)
+  }
+
+  const updateIngredientList = (index, value) => {
+    const newIngredients = ingredients.map((ingredient, i) => {
+      if(i === index){
+        ingredient.name = value
+      }
+      return ingredient
+    })
+    setIngredients(newIngredients)
+    console.log(ingredients)
+  }
+
+  const handleIngredientChange = (value, i) => {
+    updateIngredientList(i, value)
   }
   
   return (
@@ -99,6 +113,16 @@ const AddRecipe = () => {
           checked={isRecipePrivate}
           value={isRecipePrivate}
         />
+        <h1>Add Ingredients</h1>
+        {ingredients.map((ingredient, i) => (
+          <div className={ingredientInputWrapper}>
+            <input 
+              type="text"
+              value={ingredients[i].name}
+              onChange={(e) => handleIngredientChange(e.target.value, i)}
+            />
+          </div>
+        ))}
         <Button text='Submit'/>
       </form>
     </Card>
