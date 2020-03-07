@@ -3,7 +3,7 @@
 
 .container{
   background-color: $dark-grey-base;
-  padding: 0 1%;
+  padding: 0 5vw;
   height: 6em;
   display: flex;
   align-items: center;
@@ -13,7 +13,6 @@
   .iconBox{
     height: 5em;
     width: 5em;
-    margin-left: 2em;
     transition: 1s ease-in-out;
     cursor: pointer;
 
@@ -21,9 +20,5 @@
       height: 100%;
       width: 100%;
     }
-  }
-
-  .mainLogo{
-    margin-right: 2em;
   }
 }

@@ -9,19 +9,19 @@ export class Provider extends Component{
     currentUserId: 1,
     isMenuOpen: false
   }
-  //
+
   sendToContextState = (key, value) => {
     this.setState({ [key]: value })
   }
-  //
+
   toggleMenu = () => {
     this.setState({ isMenuOpen: !this.state.isMenuOpen })
   }
-  //
+
   funcGun = (ammoFunc) => {
     this.setState({ funcLoaded: ammoFunc })
   }
-  //
+
   render(){
     return(
       <Context.Provider value={{
