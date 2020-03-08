@@ -32,18 +32,6 @@ const AddRecipe = () => {
     setRecipeInfo({ ...recipeInfo, [e.target.name]: e.target.value });
   };
 
-  const handleFormSubmit = e => {
-    e.preventDefault();
-    const recipe = {
-      ...recipeInfo,
-      ingredients,
-      instructions,
-      isPrivate: isRecipePrivate
-    };
-    console.log(recipe);
-    clearForm();
-  };
-
   const clearForm = () => {
     setRecipeInfo({
       name: '',
@@ -57,6 +45,18 @@ const AddRecipe = () => {
     setRecipePrivate(false);
     setInstructions([{ description: '' }]);
     setIngredients([{ name: '' }]);
+  };
+
+  const handleFormSubmit = e => {
+    e.preventDefault();
+    const recipe = {
+      ...recipeInfo,
+      ingredients,
+      instructions,
+      isPrivate: isRecipePrivate
+    };
+    console.log(recipe);
+    clearForm();
   };
 
   const handleIsPrivate = () => {
