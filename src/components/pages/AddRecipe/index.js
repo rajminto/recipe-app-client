@@ -3,6 +3,7 @@ import styles from './AddRecipe.module.scss';
 import Card from '../../shared/Card';
 import Button from '../../shared/Button';
 import ToggleButton from '../../shared/ToggleButton';
+import { baseUrl } from '../../../api';
 
 const AddRecipe = () => {
   const {
@@ -47,16 +48,38 @@ const AddRecipe = () => {
     setIngredients([{ name: '' }]);
   };
 
+  const postNewRecipe = async recipe => {
+    const options = {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(recipe)
+    };
+    try {
+      const res = await fetch(`${baseUrl}/api/recipes`, options);
+      const newRecipe = await res.json();
+      console.log('New Recipe:', newRecipe);
+      clearForm();
+    } catch (err) {
+      console.log('Error:', err);
+    }
+  };
+
   const handleFormSubmit = e => {
     e.preventDefault();
     const recipe = {
       ...recipeInfo,
       ingredients,
-      instructions,
+      instructions: instructions.map((instruction, i) => {
+        instruction.order = i + 1;
+        return instruction;
+      }),
       isPrivate: isRecipePrivate
     };
     console.log(recipe);
-    clearForm();
+    postNewRecipe(recipe);
   };
 
   const handleIsPrivate = () => {
