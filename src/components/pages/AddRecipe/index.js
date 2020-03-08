@@ -79,7 +79,7 @@ const AddRecipe = () => {
       }),
       isPrivate: isRecipePrivate
     };
-    console.log(recipe);
+    // console.log(recipe);
     postNewRecipe(recipe);
   };
 
