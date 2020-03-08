@@ -63,6 +63,16 @@
       "jsx-a11y/no-static-element-interactions": [
         0
       ],
+      "jsx-a11y/label-has-for": [
+        0,
+        {
+          "never": {
+            "every": [
+              "id"
+            ]
+          }
+        }
+      ],
       "no-param-reassign": [
         0,
         {

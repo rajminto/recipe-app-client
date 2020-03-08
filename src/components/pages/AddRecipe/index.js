@@ -12,7 +12,8 @@ const AddRecipe = () => {
     createRecipeFormContainer,
     deleteButtonWrapper,
     ingredientInstructionInput,
-    ingredientInstructionInputWrapper
+    ingredientInstructionInputWrapper,
+    toggleSwitchContainer
   } = styles;
 
   const [recipeInfo, setRecipeInfo] = useState({
@@ -140,8 +141,9 @@ const AddRecipe = () => {
     <Card className={createRecipeFormContainer}>
       <h1>Create A Recipe</h1>
       <form className={createRecipeForm} onSubmit={handleFormSubmit}>
-        <label>Recipe Name:</label>
+        <label htmlFor="name">Recipe Name:</label>
         <input
+          id="name"
           type="text"
           name="name"
           onChange={handleInputChange}
@@ -180,14 +182,20 @@ const AddRecipe = () => {
           value={cook_time}
           required
         />
-        <label>Would You Like Your Recipe to be Private?</label>
-        <input
-          type="checkbox"
-          name="isPrivate"
-          onChange={handleIsPrivate}
-          checked={isRecipePrivate}
-          value={isRecipePrivate}
-        />
+        <div className={toggleSwitchContainer}>
+          <label>Private Recipe?</label>
+          <label className={styles.switch}>
+            <input
+              id="isPrivate"
+              type="checkbox"
+              name="isPrivate"
+              onChange={handleIsPrivate}
+              checked={isRecipePrivate}
+              value={isRecipePrivate}
+            />
+            <span className={`${styles.slider} ${styles.round}`} />
+          </label>
+        </div>
         <h1>Add Ingredients</h1>
         {ingredients.map((ingredient, i) => (
           <div className={ingredientInstructionInputWrapper} key={i}>
