@@ -59,9 +59,9 @@ const AddRecipe = () => {
     };
     try {
       const res = await fetch(`${baseUrl}/api/recipes`, options);
-      const newRecipe = await res.json();
-      console.log('New Recipe:', newRecipe);
-      clearForm();
+      const response = await res.json();
+      console.log('New Recipe:', response);
+      if (response.success) clearForm(); // TODO: Update UI in failure conditions
     } catch (err) {
       console.log('Error:', err);
     }
