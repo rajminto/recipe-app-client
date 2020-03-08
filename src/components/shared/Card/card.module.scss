@@ -8,3 +8,9 @@
   background-color: $dark-grey-base;
   margin: 1rem 0;
 }
+
+@media only screen and (max-width: 450px){
+  .cardContainer{
+    padding: 1.1rem;
+  }
+}

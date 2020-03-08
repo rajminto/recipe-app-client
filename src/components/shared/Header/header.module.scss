@@ -5,6 +5,7 @@
   background-color: $dark-grey-base;
   padding: 0 5vw;
   height: 6em;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;  
@@ -19,6 +20,16 @@
     svg{
       height: 100%;
       width: 100%;
+    }
+  }
+}
+@media only screen and (max-width: 450px){
+  .container{
+    height: 4.5em;
+
+    .iconBox{
+      height: 3em;
+      width: 3em;
     }
   }
 }

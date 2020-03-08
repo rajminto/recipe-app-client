@@ -1,80 +1,118 @@
-import React, { useState } from 'react'
-import styles from './AddRecipe.module.scss'
-import Card from '../../shared/Card'
-import Button from '../../shared/Button'
-import ToggleButton from '../../shared/ToggleButton'
+import React, { useState } from 'react';
+import styles from './AddRecipe.module.scss';
+import Card from '../../shared/Card';
+import Button from '../../shared/Button';
+import ToggleButton from '../../shared/ToggleButton';
 
 const AddRecipe = () => {
-  const { 
+  const {
     addNewButtonWrapper,
     createRecipeForm,
-    createRecipeFormContainer, 
+    createRecipeFormContainer,
     deleteButtonWrapper,
-    ingredientInput,
-    ingredientInputWrapper 
-  } = styles
+    ingredientInstructionInput,
+    ingredientInstructionInputWrapper
+  } = styles;
 
-  const [recipeInfo, setRecipeInfo] = useState({ 
-    name: '', 
-    description: '', 
-    img_url: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/190130-tacos-al-pastor-horizontal-1-1549571422.png', 
-    prep_time: '', 
-    cook_time: '', 
-    userId: null, 
-  })   
-  const [isRecipePrivate, setRecipePrivate] = useState(false)
-  const [ingredients, setIngredients] = useState([{ name: '' }])
+  const [recipeInfo, setRecipeInfo] = useState({
+    name: '',
+    description: '',
+    img_url:
+      'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/190130-tacos-al-pastor-horizontal-1-1549571422.png',
+    prep_time: '',
+    cook_time: '',
+    userId: null
+  });
 
-  const handleInputChange = (e) => {
-    setRecipeInfo({ ...recipeInfo, [e.target.name]: e.target.value })
-  }
+  const [isRecipePrivate, setRecipePrivate] = useState(false);
+  const [ingredients, setIngredients] = useState([{ name: '' }]);
+  const [instructions, setInstructions] = useState([{ description: '' }]);
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault()
-    clearForm()
-  }
+  const handleInputChange = e => {
+    setRecipeInfo({ ...recipeInfo, [e.target.name]: e.target.value });
+  };
+
+  const handleFormSubmit = e => {
+    e.preventDefault();
+    const recipe = {
+      ...recipeInfo,
+      ingredients,
+      instructions,
+      isPrivate: isRecipePrivate
+    };
+    console.log(recipe);
+    clearForm();
+  };
 
   const clearForm = () => {
-    setRecipeInfo({ 
-      name: '', 
-      description: '', 
-      img_url: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/190130-tacos-al-pastor-horizontal-1-1549571422.png', 
-      prep_time: '', 
-      cook_time: '', 
-      userId: null, 
-    })
-    setRecipePrivate(false)
-  }
+    setRecipeInfo({
+      name: '',
+      description: '',
+      img_url:
+        'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/190130-tacos-al-pastor-horizontal-1-1549571422.png',
+      prep_time: '',
+      cook_time: '',
+      userId: null
+    });
+    setRecipePrivate(false);
+    setInstructions([{ description: '' }]);
+    setIngredients([{ name: '' }]);
+  };
 
   const handleIsPrivate = () => {
-    setRecipePrivate(!isRecipePrivate)
-  }
+    setRecipePrivate(!isRecipePrivate);
+  };
 
   const updateIngredientList = (index, value) => {
     const newIngredients = ingredients.map((ingredient, i) => {
-      if(i === index){
-        ingredient.name = value
+      if (i === index) {
+        ingredient.name = value;
       }
-      return ingredient
-    })
-    setIngredients(newIngredients)
-    console.log(ingredients)
-  }
+      return ingredient;
+    });
+    setIngredients(newIngredients);
+  };
 
   const handleIngredientChange = (value, i) => {
-    updateIngredientList(i, value)
-  }
+    updateIngredientList(i, value);
+  };
 
   const addNewIngredient = () => {
-    setIngredients([...ingredients, { name: '' }])
-  }
+    setIngredients([...ingredients, { name: '' }]);
+  };
 
-  const deleteIngredient = (index) => {
-    const newIngredients = ingredients.filter((ingredient, i) => i !== index)
-    setIngredients(newIngredients)
-  }
+  const deleteIngredient = index => {
+    const newIngredients = ingredients.filter((ingredient, i) => i !== index);
+    setIngredients(newIngredients);
+  };
 
-  
+  const updateInstructionList = (index, value) => {
+    const newInstructions = instructions.map((instruction, i) => {
+      if (i === index) {
+        instruction.description = value;
+      }
+      return instruction;
+    });
+    setInstructions(newInstructions);
+  };
+
+  const handleInstructionChange = (value, i) => {
+    updateInstructionList(i, value);
+  };
+
+  const addNewInstruction = () => {
+    setInstructions([...instructions, { description: '' }]);
+  };
+
+  const deleteInstruction = index => {
+    const newInstructions = instructions.filter(
+      (instruction, i) => i !== index
+    );
+    setInstructions(newInstructions);
+  };
+
+  const { name, description, img_url, prep_time, cook_time } = recipeInfo;
+
   return (
     <Card className={createRecipeFormContainer}>
       <h1>Create A Recipe</h1>
@@ -84,7 +122,7 @@ const AddRecipe = () => {
           type="text"
           name="name"
           onChange={handleInputChange}
-          value={recipeInfo.name}
+          value={name}
           required
         />
         <label>Description:</label>
@@ -92,7 +130,7 @@ const AddRecipe = () => {
           type="text"
           name="description"
           onChange={handleInputChange}
-          value={recipeInfo.description}
+          value={description}
           required
         />
         <label>Upload an Image Here:</label>
@@ -100,7 +138,7 @@ const AddRecipe = () => {
           type="text"
           name="img_url"
           onChange={handleInputChange}
-          value={recipeInfo.img_url}
+          value={img_url}
           required
         />
         <label>Prep Time:</label>
@@ -108,7 +146,7 @@ const AddRecipe = () => {
           type="text"
           name="prep_time"
           onChange={handleInputChange}
-          value={recipeInfo.prep_time}
+          value={prep_time}
           required
         />
         <label>Cook Time:</label>
@@ -116,7 +154,7 @@ const AddRecipe = () => {
           type="text"
           name="cook_time"
           onChange={handleInputChange}
-          value={recipeInfo.cook_time}
+          value={cook_time}
           required
         />
         <label>Would You Like Your Recipe to be Private?</label>
@@ -129,32 +167,58 @@ const AddRecipe = () => {
         />
         <h1>Add Ingredients</h1>
         {ingredients.map((ingredient, i) => (
-          <div className={ingredientInputWrapper}>
+          <div className={ingredientInstructionInputWrapper} key={i}>
             <label>{i + 1}. </label>
-            <div className={ingredientInput}>
-              <input 
+            <div className={ingredientInstructionInput}>
+              <input
                 type="text"
                 value={ingredients[i].name}
-                onChange={(e) => handleIngredientChange(e.target.value, i)}
+                onChange={e => handleIngredientChange(e.target.value, i)}
               />
-              <div className={deleteButtonWrapper} onClick={() => deleteIngredient(i)}>
+              <div
+                className={deleteButtonWrapper}
+                onClick={() => deleteIngredient(i)}
+              >
                 <ToggleButton variant="delete" />
               </div>
             </div>
           </div>
         ))}
         <div className={addNewButtonWrapper} onClick={addNewIngredient}>
-          <label>Add New Ingredient</label>
+          <label>Add New</label>
           <ToggleButton variant="plus" />
         </div>
-        <Button text='Submit'/>
+        <h1>Add Instructions</h1>
+        {instructions.map((instruction, i) => (
+          <div className={ingredientInstructionInputWrapper} key={i}>
+            <label>{i + 1}. </label>
+            <div className={ingredientInstructionInput}>
+              <input
+                type="text"
+                value={instructions[i].description}
+                onChange={e => handleInstructionChange(e.target.value, i)}
+              />
+              <div
+                className={deleteButtonWrapper}
+                onClick={() => deleteInstruction(i)}
+              >
+                <ToggleButton variant="delete" />
+              </div>
+            </div>
+          </div>
+        ))}
+        <div className={addNewButtonWrapper} onClick={addNewInstruction}>
+          <label>Add New</label>
+          <ToggleButton variant="plus" />
+        </div>
+        <Button text="Submit" />
       </form>
     </Card>
-  )
-}
-export default AddRecipe
+  );
+};
+export default AddRecipe;
 
 // ***PARAMS*** //
 // CREATE RECIPE PARAMS name, description, img_url, prep_time, cook_time, userId, isPrivate
-// Ingredients PARASMS::: name (string: include quantity), recipeId, 
-// Instructions: PARAMS::: description, order, recipeId, 
+// Ingredients PARASMS::: name (string: include quantity), recipeId,
+// Instructions: PARAMS::: description, order, recipeId,

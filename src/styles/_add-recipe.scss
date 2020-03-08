@@ -1,192 +1,192 @@
-@import './variables';
+// @import './variables';
 
-.master-form-container{
-  padding: 3em;
-  width: 40%;
-  min-height: 45em;
-  // box-shadow: 0px 0px 5px 2px rgb(165, 164, 164);
-  border-radius: .2em;
-  background-color: $light-grey-base;
-  margin: auto 0;
-  .add-rec-form-wrapper{
-    h1{
-      margin-bottom: 1em;
-    }
-    .add-rec-form{
-      display: flex;
-      flex-direction: column;
-      font-size: 1.3em;
-      color: $dark-highlight;
-      max-height: 40rem;
-      padding: 0 .5em;
-      input{
-        font-size: 1.2em;
-        margin: .5em 0;
-      }
-      textarea{
-        font-size: 1em;
-        margin: .5em 0;
-      }
-      .button-container{
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
-        margin-top: 3em;
-        border: none;
-        height: auto;
-        padding: 0 2em;
-        button:focus{
-          outline: 0;
-        }
-      }
-      .ingredient-field{
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        border-bottom: 1px solid $dark-highlight;
-        padding: 2em 0;
-        span{
-          margin-right: .4em;
-        }
-      }
-    }
-  }
-  .add-ing-form-wrapper{
-    box-shadow: unset;
-    flex-direction: row;
-    width: 50%;
-    margin-left: 3em;
-    textarea{
-      width: 70%;
-      font-size: 1.1em;
-      margin: 1em 4em 0 0;
-    }
+// .master-form-container{
+//   padding: 3em;
+//   width: 40%;
+//   min-height: 45em;
+//   // box-shadow: 0px 0px 5px 2px rgb(165, 164, 164);
+//   border-radius: .2em;
+//   background-color: $light-grey-base;
+//   margin: auto 0;
+//   .add-rec-form-wrapper{
+//     h1{
+//       margin-bottom: 1em;
+//     }
+//     .add-rec-form{
+//       display: flex;
+//       flex-direction: column;
+//       font-size: 1.3em; 
+//       color: $dark-highlight;
+//       max-height: 40rem;
+//       padding: 0 .5em;
+//       input{
+//         font-size: 1.2em;
+//         margin: .5em 0;
+//       }
+//       textarea{
+//         font-size: 1em;
+//         margin: .5em 0;
+//       }
+//       .button-container{
+//         display: flex;
+//         justify-content: space-between;
+//         align-items: center;
+//         width: 100%;
+//         margin-top: 3em;
+//         border: none;
+//         height: auto;
+//         padding: 0 2em;
+//         button:focus{
+//           outline: 0;
+//         }
+//       }
+//       .ingredient-field{
+//         display: flex;
+//         justify-content: center;
+//         flex-direction: column;
+//         border-bottom: 1px solid $dark-highlight;
+//         padding: 2em 0;
+//         span{
+//           margin-right: .4em;
+//         }
+//       }
+//     }
+//   }
+//   .add-ing-form-wrapper{
+//     box-shadow: unset;
+//     flex-direction: row;
+//     width: 50%;
+//     margin-left: 3em;
+//     textarea{
+//       width: 70%;
+//       font-size: 1.1em;
+//       margin: 1em 4em 0 0;
+//     }
 
-    h2{
-      margin-bottom: 1em;
-    }
+//     h2{
+//       margin-bottom: 1em;
+//     }
 
-    label{
-      font-size: 1.1rem;
-      // margin-bottom: 4rem;
-    }
+//     label{
+//       font-size: 1.1rem;
+//       // margin-bottom: 4rem;
+//     }
 
-    input{
-      font-size: 1.2em;
-      margin: .5em 0;
-      margin-right: 4em;
-      width: 70%;
-    }
-    .ingredient-field{
-      padding: .1em 0;
-      font-size: .9em;
-      display: flex;
-      align-items: center;
-      // justify-content: space-between;
-      span{
-        margin-right: .4em;
-      }
-      .delete-btn{
-        height: 2em;
-        width: 2em;
-        margin-right: 1rem;
-        justify-self: flex-end;
-        cursor: pointer;
-        svg{
-          height: 100%;
-          width: 100%;
-        }
-      }
-    }
-    .button-container{
-      display: flex;
-      align-items: center;
-      width: 100%;
-      margin-top: .5em;
-      border: none;
-      height: auto;
-      button{
-        margin-right: 1em;
-      }
-      button:focus{
-        outline: 0;
-      }
-    }
-  }
-}
-.expanded-display{
-  min-width: 100vw;
-  min-height: calc(100vh - 6em);
-  .recipe-create-details{
-    height: auto;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    .return-icon{
-      height: 3em;
-      width: 3em;
-      cursor: pointer;
-      svg{
-        height: 100%;
-        width: 100%;
-      }
-    }
-    .recipe-info{
-      p{
-        margin: 1em;
-        font-size: 1.2em;
-        font-weight: 500;
-      }
-      span{
-        margin-left: 1em;
-        font-weight: 300;
-        font-style: italic;
-      }
-    }
-    .recipe-info-top{
-      width: 100%;
-      height: auto;
-      min-height: 23em;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      padding: 2em 0;
-      overflow: hidden;
-      .current-list{
-        display: flex;
-        justify-content: flex-start;
-        width: 80em;
-        max-width: 50%;
-        justify-content: space-around;
-        div{
-          margin: 0 1em;
-          width: 50%;
-          height: auto;
-          overflow-wrap: break-word;
-          ol{
-            padding-left: 2em;
-          }
-          li{
-            margin: 1em 0;
-          }
-        }
-      }
-    }
-    .recipe-info-bot{
-      width: 100%;
-      height: auto;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    }
-  }
-}
-.submit-rec-container{
-  display: flex;
-  justify-content: flex-end;
-  button{
-    background-color: rgb(150, 187, 150);
-    margin-right: 1rem;
-  }
-}
+//     input{
+//       font-size: 1.2em;
+//       margin: .5em 0;
+//       margin-right: 4em;
+//       width: 70%;
+//     }
+//     .ingredient-field{
+//       padding: .1em 0;
+//       font-size: .9em;
+//       display: flex;
+//       align-items: center;
+//       // justify-content: space-between;
+//       span{
+//         margin-right: .4em;
+//       }
+//       .delete-btn{
+//         height: 2em;
+//         width: 2em;
+//         margin-right: 1rem;
+//         justify-self: flex-end;
+//         cursor: pointer;
+//         svg{
+//           height: 100%;
+//           width: 100%;
+//         }
+//       }
+//     }
+//     .button-container{
+//       display: flex;
+//       align-items: center;
+//       width: 100%;
+//       margin-top: .5em;
+//       border: none;
+//       height: auto;
+//       button{
+//         margin-right: 1em;
+//       }
+//       button:focus{
+//         outline: 0;
+//       }
+//     }
+//   }
+// }
+// .expanded-display{
+//   min-width: 100vw;
+//   min-height: calc(100vh - 6em);
+//   .recipe-create-details{
+//     height: auto;
+//     width: 100%;
+//     display: flex;
+//     flex-direction: column;
+//     .return-icon{
+//       height: 3em;
+//       width: 3em;
+//       cursor: pointer;
+//       svg{
+//         height: 100%;
+//         width: 100%;
+//       }
+//     }
+//     .recipe-info{
+//       p{
+//         margin: 1em;
+//         font-size: 1.2em;
+//         font-weight: 500;
+//       }
+//       span{
+//         margin-left: 1em;
+//         font-weight: 300;
+//         font-style: italic;
+//       }
+//     }
+//     .recipe-info-top{
+//       width: 100%;
+//       height: auto;
+//       min-height: 23em;
+//       display: flex;
+//       flex-direction: row;
+//       justify-content: space-between;
+//       padding: 2em 0;
+//       overflow: hidden;
+//       .current-list{
+//         display: flex;
+//         justify-content: flex-start;
+//         width: 80em;
+//         max-width: 50%;
+//         justify-content: space-around;
+//         div{
+//           margin: 0 1em;
+//           width: 50%;
+//           height: auto;
+//           overflow-wrap: break-word;
+//           ol{
+//             padding-left: 2em;
+//           }
+//           li{
+//             margin: 1em 0;
+//           }
+//         }
+//       }
+//     }
+//     .recipe-info-bot{
+//       width: 100%;
+//       height: auto;
+//       display: flex;
+//       flex-direction: row;
+//       justify-content: space-between;
+//     }
+//   }
+// }
+// .submit-rec-container{
+//   display: flex;
+//   justify-content: flex-end;
+//   button{
+//     background-color: rgb(150, 187, 150);
+//     margin-right: 1rem;
+//   }
+// }

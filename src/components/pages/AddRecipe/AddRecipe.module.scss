@@ -36,7 +36,8 @@
             border-left-color: $dark-highlight-2;
           }
         }
-        .ingredientInputWrapper{
+
+        .ingredientInstructionInputWrapper{
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -52,7 +53,7 @@
             min-width: 1rem;
           }
 
-          .ingredientInput{
+          .ingredientInstructionInput{
             display: flex;
             align-items: center;
             width: 100%;
@@ -71,10 +72,43 @@
         .addNewButtonWrapper{
           display: flex;
           align-items: center;
+          width: 20rem;
+          padding: 1rem;
+          border-radius: .3em;
+
 
           label{
             margin-right: 1rem;
           }
         }
       }
+}
+
+@media only screen and (max-width: 450px){
+  .createRecipeFormContainer{
+    width: 92vw;
+
+    h1{
+      font-size: 1.5rem;
+    }
+    .createRecipeForm{      
+      label{
+        font-size: 1rem;
+      }
+
+      .ingredientInstructionInputWrapper{
+        div{
+          margin: .5rem 0;
+        }
+        label{
+          margin-right: .3rem;
+        }
+        .ingredientInstructionInput{  
+          input{
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
 }
