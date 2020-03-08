@@ -205,6 +205,7 @@ const AddRecipe = () => {
                 type="text"
                 value={ingredients[i].name}
                 onChange={e => handleIngredientChange(e.target.value, i)}
+                required
               />
               <div
                 className={deleteButtonWrapper}
@@ -228,6 +229,7 @@ const AddRecipe = () => {
                 type="text"
                 value={instructions[i].description}
                 onChange={e => handleInstructionChange(e.target.value, i)}
+                required
               />
               <div
                 className={deleteButtonWrapper}
