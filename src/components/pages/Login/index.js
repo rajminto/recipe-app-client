@@ -1,17 +1,17 @@
-import React, { Component } from 'react'
-import styles from './login.module.scss'
-import { Redirect } from 'react-router-dom'
+import React, { Component } from 'react';
+import styles from './login.module.scss';
+import { Redirect } from 'react-router-dom';
 
-import Button from '../../shared/Button'
-import Card from '../../shared/Card'
-import CheckAnimation from '../../shared/CheckAnimation'
+import Button from '../../shared/Button';
+import Card from '../../shared/Card';
+import CheckAnimation from '../../shared/CheckAnimation';
 
-import { baseUrl } from '../../../api'
+import { baseUrl } from '../../../api';
 
 // TODO?: use context api to control form
 class Login extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       message: '',
       loginSuccess: false,
@@ -20,21 +20,24 @@ class Login extends Component {
         email: '',
         password: ''
       }
-    }
+    };
   }
 
-  handleChange = (e) => {
-    this.setState({
-      form: {
-        ...this.state.form,
-        [e.target.name]: e.target.value
-      }
-    }, () => this.isFormValid())
-  }
+  handleChange = e => {
+    this.setState(
+      {
+        form: {
+          ...this.state.form,
+          [e.target.name]: e.target.value
+        }
+      },
+      () => this.isFormValid()
+    );
+  };
 
-  handleSubmit = (e) => {
-    e.preventDefault()
-    const user = this.state.form
+  handleSubmit = e => {
+    e.preventDefault();
+    const user = this.state.form;
 
     this.submitUser(user)
       .then(res => res.json())
@@ -44,44 +47,46 @@ class Login extends Component {
         // Login failed: display response message
         response.success
           ? this.setState({ loginSuccess: true })
-          : this.setState({ message: response.message })
+          : this.setState({ message: response.message });
       })
       .catch(err => {
-        if (typeof err === 'string') this.setState({ message: err })
-      })
-  }
+        if (typeof err === 'string') this.setState({ message: err });
+      });
+  };
 
   isFormValid = () => {
     if (this.state.form.password.length > 5 && this.state.formValid === false) {
-      this.setState({ formValid: true })
+      this.setState({ formValid: true });
+    } else if (
+      this.state.form.password.length <= 5 &&
+      this.state.formValid === true
+    ) {
+      this.setState({ formValid: false });
     }
-    else if (this.state.form.password.length <= 5 && this.state.formValid === true) {
-      this.setState({ formValid: false })
-    }
-  }
+  };
 
-  submitUser = (user) => {
+  submitUser = user => {
     return fetch(`${baseUrl}/api/auth/login`, {
       method: 'POST',
       credentials: 'include',
       headers: {
         'content-type': 'application/json',
-        'accept': 'application/json'
+        accept: 'application/json'
       },
       body: JSON.stringify(user)
-    })
-  }
+    });
+  };
 
   render() {
-    const { message, loginSuccess, formValid } = this.state
+    const { message, loginSuccess, formValid } = this.state;
 
-    if (loginSuccess) return <Redirect to='/profile' />
+    if (loginSuccess) return <Redirect to="/profile" />;
     // console.log('render from parent')
     return (
       <Card className={styles.loginFormContainer}>
         <div className={styles.validator}>
           <h1>Login to Account</h1>
-            <CheckAnimation formValid={formValid} />
+          <CheckAnimation formValid={formValid} />
         </div>
 
         {/* TODO: refactor to use a Message component */}
@@ -105,11 +110,11 @@ class Login extends Component {
             required
             minLength="6"
           />
-          <Button text={'Login'} />
+          <Button text="Login" />
         </form>
       </Card>
-    )
+    );
   }
 }
 
-export default Login
+export default Login;

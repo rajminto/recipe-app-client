@@ -1,3 +1,18 @@
 .recipesListContainer {
   width: 90vw;
 }
+
+@media only screen and (max-width: 450px) {
+  .recipesListContainer {
+    width: 92vw;
+
+    h1,
+    h2 {
+      font-size: 1.5rem;
+    }
+    p,
+    label {
+      font-size: 1rem;
+    }
+  }
+}

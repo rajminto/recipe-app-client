@@ -5,11 +5,12 @@
   "dependencies": {
     "gsap": "^2.1.2",
     "node-sass": "^4.11.0",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-infinite-scroll-component": "^4.5.2",
     "react-router-dom": "^5.0.0",
-    "react-scripts": "2.1.8",
+    "react-scripts": "3.4.0",
     "react-transition-group": "^4.0.0"
   },
   "scripts": {
@@ -19,13 +20,111 @@
     "eject": "react-scripts eject",
     "deploy": "npm run build && surge ./build https://recipe-app-client.surge.sh"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-react": "^7.19.0",
+    "prettier": "^1.19.1"
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true,
+      "es6": true
+    },
+    "extends": [
+      "react-app",
+      "airbnb",
+      "plugin:prettier/recommended",
+      "prettier/react"
+    ],
+    "rules": {
+      "no-unused-expressions": "off",
+      "prefer-promise-reject-errors": "off",
+      "jsx-a11y/label-has-associated-control": "off",
+      "react/no-access-state-in-setstate": "off",
+      "camelcase": [
+        0,
+        {
+          "properties": "never",
+          "ignoreDestructuring": true
+        }
+      ],
+      "jsx-a11y/click-events-have-key-events": [
+        0
+      ],
+      "jsx-a11y/no-noninteractive-element-interactions": [
+        0
+      ],
+      "jsx-a11y/no-static-element-interactions": [
+        0
+      ],
+      "jsx-a11y/label-has-for": [
+        0,
+        {
+          "never": {
+            "every": [
+              "id"
+            ]
+          }
+        }
+      ],
+      "no-param-reassign": [
+        0,
+        {
+          "props": false
+        }
+      ],
+      "prettier/prettier": [
+        "error",
+        {
+          "endOfLine": "auto"
+        }
+      ],
+      "react/destructuring-assignment": [
+        0
+      ],
+      "react/jsx-closing-bracket-location": [
+        0
+      ],
+      "react/jsx-filename-extension": [
+        1,
+        {
+          "extensions": [
+            ".test.js",
+            ".jsx",
+            ".js"
+          ]
+        }
+      ],
+      "react/jsx-tag-spacing": [
+        1,
+        {
+          "closingSlash": "never",
+          "beforeSelfClosing": "allow",
+          "afterOpening": "never",
+          "beforeClosing": "allow"
+        }
+      ],
+      "react/jsx-props-no-spreading": [
+        1,
+        {
+          "custom": "ignore"
+        }
+      ]
+    }
+  },
+  "prettier": {
+    "singleQuote": true,
+    "endOfLine": "lf"
+  }
 }
