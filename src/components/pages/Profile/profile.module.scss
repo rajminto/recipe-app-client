@@ -4,3 +4,8 @@
   flex-direction: column;
   justify-content: center;
 }
+@media only screen and (max-width: 450px) {
+  .profileContainer {
+    width: 92vw;
+  }
+}

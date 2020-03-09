@@ -12,8 +12,25 @@ div.loginFailureContainer {
     flex-direction: column;
     justify-content: space-between;
 
-  button {
+    button {
       width: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  div.loginFailureContainer {
+    width: 92vw;
+    margin: 4vw;
+    h1 {
+      font-size: 1.5rem;
+      margin-bottom: unset;
+    }
+
+    p {
+      font-size: 1rem;
+      margin: 1rem 0;
+      margin-bottom: 0;
     }
   }
 }

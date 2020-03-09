@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import styles from './AddRecipe.module.scss';
 import Card from '../../shared/Card';

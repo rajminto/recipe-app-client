@@ -1,15 +1,16 @@
-import React, { Component } from 'react'
-import styles from './register.module.scss'
-import { Redirect } from 'react-router-dom'
+import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import styles from './register.module.scss';
 
-import Button from '../../shared/Button'
+import Button from '../../shared/Button';
+import Card from '../../shared/Card';
 
-import { baseUrl } from '../../../api'
+import { baseUrl } from '../../../api';
 
 // TODO?: use context api to control form
 class Register extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       message: '',
       registrationSuccess: false,
@@ -19,21 +20,21 @@ class Register extends Component {
         password: '',
         password2: ''
       }
-    }
+    };
   }
 
-  handleChange = (e) => {
+  handleChange = e => {
     this.setState({
       form: {
         ...this.state.form,
         [e.target.name]: e.target.value
       }
-    })
-  }
+    });
+  };
 
-  handleSubmit = (e) => {
-    e.preventDefault()
-    const user = this.state.form
+  handleSubmit = e => {
+    e.preventDefault();
+    const user = this.state.form;
 
     this.validatePasswords(user)
       .then(this.submitNewUser)
@@ -43,40 +44,40 @@ class Register extends Component {
         // Registration failed: display response message
         response.success
           ? this.setState({ registrationSuccess: true })
-          : this.setState({ message: response.message })
+          : this.setState({ message: response.message });
       })
       .catch(err => {
-        if (typeof err === 'string') this.setState({ message: err })
-      })
-  }
+        if (typeof err === 'string') this.setState({ message: err });
+      });
+  };
 
-  submitNewUser = (user) => {
+  submitNewUser = user => {
     return fetch(`${baseUrl}/api/auth/register`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
-        'accept': 'application/json'
+        accept: 'application/json'
       },
       body: JSON.stringify(user)
-    })
-  }
+    });
+  };
 
   // TODO?: improve validation
-  validatePasswords = (user) => {
+  validatePasswords = user => {
     return new Promise((resolve, reject) => {
-      (user.password !== user.password2)
+      user.password !== user.password2
         ? reject('Passwords do not match.')
-        : resolve(user)
-    })
-  }
+        : resolve(user);
+    });
+  };
 
   render() {
-    const { message, registrationSuccess } = this.state
+    const { message, registrationSuccess } = this.state;
 
-    if (registrationSuccess) return <Redirect to='/login' />
-    
+    if (registrationSuccess) return <Redirect to="/login" />;
+
     return (
-      <div className={`master-form-container ${styles.registerFormContainer}`}>
+      <Card className={styles.registerFormContainer}>
         <h1>Create an Account</h1>
 
         {/* TODO: refactor to use a Message component */}
@@ -117,11 +118,11 @@ class Register extends Component {
             required
             minLength="6"
           />
-          <Button text={'Register'}/>
+          <Button text="Register" />
         </form>
-      </div>
-    )
+      </Card>
+    );
   }
 }
 
-export default Register
+export default Register;

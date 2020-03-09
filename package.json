@@ -5,6 +5,7 @@
   "dependencies": {
     "gsap": "^2.1.2",
     "node-sass": "^4.11.0",
+    "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-infinite-scroll-component": "^4.5.2",
@@ -47,6 +48,10 @@
       "prettier/react"
     ],
     "rules": {
+      "no-unused-expressions": "off",
+      "prefer-promise-reject-errors": "off",
+      "jsx-a11y/label-has-associated-control": "off",
+      "react/no-access-state-in-setstate": "off",
       "camelcase": [
         0,
         {
