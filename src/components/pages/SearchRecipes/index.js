@@ -134,13 +134,13 @@ class SearchRecipes extends Component {
           searchQuery={searchQuery}
           handleChange={this.handleChange}
           handleSubmit={this.handleSubmit}
-        />{' '}
+        />
         <RecipesListScroll
           title='Results'
           recipes={recipes}
           moreRecipes={moreRecipes}
           fetchMoreRecipes={this.fetchMoreRecipes}
-        />{' '}
+        />
       </div>
     );
   }

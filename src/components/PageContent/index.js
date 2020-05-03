@@ -25,14 +25,14 @@ class PageContent extends Component {
       <div className={container}>
         <Navigator />
         <Switch>
-          <Route exact path='/' component={Home} />{' '}
-          <Route exact path='/add' component={AddRecipe} />{' '}
-          <Route exact path='/search' component={SearchRecipes} />{' '}
-          <Route exact path='/profile' component={Profile} />{' '}
-          <Route exact path='/register' component={Register} />{' '}
-          <Route exact path='/login' component={Login} />{' '}
-          <Route path='/recipes/:id' component={RecipeDetail} /> <Route component={NotFound} />{' '}
-        </Switch>{' '}
+          <Route exact path='/' component={Home} />
+          <Route exact path='/add' component={AddRecipe} />
+          <Route exact path='/search' component={SearchRecipes} />
+          <Route exact path='/profile' component={Profile} />
+          <Route exact path='/register' component={Register} />
+          <Route exact path='/login' component={Login} />
+          <Route path='/recipes/:id' component={RecipeDetail} /> <Route component={NotFound} />
+        </Switch>
       </div>
     );
   }

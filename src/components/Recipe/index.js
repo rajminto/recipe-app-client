@@ -30,11 +30,11 @@ const Recipe = ({ recipe }) => {
         description={description}
         prep_time={prep_time}
         cook_time={cook_time}
-      />{' '}
+      />
       <div className='bot-recipe-info'>
-        <RecipeIngredientsList ingredients={ingredients} />{' '}
-        <RecipeInstructionsList instructions={instructions} />{' '}
-      </div>{' '}
+        <RecipeIngredientsList ingredients={ingredients} />
+        <RecipeInstructionsList instructions={instructions} />
+      </div>
     </div>
   );
 };

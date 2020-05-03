@@ -4,8 +4,7 @@ import './recipe-ingredient.module.scss';
 
 const RecipeIngredient = ({ name, quantity }) => (
   <p>
-    {' '}
-    {quantity} {name}{' '}
+    {quantity} {name}
   </p>
 );
 
