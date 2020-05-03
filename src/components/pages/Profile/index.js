@@ -28,8 +28,7 @@ class Profile extends Component {
       .then(this.fetchUserRecipes)
       .then(this.setRecipesOnState)
       .catch(err => {
-        if (err.message === 'no user')
-          this.setState({ isLoaded: true, loginFailure: true });
+        if (err.message === 'no user') this.setState({ isLoaded: true, loginFailure: true });
         else console.log(err);
       });
   }
@@ -48,29 +47,17 @@ class Profile extends Component {
   };
 
   fetchUserRecipes = user => {
-    return fetch(`${baseUrl}/api/users/${user.id}/recipes`).then(res =>
-      res.json()
-    );
+    return fetch(`${baseUrl}/api/users/${user.id}/recipes`).then(res => res.json());
   };
 
   setRecipesOnState = ({ recipes }) => {
-    const createdRecipes = recipes.filter(
-      recipe => recipe.userRecipes.createdBy
-    );
-    const savedRecipes = recipes.filter(
-      recipe => !recipe.userRecipes.createdBy
-    );
+    const createdRecipes = recipes.filter(recipe => recipe.userRecipes.createdBy);
+    const savedRecipes = recipes.filter(recipe => !recipe.userRecipes.createdBy);
     this.setState({ isLoaded: true, createdRecipes, savedRecipes });
   };
 
   render() {
-    const {
-      isLoaded,
-      loginFailure,
-      user,
-      createdRecipes,
-      savedRecipes
-    } = this.state;
+    const { isLoaded, loginFailure, user, createdRecipes, savedRecipes } = this.state;
 
     // TODO: create and use spinner/loader component here
     if (!isLoaded) return <Loader />;
@@ -83,14 +70,14 @@ class Profile extends Component {
         <ProfileHeader user={user} />
         {createdRecipes.length ? (
           // TODO?: If no recipes, show button to create
-          <RecipesList title={'Created Recipes'} recipes={createdRecipes} />
+          <RecipesList title='Created Recipes' recipes={createdRecipes} />
         ) : (
           <Card>
             <h2>No created recipes currently.</h2>
           </Card>
         )}
         {savedRecipes.length ? (
-          <RecipesList title={'Saved Recipes'} recipes={savedRecipes} />
+          <RecipesList title='Saved Recipes' recipes={savedRecipes} />
         ) : (
           <Card>
             <h2>No saved recipes currently.</h2>

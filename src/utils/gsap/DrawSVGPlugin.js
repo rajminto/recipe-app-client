@@ -127,14 +127,7 @@ function getLength(element) {
   } else if (type === 'rect') {
     length = bbox.width * 2 * scaleX + bbox.height * 2 * scaleY;
   } else if (type === 'line') {
-    length = getDistance(
-      bbox.x,
-      bbox.y,
-      bbox.x + bbox.width,
-      bbox.y + bbox.height,
-      scaleX,
-      scaleY
-    );
+    length = getDistance(bbox.x, bbox.y, bbox.x + bbox.width, bbox.y + bbox.height, scaleX, scaleY);
   } else if (type === 'polyline' || type === 'polygon') {
     points = element.getAttribute('points').match(_numbersExp) || [];
     if (type === 'polygon') {
@@ -143,20 +136,12 @@ function getLength(element) {
     length = 0;
     for (i = 2; i < points.length; i += 2) {
       length +=
-        getDistance(
-          points[i - 2],
-          points[i - 1],
-          points[i],
-          points[i + 1],
-          scaleX,
-          scaleY
-        ) || 0;
+        getDistance(points[i - 2], points[i - 1], points[i], points[i + 1], scaleX, scaleY) || 0;
     }
   } else if (type === 'circle' || type === 'ellipse') {
     rx = (bbox.width / 2) * scaleX;
     ry = (bbox.height / 2) * scaleY;
-    length =
-      Math.PI * (3 * (rx + ry) - Math.sqrt((3 * rx + ry) * (rx + 3 * ry)));
+    length = Math.PI * (3 * (rx + ry) - Math.sqrt((3 * rx + ry) * (rx + 3 * ry)));
   }
   return length || 0;
 }
@@ -233,26 +218,14 @@ DrawSVGPlugin = _gsScope._gsDefine.plugin({
         end[1] - end[0] || 0.00001,
         'drawSVG'
       );
-      this._offsetPT = this._addTween(
-        this,
-        '_offset',
-        this._offset,
-        -end[0],
-        'drawSVG'
-      );
+      this._offsetPT = this._addTween(this, '_offset', this._offset, -end[0], 'drawSVG');
     }
     if (_isEdge) {
       //to work around a bug in Microsoft Edge, animate the stroke-miterlimit by 0.0001 just to trigger the repaint (unnecessary if it's "round" and stroke-linejoin is also "round"). Imperceptible, relatively high-performance, and effective. Another option was to set the "d" <path> attribute to its current value on every tick, but that seems like it'd be much less performant.
       cs = _getComputedStyle(target);
       if (cs.strokeLinecap !== cs.strokeLinejoin) {
         end = parseFloat(cs.strokeMiterlimit);
-        this._addTween(
-          target.style,
-          'strokeMiterlimit',
-          end,
-          end + 0.0001,
-          'strokeMiterlimit'
-        );
+        this._addTween(target.style, 'strokeMiterlimit', end, end + 0.0001, 'strokeMiterlimit');
       }
     }
     this._live =

@@ -15,9 +15,9 @@ class App extends Component {
     return (
       <Provider>
         <Router>
-          <div className="container">
-            <Route path="/" component={Header} />
-            <Route path="/" component={PageContent} />
+          <div className='container'>
+            <Route path='/' component={Header} />
+            <Route path='/' component={PageContent} />
           </div>
         </Router>
       </Provider>

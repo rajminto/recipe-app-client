@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { TweenMax, Back } from 'gsap';
 import { Transition } from 'react-transition-group';
 import styles from './alert.module.scss';
 import Button from '../Button';
-//
 
 class Alert extends Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
-  //
+
   render() {
     const { showAlert, text, subText, onClose } = this.props;
     const { container, transitionWrap } = styles;
@@ -38,4 +38,12 @@ class Alert extends Component {
     );
   }
 }
+
+Alert.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  showAlert: PropTypes.bool.isRequired,
+  subText: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired
+};
+
 export default Alert;

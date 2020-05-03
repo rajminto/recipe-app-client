@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './search-recipes-header.module.scss';
 
 import Card from '../../../shared/Card';
@@ -10,20 +11,26 @@ const SearchRecipesHeader = ({ searchQuery, handleChange, handleSubmit }) => {
       <h1>Search Recipes</h1>
       <p>Enter a search term below to search for recipes.</p>
       <form onSubmit={handleSubmit} className={styles.searchForm}>
-        <label htmlFor="search-query">Ingredient:</label>
+        <label htmlFor='search-query'>Ingredient:</label>
         <input
-          id="search-query"
-          type="text"
-          name="searchQuery"
+          id='search-query'
+          type='text'
+          name='searchQuery'
           value={searchQuery}
           onChange={handleChange}
         />
         <div>
-          <Button text={'Submit'} />
+          <Button text='Submit' />
         </div>
       </form>
     </Card>
   );
+};
+
+SearchRecipesHeader.propTypes = {
+  searchQuery: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired
 };
 
 export default SearchRecipesHeader;

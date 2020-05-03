@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './recipe-instructions-list.module.scss';
 
 // Component Imports
@@ -17,18 +18,13 @@ const RecipeInstructionsList = ({ instructions }) => {
   return (
     <Card className={styles.container}>
       <h2>Instructions</h2>
-      <Card className={styles.instructionsListCard}>
-        {instructionsCompononents}
-      </Card>
+      <Card className={styles.instructionsListCard}>{instructionsCompononents}</Card>
     </Card>
   );
+};
 
-  // < Card className = { styles.ingredientsListContainer } >
-  //   <h2>Recipe Ingredients</h2>
-  //   <Card className={styles.ingredientsListCard}>
-  //     {ingredientComponents}
-  //   </Card>
-  // </Card >
+RecipeInstructionsList.propTypes = {
+  instructions: PropTypes.arrayOf(PropTypes.shape({})).isRequired
 };
 
 export default RecipeInstructionsList;

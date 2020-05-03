@@ -22,19 +22,7 @@ _gsScope._gsDefine(
       _scientific = /[\+\-]?\d*\.?\d+e[\+\-]?\d+/gi,
       _needsParsingExp = /[cLlsS]/g,
       _bezierError = 'CustomEase only accepts Cubic Bezier data.',
-      _bezierToPoints = function(
-        x1,
-        y1,
-        x2,
-        y2,
-        x3,
-        y3,
-        x4,
-        y4,
-        threshold,
-        points,
-        index
-      ) {
+      _bezierToPoints = function(x1, y1, x2, y2, x3, y3, x4, y4, threshold, points, index) {
         var x12 = (x1 + x2) / 2,
           y12 = (y1 + y2) / 2,
           x23 = (x2 + x3) / 2,
@@ -62,19 +50,7 @@ _gsScope._gsDefine(
         points.splice(index || points.length - 1, 0, { x: x1234, y: y1234 });
         if ((d2 + d3) * (d2 + d3) > threshold * (dx * dx + dy * dy)) {
           length = points.length;
-          _bezierToPoints(
-            x1,
-            y1,
-            x12,
-            y12,
-            x123,
-            y123,
-            x1234,
-            y1234,
-            threshold,
-            points,
-            index
-          );
+          _bezierToPoints(x1, y1, x12, y12, x123, y123, x1234, y1234, threshold, points, index);
           _bezierToPoints(
             x1234,
             y1234,
@@ -185,11 +161,7 @@ _gsScope._gsDefine(
               y = startY;
               segment.closed = true;
             }
-            if (
-              command === 'L' ||
-              Math.abs(relativeX - x) > 0.5 ||
-              Math.abs(relativeY - y) > 0.5
-            ) {
+            if (command === 'L' || Math.abs(relativeX - x) > 0.5 || Math.abs(relativeY - y) > 0.5) {
               segment[l++] = relativeX + (x - relativeX) / 3;
               segment[l++] = relativeY + (y - relativeY) / 3;
               segment[l++] = relativeX + ((x - relativeX) * 2) / 3;
@@ -230,8 +202,7 @@ _gsScope._gsDefine(
           sx = 1 / (+values[l - 2] + tx),
           sy =
             -height ||
-            (Math.abs(+values[l - 1] - +values[1]) <
-            0.01 * (+values[l - 2] - +values[0])
+            (Math.abs(+values[l - 1] - +values[1]) < 0.01 * (+values[l - 2] - +values[0])
               ? _findMinimum(values) + ty
               : +values[l - 1] + ty),
           i;
@@ -288,10 +259,7 @@ _gsScope._gsDefine(
       this.lookup = [];
       this.points = points;
       this.fast = precision <= 1;
-      if (
-        _needsParsingExp.test(data) ||
-        (data.indexOf('M') !== -1 && data.indexOf('C') === -1)
-      ) {
+      if (_needsParsingExp.test(data) || (data.indexOf('M') !== -1 && data.indexOf('C') === -1)) {
         values = _pathDataToBezier(data);
       }
       l = values.length;
@@ -343,9 +311,7 @@ _gsScope._gsDefine(
           if (
             this.fast &&
             i > 1 &&
-            Math.abs(
-              prevPoint.cy / prevPoint.cx - points[i - 2].cy / points[i - 2].cx
-            ) > 2
+            Math.abs(prevPoint.cy / prevPoint.cx - points[i - 2].cy / points[i - 2].cx) > 2
           ) {
             //if there's a sudden change in direction, prioritize accuracy over speed. Like a bounce ease - you don't want to risk the sampling chunks landing on each side of the bounce anchor and having it clipped off.
             this.fast = false;
@@ -443,9 +409,7 @@ _gsScope._gsDefine(
         height = -height;
         y = 0;
       }
-      ease = ease.getRatio
-        ? ease
-        : Ease.map[ease] || console.log('No ease found: ', ease);
+      ease = ease.getRatio ? ease : Ease.map[ease] || console.log('No ease found: ', ease);
       if (!ease.rawBezier) {
         a = ['M' + x + ',' + y];
         precision = Math.max(5, (config.precision || 1) * 200);
@@ -458,10 +422,7 @@ _gsScope._gsDefine(
         for (i = 2; i < precision; i++) {
           tx = (((x + i * inc * width) * rnd) | 0) / rnd;
           ty = (((y + ease.getRatio(i * inc) * -height) * rnd) | 0) / rnd;
-          if (
-            Math.abs((ty - prevY) / (tx - prevX) - slope) > threshold ||
-            i === precision - 1
-          ) {
+          if (Math.abs((ty - prevY) / (tx - prevX) - slope) > threshold || i === precision - 1) {
             //only add points when the slope changes beyond the threshold
             a.push(prevX + ',' + prevY);
             slope = (ty - prevY) / (tx - prevX);
@@ -483,10 +444,7 @@ _gsScope._gsDefine(
         a[1] = 'C' + a[1];
       }
       if (e) {
-        (typeof e === 'string' ? document.querySelector(e) : e).setAttribute(
-          'd',
-          a.join(' ')
-        );
+        (typeof e === 'string' ? document.querySelector(e) : e).setAttribute('d', a.join(' '));
       }
       return a.join(' ');
     };

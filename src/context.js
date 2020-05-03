@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 export const Context = React.createContext();
 
 export class Provider extends Component {
+  // eslint-disable-next-line react/state-in-constructor
   state = {
-    developers: ['matt', 'ross'],
-    recipeCrafterInfo: {},
-    currentUserId: 1,
-    isMenuOpen: false
+    isMenuOpen: false,
+    // eslint-disable-next-line react/no-unused-state
+    funcLoaded: null
   };
 
   sendToContextState = (key, value) => {
@@ -19,6 +19,7 @@ export class Provider extends Component {
   };
 
   funcGun = ammoFunc => {
+    // eslint-disable-next-line react/no-unused-state
     this.setState({ funcLoaded: ammoFunc });
   };
 
@@ -38,4 +39,4 @@ export class Provider extends Component {
   }
 }
 
-export const Consumer = Context.Consumer;
+export const { Consumer } = Context;

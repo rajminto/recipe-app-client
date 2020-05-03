@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import styles from './login.module.scss';
 import { Redirect } from 'react-router-dom';
+import styles from './login.module.scss';
 
 import Button from '../../shared/Button';
 import Card from '../../shared/Card';
@@ -57,10 +57,7 @@ class Login extends Component {
   isFormValid = () => {
     if (this.state.form.password.length > 5 && this.state.formValid === false) {
       this.setState({ formValid: true });
-    } else if (
-      this.state.form.password.length <= 5 &&
-      this.state.formValid === true
-    ) {
+    } else if (this.state.form.password.length <= 5 && this.state.formValid === true) {
       this.setState({ formValid: false });
     }
   };
@@ -80,7 +77,7 @@ class Login extends Component {
   render() {
     const { message, loginSuccess, formValid } = this.state;
 
-    if (loginSuccess) return <Redirect to="/profile" />;
+    if (loginSuccess) return <Redirect to='/profile' />;
     // console.log('render from parent')
     return (
       <Card className={styles.loginFormContainer}>
@@ -95,22 +92,22 @@ class Login extends Component {
         <form onSubmit={this.handleSubmit} className={styles.loginForm}>
           <label>Email:</label>
           <input
-            type="email"
-            name="email"
+            type='email'
+            name='email'
             onChange={this.handleChange}
             value={this.state.email}
             required
           />
           <label>Password:</label>
           <input
-            type="password"
-            name="password"
+            type='password'
+            name='password'
             onChange={this.handleChange}
             value={this.state.password}
             required
-            minLength="6"
+            minLength='6'
           />
-          <Button text="Login" />
+          <Button text='Login' />
         </form>
       </Card>
     );

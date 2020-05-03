@@ -15,13 +15,7 @@
 import { _gsScope } from 'gsap/TweenLite.js';
 
 var _DEG2RAD = Math.PI / 180,
-  Physics2DProp = function(
-    target,
-    p,
-    velocity,
-    acceleration,
-    stepsPerTimeUnit
-  ) {
+  Physics2DProp = function(target, p, velocity, acceleration, stepsPerTimeUnit) {
     this.p = p;
     this.f = typeof target[p] === 'function';
     this.start = this.value = !this.f
@@ -42,8 +36,7 @@ var _DEG2RAD = Math.PI / 180,
   },
   _random = Math.random(),
   _globals = _gsScope._gsDefine.globals,
-  _rootFramesTimeline =
-    _globals.com.greensock.core.Animation._rootFramesTimeline,
+  _rootFramesTimeline = _globals.com.greensock.core.Animation._rootFramesTimeline,
   Physics2DPlugin = _gsScope._gsDefine.plugin({
     propName: 'physics2D',
     version: '0.2.1',
@@ -72,8 +65,7 @@ var _DEG2RAD = Math.PI / 180,
       while (tl._timeline) {
         tl = tl._timeline;
       }
-      this._stepsPerTimeUnit = stepsPerTimeUnit =
-        tl === _rootFramesTimeline ? 1 : 30;
+      this._stepsPerTimeUnit = stepsPerTimeUnit = tl === _rootFramesTimeline ? 1 : 30;
       if (value.gravity) {
         acceleration = Number(value.gravity);
         aAngle = 90;

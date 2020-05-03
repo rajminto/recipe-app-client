@@ -10,11 +10,11 @@ const LoginFailureCard = () => (
     <h1>Login Failed</h1>
     <p>Please login or register a new account.</p>
     <div className={styles.buttonContainer}>
-      <NavLink to="/login">
-        <Button text="Login" />
+      <NavLink to='/login'>
+        <Button text='Login' />
       </NavLink>
-      <NavLink to="/register">
-        <Button text="Register" />
+      <NavLink to='/register'>
+        <Button text='Register' />
       </NavLink>
     </div>
   </Card>

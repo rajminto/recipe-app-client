@@ -1,6 +1,6 @@
 import React from 'react';
-import styles from './navigator.module.scss';
 import { NavLink } from 'react-router-dom';
+import styles from './navigator.module.scss';
 import { Consumer } from '../../../context';
 
 const Navigator = () => {
@@ -16,8 +16,8 @@ const Navigator = () => {
         >
           <div className={styles.menuWrap}>
             <NavLink
-              to="/"
-              className="nav-link"
+              to='/'
+              className='nav-link'
               onClick={() => {
                 context.toggleMenu();
                 context.state.funcLoaded();
@@ -26,8 +26,8 @@ const Navigator = () => {
               home
             </NavLink>
             <NavLink
-              to="/add"
-              className="nav-link"
+              to='/add'
+              className='nav-link'
               onClick={() => {
                 context.toggleMenu();
                 context.state.funcLoaded();
@@ -36,8 +36,8 @@ const Navigator = () => {
               add recipe
             </NavLink>
             <NavLink
-              to="/search"
-              className="nav-link"
+              to='/search'
+              className='nav-link'
               onClick={() => {
                 context.toggleMenu();
                 context.state.funcLoaded();
@@ -46,8 +46,8 @@ const Navigator = () => {
               search recipes
             </NavLink>
             <NavLink
-              to="/profile"
-              className="nav-link"
+              to='/profile'
+              className='nav-link'
               onClick={() => {
                 context.toggleMenu();
                 context.state.funcLoaded();
@@ -56,8 +56,8 @@ const Navigator = () => {
               your profile
             </NavLink>
             <NavLink
-              to="/register"
-              className="nav-link"
+              to='/register'
+              className='nav-link'
               onClick={() => {
                 context.toggleMenu();
                 context.state.funcLoaded();
@@ -66,8 +66,8 @@ const Navigator = () => {
               register
             </NavLink>
             <NavLink
-              to="/login"
-              className="nav-link"
+              to='/login'
+              className='nav-link'
               onClick={() => {
                 context.toggleMenu();
                 context.state.funcLoaded();

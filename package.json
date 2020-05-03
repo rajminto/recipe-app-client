@@ -42,10 +42,6 @@
   "prettier": {
     "singleQuote": true,
     "endOfLine": "lf",
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-    "[javascript]": {
-      "editor.defaultFormatter": "esbenp.prettier-vscode"
-    },
     "printWidth": 100,
     "jsxSingleQuote": true,
     "tabWidth": 2,

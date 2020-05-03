@@ -20,9 +20,7 @@ class Header extends Component {
         {context => (
           <div className={container}>
             <div
-              className={
-                context.state.isMenuOpen ? iconBox : `${iconBox} ${closed}`
-              }
+              className={context.state.isMenuOpen ? iconBox : `${iconBox} ${closed}`}
               onClick={context.toggleMenu}
             >
               <MenuIcon menuOpen={this.state.menuOpen} />

@@ -12,13 +12,7 @@
  */
 /* eslint-disable */
 
-import {
-  TweenLite,
-  _gsScope,
-  globals,
-  TweenPlugin,
-  Ease
-} from 'gsap/TweenLite.js';
+import { TweenLite, _gsScope, globals, TweenPlugin, Ease } from 'gsap/TweenLite.js';
 
 _gsScope._gsDefine(
   'plugins.ThrowPropsPlugin',
@@ -146,12 +140,7 @@ _gsScope._gsDefine(
         if (checkpoint == null) {
           checkpoint = 0.05;
         }
-        var e =
-          ease instanceof Ease
-            ? ease
-            : !ease
-            ? TweenLite.defaultEase
-            : new Ease(ease);
+        var e = ease instanceof Ease ? ease : !ease ? TweenLite.defaultEase : new Ease(ease);
         return (duration * checkpoint * velocity) / e.getRatio(checkpoint);
       }),
       _calculateDuration = (ThrowPropsPlugin.calculateDuration = function(
@@ -162,15 +151,8 @@ _gsScope._gsDefine(
         checkpoint
       ) {
         checkpoint = checkpoint || 0.05;
-        var e =
-          ease instanceof Ease
-            ? ease
-            : !ease
-            ? TweenLite.defaultEase
-            : new Ease(ease);
-        return Math.abs(
-          ((end - start) * e.getRatio(checkpoint)) / velocity / checkpoint
-        );
+        var e = ease instanceof Ease ? ease : !ease ? TweenLite.defaultEase : new Ease(ease);
+        return Math.abs(((end - start) * e.getRatio(checkpoint)) / velocity / checkpoint);
       }),
       _calculateTweenDuration = (ThrowPropsPlugin.calculateTweenDuration = function(
         target,
@@ -207,9 +189,7 @@ _gsScope._gsDefine(
               : !vars.ease
               ? TweenLite.defaultEase
               : new Ease(vars.ease),
-          checkpoint = isNaN(throwPropsVars.checkpoint)
-            ? 0.05
-            : Number(throwPropsVars.checkpoint),
+          checkpoint = isNaN(throwPropsVars.checkpoint) ? 0.05 : Number(throwPropsVars.checkpoint),
           resistance = isNaN(throwPropsVars.resistance)
             ? ThrowPropsPlugin.defaultResistance
             : Number(throwPropsVars.resistance),
@@ -235,21 +215,13 @@ _gsScope._gsDefine(
             p = linkedPropNames[i];
             curProp = throwPropsVars[p];
             if (curProp) {
-              if (
-                curProp.velocity !== undefined &&
-                typeof curProp.velocity === 'number'
-              ) {
+              if (curProp.velocity !== undefined && typeof curProp.velocity === 'number') {
                 curVelocity = Number(curProp.velocity) || 0;
               } else {
                 tracker = tracker || VelocityTracker.getByTarget(target);
-                curVelocity =
-                  tracker && tracker.isTrackingProp(p)
-                    ? tracker.getVelocity(p)
-                    : 0;
+                curVelocity = tracker && tracker.isTrackingProp(p) ? tracker.getVelocity(p) : 0;
               }
-              curResistance = isNaN(curProp.resistance)
-                ? resistance
-                : Number(curProp.resistance);
+              curResistance = isNaN(curProp.resistance) ? resistance : Number(curProp.resistance);
               curDuration =
                 curVelocity * curResistance > 0
                   ? curVelocity / curResistance
@@ -257,15 +229,13 @@ _gsScope._gsDefine(
               curVal =
                 typeof target[p] === 'function'
                   ? target[
-                      p.indexOf('set') ||
-                      typeof target['get' + p.substr(3)] !== 'function'
+                      p.indexOf('set') || typeof target['get' + p.substr(3)] !== 'function'
                         ? p
                         : 'get' + p.substr(3)
                     ]()
                   : target[p] || 0;
               linkedProps[p] =
-                curVal +
-                _calculateChange(curVelocity, ease, curDuration, checkpoint);
+                curVal + _calculateChange(curVelocity, ease, curDuration, checkpoint);
             }
           }
         }
@@ -295,21 +265,13 @@ _gsScope._gsDefine(
               }
             }
             if (typeof curProp === 'object') {
-              if (
-                curProp.velocity !== undefined &&
-                typeof curProp.velocity === 'number'
-              ) {
+              if (curProp.velocity !== undefined && typeof curProp.velocity === 'number') {
                 curVelocity = Number(curProp.velocity) || 0;
               } else {
                 tracker = tracker || VelocityTracker.getByTarget(target);
-                curVelocity =
-                  tracker && tracker.isTrackingProp(p)
-                    ? tracker.getVelocity(p)
-                    : 0;
+                curVelocity = tracker && tracker.isTrackingProp(p) ? tracker.getVelocity(p) : 0;
               }
-              curResistance = isNaN(curProp.resistance)
-                ? resistance
-                : Number(curProp.resistance);
+              curResistance = isNaN(curProp.resistance) ? resistance : Number(curProp.resistance);
               curDuration =
                 curVelocity * curResistance > 0
                   ? curVelocity / curResistance
@@ -317,15 +279,12 @@ _gsScope._gsDefine(
               curVal =
                 typeof target[p] === 'function'
                   ? target[
-                      p.indexOf('set') ||
-                      typeof target['get' + p.substr(3)] !== 'function'
+                      p.indexOf('set') || typeof target['get' + p.substr(3)] !== 'function'
                         ? p
                         : 'get' + p.substr(3)
                     ]()
                   : target[p] || 0;
-              end =
-                curVal +
-                _calculateChange(curVelocity, ease, curDuration, checkpoint);
+              end = curVal + _calculateChange(curVelocity, ease, curDuration, checkpoint);
               if (curProp.end !== undefined) {
                 curProp = _parseEnd(
                   curProp,
@@ -336,58 +295,28 @@ _gsScope._gsDefine(
                   throwPropsVars.radius
                 );
                 if (recordEnd || _recordEndMode) {
-                  throwPropsVars[p] = _extend(
-                    curProp,
-                    throwPropsVars[p],
-                    'end'
-                  );
+                  throwPropsVars[p] = _extend(curProp, throwPropsVars[p], 'end');
                 }
               }
-              if (
-                curProp.max !== undefined &&
-                end > Number(curProp.max) + _min
-              ) {
-                unitFactor =
-                  curProp.unitFactor ||
-                  ThrowPropsPlugin.defaultUnitFactors[p] ||
-                  1; //some values are measured in special units like radians in which case our thresholds need to be adjusted accordingly.
+              if (curProp.max !== undefined && end > Number(curProp.max) + _min) {
+                unitFactor = curProp.unitFactor || ThrowPropsPlugin.defaultUnitFactors[p] || 1; //some values are measured in special units like radians in which case our thresholds need to be adjusted accordingly.
                 //if the value is already exceeding the max or the velocity is too low, the duration can end up being uncomfortably long but in most situations, users want the snapping to occur relatively quickly (0.75 seconds), so we implement a cap here to make things more intuitive. If the max and min match, it means we're animating to a particular value and we don't want to shorten the time unless the velocity is really slow. Example: a rotation where the start and natural end value are less than the snapping spot, but the natural end is pretty close to the snap.
                 curClippedDuration =
                   (curVal > curProp.max && curProp.min !== curProp.max) ||
-                  (curVelocity * unitFactor > -15 &&
-                    curVelocity * unitFactor < 45)
+                  (curVelocity * unitFactor > -15 && curVelocity * unitFactor < 45)
                     ? minDuration + (maxDuration - minDuration) * 0.1
-                    : _calculateDuration(
-                        curVal,
-                        curProp.max,
-                        curVelocity,
-                        ease,
-                        checkpoint
-                      );
+                    : _calculateDuration(curVal, curProp.max, curVelocity, ease, checkpoint);
                 if (curClippedDuration + overshootTolerance < clippedDuration) {
                   clippedDuration = curClippedDuration + overshootTolerance;
                 }
-              } else if (
-                curProp.min !== undefined &&
-                end < Number(curProp.min) - _min
-              ) {
-                unitFactor =
-                  curProp.unitFactor ||
-                  ThrowPropsPlugin.defaultUnitFactors[p] ||
-                  1; //some values are measured in special units like radians in which case our thresholds need to be adjusted accordingly.
+              } else if (curProp.min !== undefined && end < Number(curProp.min) - _min) {
+                unitFactor = curProp.unitFactor || ThrowPropsPlugin.defaultUnitFactors[p] || 1; //some values are measured in special units like radians in which case our thresholds need to be adjusted accordingly.
                 //if the value is already exceeding the min or if the velocity is too low, the duration can end up being uncomfortably long but in most situations, users want the snapping to occur relatively quickly (0.75 seconds), so we implement a cap here to make things more intuitive.
                 curClippedDuration =
                   (curVal < curProp.min && curProp.min !== curProp.max) ||
-                  (curVelocity * unitFactor > -45 &&
-                    curVelocity * unitFactor < 15)
+                  (curVelocity * unitFactor > -45 && curVelocity * unitFactor < 15)
                     ? minDuration + (maxDuration - minDuration) * 0.1
-                    : _calculateDuration(
-                        curVal,
-                        curProp.min,
-                        curVelocity,
-                        ease,
-                        checkpoint
-                      );
+                    : _calculateDuration(curVal, curProp.min, curVelocity, ease, checkpoint);
                 if (curClippedDuration + overshootTolerance < clippedDuration) {
                   clippedDuration = curClippedDuration + overshootTolerance;
                 }
@@ -476,17 +405,11 @@ _gsScope._gsDefine(
             ) {
               val = e[p];
               if (typeof val === 'object') {
-                if (
-                  val.velocity !== undefined &&
-                  typeof val.velocity === 'number'
-                ) {
+                if (val.velocity !== undefined && typeof val.velocity === 'number') {
                   velocities[p] = Number(val.velocity) || 0;
                 } else {
                   tracker = tracker || VelocityTracker.getByTarget(t);
-                  velocities[p] =
-                    tracker && tracker.isTrackingProp(p)
-                      ? tracker.getVelocity(p)
-                      : 0; //rotational values are actually converted to radians in CSSPlugin, but our tracking velocity is in radians already, so make it into degrees to avoid a funky conversion
+                  velocities[p] = tracker && tracker.isTrackingProp(p) ? tracker.getVelocity(p) : 0; //rotational values are actually converted to radians in CSSPlugin, but our tracking velocity is in radians already, so make it into degrees to avoid a funky conversion
                 }
                 if (val.end !== undefined) {
                   end[p] = val.end;
@@ -555,13 +478,7 @@ _gsScope._gsDefine(
       });
     };
 
-    ThrowPropsPlugin.to = function(
-      target,
-      vars,
-      maxDuration,
-      minDuration,
-      overshootTolerance
-    ) {
+    ThrowPropsPlugin.to = function(target, vars, maxDuration, minDuration, overshootTolerance) {
       if (!vars.throwProps) {
         vars = { throwProps: vars };
       }
@@ -592,13 +509,7 @@ _gsScope._gsDefine(
         tween.kill();
         tween = new TweenLite(
           target,
-          _calculateTweenDuration(
-            target,
-            vars,
-            maxDuration,
-            minDuration,
-            overshootTolerance
-          ),
+          _calculateTweenDuration(target, vars, maxDuration, minDuration, overshootTolerance),
           vars
         );
         _recordEndMode = false;
@@ -637,29 +548,21 @@ _gsScope._gsDefine(
           p = linkedPropNames[i];
           curProp = value[p];
           if (curProp) {
-            if (
-              curProp.velocity !== undefined &&
-              typeof curProp.velocity === 'number'
-            ) {
+            if (curProp.velocity !== undefined && typeof curProp.velocity === 'number') {
               velocity = Number(curProp.velocity) || 0;
             } else {
               tracker = tracker || VelocityTracker.getByTarget(target);
-              velocity =
-                tracker && tracker.isTrackingProp(p)
-                  ? tracker.getVelocity(p)
-                  : 0;
+              velocity = tracker && tracker.isTrackingProp(p) ? tracker.getVelocity(p) : 0;
             }
             curVal =
               typeof target[p] === 'function'
                 ? target[
-                    p.indexOf('set') ||
-                    typeof target['get' + p.substr(3)] !== 'function'
+                    p.indexOf('set') || typeof target['get' + p.substr(3)] !== 'function'
                       ? p
                       : 'get' + p.substr(3)
                   ]()
                 : target[p] || 0;
-            linkedProps[p] =
-              curVal + _calculateChange(velocity, ease, duration, checkpoint);
+            linkedProps[p] = curVal + _calculateChange(velocity, ease, duration, checkpoint);
           }
         }
       }
@@ -696,8 +599,7 @@ _gsScope._gsDefine(
           isFunc = typeof target[p] === 'function';
           curVal = isFunc
             ? target[
-                p.indexOf('set') ||
-                typeof target['get' + p.substr(3)] !== 'function'
+                p.indexOf('set') || typeof target['get' + p.substr(3)] !== 'function'
                   ? p
                   : 'get' + p.substr(3)
               ]()
@@ -925,26 +827,17 @@ _gsScope._gsDefine(
           isFunc = typeof t[prop] === 'function',
           alt = isFunc ? this._altProp(prop) : prop,
           vp = this._firstVP;
-        this._firstVP = this._lookup[prop] = this._lookup[
-          alt
-        ] = vp = new VelocityProp(
+        this._firstVP = this._lookup[prop] = this._lookup[alt] = vp = new VelocityProp(
           alt !== prop && prop.indexOf('set') === 0 ? alt : prop,
           isFunc,
           vp
         );
-        vp.css =
-          this.elem &&
-          (this.target.style[vp.p] !== undefined || _transforms[vp.p]);
+        vp.css = this.elem && (this.target.style[vp.p] !== undefined || _transforms[vp.p]);
         if (vp.css && _transforms[vp.p] && !t._gsTransform) {
           TweenLite.set(t, { x: '+=0', overwrite: false }); //just forces CSSPlugin to create a _gsTransform for the element if it doesn't exist
         }
-        vp.type =
-          type || (vp.css && prop.indexOf('rotation') === 0) ? 'deg' : '';
-        vp.v1 = vp.v2 = vp.css
-          ? _getStyle(t, vp.p)
-          : isFunc
-          ? t[vp.p]()
-          : t[vp.p];
+        vp.type = type || (vp.css && prop.indexOf('rotation') === 0) ? 'deg' : '';
+        vp.v1 = vp.v2 = vp.css ? _getStyle(t, vp.p) : isFunc ? t[vp.p]() : t[vp.p];
       }
     };
 
@@ -979,11 +872,7 @@ _gsScope._gsDefine(
       if (!vp) {
         throw 'The velocity of ' + prop + ' is not being tracked.';
       }
-      val = vp.css
-        ? _getStyle(target, vp.p)
-        : vp.f
-        ? target[vp.p]()
-        : target[vp.p];
+      val = vp.css ? _getStyle(target, vp.p) : vp.f ? target[vp.p]() : target[vp.p];
       dif = val - vp.v2;
       if (vp.type === 'rad' || vp.type === 'deg') {
         //rotational values need special interpretation so that if, for example, they go from 179 to -178 degrees it is interpreted as a change of 3 instead of -357.
@@ -999,8 +888,7 @@ _gsScope._gsDefine(
     p._altProp = function(p) {
       //for getters/setters like getCustomProp() and setCustomProp() - we should accommodate both
       var pre = p.substr(0, 3),
-        alt =
-          (pre === 'get' ? 'set' : pre === 'set' ? 'get' : pre) + p.substr(3);
+        alt = (pre === 'get' ? 'set' : pre === 'set' ? 'get' : pre) + p.substr(3);
       return typeof this.target[alt] === 'function' ? alt : p;
     };
 
@@ -1009,13 +897,7 @@ _gsScope._gsDefine(
       if (typeof target === 'string') {
         target = TweenLite.selector(target);
       }
-      if (
-        target.length &&
-        target !== window &&
-        target[0] &&
-        target[0].style &&
-        !target.nodeType
-      ) {
+      if (target.length && target !== window && target[0] && target[0].style && !target.nodeType) {
         target = target[0];
       }
       while (vt) {
@@ -1064,11 +946,7 @@ _gsScope._gsDefine(
 
     VelocityTracker.isTracking = function(target, prop) {
       var vt = getByTarget(target);
-      return !vt
-        ? false
-        : !prop && vt._firstVP
-        ? true
-        : vt.isTrackingProp(prop);
+      return !vt ? false : !prop && vt._firstVP ? true : vt.isTrackingProp(prop);
     };
 
     return VelocityTracker;

@@ -14,14 +14,7 @@
 
 import { _gsScope } from 'gsap/TweenLite.js';
 
-var PhysicsProp = function(
-    target,
-    p,
-    velocity,
-    acceleration,
-    friction,
-    stepsPerTimeUnit
-  ) {
+var PhysicsProp = function(target, p, velocity, acceleration, friction, stepsPerTimeUnit) {
     this.p = p;
     this.f = typeof target[p] === 'function';
     this.start = this.value = !this.f
@@ -43,8 +36,7 @@ var PhysicsProp = function(
   },
   _random = Math.random(),
   _globals = _gsScope._gsDefine.globals,
-  _rootFramesTimeline =
-    _globals.com.greensock.core.Animation._rootFramesTimeline,
+  _rootFramesTimeline = _globals.com.greensock.core.Animation._rootFramesTimeline,
   PhysicsPropsPlugin = _gsScope._gsDefine.plugin({
     propName: 'physicsProps',
     version: '0.2.1',
@@ -155,9 +147,7 @@ var PhysicsProp = function(
         tt = time * time * 0.5;
         while (--i > -1) {
           curProp = this._props[i];
-          val =
-            curProp.start +
-            (curProp.velocity * time + curProp.acceleration * tt);
+          val = curProp.start + (curProp.velocity * time + curProp.acceleration * tt);
           if (curProp.m) {
             val = curProp.m(val, target);
           }

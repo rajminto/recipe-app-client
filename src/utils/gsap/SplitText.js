@@ -66,8 +66,7 @@ import { _gsScope, globals } from 'gsap/TweenLite.js';
     _isArrayLike = function(e) {
       return e.length &&
         e[0] &&
-        ((e[0].nodeType && e[0].style && !e.nodeType) ||
-          (e[0].length && e[0][0]))
+        ((e[0].nodeType && e[0].style && !e.nodeType) || (e[0].length && e[0][0]))
         ? true
         : false; //could be an array of jQuery objects too, so accommodate that.
     },
@@ -111,11 +110,7 @@ import { _gsScope, globals } from 'gsap/TweenLite.js';
     _emojiModStart = 0x1f3fb,
     _emojiModEnd = 0x1f3ff,
     _emojiPairCode = function(s) {
-      return (
-        ((s.charCodeAt(0) - _emojiStart) << 10) +
-        (s.charCodeAt(1) - _emojiLowStart) +
-        0x10000
-      );
+      return ((s.charCodeAt(0) - _emojiStart) << 10) + (s.charCodeAt(1) - _emojiLowStart) + 0x10000;
     },
     _isOldIE = _doc.all && !_doc.addEventListener,
     _divStart =
@@ -133,9 +128,7 @@ import { _gsScope, globals } from 'gsap/TweenLite.js';
           '<' +
           tag +
           _divStart +
-          (cssClass
-            ? " class='" + cssClass + (iterate ? num++ : '') + "'>"
-            : '>')
+          (cssClass ? " class='" + cssClass + (iterate ? num++ : '') + "'>" : '>')
         );
       };
     },
@@ -146,9 +139,7 @@ import { _gsScope, globals } from 'gsap/TweenLite.js';
       if (!element) {
         throw 'cannot split a null element.';
       }
-      this.elements = _isArrayLike(element)
-        ? _flattenArray(element)
-        : [element];
+      this.elements = _isArrayLike(element) ? _flattenArray(element) : [element];
       this.chars = [];
       this.words = [];
       this.lines = [];
@@ -159,11 +150,7 @@ import { _gsScope, globals } from 'gsap/TweenLite.js';
     _swapText = function(element, oldText, newText) {
       var type = element.nodeType;
       if (type === 1 || type === 9 || type === 11) {
-        for (
-          element = element.firstChild;
-          element;
-          element = element.nextSibling
-        ) {
+        for (element = element.firstChild; element; element = element.nextSibling) {
           _swapText(element, oldText, newText);
         }
       } else if (type === 3 || type === 4) {
@@ -207,9 +194,7 @@ import { _gsScope, globals } from 'gsap/TweenLite.js';
         } else {
           if (i && child.previousSibling.nodeType === 3) {
             child.previousSibling.nodeValue +=
-              child.nodeType === 3
-                ? child.nodeValue
-                : child.firstChild.nodeValue;
+              child.nodeType === 3 ? child.nodeValue : child.firstChild.nodeValue;
           } else if (child.nodeType !== 3) {
             e.insertBefore(child.firstChild, child);
           }
@@ -230,17 +215,13 @@ import { _gsScope, globals } from 'gsap/TweenLite.js';
         paddingLeft = _getStyle(element, 'paddingLeft', cs),
         lineOffsetY = -999,
         borderTopAndBottom =
-          _getStyle(element, 'borderBottomWidth', cs) +
-          _getStyle(element, 'borderTopWidth', cs),
+          _getStyle(element, 'borderBottomWidth', cs) + _getStyle(element, 'borderTopWidth', cs),
         borderLeftAndRight =
-          _getStyle(element, 'borderLeftWidth', cs) +
-          _getStyle(element, 'borderRightWidth', cs),
+          _getStyle(element, 'borderLeftWidth', cs) + _getStyle(element, 'borderRightWidth', cs),
         padTopAndBottom =
-          _getStyle(element, 'paddingTop', cs) +
-          _getStyle(element, 'paddingBottom', cs),
+          _getStyle(element, 'paddingTop', cs) + _getStyle(element, 'paddingBottom', cs),
         padLeftAndRight =
-          _getStyle(element, 'paddingLeft', cs) +
-          _getStyle(element, 'paddingRight', cs),
+          _getStyle(element, 'paddingLeft', cs) + _getStyle(element, 'paddingRight', cs),
         lineThreshold = _getStyle(element, 'fontSize') * 0.2,
         textAlign = _getStyle(element, 'textAlign', cs, true),
         charArray = [],
@@ -310,9 +291,7 @@ import { _gsScope, globals } from 'gsap/TweenLite.js';
                 (node._isSplit && isChild) ||
                 (!chars && isChild) ||
                 (words && isChild) ||
-                (!words &&
-                  node.parentNode.parentNode === element &&
-                  !node.parentNode._isSplit)
+                (!words && node.parentNode.parentNode === element && !node.parentNode._isSplit)
               ) {
                 curLine.push(node);
                 node._x -= paddingLeft;
@@ -322,8 +301,7 @@ import { _gsScope, globals } from 'gsap/TweenLite.js';
               }
               if (
                 node.nodeName === 'BR' &&
-                ((node.nextSibling && node.nextSibling.nodeName === 'BR') ||
-                  i === 0)
+                ((node.nextSibling && node.nextSibling.nodeName === 'BR') || i === 0)
               ) {
                 //two consecutive <br> tags signify a new [empty] line. Also, if the entire block of content STARTS with a <br>, add a line.
                 lines.push([]);
@@ -382,17 +360,13 @@ import { _gsScope, globals } from 'gsap/TweenLite.js';
               //if the last node inside a nested element is just a space (like T<span>nested </span>), remove it otherwise it'll get placed in the wrong order. Don't remove it right away, though, because we need to sense when words/characters are before a space like _isBeforeWordDelimiter(). Removing it now would make that a false negative.
               spaceNodesToRemove.push(node.nextSibling);
             }
-            node._next =
-              node.nextSibling && node.nextSibling._isFirst
-                ? null
-                : node.nextSibling;
+            node._next = node.nextSibling && node.nextSibling._isFirst ? null : node.nextSibling;
             node.parentNode.removeChild(node);
             nodes.splice(i--, 1);
             l--;
           } else if (!isChild) {
             offset =
-              !node.nextSibling &&
-              _isBeforeWordDelimiter(node.parentNode, element, wordDelimiter); //if this is the last letter in the word (and we're not breaking by lines and not positioning things absolutely), we need to add a space afterwards so that the characters don't just mash together
+              !node.nextSibling && _isBeforeWordDelimiter(node.parentNode, element, wordDelimiter); //if this is the last letter in the word (and we're not breaking by lines and not positioning things absolutely), we need to add a space afterwards so that the characters don't just mash together
             if (node.parentNode._parent) {
               node.parentNode._parent.appendChild(node);
             }
@@ -404,11 +378,7 @@ import { _gsScope, globals } from 'gsap/TweenLite.js';
             }
             charArray.push(node);
           }
-        } else if (
-          node.parentNode._isSplit &&
-          !node._isSplit &&
-          node.innerHTML !== ''
-        ) {
+        } else if (node.parentNode._isSplit && !node._isSplit && node.innerHTML !== '') {
           wordArray.push(node);
         } else if (chars && !node._isSplit) {
           if (tag === 'span') {
@@ -438,8 +408,7 @@ import { _gsScope, globals } from 'gsap/TweenLite.js';
         while (element.firstChild) {
           element.removeChild(element.firstChild);
         }
-        addWordSpaces =
-          wordDelimiter === ' ' && (!absolute || (!words && !chars));
+        addWordSpaces = wordDelimiter === ' ' && (!absolute || (!words && !chars));
         for (i = 0; i < lines.length; i++) {
           curLine = lines[i];
           lineNode = _doc.createElement(tag);
@@ -556,22 +525,13 @@ import { _gsScope, globals } from 'gsap/TweenLite.js';
       splitText = (text.charAt(0) === ' ' ? space : '') + wordStart();
       for (i = 0; i < l; i++) {
         character = text.charAt(i);
-        if (
-          specialChars &&
-          (testResult = specialChars(text.substr(i), vars.specialChars))
-        ) {
+        if (specialChars && (testResult = specialChars(text.substr(i), vars.specialChars))) {
           // look for any specialChars that were declared. Remember, they can be passed in like {specialChars:["मी", "पा", "है"]} or a function could be defined instead. Either way, the function should return the number of characters that should be grouped together for this "character".
           character = text.substr(i, testResult || 1);
           splitText +=
-            chars && character !== ' '
-              ? charStart() + character + '</' + tag + '>'
-              : character;
+            chars && character !== ' ' ? charStart() + character + '</' + tag + '>' : character;
           i += testResult - 1;
-        } else if (
-          character === wordDelimiter &&
-          text.charAt(i - 1) !== wordDelimiter &&
-          i
-        ) {
+        } else if (character === wordDelimiter && text.charAt(i - 1) !== wordDelimiter && i) {
           splitText += wordIsOpen ? wordEnd : '';
           wordIsOpen = false;
           while (text.charAt(i + 1) === wordDelimiter) {
@@ -586,13 +546,10 @@ import { _gsScope, globals } from 'gsap/TweenLite.js';
             wordIsOpen = true;
           }
         } else if (character === '{' && text.substr(i, 6) === '{{LT}}') {
-          splitText += chars
-            ? charStart() + '{{LT}}' + '</' + tag + '>'
-            : '{{LT}}';
+          splitText += chars ? charStart() + '{{LT}}' + '</' + tag + '>' : '{{LT}}';
           i += 5;
         } else if (
-          (character.charCodeAt(0) >= _emojiStart &&
-            character.charCodeAt(0) <= _emojiEnd) ||
+          (character.charCodeAt(0) >= _emojiStart && character.charCodeAt(0) <= _emojiEnd) ||
           (text.charCodeAt(i + 1) >= 0xfe00 && text.charCodeAt(i + 1) <= 0xfe0f)
         ) {
           //special emoji characters use 2 or 4 unicode characters that we must keep together.
@@ -613,9 +570,7 @@ import { _gsScope, globals } from 'gsap/TweenLite.js';
           i += j - 1;
         } else {
           splitText +=
-            chars && character !== ' '
-              ? charStart() + character + '</' + tag + '>'
-              : character;
+            chars && character !== ' ' ? charStart() + character + '</' + tag + '>' : character;
         }
       }
       element.outerHTML = splitText + (wordIsOpen ? wordEnd : '');
@@ -675,15 +630,7 @@ import { _gsScope, globals } from 'gsap/TweenLite.js';
       origHeight = e.clientHeight;
       origWidth = e.clientWidth;
       _split(e, vars, wordStart, charStart);
-      _setPositionsAfterSplit(
-        e,
-        vars,
-        this.chars,
-        this.words,
-        this.lines,
-        origWidth,
-        origHeight
-      );
+      _setPositionsAfterSplit(e, vars, this.chars, this.words, this.lines, origWidth, origHeight);
     }
     this.chars.reverse();
     this.words.reverse();

@@ -20,24 +20,16 @@ _gsScope._gsDefine(
   function() {
     var eases = {
         easeOut: new CustomEase('', 'M0,1,C0.7,1,0.6,0,1,0'),
-        easeInOut: new CustomEase(
-          '',
-          'M0,0,C0.104,0,0.242,1,0.444,1,0.644,1,0.608,0,1,0'
-        ),
+        easeInOut: new CustomEase('', 'M0,0,C0.104,0,0.242,1,0.444,1,0.644,1,0.608,0,1,0'),
         anticipate: new CustomEase(
           '',
           'M0,0,C0,0.222,0.024,0.386,0.06,0.402,0.181,0.455,0.647,0.646,0.7,0.67,0.9,0.76,1,0.846,1,1'
         ),
-        uniform: new CustomEase(
-          '',
-          'M0,0,C0,0.95,0.01,1,0.01,1,0.01,1,1,1,1,1,1,1,1,0.01,1,0'
-        )
+        uniform: new CustomEase('', 'M0,0,C0,0.95,0.01,1,0.01,1,0.01,1,1,1,1,1,1,1,1,0.01,1,0')
       },
       _linearEase = new CustomEase(), //linear
       _parseEase = function(ease, invertNonCustomEases) {
-        ease = ease.getRatio
-          ? ease
-          : Ease.map[ease] || new CustomEase('', ease);
+        ease = ease.getRatio ? ease : Ease.map[ease] || new CustomEase('', ease);
         return ease.rawBezier || !invertNonCustomEases
           ? ease
           : {
@@ -99,10 +91,7 @@ _gsScope._gsDefine(
           y = nextY;
           nextX = xEase.getRatio(inc * i);
           nextY = Math.random() * 2 - 1;
-          angle = Math.atan2(
-            nextY - path[path.length - 3],
-            nextX - path[path.length - 4]
-          );
+          angle = Math.atan2(nextY - path[path.length - 3], nextX - path[path.length - 4]);
           handleX = Math.cos(angle) * inc;
           handleY = Math.sin(angle) * inc;
           path.push(x - handleX, y - handleY, x, y, x + handleX, y + handleY);
@@ -116,14 +105,7 @@ _gsScope._gsDefine(
           easedX = xEase.getRatio(x);
           path.push(xEase.getRatio(x - inc / 2), y, easedX, y);
         }
-        path.push(
-          xEase.getRatio(x + inc / 4),
-          y,
-          xEase.getRatio(x + inc / 4),
-          0,
-          1,
-          0
-        );
+        path.push(xEase.getRatio(x + inc / 4), y, xEase.getRatio(x + inc / 4), 0, 1, 0);
       }
       i = path.length;
       while (--i > -1) {

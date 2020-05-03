@@ -130,9 +130,7 @@ const AddRecipe = () => {
   };
 
   const deleteInstruction = index => {
-    const newInstructions = instructions.filter(
-      (instruction, i) => i !== index
-    );
+    const newInstructions = instructions.filter((instruction, i) => i !== index);
     setInstructions(newInstructions);
   };
 
@@ -142,43 +140,37 @@ const AddRecipe = () => {
     <Card className={createRecipeFormContainer}>
       <h1>Create A Recipe</h1>
       <form className={createRecipeForm} onSubmit={handleFormSubmit}>
-        <label htmlFor="name">Recipe Name:</label>
+        <label htmlFor='name'>Recipe Name:</label>
         <input
-          id="name"
-          type="text"
-          name="name"
+          id='name'
+          type='text'
+          name='name'
           onChange={handleInputChange}
           value={name}
           required
         />
         <label>Description:</label>
         <input
-          type="text"
-          name="description"
+          type='text'
+          name='description'
           onChange={handleInputChange}
           value={description}
           required
         />
         <label>Upload an Image Here:</label>
-        <input
-          type="text"
-          name="img_url"
-          onChange={handleInputChange}
-          value={img_url}
-          required
-        />
+        <input type='text' name='img_url' onChange={handleInputChange} value={img_url} required />
         <label>Prep Time:</label>
         <input
-          type="text"
-          name="prep_time"
+          type='text'
+          name='prep_time'
           onChange={handleInputChange}
           value={prep_time}
           required
         />
         <label>Cook Time:</label>
         <input
-          type="text"
-          name="cook_time"
+          type='text'
+          name='cook_time'
           onChange={handleInputChange}
           value={cook_time}
           required
@@ -187,9 +179,9 @@ const AddRecipe = () => {
           <label>Private Recipe?</label>
           <label className={styles.switch}>
             <input
-              id="isPrivate"
-              type="checkbox"
-              name="isPrivate"
+              id='isPrivate'
+              type='checkbox'
+              name='isPrivate'
               onChange={handleIsPrivate}
               checked={isRecipePrivate}
               value={isRecipePrivate}
@@ -203,23 +195,20 @@ const AddRecipe = () => {
             <label>{i + 1}. </label>
             <div className={ingredientInstructionInput}>
               <input
-                type="text"
+                type='text'
                 value={ingredients[i].name}
                 onChange={e => handleIngredientChange(e.target.value, i)}
                 required
               />
-              <div
-                className={deleteButtonWrapper}
-                onClick={() => deleteIngredient(i)}
-              >
-                <ToggleButton variant="delete" />
+              <div className={deleteButtonWrapper} onClick={() => deleteIngredient(i)}>
+                <ToggleButton variant='delete' />
               </div>
             </div>
           </div>
         ))}
         <div className={addNewButtonWrapper} onClick={addNewIngredient}>
           <label>Add New</label>
-          <ToggleButton variant="plus" />
+          <ToggleButton variant='plus' />
         </div>
         <h1>Add Instructions</h1>
         {instructions.map((instruction, i) => (
@@ -227,25 +216,22 @@ const AddRecipe = () => {
             <label>{i + 1}. </label>
             <div className={ingredientInstructionInput}>
               <input
-                type="text"
+                type='text'
                 value={instructions[i].description}
                 onChange={e => handleInstructionChange(e.target.value, i)}
                 required
               />
-              <div
-                className={deleteButtonWrapper}
-                onClick={() => deleteInstruction(i)}
-              >
-                <ToggleButton variant="delete" />
+              <div className={deleteButtonWrapper} onClick={() => deleteInstruction(i)}>
+                <ToggleButton variant='delete' />
               </div>
             </div>
           </div>
         ))}
         <div className={addNewButtonWrapper} onClick={addNewInstruction}>
           <label>Add New</label>
-          <ToggleButton variant="plus" />
+          <ToggleButton variant='plus' />
         </div>
-        <Button text="Submit" />
+        <Button text='Submit' />
       </form>
     </Card>
   );

@@ -84,11 +84,7 @@ var _trimExp = /(^\s+|\s+$)/g,
     //called when the tween renders for the first time. This is where initial values should be recorded and any setup routines should run.
     init: function(target, value, tween, index) {
       this._prop =
-        'innerHTML' in target
-          ? 'innerHTML'
-          : 'textContent' in target
-          ? 'textContent'
-          : 0; // SVG text in IE doesn't have innerHTML, but it does have textContent.
+        'innerHTML' in target ? 'innerHTML' : 'textContent' in target ? 'textContent' : 0; // SVG text in IE doesn't have innerHTML, but it does have textContent.
       if (!this._prop) {
         return false;
       }
@@ -117,11 +113,7 @@ var _trimExp = /(^\s+|\s+$)/g,
       if (text === '{original}' || text === true || text == null) {
         text = this._original.join(delim);
       }
-      this._text = _emojiSafeSplit(
-        (text || '').replace(_spacesExp, ' '),
-        delim,
-        trim
-      );
+      this._text = _emojiSafeSplit((text || '').replace(_spacesExp, ' '), delim, trim);
       this._hasClass = false;
       if (typeof value.newClass === 'string') {
         this._newClass = value.newClass;
@@ -132,19 +124,13 @@ var _trimExp = /(^\s+|\s+$)/g,
         this._hasClass = true;
       }
       splitByChars = delim === '';
-      this._textHasEmoji =
-        _emojiExp.test(this._text.join(delim)) && splitByChars;
+      this._textHasEmoji = _emojiExp.test(this._text.join(delim)) && splitByChars;
       this._charsHaveEmoji = !!value.chars && _emojiExp.test(value.chars);
-      this._length = splitByChars
-        ? this._original.length
-        : this._original.join(delim).length;
+      this._length = splitByChars ? this._original.length : this._original.join(delim).length;
       this._lengthDif =
-        (splitByChars ? this._text.length : this._text.join(delim).length) -
-        this._length;
+        (splitByChars ? this._text.length : this._text.join(delim).length) - this._length;
       this._fillChar =
-        value.fillChar || (value.chars && value.chars.indexOf(' ') !== -1)
-          ? '&nbsp;'
-          : '';
+        value.fillChar || (value.chars && value.chars.indexOf(' ') !== -1) ? '&nbsp;' : '';
       this._charSet = charset =
         _charsLookup[value.chars || 'upperCase'] || new CharSet(value.chars);
       this._speed = 0.016 / (value.speed || 1);
@@ -189,8 +175,7 @@ var _trimExp = /(^\s+|\s+$)/g,
             : time === this._tween._duration
             ? 1
             : this._tween._ease.getRatio(
-                (time - this._revealDelay) /
-                  (this._tween._duration - this._revealDelay)
+                (time - this._revealDelay) / (this._tween._duration - this._revealDelay)
               );
       }
       if (ratio < 0) {
@@ -214,10 +199,7 @@ var _trimExp = /(^\s+|\s+$)/g,
       }
 
       if (this._rightToLeft) {
-        if (
-          ratio === 1 &&
-          (this._tween.vars.runBackwards || this._tween.data === 'isFromStart')
-        ) {
+        if (ratio === 1 && (this._tween.vars.runBackwards || this._tween.data === 'isFromStart')) {
           //special case for from() tweens
           startText = '';
           endText = this._original.join(delim);
@@ -228,8 +210,7 @@ var _trimExp = /(^\s+|\s+$)/g,
               .slice(
                 0,
                 (this._length +
-                  (this._tweenLength ? 1 - ratio * ratio * ratio : 1) *
-                    this._lengthDif -
+                  (this._tweenLength ? 1 - ratio * ratio * ratio : 1) * this._lengthDif -
                   (this._textHasEmoji ? _emojiSafeSplit(str) : str).length +
                   0.5) |
                   0
@@ -239,8 +220,7 @@ var _trimExp = /(^\s+|\s+$)/g,
             startText = endText.substr(
               0,
               (this._length +
-                (this._tweenLength ? 1 - ratio * ratio * ratio : 1) *
-                  this._lengthDif -
+                (this._tweenLength ? 1 - ratio * ratio * ratio : 1) * this._lengthDif -
                 (this._textHasEmoji ? _emojiSafeSplit(str) : str).length +
                 0.5) |
                 0
@@ -250,16 +230,13 @@ var _trimExp = /(^\s+|\s+$)/g,
         }
       } else {
         startText = this._text.slice(0, i).join(delim);
-        i2 = (this._textHasEmoji ? _emojiSafeSplit(startText) : startText)
-          .length;
+        i2 = (this._textHasEmoji ? _emojiSafeSplit(startText) : startText).length;
         if (this._charsHaveEmoji) {
           endText = _emojiSafeSplit(endText)
             .slice(
               i2,
               (this._length +
-                (this._tweenLength
-                  ? 1 - (ratio = 1 - ratio) * ratio * ratio * ratio
-                  : 1) *
+                (this._tweenLength ? 1 - (ratio = 1 - ratio) * ratio * ratio * ratio : 1) *
                   this._lengthDif +
                 0.5) |
                 0
@@ -269,9 +246,7 @@ var _trimExp = /(^\s+|\s+$)/g,
           endText = endText.substr(
             i2,
             (this._length +
-              (this._tweenLength
-                ? 1 - (ratio = 1 - ratio) * ratio * ratio * ratio
-                : 1) *
+              (this._tweenLength ? 1 - (ratio = 1 - ratio) * ratio * ratio * ratio : 1) *
                 this._lengthDif -
               i2 +
               0.5) |

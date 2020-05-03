@@ -130,43 +130,30 @@ _gsScope._gsDefine(
           }
         }
       },
-      _timeToProgress = function(
-        time,
-        animation,
-        defaultValue,
-        relativeProgress
-      ) {
+      _timeToProgress = function(time, animation, defaultValue, relativeProgress) {
         var add, i, a;
         if (typeof time === 'string') {
           if (time.charAt(1) === '=') {
-            add =
-              parseInt(time.charAt(0) + '1', 10) * parseFloat(time.substr(2));
+            add = parseInt(time.charAt(0) + '1', 10) * parseFloat(time.substr(2));
             if (add < 0 && relativeProgress === 0) {
               //if something like inTime:"-=2", we measure it from the END, not the beginning
               relativeProgress = 100;
             }
             time = (relativeProgress / 100) * animation.duration() + add;
-          } else if (
-            isNaN(time) &&
-            animation.getLabelTime &&
-            animation.getLabelTime(time) !== -1
-          ) {
+          } else if (isNaN(time) && animation.getLabelTime && animation.getLabelTime(time) !== -1) {
             time = animation.getLabelTime(time);
           } else if (animation === _recordedRoot) {
             //perhaps they defined an id of an animation, like "myAnimation+=2"
             i = time.indexOf('=');
             if (i > 0) {
-              add =
-                parseInt(time.charAt(i - 1) + '1', 10) *
-                parseFloat(time.substr(i + 1));
+              add = parseInt(time.charAt(i - 1) + '1', 10) * parseFloat(time.substr(i + 1));
               time = time.substr(0, i - 1);
             } else {
               add = 0;
             }
             a = _getAnimationById(time);
             if (a) {
-              time =
-                _getGlobalTime(a, (defaultValue / 100) * a.duration()) + add;
+              time = _getGlobalTime(a, (defaultValue / 100) * a.duration()) + add;
             }
           }
         }
@@ -199,10 +186,7 @@ _gsScope._gsDefine(
           'div',
           element || _docElement.getElementsByTagName('body')[0] || _docElement
         );
-        root.setAttribute(
-          'class',
-          'gs-dev-tools' + (minimal ? ' minimal' : '')
-        );
+        root.setAttribute('class', 'gs-dev-tools' + (minimal ? ' minimal' : ''));
         root.innerHTML =
           '<div class=gs-hit-area></div><div class=gs-top><div class=timeline><div class=timeline-track></div><div class=progress-bar></div><div class=seek-bar></div><svg class=in-point viewBox="0 0 15 26"xmlns=http://www.w3.org/2000/svg><polygon class=in-point-shape points=".5 .5 14.5 .5 14.5 25.5 .5 17.5"/><polyline class=grab points="5.5 4 5.5 15"/><polyline class=grab points="9.5 4 9.5 17"/></svg> <svg class=out-point viewBox="0 0 15 26"xmlns=http://www.w3.org/2000/svg><polygon class=out-point-shape points=".5 .5 14.5 .5 14.5 17.5 .5 25.5"/><polyline class=grab points="5.5 4 5.5 17"/><polyline class=grab points="9.5 4 9.5 15"/></svg><div class=playhead></div></div></div><div class=gs-bottom><div class=select-animation-container><label class=select-animation><select class=animation-list><option>Global Timeline<option>myTimeline</select><nobr><span class="display animation-label">Global Timeline</span> <svg class=select-arrow viewBox="0 0 12.05 6.73"xmlns=http://www.w3.org/2000/svg><polyline class=select-arrow-shape points="0.35 0.35 6.03 6.03 11.7 0.35"/></svg></nobr></label></div><svg class=rewind viewBox="0 0 12 15.38"xmlns=http://www.w3.org/2000/svg><path d=M0,.38H2v15H0Zm2,7,10,7.36V0Z class="gs-btn-white rewind-path"/></svg> <svg class=play-pause viewBox="0 0 20.97 25.67"xmlns=http://www.w3.org/2000/svg><g class=play><path d="M8,4.88 C8,10.18 8,15.48 8,20.79 5.33,22.41 2.66,24.04 0,25.67 0,17.11 0,8.55 0,0 2.66,1.62 5.33,3.25 8,4.88"class="gs-btn-white play-1"style=stroke:#fff;stroke-width:.6px /><path d="M14.485,8.855 C16.64,10.18 18.8,11.5 20.97,12.83 16.64,15.48 12.32,18.13 8,20.79 8,15.48 8,10.18 8,4.88 10.16,6.2 12.32,7.53 14.48,8.85"class="gs-btn-white play-2"style=stroke:#fff;stroke-width:.6px /></g></svg> <svg class=loop viewBox="0 0 29 25.38"xmlns=http://www.w3.org/2000/svg><path d=M27.44,5.44,20.19,0V3.06H9.06A9.31,9.31,0,0,0,0,12.41,9.74,9.74,0,0,0,.69,16l3.06-2.23a6,6,0,0,1-.12-1.22,5.49,5.49,0,0,1,5.43-5.5H20.19v3.81Z class=loop-path /><path d=M25.25,11.54a5.18,5.18,0,0,1,.12,1.12,5.41,5.41,0,0,1-5.43,5.41H9.19V14.5L1.94,19.94l7.25,5.44V22.06H19.94A9.2,9.2,0,0,0,29,12.84a9.42,9.42,0,0,0-.68-3.53Z class=loop-path /></svg> <svg class=ease viewBox="0 0 25.67 25.67"xmlns=http://www.w3.org/2000/svg><path d=M.48,25.12c1.74-3.57,4.28-12.6,8.8-10.7s4.75,1.43,6.5-1.11S19.89,1.19,25.2.55 class=ease-path /><path d=M24.67,1V24.67H1V1H24.67m1-1H0V25.67H25.67V0Z class=ease-border /></svg><label class=time-scale><select><option value=10>10x<option value=5>5x<option value=2>2x<option value=1 selected>1x<option value=0.5>0.5x<option value=0.25>0.25x<option value=0.1>0.1x</select><span class="display time-scale-label">1x</span></label><div class=gs-bottom-right><div class=time-container><span class=time>0.00</span> / <span class=duration>0.00</span></div><a href="https://greensock.com/docs/Utilities/GSDevTools?source=GSDevTools"target=_blank title=Docs><svg class=logo viewBox="0 0 100 100"xmlns=http://www.w3.org/2000/svg><path d="M60 15.4c-.3-.4-.5-.6-.5-.7.1-.6.2-1 .2-1.7v-.4c.6.6 1.3 1.3 1.8 1.7.2.2.5.3.8.3.2 0 .3 0 .5.1h1.6c.8 0 1.6.1 2 0 .1 0 .2 0 .3-.1.6-.3 1.4-1 2.1-1.6 0 .6.1 1.2.1 1.7v1.5c0 .3 0 .5.1.7-.1.1-.2.1-.4.2-.7.4-1.7 1-2.3.9-.5-.1-1.5-.3-2.6-.7-1.2-.3-2.4-.8-3.2-1.2 0 0-.1 0-.1-.1s-.2-.4-.4-.6zm24.6 21.9c-.5-1.7-1.9-2-4.2-.7.9-1.5 2.1-1.5 2.3-2.1.9-2.5-.6-4.6-1.2-5.3.7-1.8 1.4-4.5-1-6.8-1-1-2.4-1.2-3.6-1.1 1.8 1.7 3.4 4.4 2.5 7.2-.1.3-.9.7-1.7 1 0 0 .4 2-.3 3.5-.3.6-.8 1.5-1.3 2.6 1 .9 1.6 1 3 1.3-.9.1-1.2.4-1.2.5-.7 3 1 3.4 1.4 4.8 0 .1 0 .2.1.3v.4c-.3.3-1.4.5-2.5.5s-1.8 1-1.8 1c-.2.1-.3.3-.4.4v1c0 .1 0 .4.1.6.1.5.3 1.3.4 1.8.9.6 1.4.9 2.2 1.1.5.1 1 .2 1.5.1.3-.1.7-.3 1-.7 1.5-1.7 1.9-3.2 2.2-4.1 0-.1 0-.2.1-.2 0 .1.1.1.1.2 0 0 .1-.1.1-.2l.1-.1c1.3-1.6 2.9-4.5 2.1-7zM74.3 49.9c-.1-.3-.1-.7-.2-1.1v-.2c-.1-.2-.1-.4-.2-.6 0-.1-.1-.3-.1-.5s-.1-.5-.1-.7v-.1c0-.2-.1-.5-.1-.7-.1-.3-.1-.7-.2-1.1v-.1c0-.2 0-.3-.1-.5v-.9c0-.1 0-.2.1-.3V43h-.3c-1.1.1-3.8.4-6.7.2-1.2-.1-2.4-.3-3.6-.6-1-.3-1.8-.5-2.3-.7-1.2-.4-1.6-.6-1.8-.7 0 .2-.1.4-.1.7 0 .3-.1.5-.1.8-.1.2-.1.4-.2.6l.1.1c.5.5 1.5 1.3 1.5 2.1v.2c-.1.4-.4.5-.8.9-.1.1-.6.7-1.1 1.1l-.6.6c-.1 0-.1.1-.2.1-.1.1-.3.2-.4.3-.2.1-.7.5-.8.6-.1.1-.2.1-.3.1-2.8 8.8-2.2 13.5-1.5 16.1.1.5.3 1 .4 1.3-.4.5-.8 1-1.2 1.4-1.2 1.5-2 2.6-2.6 4.2 0 .1 0 .1-.1.2 0 .1 0 .2-.1.2-.2.5-.3 1-.4 1.5-.6 2.3-.8 4.5-.9 6.6-.1 2.4-.2 4.6-.5 6.9.7.3 3.1.9 4.7.6.2-.1 0-3.9.6-5.7l.6-1.5c.4-.9.9-1.9 1.3-3.1.3-.7.5-1.5.7-2.4.1-.5.2-1 .3-1.6V74v-.1c.1-.6.1-1.3.1-2 0-.2-.7.3-1.1.9.3-1.8 1.3-2.1 2-3.2.3-.5.6-1.1.6-2 2.5-1.7 4-3.7 5-5.7.2-.4.4-.9.6-1.4.3-.8.5-1.6.7-2.4.3-1.4.8-3.2 1.2-4.8v-.1c.4-1.2.8-2.2 1.2-2.6-.2.9-.4 1.7-.6 2.5v.2c-.6 3.5-.7 6.2-2 9.2 1 2.6 1.9 3.9 2 7.6-2 0-3.2 1.6-3.7 3.2 1.2.3 3.9.7 8.3.1h.3c.1-.5.3-1.1.5-1.5.3-.8.5-1.5.6-2.2.2-1.3.1-2.4 0-3.2 3.9-3.7 2.6-11 1.6-16.6zm.3-15.1c.1-.3.2-.6.4-.8.2-.3.3-.7.5-1 .1-.3.3-.6.4-.9.5-1.5.4-2.8.3-3.5-.1 0-.1-.1-.2-.1-.5-.2-.9-.4-1.4-.6-.1 0-.2-.1-.3-.1-3.8-1.2-7.9-.9-11.9.1-1 .2-1.9.5-2.9.1-2.3-.8-3.9-1.9-4.6-2.8l-.2-.2c-.1.2-.2.4-.4.6.2 2.3-.5 3.9-1.4 5.1.9 1.2 2.6 2.8 3.6 3.4 1.1.6 1.7.7 3.4.4-.6.7-1.1 1-1.9 1.4.1.7.2 2 .5 3.4.3.3 1.2.8 2.3 1.3.5.3 1.1.5 1.7.7.8.3 1.7.6 2.4.8.1 0 .2.1.3.1.5.1 1.1.2 1.8.2h.9c2.1 0 4.5-.2 5.4-.3h.1c-.1-2.7.2-4.6.7-6.2.2-.3.4-.7.5-1.1zm-23.2 9.3v.2c-.3 1.7.5 2.4 1.9 3.4.6.5 0 .5.5.8.3.2.7.3 1 .3.3 0 .5 0 .8-.1.2-.1.4-.3.6-.5.1-.1.3-.2.5-.4.3-.2.6-.5.7-.6.1-.1.2-.1.3-.2.2-.2.5-.5.6-.7.2-.2.4-.5.5-.7 0-.1.1-.1.1-.1v-.1c.1-.4-.3-.8-.8-1.3-.2-.2-.4-.3-.5-.5-.3-.3-.6-.5-1-.7-.9-.5-1.9-.7-3-.7l-.3-.3c-2.2-2.5-3.2-4.8-3.9-6.5-.9-2.1-1.9-3.3-3.9-4.9 1 .4 1.8.8 2.3 1.1.5.4 1.3.4 1.9.2.2-.1.5-.2.7-.3.2-.1.4-.2.6-.4 1.6-1.3 2.5-3.8 2.6-5.6v-.1c.2-.3.6-1.1.8-1.4l.1.1c.1.1.3.2.6.5.1 0 .1.1.2.1.1.1.2.1.2.2.8.6 1.9 1.3 2.6 1.7 1.4.7 2.3.7 5.3-.1 2.2-.6 4.8-.8 6.8-.8 1.4 0 2.7.3 4 .7.2.1.4.1.5.2.3.1.6.2.9.4 0 0 .1 0 .1.1.8.4 2.1 1.2 2.5-.3.1-2-.6-3.9-1.6-5.3 0 0-.1 0-.1-.1-.1-.1-.2-.2-.4-.3-.1-.1-.2-.1-.3-.2-.1-.1-.2-.2-.4-.2-.6-.4-1.2-.8-1.6-.9-.1-.1-.3-.1-.4-.2h-.1-.1c-.1 0-.3-.1-.4-.1-.1 0-.1 0-.2-.1h-.1l-.2-.4c-.2-.1-.4-.2-.5-.2h-.6c-.3 0-.5.1-.7.1-.7.1-1.2.3-1.7.4-.2 0-.3.1-.5.1-.5.1-1 .2-1.6.2-.4 0-.9-.1-1.5-.2-.4-.1-.8-.2-1.1-.3-.2-.1-.4-.1-.6-.2-.6-.2-1.1-.3-1.7-.4h-.2-1.8c-.3 0-.6.1-1 .1H57.9c-.8 0-1.5 0-2.3-.1-.2 0-.5-.1-.7-.1-.5-.1-.9-.2-1.3-.4-.2-.1-.3-.1-.4-.2-.1 0-.2 0-.2-.1-.3-.1-.6-.1-.9-.1H51h-.1c-.4 0-.9.1-1.4.2-1.1.2-2.1.6-3 1.3-.3.2-.6.5-.8.8-.1.1-.2.2-.2.3-.4.6-.8 1.2-.9 2 0 .2-.1.4-.1.6 0 .2 1.7.7 2.3 2.8-.8-1.2-2.3-2.5-4.1-1.4-1.5 1-1.1 3.1-2.4 5.4-.3.5-.6.9-1 1.4-.8 1-.7 2.1.2 4.4 1.4 3.4 7.6 5.3 11.5 8.3l.4.4zm8.7-36.3c0 .6.1 1 .2 1.6v.1c0 .3.1.6.1.9.1 1.2.4 2 1 2.9 0 .1.1.1.1.2.3.2.5.3.8.4 1.1.2 3.1.3 4.2 0 .2-.1.5-.3.7-.5.4-.4.7-1.1.9-1.7.1-.7.3-1.3.4-1.8 0-.2.1-.4.1-.5v-.1c0-.2 0-.3.1-.5.2-.7.2-2.4.3-2.8.1-.7 0-1.8-.1-2.5 0-.2-.1-.4-.1-.5v-.1c-.2-.5-1.4-1.4-4.3-1.4-3.1 0-4 1-4.1 1.5v.1c0 .1 0 .3-.1.5-.1.4-.2 1.4-.2 1.9v2.3zm-6 88.6c0-.1-.1-.2-.1-.3-.7-1.5-1.1-3.5-1.3-4.6.4.1.7.6.8.3.2-.5-.4-1.5-.5-2.2v-.1c-.5-.5-4-.5-3.7-.3-.4.8-1 .6-1.3 2.1-.1.7.8.1 1.7.1-1.4.9-3 2.1-3.4 3.2-.1.1-.1.2-.1.3 0 .2-.1.4-.1.5-.1 1.2.5 1.6 2 2.4H48.4c1.4.3 3 .3 4.3.3 1.2-.2 1.6-.7 1.6-1.4-.2-.1-.2-.2-.2-.3z"style=fill:#efefef /><path d="M56.1 36.5c.3 1.4.5 2.4.8 4.2h-.2c-.1.5-.1.9-.1 1.3-1-.4-2.2-.5-2.6-.5-3.7-4.4-2.9-6.1-4.4-8.3.4-.2 1-.4 1.5-.8 1.6 1.9 3.3 3 5 4.1zm-1.7 13.2s-1.4 0-2.3-1c0 0-.1-.5.1-.7 0 0-1.2-1-1.5-1.7-.2-.5-.3-1.1-.2-1.6-4.4-3.7-10.9-4.2-12.9-9.1-.5-1.2-1.3-2.9-.9-3.9-.3.1-.5.2-.8.3-2.9.9-11.7 5.3-17.9 8.8 1.6 1.7 2.6 4.3 3.2 7.2l.3 1.5c.1.5.1 1 .2 1.5.1 1.4.4 2.7.8 3.9.2.8.6 1.5.9 2.2.6 1 1.2 1.9 2.1 2.6.6.5 1.2.9 1.9 1.3 2.1 1.1 5 1.6 8.6 1.5H37.9c.5 0 1 .1 1.5.1h.1c.4.1.9.1 1.3.2h.2c.4.1.9.2 1.3.4h.1c.4.1.8.3 1.1.5h.1c.4.2.7.4 1.1.6h.1c.7.4 1.3.9 1.9 1.5l.1.1c.6.5 1.1 1.1 1.5 1.8 0 .1.1.1.1.2s.1.1.1.2c.4.6 1.2 1.1 1.9 1.3.7-.9 1.5-1.8 2.2-2.8-1.6-6 0-11.7 1.8-16.9zm-26-15.9c5-2.4 9-4.1 9.9-4.5.3-.6.6-1.4.9-2.6.1-.3.2-.5.3-.8 1-2.7 2.7-2.8 3.5-3v-.2c.1-1.1.5-2 1-2.8-8.8 2.5-18 5.5-28 11.7-.1.1-.2.2-.4.2C11.3 34.5 3 40.3 1.3 51c2.4-2.7 6-5.6 10.5-8.5.1-.1.3-.2.5-.3.2-.1.5-.3.7-.4 1.2-.7 2.4-1.4 3.6-2.2 2.2-1.2 4.5-2.4 6.7-3.5 1.8-.8 3.5-1.6 5.1-2.3zm54.9 61.3l-.3-.3c-.8-.6-4.1-1.2-5.5-2.3-.4-.3-1.1-.7-1.7-1.1-1.6-.9-3.5-1.8-3.5-2.1v-.1c-.2-1.7-.2-7 .1-8.8.3-1.8.7-4.4.8-5.1.1-.6.5-1.2.1-1.2h-.4c-.2 0-.4.1-.8.1-1.5.3-4.3.6-6.6.4-.9-.1-1.6-.2-2-.3-.5-.1-.7-.2-.9-.3H62.3c-.4.5 0 2.7.6 4.8.3 1.1.8 2 1.2 3 .3.8.6 1.8.8 3.1 0 .2.1.4.1.7.2 2.8.3 3.6-.2 4.9-.1.3-.3.6-.4 1-.4.9-.7 1.7-.6 2.3 0 .2.1.4.1.5.2.4.6.7 1.2.8.2 0 .3.1.5.1.3 0 .6.1.9.1 3.4 0 5.2 0 8.6.4 2.5.4 3.9.6 5.1.5.4 0 .9-.1 1.4-.1 1.2-.2 1.8-.5 1.9-.9-.1.2-.1.1-.2-.1zM60.2 16.4zm-.5 1.7zm3.8.5c.1 0 .3.1.5.1.4.1.7.2 1.2.3.3.1.6.1.9.1h1.3c.3-.1.7-.1 1-.2.7-.2 1.5-.4 2.7-.6h.3c.3 0 .6.1.9.3.1.1.2.1.4.2.3.2.8.2 1.2.4h.1c.1 0 .1.1.2.1.6.3 1.3.7 1.9 1.1l.3.3c.9-.1 1.6-.2 2.1-.2h.1c-.2-.4-.3-1.3-1.8-.6-.6-.7-.8-1.3-2.1-.9-.1-.2-.2-.3-.3-.4l-.1-.1c-.1-.1-.2-.3-.3-.4 0-.1-.1-.1-.1-.2-.2-.3-.5-.5-.9-.7-.7-.4-1.5-.6-2.3-.5-.2 0-.4.1-.6.2-.1 0-.2.1-.2.1-.1 0-.2.1-.3.2-.5.3-1.3.8-2.1 1-.1 0-.1 0-.2.1-.2 0-.4.1-.5.1H66.5h-.1c-.4-.1-1.1-.2-2-.5-.1 0-.2-.1-.3-.1-.9-.2-1.8-.5-2.7-.8-.3-.1-.7-.2-1-.3-.1 0-.1 0-.2-.1h-.1s-.1 0-.1-.1c-.3-.3-.7-.6-1.3-.8-.5-.2-1.2-.4-2.1-.5-.2 0-.5 0-.7.1-.4.2-.8.6-1.2.9.1.1.3.3.4.5.1.2.2.4.3.7l-.6-.6c-.5-.4-1.1-.8-1.7-.9-.8-.2-1.4.4-2.3.9 1 0 1.8.1 2.5.4.1 0 .1 0 .2.1h.1c.1 0 .2.1.3.1.9.4 1.8.6 2.7.6h1.3c.5 0 .8-.1 1.1-.1.1 0 .4 0 .7-.1h2.2c.4.4.9.6 1.6.8z"style=fill:#88ce02 /><path d="M100 51.8c0-19.5-12.5-36.1-30-42.1.1-1.2.2-2.4.3-3.1.1-1.5.2-3.9-.5-4.9-1.6-2.3-9.1-2.1-10.5-.1-.4.6-.7 3.6-.6 5.9-1.1-.1-2.2-.1-3.3-.1-16.5 0-30.9 9-38.6 22.3-2.4 1.4-4.7 2.8-6.1 4C5.4 38 2.2 43.2 1 47c-1.6 4.7-1.1 7.6.4 5.8 1.2-1.5 6.6-5.9 10.1-8.2-.4 2.3-.6 4.8-.6 7.2 0 21 14.5 38.5 34 43.3-.1 1.1.1 2 .7 2.6.9.8 3.2 2 6.4 1.6 2.9-.3 3.5-.5 3.2-2.9h.2c2.7 0 5.3-.2 7.8-.7.1.1.2.2.4.3 1.5 1 7.1.8 9.6.7s6.2.9 8.6.5c2.9-.5 3.4-2.3 1.6-3.2-1.5-.8-3.8-1.3-6.7-3.1C90.6 83.4 100 68.7 100 51.8zM60.1 5.5c0-.5.1-1.5.2-2.1 0-.2 0-.4.1-.5v-.1c.1-.5 1-1.5 4.1-1.5 2.9 0 4.2.9 4.3 1.4v.1c0 .1 0 .3.1.5.1.8.2 1.9.1 2.7 0 .5-.1 2.1-.2 2.9 0 .1 0 .3-.1.5v.1c0 .2-.1.3-.1.5-.1.5-.2 1.1-.4 1.8-.1.6-.5 1.2-.9 1.7-.2.3-.5.5-.7.5-1.1.3-3.1.3-4.2 0-.3-.1-.5-.2-.8-.4 0-.1-.1-.1-.1-.2-.6-.9-.9-1.7-1-2.9 0-.4-.1-.6-.1-.9v-.1c-.1-.6-.2-1-.2-1.6v-.3c-.1-1.3-.1-2.1-.1-2.1zm-.4 7.5v-.4c.6.6 1.3 1.3 1.8 1.7.2.2.5.3.8.3.2 0 .3 0 .5.1h1.6c.8 0 1.6.1 2 0 .1 0 .2 0 .3-.1.6-.3 1.4-1 2.1-1.6 0 .6.1 1.2.1 1.7v1.5c0 .3 0 .5.1.7-.1.1-.2.1-.4.2-.7.4-1.7 1-2.3.9-.5-.1-1.5-.3-2.6-.7-1.2-.3-2.4-.8-3.2-1.2 0 0-.1 0-.1-.1-.2-.3-.4-.5-.6-.7-.3-.4-.5-.6-.5-.7.3-.4.4-.9.4-1.6zm.5 3.4zm-7.3-.3c.6.1 1.2.5 1.7.9.2.2.5.4.6.6-.1-.2-.2-.5-.3-.7-.1-.2-.3-.4-.4-.5.4-.3.8-.7 1.2-.9.2-.1.4-.1.7-.1.9.1 1.6.2 2.1.5.6.2 1 .5 1.3.8 0 0 .1 0 .1.1h.1c.1 0 .1 0 .2.1.3.1.6.2 1 .3.9.3 1.9.6 2.7.8.1 0 .2.1.3.1.9.2 1.6.4 2 .5h.4c.2 0 .4 0 .5-.1.1 0 .1 0 .2-.1.7-.2 1.5-.7 2.1-1 .1-.1.2-.1.3-.2.1 0 .2-.1.2-.1.2-.1.4-.2.6-.2.8-.2 1.7.1 2.3.5.3.2.6.4.9.7 0 .1.1.1.1.2.1.2.2.3.3.4l.1.1c.1.1.2.2.3.4 1.3-.4 1.5.2 2.1.9 1.6-.7 1.7.2 1.8.6h-.1c-.5 0-1.2 0-2.1.2l-.3-.3c-.5-.4-1.2-.8-1.9-1.1-.1 0-.1-.1-.2-.1h-.1c-.4-.2-.8-.2-1.2-.4-.1-.1-.2-.1-.4-.2-.3-.1-.6-.3-.9-.3h-.3c-1.2.1-2 .4-2.7.6-.3.1-.7.2-1 .2-.4.1-.8.1-1.3 0-.3 0-.6-.1-.9-.1-.5-.1-.8-.2-1.2-.3-.2 0-.3-.1-.5-.1h-.1c-.6-.2-1.2-.3-1.8-.4h-.1-2.1c-.4.1-.6.1-.7.1-.3 0-.7.1-1.1.1h-1.3c-.9 0-1.9-.2-2.7-.6-.1 0-.2-.1-.3-.1H53c-.1 0-.1 0-.2-.1-.7-.3-1.6-.4-2.5-.4 1.2-.8 1.8-1.4 2.6-1.3zm6.8 2zm-15.2 4.1c.1-.7.4-1.4.9-2 .1-.1.2-.2.2-.3l.8-.8c.9-.6 1.9-1.1 3-1.3.5-.1 1-.2 1.4-.2H52c.3 0 .6.1.9.1.1 0 .2 0 .2.1.1.1.2.1.4.2.4.2.8.3 1.3.4.2 0 .5.1.7.1.7.1 1.5.1 2.3.1H58.7c.4 0 .7-.1 1-.1H61.7c.6.1 1.1.2 1.7.4.2 0 .4.1.6.2.3.1.7.2 1.1.3.6.1 1.1.2 1.5.2.6 0 1.1-.1 1.6-.2.2 0 .3-.1.5-.1.5-.1 1-.3 1.7-.4.2 0 .5-.1.7-.1h.6c.2 0 .4.1.5.2l.1.1h.1c.1 0 .1 0 .2.1.2.1.3.1.4.1h.2c.1.1.3.1.4.2.4.2 1 .6 1.6.9.1.1.2.2.4.2.1.1.2.1.3.2.2.1.3.3.4.3l.1.1c1.1 1.4 1.8 3.3 1.6 5.3-.3 1.5-1.6.7-2.5.3 0 0-.1 0-.1-.1-.3-.1-.6-.2-.9-.4-.2-.1-.4-.1-.5-.2-1.2-.4-2.5-.7-4-.7-2 0-4.6.1-6.8.8-3 .8-4 .8-5.3.1-.8-.4-1.8-1.1-2.6-1.7-.1-.1-.2-.1-.2-.2-.1-.1-.1-.1-.2-.1-.3-.2-.6-.4-.6-.5l-.1-.1c-.2.3-.6 1-.8 1.4v.1c-.1 1.7-1 4.2-2.6 5.6-.2.1-.4.3-.6.4-.2.1-.5.2-.7.3-.7.2-1.4.2-1.9-.2-.5-.3-1.3-.7-2.3-1.1 2 1.6 3 2.8 3.9 4.9.7 1.7 1.7 4 3.9 6.5l.3.3c1.1 0 2.1.2 3 .7.4.2.7.4 1 .7.2.2.4.3.5.5.5.4.9.8.8 1.3v.1s0 .1-.1.1c-.1.2-.3.5-.5.7-.1.1-.4.4-.6.7-.1.1-.2.2-.3.2-.1.1-.4.3-.7.6-.2.2-.4.3-.5.4-.2.1-.4.4-.6.5-.3.1-.5.2-.8.1-.3 0-.7-.2-1-.3-.5-.3.1-.3-.5-.8-1.4-1-2.2-1.7-1.9-3.4v-.2c-.2-.1-.3-.3-.5-.4-3.9-3-10.1-4.9-11.5-8.3-.9-2.3-1-3.4-.2-4.4.4-.5.8-1 1-1.4 1.3-2.3.9-4.4 2.4-5.4 1.8-1.2 3.3.2 4.1 1.4-.5-2.1-2.3-2.6-2.3-2.8.3.1.3-.1.3-.3zm29 20s-.1 0 0 0c-.1 0-.1 0 0 0-.9.1-3.3.3-5.4.3h-.9c-.7 0-1.3-.1-1.8-.2-.1 0-.2 0-.3-.1-.7-.2-1.6-.5-2.4-.8-.6-.2-1.2-.5-1.7-.7-1.1-.5-2.1-1.1-2.3-1.3-.5-1.4-.7-2.7-.7-3.4.8-.4 1.3-.7 1.9-1.4-1.7.3-2.4.2-3.4-.4-1-.5-2.6-2.2-3.6-3.4 1-1.2 1.7-2.9 1.4-5.1.1-.2.3-.4.4-.6 0 .1.1.1.2.2.7.9 2.4 2 4.6 2.8 1.1.4 2 .1 2.9-.1 4-1 8.1-1.3 11.9-.1.1 0 .2.1.3.1.5.2.9.4 1.4.6.1 0 .1.1.2.1.1.7.2 2-.3 3.5-.1.3-.2.6-.4.9-.2.3-.3.6-.5 1-.1.3-.2.5-.4.8-.2.4-.3.8-.5 1.3-.4 1.4-.7 3.4-.6 6zm-23.9-9c.4-.2 1-.4 1.5-.8 1.6 1.8 3.3 3 5 4.1.3 1.4.5 2.4.8 4.2h-.2c-.1.5-.1.9-.1 1.3-1-.4-2.2-.5-2.6-.5-3.7-4.3-3-6-4.4-8.3zm-32.9 6.5c-1.3.7-2.5 1.4-3.6 2.2-.2.1-.5.3-.7.4-.1.1-.3.2-.5.3-4.5 2.9-8.1 5.8-10.5 8.5 1.7-10.8 10-16.5 14.3-19.2.1-.1.2-.2.4-.2 10-6.2 19.2-9.2 28-11.7-.5.8-.9 1.7-1 2.8v.2c-.8.1-2.5.2-3.5 3-.1.2-.2.5-.3.8-.3 1.2-.6 2-.9 2.6-.9.4-5 2.2-9.9 4.5-1.6.8-3.3 1.6-5 2.4-2.3 1-4.6 2.2-6.8 3.4zm28 24.8s0-.1 0 0c-.4-.3-.8-.5-1.2-.7h-.1c-.4-.2-.7-.3-1.1-.5h-.1c-.4-.1-.8-.3-1.3-.4h-.2c-.4-.1-.8-.2-1.3-.2h-.1c-.5-.1-1-.1-1.5-.1H35.9c-3.7.1-6.5-.4-8.6-1.5-.7-.4-1.4-.8-1.9-1.3-.9-.7-1.5-1.6-2.1-2.6-.4-.7-.7-1.4-.9-2.2-.4-1.2-.6-2.5-.8-3.9 0-.5-.1-1-.2-1.5l-.3-1.5c-.6-2.9-1.6-5.5-3.2-7.2 6.3-3.5 15-7.9 17.8-8.8.3-.1.6-.2.8-.3-.3 1.1.4 2.7.9 3.9 2.1 4.9 8.6 5.4 12.9 9.1 0 .5 0 1.1.2 1.6.5.6 1.7 1.6 1.7 1.6-.2.2-.1.7-.1.7.9 1 2.3 1 2.3 1-1.8 5.2-3.4 10.9-1.9 16.9-.7 1-1.5 1.8-2.2 2.8-.7-.2-1.4-.6-1.9-1.3 0-.1-.1-.1-.1-.2s-.1-.1-.1-.2l-1.5-1.8-.1-.1c-.5-.4-1.2-.9-1.9-1.3zm7.9 33.6c-1.3.1-2.9 0-4.3-.3h-.2-.1c-1.5-.8-2.1-1.2-2-2.4 0-.2 0-.3.1-.5 0-.1.1-.2.1-.3.5-1.1 2.1-2.2 3.4-3.2-.8 0-1.8.7-1.7-.1.2-1.5.9-1.3 1.3-2.1-.2-.3 3.3-.2 3.8.3v.1c0 .7.7 1.7.5 2.2-.1.3-.4-.2-.8-.3.2 1.1.6 3.1 1.3 4.6.1.1.1.2.1.3 0 .1.1.2.1.3 0 .7-.4 1.2-1.6 1.4zM59 67.7c0 .9-.3 1.6-.6 2-.7 1.1-1.7 1.4-2 3.2.4-.6 1.1-1.1 1.1-.9 0 .8-.1 1.4-.1 2v.2c-.1.6-.2 1.1-.3 1.6-.2.9-.5 1.7-.7 2.4-.4 1.2-.9 2.1-1.3 3.1l-.6 1.5c-.6 1.7-.4 5.6-.6 5.7-1.6.3-4.1-.3-4.7-.6.3-2.2.4-4.5.5-6.9.1-2.1.3-4.3.9-6.6.1-.5.3-1 .4-1.5 0-.1 0-.2.1-.2 0-.1 0-.1.1-.2.5-1.6 1.4-2.7 2.6-4.2.4-.4.7-.9 1.2-1.4-.1-.4-.2-.8-.4-1.3-.7-2.6-1.3-7.3 1.5-16.1.1 0 .2-.1.3-.1.2-.1.7-.5.8-.6.1-.1.3-.2.4-.3.1 0 .1-.1.2-.1l.6-.6 1.1-1.1c.4-.4.7-.5.8-.9v-.2c0-.8-1.1-1.5-1.5-2.1l-.1-.1c.1-.2.1-.4.2-.6 0-.2.1-.5.1-.8 0-.2.1-.5.1-.7.1.1.6.4 1.8.7.6.2 1.3.4 2.3.7 1.1.3 2.4.5 3.6.6 2.9.2 5.6 0 6.7-.2h.3v.1c0 .1 0 .2-.1.3v.9c0 .2 0 .3.1.5v.1c0 .4.1.7.2 1.1 0 .3.1.5.1.7v.1c0 .3.1.5.1.7 0 .2.1.3.1.5.1.2.1.4.2.6v.2c.1.4.2.8.2 1.1 1 5.7 2.3 12.9-1.1 16.7.2.8.3 1.9 0 3.2-.1.7-.3 1.4-.6 2.2-.2.5-.3 1-.5 1.5h-.3c-4.5.6-7.1.2-8.3-.1.5-1.6 1.7-3.3 3.7-3.2-.1-3.7-1.1-5-2-7.6 1.3-3 1.3-5.7 2-9.2v-.2c.2-.8.3-1.6.6-2.5-.4.5-.8 1.5-1.2 2.6v.1c-.5 1.5-.9 3.4-1.2 4.8-.2.8-.4 1.6-.7 2.4-.2.5-.4.9-.6 1.4-1.5 1.9-3 3.9-5.5 5.6zm18.5 24.9c1.5 1.1 4.7 1.8 5.5 2.3l.3.3c.1.1.1.2.1.3-.1.4-.7.7-1.9.9-.5.1-.9.1-1.4.1-1.3 0-2.6-.2-5.1-.5-3.4-.5-5.2-.4-8.6-.4-.3 0-.6 0-.9-.1-.2 0-.4-.1-.5-.1-.6-.2-1-.5-1.2-.8-.1-.2-.1-.3-.1-.5-.1-.7.2-1.5.6-2.3.2-.4.3-.7.4-1 .5-1.3.4-2.1.2-4.9 0-.2-.1-.4-.1-.7-.2-1.3-.5-2.3-.8-3.1-.4-1.1-.9-1.9-1.2-3-.6-2.1-1-4.3-.6-4.8H62.5c.2.1.5.2.9.3.5.1 1.1.2 2 .3 2.2.2 5.1-.2 6.6-.4.3-.1.6-.1.8-.1h.4c.4 0 .1.6-.1 1.2-.1.7-.5 3.3-.8 5.1-.3 1.8-.2 7.1-.1 8.8v.1c0 .3 1.9 1.2 3.5 2.1.7.2 1.4.5 1.8.9zm4.8-48.2c0 .1 0 .1 0 0-.1.1-.2.2-.2.3 0-.1-.1-.1-.1-.2 0 .1 0 .2-.1.2-.2.9-.6 2.4-2.2 4.1-.4.4-.7.6-1 .7-.5.1-.9 0-1.5-.1-.9-.2-1.3-.6-2.2-1.1-.1-.6-.3-1.3-.4-1.8 0-.3-.1-.5-.1-.6v-1l.4-.4s.7-1 1.8-1 2.2-.2 2.5-.5v-.1-.3c0-.1 0-.2-.1-.3-.4-1.4-2.1-1.8-1.4-4.8 0-.2.3-.5 1.2-.5-1.4-.3-2-.4-3-1.3.5-1.1 1-1.9 1.3-2.6.8-1.5.3-3.5.3-3.5.8-.3 1.6-.7 1.7-1 .9-2.8-.7-5.5-2.5-7.2 1.2-.1 2.6.1 3.6 1.1 2.4 2.4 1.8 5 1 6.8.6.7 2.1 2.9 1.2 5.3-.2.6-1.4.6-2.3 2.1 2.3-1.3 3.7-1 4.2.7 1 2.4-.6 5.3-2.1 7z"/><path d="M22 53.4v-.2c0-.2-.1-.5-.2-.9s-.1-.8-.2-1.3c-.5-4.7-1.9-9.4-4.9-11.3 3.7-2 16.8-8.5 21.9-10.5 2.9-1.2.8-.4-.2 1.4-.8 1.4-.3 2.9-.5 3.2-.6.8-12.6 10.5-15.9 19.6zm32.2-2.3c-3.4 3.8-12 11-18.2 11.4 8.7-.2 12.2 4.1 14.7 9.7 2.6-5.2 2.7-10.3 2.6-16.1 0-2.6 1.8-6 .9-5zm5.3-23L54.3 24s-1.1 3.1-1 4.6c.1 1.6-1.8 2.7-.9 3.6.9.9 3.2 2.5 4 3.4.7.9 1.1 7.1 1.1 7.1l2.2 2.7s1-1.8 1.1-6.3c.2-5.4-2.9-7.1-3.3-8.6-.4-1.4.6-2.9 2-2.4zm3.1 45.6l3.9.3s1.2-2.2 2.1-3.5c.9-1.4.4-1.6 0-4.6-.4-3-1.4-9.3-1.2-13.6l-3.1 10.2s1.8 5.6 1.6 6.4c-.1.8-3.3 4.8-3.3 4.8zm5 18.8c-1.1 0-2.5-.4-3.5-.8l-1 .3.2 4s5.2.7 4.6-.4c-.6-1.2-.3-3.1-.3-3.1zm12 .6c-1 0-.3.2.4 1.2.8 1 .1 2-.8 2.3l3.2.5 1.9-1.7c.1 0-3.7-2.3-4.7-2.3zM73 76c-1.6.5-4.2.8-5.9.8-1.7.1-3.7-.1-5-.5v1.4s1.2.5 5.4.5c3.5.1 5.7-.8 5.7-.8l.9-.8c-.1.1.5-1.1-1.1-.6zm-.2 3.1c-1.6.6-3.9.6-5.6.7-1.7.1-3.7-.1-5-.5l.1 1.4s.7.3 4.9.4c3.5.1 5.7-.7 5.7-.7l.3-.5c-.1-.1.3-1-.4-.8zm5.9-42.7c-.9-.8-1.4-2.4-1.5-3.3l-1.9 2.5.7 1.2s2.5.1 2.8.1c.4 0 .3-.1-.1-.5zM69 14.7c.6-.7.2-2.7.2-2.7L66 14.6l-4.4-.8-.5-1.3-1.3-.1c.8 1.8 1.8 2.5 3.3 3.1.9.4 4.5.9 5.9-.8z"style=opacity:.4;fill-rule:evenodd;clip-rule:evenodd /></svg></a></div></div>';
         if (element) {
@@ -252,10 +236,7 @@ _gsScope._gsDefine(
               : null;
           if (altType) {
             handler = function(event) {
-              if (
-                event.target.nodeName.toLowerCase() !== 'select' &&
-                event.type === altType
-              ) {
+              if (event.target.nodeName.toLowerCase() !== 'select' && event.type === altType) {
                 //don't preventDefault() on a <select> or else it won't open!
                 event.stopPropagation();
                 if (_clickedOnce) {
@@ -312,10 +293,7 @@ _gsScope._gsDefine(
       //increments the selected value of a <select> up or down by a certain amount.
       _shiftSelectedValue = function(element, amount, label) {
         var options = element.options,
-          i = Math.min(
-            options.length - 1,
-            Math.max(0, element.selectedIndex + amount)
-          );
+          i = Math.min(options.length - 1, Math.max(0, element.selectedIndex + amount));
         element.selectedIndex = i;
         if (label) {
           label.innerHTML = options[i].innerHTML;
@@ -366,11 +344,7 @@ _gsScope._gsDefine(
                 //typically, delayedCalls aren't included in the _recordedTemp, but since the hijacked add() below fires BEFORE TweenLite's constructor sets the target, we couldn't check that target === vars.onComplete there. And Draggable creates a tween with just an onComplete (no onReverseComplete), thus it fails that test. Therefore, we test again here to avoid merging that in.
                 _recordedRoot.add(t, t._startTime - t._delay);
               } else {
-                SimpleTimeline.prototype.add.call(
-                  _globalTimeline,
-                  t,
-                  t._startTime - t._delay
-                );
+                SimpleTimeline.prototype.add.call(_globalTimeline, t, t._startTime - t._delay);
               }
               t = next;
             }
@@ -384,11 +358,7 @@ _gsScope._gsDefine(
               } else {
                 //SimpleTimeline.prototype.add.call(_globalTimeline, t, t._recordedTime);
                 //_globalTimeline.add(t, t._startTime - t._delay - _recordedTemp._startTime);
-                SimpleTimeline.prototype.add.call(
-                  _globalTimeline,
-                  t,
-                  t._startTime - t._delay
-                );
+                SimpleTimeline.prototype.add.call(_globalTimeline, t, t._startTime - t._delay);
               }
               t = next;
             }
@@ -455,9 +425,7 @@ _gsScope._gsDefine(
       },
       GSDevTools = function(vars) {
         this.vars = vars = vars || {};
-        vars.id =
-          vars.id ||
-          (typeof vars.animation === 'string' ? vars.animation : _idSeed++); //try to find a unique ID so that sessionStorage can be mapped to it (otherwise, for example, all the embedded codepens on a page would share the same settings). So if no id is defined, see if there's a string-based "animation" defined. Last of all, we default to a numeric counter that we increment.
+        vars.id = vars.id || (typeof vars.animation === 'string' ? vars.animation : _idSeed++); //try to find a unique ID so that sessionStorage can be mapped to it (otherwise, for example, all the embedded codepens on a page would share the same settings). So if no id is defined, see if there's a string-based "animation" defined. Last of all, we default to a numeric counter that we increment.
         _lookup[vars.id + ''] = this;
 
         if (vars.animation && !_recording && vars.globalSync !== true) {
@@ -472,20 +440,14 @@ _gsScope._gsDefine(
             return root.querySelector(s);
           },
           record = function(key, value) {
-            if (
-              vars.persist !== false &&
-              typeof sessionStorage !== 'undefined'
-            ) {
+            if (vars.persist !== false && typeof sessionStorage !== 'undefined') {
               sessionStorage.setItem('gs-dev-' + key + vars.id, value);
             }
             return value;
           },
           recall = function(key) {
             var value;
-            if (
-              vars.persist !== false &&
-              typeof sessionStorage !== 'undefined'
-            ) {
+            if (vars.persist !== false && typeof sessionStorage !== 'undefined') {
               value = sessionStorage.getItem('gs-dev-' + key + vars.id);
               return key === 'animation'
                 ? value
@@ -513,11 +475,7 @@ _gsScope._gsDefine(
                 left = elementBounds.width * originRatio,
                 x = element._gsTransform.x,
                 minX = trackBounds.left - elementBounds.left - left + x,
-                maxX =
-                  trackBounds.right -
-                  elementBounds.right +
-                  (elementBounds.width - left) +
-                  x,
+                maxX = trackBounds.right - elementBounds.right + (elementBounds.width - left) + x,
                 unlimitedMinX = minX,
                 limitBounds;
               if (limitToInOut) {
@@ -525,16 +483,14 @@ _gsScope._gsDefine(
                   limitBounds = inPoint.getBoundingClientRect();
                   if (limitBounds.left) {
                     //if inPoint is hidden (like display:none), ignore.
-                    minX +=
-                      limitBounds.left + limitBounds.width - trackBounds.left;
+                    minX += limitBounds.left + limitBounds.width - trackBounds.left;
                   }
                 }
                 if (element !== outPoint) {
                   limitBounds = outPoint.getBoundingClientRect();
                   if (limitBounds.left) {
                     //if outPoint is hidden (like display:none), ignore.
-                    maxX -=
-                      trackBounds.left + trackBounds.width - limitBounds.left;
+                    maxX -= trackBounds.left + trackBounds.width - limitBounds.left;
                   }
                 }
               }
@@ -545,9 +501,7 @@ _gsScope._gsDefine(
               timeAtDragStart = -unlimitedMinX * pixelToTimeRatio;
 
               if (!skipDragUpdates) {
-                linkedAnimation.pause(
-                  timeAtDragStart + pixelToTimeRatio * this.x
-                );
+                linkedAnimation.pause(timeAtDragStart + pixelToTimeRatio * this.x);
               } else {
                 linkedAnimation.pause();
               }
@@ -579,10 +533,7 @@ _gsScope._gsDefine(
               progressBar.style.width =
                 Math.min(
                   outProgress - inProgress,
-                  Math.max(
-                    0,
-                    (time / linkedAnimation._duration) * 100 - inProgress
-                  )
+                  Math.max(0, (time / linkedAnimation._duration) * 100 - inProgress)
                 ) + '%';
               timeLabel.innerHTML = time.toFixed(2);
             },
@@ -616,9 +567,7 @@ _gsScope._gsDefine(
             onDoubleClick: resetInOut,
             onDrag: function() {
               inProgress =
-                ((timeAtDragStart + pixelToTimeRatio * this.x) /
-                  linkedAnimation.duration()) *
-                100;
+                ((timeAtDragStart + pixelToTimeRatio * this.x) / linkedAnimation.duration()) * 100;
               linkedAnimation.progress(inProgress / 100);
               updateProgress(true);
             },
@@ -646,9 +595,7 @@ _gsScope._gsDefine(
             onDoubleClick: resetInOut,
             onDrag: function() {
               outProgress =
-                ((timeAtDragStart + pixelToTimeRatio * this.x) /
-                  linkedAnimation.duration()) *
-                100;
+                ((timeAtDragStart + pixelToTimeRatio * this.x) / linkedAnimation.duration()) * 100;
               linkedAnimation.progress(outProgress / 100);
               updateProgress(true);
             },
@@ -673,26 +620,19 @@ _gsScope._gsDefine(
             }
             var p =
                 !loopEnabled && selectedAnimation._repeat === -1
-                  ? (selectedAnimation.totalTime() /
-                      selectedAnimation.duration()) *
-                    100
+                  ? (selectedAnimation.totalTime() / selectedAnimation.duration()) * 100
                   : linkedAnimation.progress() * 100 || 0,
               repeatDelayPhase =
                 selectedAnimation._repeat &&
                 selectedAnimation._repeatDelay &&
                 selectedAnimation.totalTime() %
-                  (selectedAnimation.duration() +
-                    selectedAnimation._repeatDelay) >
+                  (selectedAnimation.duration() + selectedAnimation._repeatDelay) >
                   selectedAnimation.duration();
             if (p > 100) {
               p = 100;
             }
             if (p >= outProgress) {
-              if (
-                loopEnabled &&
-                !linkedAnimation.paused() &&
-                !progressDrag.isDragging
-              ) {
+              if (loopEnabled && !linkedAnimation.paused() && !progressDrag.isDragging) {
                 if (!repeatDelayPhase) {
                   p = inProgress;
                   if (linkedAnimation.target === selectedAnimation) {
@@ -701,11 +641,7 @@ _gsScope._gsDefine(
                       startTime + ((endTime - startTime) * inProgress) / 100
                     );
                   }
-                  if (
-                    selectedAnimation._repeat > 0 &&
-                    !inProgress &&
-                    outProgress === 100
-                  ) {
+                  if (selectedAnimation._repeat > 0 && !inProgress && outProgress === 100) {
                     if (selectedAnimation.totalProgress() === 1) {
                       linkedAnimation.totalProgress(0, true).resume();
                     }
@@ -720,8 +656,7 @@ _gsScope._gsDefine(
                 }
                 if (
                   !paused &&
-                  (selectedAnimation.totalProgress() === 1 ||
-                    selectedAnimation._repeat === -1)
+                  (selectedAnimation.totalProgress() === 1 || selectedAnimation._repeat === -1)
                 ) {
                   pause();
                 }
@@ -778,9 +713,7 @@ _gsScope._gsDefine(
             if (linkedAnimation.progress() >= outProgress / 100) {
               if (linkedAnimation.target === selectedAnimation) {
                 //in case there are callbacks on the timeline, when we jump back to the start we should seek() so that the playhead doesn't drag [backward] past those and trigger them.
-                linkedAnimation.target.seek(
-                  startTime + ((endTime - startTime) * inProgress) / 100
-                );
+                linkedAnimation.target.seek(startTime + ((endTime - startTime) * inProgress) / 100);
               }
               if (linkedAnimation._repeat && !inProgress) {
                 linkedAnimation.totalProgress(0, true); //for repeating animations, don't get stuck in the last iteration - jump all the way back to the start.
@@ -817,9 +750,7 @@ _gsScope._gsDefine(
             //_self.update();
             if (linkedAnimation.target === selectedAnimation) {
               //in case there are callbacks on the timeline, when we jump back to the start we should seek() so that the playhead doesn't drag [backward] past those and trigger them.
-              linkedAnimation.target.seek(
-                startTime + ((endTime - startTime) * inProgress) / 100
-              );
+              linkedAnimation.target.seek(startTime + ((endTime - startTime) * inProgress) / 100);
             }
             linkedAnimation.progress(inProgress / 100, true);
             if (!paused) {
@@ -842,11 +773,7 @@ _gsScope._gsDefine(
                     startTime + ((endTime - startTime) * inProgress) / 100
                   );
                 }
-                if (
-                  selectedAnimation._repeat &&
-                  !inProgress &&
-                  outProgress === 100
-                ) {
+                if (selectedAnimation._repeat && !inProgress && outProgress === 100) {
                   linkedAnimation.totalProgress(0, true);
                 } else {
                   linkedAnimation.progress(inProgress / 100, true);
@@ -870,9 +797,7 @@ _gsScope._gsDefine(
           endTime,
           updateList = function() {
             var animations = _getChildrenOf(
-                declaredAnimation && vars.globalSync === false
-                  ? declaredAnimation
-                  : _recordedRoot,
+                declaredAnimation && vars.globalSync === false ? declaredAnimation : _recordedRoot,
                 true
               ),
               options = list.children,
@@ -887,18 +812,14 @@ _gsScope._gsDefine(
             for (i = 0; i < animations.length; i++) {
               option = options[i] || _createElement('option', list);
               option.animation = animations[i];
-              matches =
-                i && animations[i].vars.id === animations[i - 1].vars.id
-                  ? matches + 1
-                  : 0;
+              matches = i && animations[i].vars.id === animations[i - 1].vars.id ? matches + 1 : 0;
               option.setAttribute(
                 'value',
                 (option.innerHTML =
                   animations[i].vars.id +
                   (matches
                     ? ' [' + matches + ']'
-                    : animations[i + 1] &&
-                      animations[i + 1].vars.id === animations[i].vars.id
+                    : animations[i + 1] && animations[i + 1].vars.id === animations[i].vars.id
                     ? ' [0]'
                     : ''))
               );
@@ -908,9 +829,7 @@ _gsScope._gsDefine(
             }
           },
           animation = function(anim) {
-            var ts =
-                parseFloat(timeScale.options[timeScale.selectedIndex].value) ||
-                1,
+            var ts = parseFloat(timeScale.options[timeScale.selectedIndex].value) || 1,
               tl,
               maxDuration;
             if (!arguments.length) {
@@ -954,10 +873,7 @@ _gsScope._gsDefine(
               vars.maxDuration || 1000,
               _getClippedDuration(selectedAnimation)
             );
-            if (
-              selectedAnimation === _recordedRoot ||
-              vars.globalSync !== false
-            ) {
+            if (selectedAnimation === _recordedRoot || vars.globalSync !== false) {
               _merge();
               linkedAnimation = _rootTween;
               if (_rootInstance && _rootInstance !== _self) {
@@ -1006,10 +922,7 @@ _gsScope._gsDefine(
               if (_rootInstance === _self) {
                 _rootInstance = null;
               }
-              if (
-                selectedAnimation === declaredAnimation ||
-                !declaredAnimation
-              ) {
+              if (selectedAnimation === declaredAnimation || !declaredAnimation) {
                 linkedAnimation = selectedAnimation;
                 if (!loopEnabled && linkedAnimation._repeat) {
                   loop(true);
@@ -1032,11 +945,11 @@ _gsScope._gsDefine(
                   endTime = startTime + maxDuration;
                 }
                 declaredAnimation.pause(startTime);
-                linkedAnimation = TweenLite.to(
-                  declaredAnimation,
-                  endTime - startTime,
-                  { time: endTime, ease: Linear.easeNone, data: 'root' }
-                );
+                linkedAnimation = TweenLite.to(declaredAnimation, endTime - startTime, {
+                  time: endTime,
+                  ease: Linear.easeNone,
+                  data: 'root'
+                });
               }
               linkedAnimation.timeScale(ts);
               _rootTween.pause();
@@ -1052,9 +965,7 @@ _gsScope._gsDefine(
             if (selectedAnimation === _recordedRoot) {
               time = _recordedRoot._time;
               _recordedRoot.progress(1, true).time(time, true); //jump to the end and back again because sometimes a tween that hasn't rendered yet will affect duration, like a TimelineMax.tweenTo() where the duration gets set in the onStart.
-              time =
-                (_rootTween._timeline._time - _rootTween._startTime) *
-                _rootTween._timeScale;
+              time = (_rootTween._timeline._time - _rootTween._startTime) * _rootTween._timeScale;
               duration = Math.min(1000, _recordedRoot.duration());
               if (duration === 1000) {
                 duration = Math.min(1000, _getClippedDuration(_recordedRoot));
@@ -1089,8 +1000,7 @@ _gsScope._gsDefine(
           timeScale = find('.time-scale select'),
           timeScaleLabel = find('.time-scale-label'),
           onChangeTimeScale = function(e) {
-            var ts =
-              parseFloat(timeScale.options[timeScale.selectedIndex].value) || 1;
+            var ts = parseFloat(timeScale.options[timeScale.selectedIndex].value) || 1;
             linkedAnimation.timeScale(ts);
             record('timeScale', ts);
             if (!paused) {
@@ -1116,17 +1026,13 @@ _gsScope._gsDefine(
             }
           },
           //AUTOHIDE
-          autoHideTween = TweenLite.to(
-            [find('.gs-bottom'), find('.gs-top')],
-            0.3,
-            {
-              autoAlpha: 0,
-              y: 50,
-              ease: Power2.easeIn,
-              data: 'root',
-              paused: true
-            }
-          ),
+          autoHideTween = TweenLite.to([find('.gs-bottom'), find('.gs-top')], 0.3, {
+            autoAlpha: 0,
+            y: 50,
+            ease: Power2.easeIn,
+            data: 'root',
+            paused: true
+          }),
           hidden = false,
           onMouseOut = function(e) {
             if (
@@ -1198,8 +1104,7 @@ _gsScope._gsDefine(
             if (inProgress === 100 && !vars.animation && savedAnimation) {
               //in case there's a recorded animation (sessionStorage) and then the user defines an inTime that exceeds that animation's duration, just default back to the Global Timeline. Otherwise the in/out point will be at the very end and it'd be weird.
               animation(_recordedRoot);
-              inProgress =
-                _timeToProgress(vars.inTime, selectedAnimation, 0, 0) || 0;
+              inProgress = _timeToProgress(vars.inTime, selectedAnimation, 0, 0) || 0;
             }
             if (inProgress) {
               inPoint.style.left = inProgress + '%';
@@ -1207,12 +1112,7 @@ _gsScope._gsDefine(
             }
             outProgress =
               ('outTime' in vars
-                ? _timeToProgress(
-                    vars.outTime,
-                    selectedAnimation,
-                    100,
-                    inProgress
-                  )
+                ? _timeToProgress(vars.outTime, selectedAnimation, 100, inProgress)
                 : savedInOut
                 ? savedAnimation._outProgress
                 : 0) || 100;
@@ -1276,16 +1176,12 @@ _gsScope._gsDefine(
                 togglePlayPause();
               } else if (key === 38) {
                 //up arrow
-                ts = parseFloat(
-                  _shiftSelectedValue(timeScale, -1, timeScaleLabel)
-                );
+                ts = parseFloat(_shiftSelectedValue(timeScale, -1, timeScaleLabel));
                 linkedAnimation.timeScale(ts);
                 record('timeScale', ts);
               } else if (key === 40) {
                 //down arrow
-                ts = parseFloat(
-                  _shiftSelectedValue(timeScale, 1, timeScaleLabel)
-                );
+                ts = parseFloat(_shiftSelectedValue(timeScale, 1, timeScaleLabel));
                 linkedAnimation.timeScale(ts);
                 record('timeScale', ts);
               } else if (key === 37) {
@@ -1433,15 +1329,8 @@ _gsScope._gsDefine(
         while (t) {
           next = t._next;
           //any animations that aren't finished should be dumped into the root timeline. If they're done, just kill them.
-          if (
-            t._totalDuration !== t._totalTime ||
-            (!t._duration && t.ratio !== 1)
-          ) {
-            SimpleTimeline.prototype.add.call(
-              _globalTimeline,
-              t,
-              t._startTime - t._delay + offset
-            );
+          if (t._totalDuration !== t._totalTime || (!t._duration && t.ratio !== 1)) {
+            SimpleTimeline.prototype.add.call(_globalTimeline, t, t._startTime - t._delay + offset);
           } else {
             t.kill();
           }
@@ -1474,10 +1363,7 @@ _gsScope._gsDefine(
         data !== 'isFromStart' &&
         data !== '_draggable' &&
         !(_startupPhase && !child._duration && child instanceof TweenLite) &&
-        !(
-          child.vars.onComplete &&
-          child.vars.onComplete === child.vars.onReverseComplete
-        )
+        !(child.vars.onComplete && child.vars.onComplete === child.vars.onReverseComplete)
       ) {
         //skip delayedCalls too
         var tl = _recordedRoot;
@@ -1486,9 +1372,7 @@ _gsScope._gsDefine(
             tl = _recordedTemp;
             child._recordedTime = _recordedRoot.rawTime();
           } else {
-            position =
-              (_globalTimeline._time - _rootTween._startTime) *
-              _rootTween._timeScale;
+            position = (_globalTimeline._time - _rootTween._startTime) * _rootTween._timeScale;
             if (!_rootIsDirty) {
               TweenLite.ticker.addEventListener('tick', _updateRootDuration);
               _rootIsDirty = true;
@@ -1506,10 +1390,7 @@ _gsScope._gsDefine(
       }
       return SimpleTimeline.prototype.add.apply(this, arguments);
     };
-    _recordedRoot._enabled = _recordedTemp._enabled = function(
-      value,
-      ignoreTimeline
-    ) {
+    _recordedRoot._enabled = _recordedTemp._enabled = function(value, ignoreTimeline) {
       //skip enabling/disabling the nested animations (performance improvement). SimpleTimeline._enabled() doesn't do that - only TimelineLite._enabled() does.
       return SimpleTimeline.prototype._enabled.apply(this, arguments);
     };
@@ -1554,12 +1435,7 @@ _gsScope._gsDefine(
         }
       }
       if (typeof _onOverwrite === 'function') {
-        _onOverwrite(
-          overwrittenTween,
-          overwritingTween,
-          target,
-          overwrittenProperties
-        );
+        _onOverwrite(overwrittenTween, overwritingTween, target, overwrittenProperties);
       }
     };
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { baseUrl } from '../../../api';
 
 // Component imports
@@ -22,6 +23,7 @@ class RecipeDetail extends Component {
     // Capture id from url params
     const { id } = this.props.match.params;
     // Validate id: ensure it is a number
+    // eslint-disable-next-line radix
     if (!parseInt(id))
       this.setState({
         error: true,
@@ -31,6 +33,10 @@ class RecipeDetail extends Component {
       this.fetchRecipeById(id);
     }
   }
+
+  onClose = () => {
+    this.setState({ showAlert: !this.state.showAlert });
+  };
 
   fetchRecipeById(id = 1) {
     fetch(`${baseUrl}/api/recipes/${id}`)
@@ -47,10 +53,6 @@ class RecipeDetail extends Component {
       .catch(console.log);
   }
 
-  onClose = () => {
-    this.setState({ showAlert: !this.state.showAlert });
-  };
-
   render() {
     const { error, isLoaded, message } = this.state;
 
@@ -58,10 +60,10 @@ class RecipeDetail extends Component {
     if (error) return <h1>{message}</h1>;
 
     return (
-      <div className="home-container">
+      <div className='home-container'>
         <Alert
           showAlert={this.state.showAlert}
-          subText="Please Create A Recipe"
+          subText='Please Create A Recipe'
           onClose={this.onClose}
         />
         {isLoaded ? <Recipe recipe={this.state.recipe} /> : <Loader />}
@@ -69,4 +71,13 @@ class RecipeDetail extends Component {
     );
   }
 }
+
+RecipeDetail.propTypes = {
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      id: PropTypes.number.isRequired
+    }).isRequired
+  }).isRequired
+};
+
 export default RecipeDetail;

@@ -1,23 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
+import InfiniteScroll from 'react-infinite-scroll-component';
 import styles from './recipes-list-scroll.module.scss';
 
 import Card from '../Card';
 import RecipeCardHorizontal from '../RecipeCardHorizontal';
-import InfiniteScroll from 'react-infinite-scroll-component';
 
-const RecipesListScroll = ({
-  title,
-  recipes,
-  fetchMoreRecipes,
-  moreRecipes
-}) => {
+const RecipesListScroll = ({ title, recipes, fetchMoreRecipes, moreRecipes }) => {
   const recipeComponents = recipes.map(recipe => (
-    <NavLink
-      className={styles.navLink}
-      key={recipe.id}
-      to={`/recipes/${recipe.id}`}
-    >
+    <NavLink className={styles.navLink} key={recipe.id} to={`/recipes/${recipe.id}`}>
       <RecipeCardHorizontal key={recipe.id} recipe={recipe} />
     </NavLink>
   ));
@@ -39,6 +31,13 @@ const RecipesListScroll = ({
       )}
     </Card>
   );
+};
+
+RecipesListScroll.propTypes = {
+  fetchMoreRecipes: PropTypes.func.isRequired,
+  moreRecipes: PropTypes.bool.isRequired,
+  recipes: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  title: PropTypes.string.isRequired
 };
 
 export default RecipesListScroll;

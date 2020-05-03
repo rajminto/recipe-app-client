@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './recipe-ingredients-list.module.scss';
 
 // Component imports
@@ -16,6 +17,15 @@ const RecipeIngredientsList = ({ ingredients }) => {
       <Card className={styles.ingredientsListCard}>{ingredientComponents}</Card>
     </Card>
   );
+};
+
+RecipeIngredientsList.propTypes = {
+  ingredients: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired
+    })
+  ).isRequired
 };
 
 export default RecipeIngredientsList;

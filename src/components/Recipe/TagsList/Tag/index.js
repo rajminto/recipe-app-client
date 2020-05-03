@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './tag.module.scss';
 
 const Tag = ({ name }) => (
@@ -6,5 +7,9 @@ const Tag = ({ name }) => (
     <strong>#{name} </strong>
   </div>
 );
+
+Tag.propTypes = {
+  name: PropTypes.string.isRequired
+};
 
 export default Tag;

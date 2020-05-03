@@ -22,10 +22,10 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="home-container">
+      <div className='home-container'>
         <Alert
           showAlert={this.state.showAlert}
-          subText="Please Create A Recipe"
+          subText='Please Create A Recipe'
           onClose={this.onClose}
         />
         <h1>Welcome Home</h1>

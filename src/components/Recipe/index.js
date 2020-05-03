@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './recipe.scss';
 
 // Component Imports
@@ -20,7 +21,7 @@ const Recipe = ({ recipe }) => {
   } = recipe;
 
   return (
-    <div className="recipe-container">
+    <div className='recipe-container'>
       <RecipeHeader
         name={name}
         user_name={users[0].name}
@@ -29,13 +30,29 @@ const Recipe = ({ recipe }) => {
         description={description}
         prep_time={prep_time}
         cook_time={cook_time}
-      />
-      <div className="bot-recipe-info">
-        <RecipeIngredientsList ingredients={ingredients} />
-        <RecipeInstructionsList instructions={instructions} />
-      </div>
+      />{' '}
+      <div className='bot-recipe-info'>
+        <RecipeIngredientsList ingredients={ingredients} />{' '}
+        <RecipeInstructionsList instructions={instructions} />{' '}
+      </div>{' '}
     </div>
   );
+};
+
+Recipe.propTypes = {
+  recipe: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    instructions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    ingredients: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+    description: PropTypes.string.isRequired,
+    img_url: PropTypes.string.isRequired,
+    prep_time: PropTypes.string.isRequired,
+    cook_time: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
+    users: PropTypes.shape({
+      name: PropTypes.string.isRequired
+    }).isRequired
+  }).isRequired
 };
 
 export default Recipe;

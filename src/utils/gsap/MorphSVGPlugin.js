@@ -36,17 +36,7 @@ var _PI = Math.PI,
     }
   },
   // translates SVG arc data into an array of cubic beziers
-  _arcToBeziers = function(
-    lastX,
-    lastY,
-    rx,
-    ry,
-    angle,
-    largeArcFlag,
-    sweepFlag,
-    x,
-    y
-  ) {
+  _arcToBeziers = function(lastX, lastY, rx, ry, angle, largeArcFlag, sweepFlag, x, y) {
     if (lastX === x && lastY === y) {
       return;
     }
@@ -68,9 +58,7 @@ var _PI = Math.PI,
     }
     var rx_sq = rx * rx,
       ry_sq = ry * ry,
-      sq =
-        (rx_sq * ry_sq - rx_sq * y1_sq - ry_sq * x1_sq) /
-        (rx_sq * y1_sq + ry_sq * x1_sq);
+      sq = (rx_sq * ry_sq - rx_sq * y1_sq - ry_sq * x1_sq) / (rx_sq * y1_sq + ry_sq * x1_sq);
     if (sq < 0) {
       sq = 0;
     }
@@ -100,8 +88,7 @@ var _PI = Math.PI,
     var segments = Math.ceil(Math.abs(angleExtent) / (_2PI / 4)),
       rawPath = [],
       angleIncrement = angleExtent / segments,
-      controlLength =
-        ((4 / 3) * _sin(angleIncrement / 2)) / (1 + _cos(angleIncrement / 2)),
+      controlLength = ((4 / 3) * _sin(angleIncrement / 2)) / (1 + _cos(angleIncrement / 2)),
       ma = cosAngle * rx,
       mb = sinAngle * rx,
       mc = sinAngle * -ry,
@@ -238,14 +225,7 @@ var _PI = Math.PI,
         if (!isRelative) {
           relativeX = relativeY = 0;
         }
-        segment.push(
-          difX,
-          difY,
-          x,
-          y,
-          (relativeX += a[i + 3] * 1),
-          (relativeY += a[i + 4] * 1)
-        );
+        segment.push(difX, difY, x, y, (relativeX += a[i + 3] * 1), (relativeY += a[i + 4] * 1));
         i += 4;
 
         // "Q" (quadratic bezier)
@@ -304,11 +284,7 @@ var _PI = Math.PI,
           y = startY;
           segment.closed = true;
         }
-        if (
-          command === 'L' ||
-          Math.abs(relativeX - x) > 0.5 ||
-          Math.abs(relativeY - y) > 0.5
-        ) {
+        if (command === 'L' || Math.abs(relativeX - x) > 0.5 || Math.abs(relativeY - y) > 0.5) {
           line(relativeX, relativeY, x, y);
           if (command === 'L') {
             i += 2;
@@ -424,12 +400,7 @@ var _PI = Math.PI,
     for (j = 0; j < rawPath.length; j++) {
       segment = rawPath[j];
       l = segment.length;
-      s +=
-        'M' +
-        ((segment[0] * rnd) | 0) / rnd +
-        space +
-        ((segment[1] * rnd) | 0) / rnd +
-        ' C';
+      s += 'M' + ((segment[0] * rnd) | 0) / rnd + space + ((segment[1] * rnd) | 0) / rnd + ' C';
       for (i = 2; i < l; i++) {
         //this is actually faster than just doing a join() on the array, possibly because the numbers have so many decimal places
         s += ((segment[i] * rnd) | 0) / rnd + space;
@@ -657,14 +628,7 @@ var _PI = Math.PI,
     }
     return [closestX, closestY];
   },
-  _getClosestSegment = function(
-    bezier,
-    pool,
-    startIndex,
-    sortRatio,
-    offsetX,
-    offsetY
-  ) {
+  _getClosestSegment = function(bezier, pool, startIndex, sortRatio, offsetX, offsetY) {
     //matches the bezier to the closest one in a pool (array) of beziers, assuming they are in order of size and we shouldn't drop more than 20% of the size, otherwise prioritizing location (total distance to the center). Extracts the segment out of the pool array and returns it.
     var l = pool.length,
       index = 0,
@@ -708,9 +672,7 @@ var _PI = Math.PI,
       sortRatio = map === 'position' ? 0 : typeof map === 'number' ? map : 0.8,
       i = shorter.length,
       shapeIndices =
-        typeof shapeIndex === 'object' && shapeIndex.push
-          ? shapeIndex.slice(0)
-          : [shapeIndex],
+        typeof shapeIndex === 'object' && shapeIndex.push ? shapeIndex.slice(0) : [shapeIndex],
       reverse = shapeIndices[0] === 'reverse' || shapeIndices[0] < 0,
       log = shapeIndex === 'log',
       eb,
@@ -735,14 +697,7 @@ var _PI = Math.PI,
           longer.splice(
             i,
             0,
-            _getClosestSegment(
-              shorter[i],
-              longer,
-              i,
-              sortRatio,
-              offsetX,
-              offsetY
-            )
+            _getClosestSegment(shorter[i], longer, i, sortRatio, offsetX, offsetY)
           );
         }
       }
@@ -753,10 +708,7 @@ var _PI = Math.PI,
       }
       if (longer[0].length > shorter[0].length) {
         //since we use shorter[0] as the one to map the origination point of any brand new fabricated segments, do any subdividing first so that there are more points to choose from (if necessary)
-        _subdivideSegment(
-          shorter[0],
-          ((longer[0].length - shorter[0].length) / 6) | 0
-        );
+        _subdivideSegment(shorter[0], ((longer[0].length - shorter[0].length) / 6) | 0);
       }
       i = shorter.length;
       while (added < dif) {
@@ -781,21 +733,15 @@ var _PI = Math.PI,
       if (reverse && fillSafe !== false && !sb.reversed) {
         _reverseBezier(sb);
       }
-      shapeIndex =
-        shapeIndices[i] || shapeIndices[i] === 0 ? shapeIndices[i] : 'auto';
+      shapeIndex = shapeIndices[i] || shapeIndices[i] === 0 ? shapeIndices[i] : 'auto';
       if (shapeIndex) {
         //if start shape is closed, find the closest point to the start/end, and re-organize the bezier points accordingly so that the shape morphs in a more intuitive way.
         if (
           sb.closed ||
-          (Math.abs(sb[0] - sb[sb.length - 2]) < 0.5 &&
-            Math.abs(sb[1] - sb[sb.length - 1]) < 0.5)
+          (Math.abs(sb[0] - sb[sb.length - 2]) < 0.5 && Math.abs(sb[1] - sb[sb.length - 1]) < 0.5)
         ) {
           if (shapeIndex === 'auto' || shapeIndex === 'log') {
-            shapeIndices[i] = shapeIndex = _getClosestShapeIndex(
-              sb,
-              eb,
-              !i || fillSafe === false
-            );
+            shapeIndices[i] = shapeIndex = _getClosestShapeIndex(sb, eb, !i || fillSafe === false);
             if (shapeIndex < 0) {
               reverse = true;
               _reverseBezier(sb);
@@ -952,10 +898,7 @@ var _PI = Math.PI,
       : _pointsFilter;
   },
   _createPath = function(e, ignore) {
-    var path = _gsScope.document.createElementNS(
-        'http://www.w3.org/2000/svg',
-        'path'
-      ),
+    var path = _gsScope.document.createElementNS('http://www.w3.org/2000/svg', 'path'),
       attr = Array.prototype.slice.call(e.attributes),
       i = attr.length,
       name;
@@ -1086,20 +1029,7 @@ var _PI = Math.PI,
           ].join(',') +
           'z';
       } else {
-        data =
-          'M' +
-          (x + w) +
-          ',' +
-          y +
-          ' v' +
-          h +
-          ' h' +
-          -w +
-          ' v' +
-          -h +
-          ' h' +
-          w +
-          'z';
+        data = 'M' + (x + w) + ',' + y + ' v' + h + ' h' + -w + ' v' + -h + ' h' + w + 'z';
       }
     } else if (type === 'circle' || type === 'ellipse') {
       if (type === 'circle') {
@@ -1157,10 +1087,7 @@ var _PI = Math.PI,
         data += ',' + x + ',' + y + 'z';
       }
     }
-    path.setAttribute(
-      'd',
-      _rawPathToString((path._gsRawPath = _stringToRawPath(data)))
-    );
+    path.setAttribute('d', _rawPathToString((path._gsRawPath = _stringToRawPath(data))));
     if (swap && e.parentNode) {
       e.parentNode.insertBefore(path, e);
       e.parentNode.removeChild(e);
@@ -1172,16 +1099,8 @@ var _PI = Math.PI,
     var isString = typeof shape === 'string',
       e,
       type;
-    if (
-      !isString ||
-      _selectorExp.test(shape) ||
-      (shape.match(_numbersExp) || []).length < 3
-    ) {
-      e = isString
-        ? TweenLite.selector(shape)
-        : shape && shape[0]
-        ? shape
-        : [shape]; //allow array-like objects like jQuery objects.
+    if (!isString || _selectorExp.test(shape) || (shape.match(_numbersExp) || []).length < 3) {
+      e = isString ? TweenLite.selector(shape) : shape && shape[0] ? shape : [shape]; //allow array-like objects like jQuery objects.
       if (e && e[0]) {
         e = e[0];
         type = (e.nodeName + '').toUpperCase();
@@ -1328,9 +1247,7 @@ var _PI = Math.PI,
       type = (target.nodeName + '').toUpperCase();
       isPoly = type === 'POLYLINE' || type === 'POLYGON';
       if (type !== 'PATH' && !isPoly && !value.prop) {
-        _log(
-          'WARNING: cannot morph a <' + type + '> element. ' + _morphMessage
-        );
+        _log('WARNING: cannot morph a <' + type + '> element. ' + _morphMessage);
         return false;
       }
       p = type === 'PATH' ? 'd' : 'points';
@@ -1340,26 +1257,17 @@ var _PI = Math.PI,
       if (!value.prop && typeof target.setAttribute !== 'function') {
         return false;
       }
-      shape = _parseShape(
-        value.shape || value.d || value.points || '',
-        p === 'd',
-        target
-      );
+      shape = _parseShape(value.shape || value.d || value.points || '', p === 'd', target);
       if (isPoly && _commands.test(shape)) {
-        _log(
-          'WARNING: a <' + type + '> cannot accept path data. ' + _morphMessage
-        );
+        _log('WARNING: a <' + type + '> cannot accept path data. ' + _morphMessage);
         return false;
       }
-      shapeIndex =
-        value.shapeIndex || value.shapeIndex === 0 ? value.shapeIndex : 'auto';
+      shapeIndex = value.shapeIndex || value.shapeIndex === 0 ? value.shapeIndex : 'auto';
       map = value.map || MorphSVGPlugin.defaultMap;
       this._prop = value.prop;
       this._render = value.render || MorphSVGPlugin.defaultRender;
       this._apply =
-        'updateTarget' in value
-          ? value.updateTarget
-          : MorphSVGPlugin.defaultUpdateTarget;
+        'updateTarget' in value ? value.updateTarget : MorphSVGPlugin.defaultUpdateTarget;
       this._rnd = Math.pow(10, isNaN(value.precision) ? 2 : +value.precision);
       this._tween = tween;
       if (shape) {
@@ -1372,20 +1280,11 @@ var _PI = Math.PI,
         if (p === 'd' || this._prop) {
           start = _stringToRawPath(precompiled ? value.precompile[0] : start);
           end = _stringToRawPath(precompiled ? value.precompile[1] : shape);
-          if (
-            !precompiled &&
-            !_equalizeSegmentQuantity(start, end, shapeIndex, map, fillSafe)
-          ) {
+          if (!precompiled && !_equalizeSegmentQuantity(start, end, shapeIndex, map, fillSafe)) {
             return false; //malformed path data or null target
           }
           if (value.precompile === 'log' || value.precompile === true) {
-            _log(
-              'precompile:["' +
-                _rawPathToString(start) +
-                '","' +
-                _rawPathToString(end) +
-                '"]'
-            );
+            _log('precompile:["' + _rawPathToString(start) + '","' + _rawPathToString(end) + '"]');
           }
 
           useRotation = (value.type || MorphSVGPlugin.defaultType) !== 'linear';
@@ -1424,10 +1323,7 @@ var _PI = Math.PI,
             l = startSeg.length;
             _lastLinkedAnchor = 0; //reset; we use _lastLinkedAnchor in the _tweenRotation() method to help make sure that close points don't get ripped apart and rotate opposite directions. Typically we want to go the shortest direction, but if the previous anchor is going a different direction, we override this logic (within certain thresholds)
             for (i = 0; i < l; i += 2) {
-              if (
-                endSeg[i] !== startSeg[i] ||
-                endSeg[i + 1] !== startSeg[i + 1]
-              ) {
+              if (endSeg[i] !== startSeg[i] || endSeg[i + 1] !== startSeg[i + 1]) {
                 if (useRotation) {
                   if (startSmooth[i] && endSmooth[i]) {
                     //if BOTH starting and ending values are smooth (meaning control points have basically the same slope), interpolate the rotation and length instead of the coordinates (this is what makes things smooth).
@@ -1452,12 +1348,7 @@ var _PI = Math.PI,
                   }
                 } else {
                   this._addTween(startSeg, i, startSeg[i], endSeg[i]);
-                  pt = this._addTween(
-                    startSeg,
-                    i + 1,
-                    startSeg[i + 1],
-                    endSeg[i + 1]
-                  );
+                  pt = this._addTween(startSeg, i + 1, startSeg[i + 1], endSeg[i + 1]);
                 }
               }
             }
@@ -1477,12 +1368,7 @@ var _PI = Math.PI,
 
         if (useRotation) {
           this._addTween(this._origin, 'x', this._origin.x, this._eOrigin.x);
-          pt = this._addTween(
-            this._origin,
-            'y',
-            this._origin.y,
-            this._eOrigin.y
-          );
+          pt = this._addTween(this._origin, 'y', this._origin.y, this._eOrigin.y);
         }
 
         if (pt) {
@@ -1538,16 +1424,12 @@ var _PI = Math.PI,
         }
 
         //smooth out the control points
-        easeInOut =
-          ratio < 0.5 ? 2 * ratio * ratio : (4 - 2 * ratio) * ratio - 1;
+        easeInOut = ratio < 0.5 ? 2 * ratio * ratio : (4 - 2 * ratio) * ratio - 1;
         while (controlPT) {
           i = controlPT.i;
           segment = rawPath[controlPT.j];
           offset = i + (i === segment.length - 4 ? 7 - segment.length : 5); //accommodates wrapping around of smooth points, like if the start and end anchors are on top of each other and their handles are smooth.
-          angle = _atan2(
-            segment[offset] - segment[i + 1],
-            segment[offset - 1] - segment[i]
-          ); //average the angles
+          angle = _atan2(segment[offset] - segment[i + 1], segment[offset - 1] - segment[i]); //average the angles
           sin = _sin(angle);
           cos = _cos(angle);
           x = segment[i + 2];
@@ -1570,11 +1452,7 @@ var _PI = Math.PI,
             segment = rawPath[j];
             l = segment.length;
             s +=
-              'M' +
-              ((segment[0] * rnd) | 0) / rnd +
-              space +
-              ((segment[1] * rnd) | 0) / rnd +
-              ' C';
+              'M' + ((segment[0] * rnd) | 0) / rnd + space + ((segment[1] * rnd) | 0) / rnd + ' C';
             for (i = 2; i < l; i++) {
               //this is actually faster than just doing a join() on the array, possibly because the numbers have so many decimal places
               s += ((segment[i] * rnd) | 0) / rnd + space;
@@ -1607,21 +1485,14 @@ MorphSVGPlugin.prototype._tweenRotation = function(start, end, i, linkedPT) {
   angleDif = _atan2(dy, dx) - sa;
   short = _shortAngle(angleDif);
   //in the case of control points, we ALWAYS link them to their anchor so that they don't get torn apart and rotate the opposite direction. If it's not a control point, we look at the most recently linked point as long as they're within a certain rotational range of each other.
-  if (
-    !linkedPT &&
-    _lastLinkedAnchor &&
-    Math.abs(short + _lastLinkedAnchor.ca) < _angleMin
-  ) {
+  if (!linkedPT && _lastLinkedAnchor && Math.abs(short + _lastLinkedAnchor.ca) < _angleMin) {
     linkedPT = _lastLinkedAnchor;
   }
   return (this._anchorPT = _lastLinkedAnchor = {
     _next: this._anchorPT,
     t: start,
     sa: sa, //starting angle
-    ca:
-      linkedPT && short * linkedPT.ca < 0 && Math.abs(short) > _angleMax
-        ? angleDif
-        : short, //change in angle
+    ca: linkedPT && short * linkedPT.ca < 0 && Math.abs(short) > _angleMax ? angleDif : short, //change in angle
     sl: d, //starting length
     cl: _sqrt(dx * dx + dy * dy) - d, //change in length
     i: i
@@ -1636,9 +1507,7 @@ MorphSVGPlugin.rawPathToString = _rawPathToString;
 MorphSVGPlugin.defaultType = 'linear';
 MorphSVGPlugin.defaultUpdateTarget = true;
 MorphSVGPlugin.defaultMap = 'size';
-MorphSVGPlugin.stringToRawPath = MorphSVGPlugin.pathDataToRawBezier = function(
-  data
-) {
+MorphSVGPlugin.stringToRawPath = MorphSVGPlugin.pathDataToRawBezier = function(data) {
   return _stringToRawPath(_parseShape(data, true));
 };
 MorphSVGPlugin.equalizeSegmentQuantity = _equalizeSegmentQuantity;
@@ -1698,11 +1567,8 @@ MorphSVGPlugin.pathDataToBezier = function(data, vars) {
   if (matrix && matrix.join(',') !== '1,0,0,1,0,0') {
     for (i = 0; i < l; i += 2) {
       a.push({
-        x:
-          prefix +
-          (bezier[i] * matrix[0] + bezier[i + 1] * matrix[2] + offsetX),
-        y:
-          prefix + (bezier[i] * matrix[1] + bezier[i + 1] * matrix[3] + offsetY)
+        x: prefix + (bezier[i] * matrix[0] + bezier[i + 1] * matrix[2] + offsetX),
+        y: prefix + (bezier[i] * matrix[1] + bezier[i + 1] * matrix[3] + offsetY)
       });
     }
   } else {
