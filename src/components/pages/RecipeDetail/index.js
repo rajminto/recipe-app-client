@@ -50,6 +50,7 @@ class RecipeDetail extends Component {
               message: response.message
             });
       })
+      // eslint-disable-next-line no-console
       .catch(console.log);
   }
 

@@ -9,7 +9,7 @@
  * This work is subject to the software agreement that was issued with your membership.
  *
  * @author: Jack Doyle, jack@greensock.com
- **/
+ * */
 /* eslint-disable */
 
 import {

@@ -29,6 +29,7 @@ class Profile extends Component {
       .then(this.setRecipesOnState)
       .catch(err => {
         if (err.message === 'no user') this.setState({ isLoaded: true, loginFailure: true });
+        // eslint-disable-next-line no-console
         else console.log(err);
       });
   }

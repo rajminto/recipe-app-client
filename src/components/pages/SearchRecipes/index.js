@@ -39,6 +39,7 @@ class SearchRecipes extends Component {
     )
       .then(res => res.json())
       .then(response => this.handleFetchMoreRecipesResponse(response, recipes, offset, limit))
+      // eslint-disable-next-line no-console
       .catch(console.error);
   };
 
@@ -58,6 +59,7 @@ class SearchRecipes extends Component {
     fetch(`${baseUrl}/api/recipes?type=${searchType}&query=${searchQuery}`)
       .then(res => res.json())
       .then(this.handleSearchResponse)
+      // eslint-disable-next-line no-console
       .catch(console.error);
   };
 

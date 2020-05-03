@@ -32,6 +32,8 @@ class CheckAnimation extends Component {
   };
 
   render() {
+    // TODO:: this wont be an issue once we refactor to GSAP 3
+    // eslint-disable-next-line no-console
     console.log(DrawSVGPlugin);
     const { animationContainer, circle, check } = styles;
     return (

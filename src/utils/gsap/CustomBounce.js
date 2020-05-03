@@ -8,7 +8,7 @@
  * Club GreenSock members, the software agreement that was issued with your membership.
  *
  * @author: Jack Doyle, jack@greensock.com
- **/
+ * */
 /* eslint-disable */
 
 import { _gsScope, globals } from 'gsap/TweenLite.js';

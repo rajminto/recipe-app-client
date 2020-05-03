@@ -42,6 +42,7 @@ class Login extends Component {
     this.submitUser(user)
       .then(res => res.json())
       .then(response => {
+        // eslint-disable-next-line no-console
         console.log(response);
         // Login succeeded: redirect to signup page
         // Login failed: display response message

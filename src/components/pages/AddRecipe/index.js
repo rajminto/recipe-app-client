@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
 import styles from './AddRecipe.module.scss';
@@ -62,9 +63,9 @@ const AddRecipe = () => {
     try {
       const res = await fetch(`${baseUrl}/api/recipes`, options);
       const response = await res.json();
-      console.log('New Recipe:', response);
       if (response.success) clearForm(); // TODO: Update UI in failure conditions
     } catch (err) {
+      // eslint-disable-next-line no-console
       console.log('Error:', err);
     }
   };
