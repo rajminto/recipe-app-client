@@ -1,7 +1,7 @@
-import React from 'react'
-import styles from './profile-header.module.scss'
+import React from 'react';
+import styles from './profile-header.module.scss';
 
-import Card from '../../../shared/Card'
+import Card from '../../../shared/Card';
 
 const ProfileHeader = ({ user }) => {
   return (
@@ -9,7 +9,7 @@ const ProfileHeader = ({ user }) => {
       <h1>Welcome, {user.name}!</h1>
       <div className={styles.headerContent}>
         <Card className={styles.headerCard}>
-          <img src={user.avatar_url} alt=""/>
+          <img src={user.avatar_url} alt="" />
         </Card>
         <Card className={styles.headerCard}>
           <h2>About Me</h2>
@@ -26,7 +26,7 @@ const ProfileHeader = ({ user }) => {
         </Card> */}
       </div>
     </Card>
-  )
-}
+  );
+};
 
-export default ProfileHeader
+export default ProfileHeader;

@@ -8,7 +8,7 @@ import Button from '../Button';
 class Alert extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
   //
   render() {
@@ -32,12 +32,10 @@ class Alert extends Component {
         <div className={`${container} ${transitionWrap}`}>
           <h1>{text}</h1>
           <p>{subText}</p>
-          <Button
-            clickFunc={onClose}
-          />
+          <Button clickFunc={onClose} />
         </div>
       </Transition>
-    )
+    );
   }
 }
 export default Alert;

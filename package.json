@@ -14,6 +14,8 @@
     "react-transition-group": "^4.0.0"
   },
   "scripts": {
+    "lint": "eslint --ext .js .",
+    "prettify": "prettier --write \"./**/*.{js,jsx}\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -34,97 +36,19 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
-    "prettier": "^1.19.1"
-  },
-  "eslintConfig": {
-    "env": {
-      "node": true,
-      "es6": true
-    },
-    "extends": [
-      "react-app",
-      "airbnb",
-      "plugin:prettier/recommended",
-      "prettier/react"
-    ],
-    "rules": {
-      "no-unused-expressions": "off",
-      "prefer-promise-reject-errors": "off",
-      "jsx-a11y/label-has-associated-control": "off",
-      "react/no-access-state-in-setstate": "off",
-      "camelcase": [
-        0,
-        {
-          "properties": "never",
-          "ignoreDestructuring": true
-        }
-      ],
-      "jsx-a11y/click-events-have-key-events": [
-        0
-      ],
-      "jsx-a11y/no-noninteractive-element-interactions": [
-        0
-      ],
-      "jsx-a11y/no-static-element-interactions": [
-        0
-      ],
-      "jsx-a11y/label-has-for": [
-        0,
-        {
-          "never": {
-            "every": [
-              "id"
-            ]
-          }
-        }
-      ],
-      "no-param-reassign": [
-        0,
-        {
-          "props": false
-        }
-      ],
-      "prettier/prettier": [
-        "error",
-        {
-          "endOfLine": "auto"
-        }
-      ],
-      "react/destructuring-assignment": [
-        0
-      ],
-      "react/jsx-closing-bracket-location": [
-        0
-      ],
-      "react/jsx-filename-extension": [
-        1,
-        {
-          "extensions": [
-            ".test.js",
-            ".jsx",
-            ".js"
-          ]
-        }
-      ],
-      "react/jsx-tag-spacing": [
-        1,
-        {
-          "closingSlash": "never",
-          "beforeSelfClosing": "allow",
-          "afterOpening": "never",
-          "beforeClosing": "allow"
-        }
-      ],
-      "react/jsx-props-no-spreading": [
-        1,
-        {
-          "custom": "ignore"
-        }
-      ]
-    }
+    "prettier": "^1.19.1",
+    "typescript": "^3.8.3"
   },
   "prettier": {
     "singleQuote": true,
-    "endOfLine": "lf"
+    "endOfLine": "lf",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "printWidth": 100,
+    "jsxSingleQuote": true,
+    "tabWidth": 2,
+    "useTabs": false
   }
 }

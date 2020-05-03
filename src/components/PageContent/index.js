@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import styles from './page-content.module.scss';
 
@@ -14,11 +14,10 @@ import SearchRecipes from '../pages/SearchRecipes';
 import RecipeDetail from '../pages/RecipeDetail';
 
 class PageContent extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {};
   }
-  //
 
   render() {
     const { container } = styles;
@@ -26,17 +25,17 @@ class PageContent extends Component {
       <div className={container}>
         <Navigator />
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/add" component={AddRecipe} />
-          <Route exact path="/search" component={SearchRecipes} />
-          <Route exact path="/profile" component={Profile} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/login" component={Login} />
-          <Route path="/recipes/:id" component={RecipeDetail} />
-          <Route component={NotFound} />
-        </Switch>
+          <Route exact path="/" component={Home} />{' '}
+          <Route exact path="/add" component={AddRecipe} />{' '}
+          <Route exact path="/search" component={SearchRecipes} />{' '}
+          <Route exact path="/profile" component={Profile} />{' '}
+          <Route exact path="/register" component={Register} />{' '}
+          <Route exact path="/login" component={Login} />{' '}
+          <Route path="/recipes/:id" component={RecipeDetail} />{' '}
+          <Route component={NotFound} />{' '}
+        </Switch>{' '}
       </div>
-    )
+    );
   }
 }
-export default PageContent; 
+export default PageContent;

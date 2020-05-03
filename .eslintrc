@@ -1,0 +1,71 @@
+{
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "extends": [
+    "react-app",
+    "airbnb",
+    "plugin:prettier/recommended",
+    "prettier/react"
+  ],
+  "rules": {
+    "no-unused-expressions": "off",
+    "prefer-promise-reject-errors": "off",
+    "jsx-a11y/label-has-associated-control": "off",
+    "react/no-access-state-in-setstate": "off",
+    "camelcase": [
+      0,
+      {
+        "properties": "never",
+        "ignoreDestructuring": true
+      }
+    ],
+    "jsx-a11y/click-events-have-key-events": [0],
+    "jsx-a11y/no-noninteractive-element-interactions": [0],
+    "jsx-a11y/no-static-element-interactions": [0],
+    "jsx-a11y/label-has-for": [
+      0,
+      {
+        "never": {
+          "every": ["id"]
+        }
+      }
+    ],
+    "no-param-reassign": [
+      0,
+      {
+        "props": false
+      }
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ],
+    "react/destructuring-assignment": [0],
+    "react/jsx-closing-bracket-location": [0],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".test.js", ".jsx", ".js"]
+      }
+    ],
+    "react/jsx-tag-spacing": [
+      1,
+      {
+        "closingSlash": "never",
+        "beforeSelfClosing": "allow",
+        "afterOpening": "never",
+        "beforeClosing": "allow"
+      }
+    ],
+    "react/jsx-props-no-spreading": [
+      1,
+      {
+        "custom": "ignore"
+      }
+    ]
+  }
+}

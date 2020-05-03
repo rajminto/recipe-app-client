@@ -1,15 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from './context';
 import Header from './components/shared/Header/index';
 import PageContent from './components/PageContent/index';
-import './styles/main-styles.scss'
-
+import './styles/main-styles.scss';
 
 class App extends Component {
   constructor(props) {
-    super(props)
-    this.state = {}
+    super(props);
+    this.state = {};
   }
 
   render() {
@@ -22,8 +21,8 @@ class App extends Component {
           </div>
         </Router>
       </Provider>
-    )
+    );
   }
 }
 
-export default App
+export default App;

@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { baseUrl } from '../../../api'
+import React, { Component } from 'react';
+import { baseUrl } from '../../../api';
 
 // Component imports
 import Recipe from '../../Recipe';
@@ -15,16 +15,20 @@ class RecipeDetail extends Component {
       error: false,
       message: '',
       showAlert: false
-    }
+    };
   }
 
   componentDidMount() {
     // Capture id from url params
-    const { id } = this.props.match.params
+    const { id } = this.props.match.params;
     // Validate id: ensure it is a number
-    if (!parseInt(id)) this.setState({ error: true, message: 'Recipe not found. Please enter a valid ID.'})
+    if (!parseInt(id))
+      this.setState({
+        error: true,
+        message: 'Recipe not found. Please enter a valid ID.'
+      });
     else {
-      this.fetchRecipeById(id)
+      this.fetchRecipeById(id);
     }
   }
 
@@ -34,21 +38,24 @@ class RecipeDetail extends Component {
       .then(response => {
         response.success
           ? this.setState({ isLoaded: true, recipe: response.recipe })
-          : this.setState({ isLoaded: true, error: true, message: response.message })
-
+          : this.setState({
+              isLoaded: true,
+              error: true,
+              message: response.message
+            });
       })
-      .catch(console.log)
+      .catch(console.log);
   }
 
   onClose = () => {
-    this.setState({ showAlert: !this.state.showAlert })
-  }
+    this.setState({ showAlert: !this.state.showAlert });
+  };
 
   render() {
-    const { error, isLoaded, message } = this.state
+    const { error, isLoaded, message } = this.state;
 
     // TODO: Replace with component with options to search again, go back to profile, etc.
-    if (error) return <h1>{message}</h1>
+    if (error) return <h1>{message}</h1>;
 
     return (
       <div className="home-container">
@@ -57,13 +64,9 @@ class RecipeDetail extends Component {
           subText="Please Create A Recipe"
           onClose={this.onClose}
         />
-        {isLoaded
-          ? <Recipe recipe={this.state.recipe} />
-          : <Loader />
-        }
+        {isLoaded ? <Recipe recipe={this.state.recipe} /> : <Loader />}
       </div>
-    )
+    );
   }
 }
 export default RecipeDetail;
-

@@ -5,22 +5,26 @@ import MenuIcon from '../MenuIcon';
 //
 
 class Header extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       menuOpen: false
-    }
+    };
   }
 
-  // 
-  render(){
+  //
+  render() {
     const { container, iconBox, closed, companyName, mainLogo } = styles;
     return (
       <Consumer>
-        {(context) => (
+        {context => (
           <div className={container}>
-            <div className={context.state.isMenuOpen ? iconBox : `${iconBox} ${closed}`} 
-              onClick={context.toggleMenu}>
+            <div
+              className={
+                context.state.isMenuOpen ? iconBox : `${iconBox} ${closed}`
+              }
+              onClick={context.toggleMenu}
+            >
               <MenuIcon menuOpen={this.state.menuOpen} />
             </div>
             <div className={mainLogo}>
@@ -29,7 +33,7 @@ class Header extends Component {
           </div>
         )}
       </Consumer>
-    )
+    );
   }
 }
 Header.contextType = Context;

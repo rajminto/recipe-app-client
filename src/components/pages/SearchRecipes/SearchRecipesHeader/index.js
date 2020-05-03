@@ -1,8 +1,8 @@
-import React from 'react'
-import styles from './search-recipes-header.module.scss'
+import React from 'react';
+import styles from './search-recipes-header.module.scss';
 
-import Card from '../../../shared/Card'
-import Button from '../../../shared/Button'
+import Card from '../../../shared/Card';
+import Button from '../../../shared/Button';
 
 const SearchRecipesHeader = ({ searchQuery, handleChange, handleSubmit }) => {
   return (
@@ -10,20 +10,20 @@ const SearchRecipesHeader = ({ searchQuery, handleChange, handleSubmit }) => {
       <h1>Search Recipes</h1>
       <p>Enter a search term below to search for recipes.</p>
       <form onSubmit={handleSubmit} className={styles.searchForm}>
-        <label htmlFor='search-query'>Ingredient:</label>
+        <label htmlFor="search-query">Ingredient:</label>
         <input
-          id='search-query'
-          type='text'
-          name='searchQuery'
+          id="search-query"
+          type="text"
+          name="searchQuery"
           value={searchQuery}
           onChange={handleChange}
         />
         <div>
-          <Button text={'Submit'}/>
+          <Button text={'Submit'} />
         </div>
       </form>
     </Card>
-  )
-}
+  );
+};
 
-export default SearchRecipesHeader
+export default SearchRecipesHeader;

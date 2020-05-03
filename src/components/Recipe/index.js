@@ -1,13 +1,13 @@
-import React from 'react'
-import './recipe.scss'
+import React from 'react';
+import './recipe.scss';
 
 // Component Imports
-import RecipeHeader from './RecipeHeader'
-import RecipeIngredientsList from './RecipeIngredientsList'
+import RecipeHeader from './RecipeHeader';
+import RecipeIngredientsList from './RecipeIngredientsList';
 import RecipeInstructionsList from './RecipeInstructionsList';
 
 const Recipe = ({ recipe }) => {
-  const { 
+  const {
     name,
     description,
     img_url,
@@ -17,7 +17,7 @@ const Recipe = ({ recipe }) => {
     instructions,
     ingredients,
     tags
-  } = recipe
+  } = recipe;
 
   return (
     <div className="recipe-container">
@@ -31,15 +31,11 @@ const Recipe = ({ recipe }) => {
         cook_time={cook_time}
       />
       <div className="bot-recipe-info">
-        <RecipeIngredientsList
-          ingredients={ingredients}
-        />
-        <RecipeInstructionsList
-          instructions={instructions}
-        />
+        <RecipeIngredientsList ingredients={ingredients} />
+        <RecipeInstructionsList instructions={instructions} />
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Recipe
+export default Recipe;

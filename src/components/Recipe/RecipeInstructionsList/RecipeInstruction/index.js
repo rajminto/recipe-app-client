@@ -1,10 +1,12 @@
-import React from 'react'
-import './recipe-instruction.module.scss'
+import React from 'react';
+import './recipe-instruction.module.scss';
 
 const RecipeInstruction = ({ description, order }) => (
   <div>
-    <p>{order}. {description}</p>
+    <p>
+      {order}. {description}
+    </p>
   </div>
-)
+);
 
-export default RecipeInstruction
+export default RecipeInstruction;
