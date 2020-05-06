@@ -1,7 +1,7 @@
 @import '../../../styles/variables';
 
 .container {
-  height: 100vh;
+  height: calc(100vh - 4.5em);
   width: 20em;
   position: absolute;
   top: 0;
