@@ -8,13 +8,13 @@ const ProfileHeader = ({ user }) => {
     <Card className={styles.profileHeaderContainer}>
       <h1>Welcome, {user.name}!</h1>
       <div className={styles.headerContent}>
-        <Card className={styles.headerCard}>
+        <div className={styles.userImage}>
           <img src={user.avatar_url} alt=""/>
-        </Card>
-        <Card className={styles.headerCard}>
+        </div>
+        <div className={styles.headerCard}>
           <h2>About Me</h2>
           <p>{user.bio}</p>
-        </Card>
+        </div>
         {/* <Card className={styles.headerCard}>
           <p>From here you can:</p>
           <ul>

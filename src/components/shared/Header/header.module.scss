@@ -4,7 +4,7 @@
 .container {
   background-color: $dark-grey-base;
   padding: 0 5vw;
-  height: 6em;
+  height: 4.5em;
   width: 100%;
   display: flex;
   align-items: center;
@@ -12,8 +12,8 @@
   @include box-shadow-mat;
 
   .iconBox {
-    height: 5em;
-    width: 5em;
+    height: 3.2em;
+    width: 3.2em;
     transition: 1s ease-in-out;
     cursor: pointer;
 
