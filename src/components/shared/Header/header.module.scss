@@ -22,7 +22,25 @@
       width: 100%;
     }
   }
+
+  .mainLogo{
+    display: flex;
+    align-items: center;
+
+    .carrotSvgWrap{
+      height: 2.3rem;
+      width: 2.3rem;
+      margin-left: .5rem;
+    
+      svg{
+        height: 100%;
+        width: 100%;
+        fill: $dark-highlight;
+      }
+    }
+  }
 }
+
 @media only screen and (max-width: 450px) {
   .container {
     height: 4.5em;

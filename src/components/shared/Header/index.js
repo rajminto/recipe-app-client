@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styles from './header.module.scss';
 import { Consumer, Context } from '../../../context';
 import MenuIcon from '../MenuIcon';
-//
+import { ReactComponent as CarrotSVG } from '../../../assets/svgs/food.svg';
 
 class Header extends Component {
   constructor(props){
@@ -12,9 +12,16 @@ class Header extends Component {
     }
   }
 
-  // 
   render(){
-    const { container, iconBox, closed, companyName, mainLogo } = styles;
+    const { 
+      carrotSvgWrap, 
+      container, 
+      iconBox, 
+      closed, 
+      companyName, 
+      mainLogo 
+    } = styles;
+
     return (
       <Consumer>
         {(context) => (
@@ -25,6 +32,7 @@ class Header extends Component {
             </div>
             <div className={mainLogo}>
               <h1 className={companyName}>SAVVORED</h1>
+              <div className={carrotSvgWrap}><CarrotSVG /></div>
             </div>
           </div>
         )}

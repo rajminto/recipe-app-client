@@ -1,37 +1,37 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { withRouter } from 'react-router-dom';
+import styles from './home.module.scss';
+import { ReactComponent as CarrotSVG } from '../../../assets/svgs/food.svg'
+import Button from '../../shared/Button';
 
-// Component imports
-import Alert from '../../shared/Alert'
-// import Loader from '../../shared/Loader'
 
-class Home extends Component {
-  constructor(props){
-    super(props)
-    this.state = {}
+const Home = (props) => {
+  const { 
+    carrotSvgWrap, 
+    homeButtonWrapper, 
+    homeContainer, 
+    splashTitle ,
+    welcomePanel
+  } = styles;
+
+  const history = props.history;
+
+  const handleMainBtnClick = (dest) => {
+    history.push(dest);
   }
 
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({ showAlert: !this.state.showAlert })
-    }, 2000)
-  }
-
-  onClose = () => {
-    this.setState({ showAlert: !this.state.showAlert })
-  }
-
-  render() {
-    return (
-      <div className="home-container">
-        <Alert 
-          showAlert={this.state.showAlert}
-          subText="Please Create A Recipe"
-          onClose={this.onClose}
-        />
-        <h1>Welcome Home</h1>
+  return (
+    <div className={homeContainer}>
+      <div className={welcomePanel}>
+        <h1 className={splashTitle}>SAVVORED</h1>
+        <div className={homeButtonWrapper}>
+          <Button text="Browse Recipes" clickFunc={() => handleMainBtnClick('/recipes')} />
+          <Button text="Create Recipe" clickFunc={() => handleMainBtnClick('/add')} />
+        </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
-export default Home
+
+export default withRouter(Home);
 

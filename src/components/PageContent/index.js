@@ -18,7 +18,6 @@ class PageContent extends Component {
     super(props);
     this.state = {}
   }
-  //
 
   render() {
     const { container } = styles;
