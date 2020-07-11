@@ -1,13 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import styles from './home.module.scss';
-import { ReactComponent as CarrotSVG } from '../../../assets/svgs/food.svg';
 import Button from '../../shared/Button';
 
 const Home = props => {
-  const { carrotSvgWrap, homeButtonWrapper, homeContainer, splashTitle, welcomePanel } = styles;
+  const { homeButtonWrapper, homeContainer, splashTitle, welcomePanel } = styles;
 
-  const history = props.history;
+  const { history } = props;
 
   const handleMainBtnClick = dest => {
     history.push(dest);
