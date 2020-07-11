@@ -1,3 +1,9 @@
 @mixin box-shadow-mat{
   box-shadow: 3px 5px 10px #161616;
 }
+
+@mixin flex-center{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

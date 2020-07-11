@@ -1,0 +1,62 @@
+@import '../../../styles/mixins';
+@import '../../../styles/variables';
+
+.homeContainer{
+  @include flex-center;
+  position: relative;
+
+  .welcomePanel{
+    @include flex-center;
+    flex-direction: column;
+
+    .splashTitle{
+      font-size: 8rem;
+    }
+
+    .homeButtonWrapper{
+      button{
+        margin: 1rem;
+        width: 17rem;
+        // background-color: $dark-base;
+      }
+    }
+  }
+}
+.homeContainer:before{
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.2;
+  background-image: url('../../../assets/svgs/food.svg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: 40% 0;
+}
+
+@media only screen and (max-width: 450px){
+  .homeContainer{
+    .welcomePanel{
+
+      .splashTitle{
+        font-size: 3rem;
+        margin-bottom: 2rem;
+      }  
+
+      .homeButtonWrapper{        
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  }
+  .homeContainer:before{
+    background-image: url('../../../assets/svgs/food.svg');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50% 25%;
+  }
+}
