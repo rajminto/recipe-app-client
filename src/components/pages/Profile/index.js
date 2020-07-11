@@ -20,7 +20,7 @@ class Profile extends Component {
       createdRecipes: [],
       savedRecipes: []
     };
-  }
+  } 
 
   componentDidMount() {
     this.ensureAuthenticted()

@@ -18,7 +18,7 @@ class MenuIcon extends Component {
   componentDidMount() {
     this.tl = new TimelineLite({ paused: true, reversed: true })
     this.tl
-      .to(this.spoon, .5, { 
+      .to(this.spoon, .3, { 
         transformOrigin: '14.385px 70%', 
         fill: '#7692FF', 
         rotation: 45, 
@@ -26,7 +26,7 @@ class MenuIcon extends Component {
         y: -50, 
         ease: Power1.easeInOut 
       }, 'menu')
-      .to(this.knife, .5, { 
+      .to(this.knife, .3, { 
         transformOrigin: '68.77px 70%', 
         fill: '#7692FF', 
         rotation: -45, 
@@ -34,7 +34,7 @@ class MenuIcon extends Component {
         y: -50, 
         ease: Power1.easeInOut 
       }, 'menu')
-      .to(this.fork, .4, { 
+      .to(this.fork, .3, { 
         autoAlpha: 0 
       }, 'menu')
   }

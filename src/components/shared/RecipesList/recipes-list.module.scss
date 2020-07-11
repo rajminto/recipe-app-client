@@ -4,6 +4,7 @@
 
 .recipesCard {
   h2 {
+    font-size: 1.5rem;
     margin-bottom: 1rem;
   }
 
@@ -11,5 +12,13 @@
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-gap: 1rem;
+  }
+}
+
+@media only screen and (max-width: 450px){
+  .recipesCard {
+  .recipesContainer {
+    grid-template-columns: 1fr;
+      }
   }
 }

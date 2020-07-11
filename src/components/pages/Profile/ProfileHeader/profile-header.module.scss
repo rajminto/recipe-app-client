@@ -13,14 +13,19 @@
       min-width: 100%;
     }
 
-    .headerCard {
-      background-color: $dark-base;
-      margin: 0;
-      padding: 1.5rem;
+    .userImage{
+      min-height: 10rem;
+      min-width: 10rem;
+      border-radius: 50%;
+
+      img{
+        border-radius: 50%;
+      }
     }
   }
 
-  h1, h2 {
+  h1,
+  h2 {
     margin-bottom: 1rem;
   }
 
@@ -29,7 +34,18 @@
 
     li {
       margin-top: .5rem;
-      font-size: 1.3rem;
+    }
+  }
+}
+
+@media only screen and (max-width: 450px){
+  .profileHeaderContainer{
+    h1{
+      font-size: 1.6rem;
+    }
+
+    .headerContent{
+      grid-template-columns: 1fr;
     }
   }
 }
