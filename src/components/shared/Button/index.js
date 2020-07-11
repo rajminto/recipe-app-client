@@ -5,7 +5,7 @@ import styles from './button.module.scss';
 const Button = ({ clickFunc, text }) => {
   return (
     <>
-      <button className={styles['ui-btn']} type='submit' onClick={clickFunc && clickFunc}>
+      <button className={styles['ui-btn']} type='submit' onClick={clickFunc}>
         {text}
       </button>
     </>
@@ -13,8 +13,12 @@ const Button = ({ clickFunc, text }) => {
 };
 
 Button.propTypes = {
-  clickFunc: PropTypes.func.isRequired,
+  clickFunc: PropTypes.func,
   text: PropTypes.string.isRequired
+};
+
+Button.defaultProps = {
+  clickFunc: null
 };
 
 export default Button;

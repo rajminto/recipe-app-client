@@ -12,6 +12,7 @@ import Profile from '../pages/Profile';
 import Navigator from '../shared/Navigator';
 import SearchRecipes from '../pages/SearchRecipes';
 import RecipeDetail from '../pages/RecipeDetail';
+import BrowseRecipes from '../pages/BrowseRecipes';
 
 class PageContent extends Component {
   constructor(props) {
@@ -26,12 +27,14 @@ class PageContent extends Component {
         <Navigator />
         <Switch>
           <Route exact path='/' component={Home} />
-          <Route exact path='/add' component={AddRecipe} />
-          <Route exact path='/search' component={SearchRecipes} />
+          <Route exact path='/recipes/create' component={AddRecipe} />
+          <Route exact path='/recipes/search' component={SearchRecipes} />
           <Route exact path='/profile' component={Profile} />
           <Route exact path='/register' component={Register} />
           <Route exact path='/login' component={Login} />
-          <Route path='/recipes/:id' component={RecipeDetail} /> <Route component={NotFound} />
+          <Route exact path='/recipes/browse' component={BrowseRecipes} />
+          <Route path='/recipes/:id' component={RecipeDetail} />
+          <Route component={NotFound} />
         </Switch>
       </div>
     );

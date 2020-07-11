@@ -1,0 +1,63 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.browseRecipesContainer {
+  width: 90vw;
+
+  .tagsContainer {
+    display: flex;
+    justify-content: space-around;
+
+    .singleTag {
+      height: 5rem;
+      width: 5rem;
+      @include flex-center;
+
+      svg {
+        height: 100%;
+        width: 100%;
+        fill: $dark-highlight;
+        transition: fill 0.2s;
+      }
+    }
+    .singleTag:hover {
+      svg {
+        fill: $dark-highlight-2;
+        transition: fill 0.2s;
+      }
+    }
+  }
+
+  .tagsHeader {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+  }
+
+  .recipesCard {
+    h1 {
+      margin-bottom: 1rem;
+    }
+    h2 {
+      font-size: 1.5rem;
+    }
+    .navLink {
+      text-decoration: none;
+    }
+    .recipesContainer {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-gap: 1rem;
+    }
+  }
+
+  @media only screen and (max-width: 450px) {
+    h1 {
+      font-size: 1.6rem;
+    }
+    .recipesCard {
+      .recipesContainer {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+}
