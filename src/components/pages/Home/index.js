@@ -1,12 +1,11 @@
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import styles from './home.module.scss';
 import Button from '../../shared/Button';
 
-const Home = props => {
+const Home = () => {
   const { homeButtonWrapper, homeContainer, splashTitle, welcomePanel } = styles;
-
-  const { history } = props;
+  const history = useHistory();
 
   const handleMainBtnClick = dest => {
     history.push(dest);
@@ -25,4 +24,4 @@ const Home = props => {
   );
 };
 
-export default withRouter(Home);
+export default Home;
