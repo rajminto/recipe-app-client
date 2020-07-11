@@ -20,10 +20,9 @@
         transition: fill 0.2s;
       }
     }
-    .singleTag:hover {
+    .tagSelected {
       svg {
         fill: $dark-highlight-2;
-        transition: fill 0.2s;
       }
     }
   }
@@ -54,9 +53,35 @@
     h1 {
       font-size: 1.6rem;
     }
+
     .recipesCard {
       .recipesContainer {
         grid-template-columns: 1fr;
+      }
+    }
+
+    .tagsContainer {
+      justify-content: space-between;
+      .singleTag {
+        height: 2rem;
+        width: 2rem;
+      }
+    }
+  }
+}
+
+@media (hover: hover) {
+  .tagsContainer {
+    .singleTag:hover {
+      svg {
+        fill: $dark-highlight-2;
+        transition: fill 0.2s;
+      }
+    }
+
+    .tagSelected:hover {
+      svg {
+        fill: $dark-highlight-2;
       }
     }
   }

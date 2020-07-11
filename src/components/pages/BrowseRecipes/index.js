@@ -17,7 +17,7 @@ import { baseUrl } from '../../../api';
 const BrowseRecipes = () => {
   const [recipeData, setRecipeData] = useState();
   const [chosenTags, setChosenTags] = useState([]);
-  const url = `${baseUrl}/api/recipes`;
+
   const {
     browseRecipesContainer,
     headerTitle,
@@ -26,10 +26,12 @@ const BrowseRecipes = () => {
     recipesCard,
     singleTag,
     tagsContainer,
-    tagsHeader
+    tagsHeader,
+    tagSelected
   } = styles;
 
   const getRecipes = () => {
+    const url = `${baseUrl}/api/recipes`;
     return fetch(url).then(res => res.json());
   };
 
@@ -48,6 +50,7 @@ const BrowseRecipes = () => {
   };
 
   const renderRecipeCards = () => {
+    // eslint-disable-next-line consistent-return
     const recipeCards = recipeData?.map(recipe => {
       const recipeSpecificTags = [];
       recipe.tags.map(tag => recipeSpecificTags.push(tag.name));
@@ -103,7 +106,11 @@ const BrowseRecipes = () => {
       <h2 className={tagsHeader}>Tags List</h2>
       <div className={tagsContainer}>
         {tagsMap.map(({ label, svgComponent, data_stamp }) => (
-          <div className={singleTag} key={label} onClick={() => handleTagToggle(data_stamp)}>
+          <div
+            className={`${singleTag} ${chosenTags.includes(data_stamp) && tagSelected}`}
+            key={label}
+            onClick={() => handleTagToggle(data_stamp)}
+          >
             {svgComponent}
           </div>
         ))}
