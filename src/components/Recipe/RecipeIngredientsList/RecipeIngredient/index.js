@@ -1,8 +1,16 @@
-import React from 'react'
-import './recipe-ingredient.module.scss'
+import React from 'react';
+import PropTypes from 'prop-types';
+import './recipe-ingredient.module.scss';
 
 const RecipeIngredient = ({ name, quantity }) => (
-  <p>{quantity} {name}</p>
-)
+  <p>
+    {quantity} {name}
+  </p>
+);
 
-export default RecipeIngredient
+RecipeIngredient.propTypes = {
+  name: PropTypes.string.isRequired,
+  quantity: PropTypes.string.isRequired
+};
+
+export default RecipeIngredient;

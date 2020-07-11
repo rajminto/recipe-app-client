@@ -1,17 +1,18 @@
-import React from 'react'
-import styles from './tags-list.module.scss'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './tags-list.module.scss';
 
 // Component Imports
-import Tag from './Tag'
+import Tag from './Tag';
 
 const TagsList = ({ tags }) => {
-  const tagComponents = tags.map(tag => <Tag key={tag.id} name={tag.name} />)
+  const tagComponents = tags.map(tag => <Tag key={tag.id} name={tag.name} />);
 
-  return (
-    <div className={styles.tagList}>
-      {tagComponents}
-    </div>
-  )
-}
+  return <div className={styles.tagList}>{tagComponents}</div>;
+};
 
-export default TagsList
+TagsList.propTypes = {
+  tags: PropTypes.arrayOf(PropTypes.shape({})).isRequired
+};
+
+export default TagsList;

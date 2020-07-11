@@ -1,19 +1,20 @@
-import React, { Fragment } from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 import styles from './button.module.scss';
 
-
 const Button = ({ clickFunc, text }) => {
-    return (
-      <Fragment>
-        <button
-          className={styles['ui-btn']}
-          type="submit"
-          onClick={clickFunc ? clickFunc : null}
-        >
-          {text}
-        </button>
-      </Fragment>
-    )
-  }
+  return (
+    <>
+      <button className={styles['ui-btn']} type='submit' onClick={clickFunc && clickFunc}>
+        {text}
+      </button>
+    </>
+  );
+};
+
+Button.propTypes = {
+  clickFunc: PropTypes.func.isRequired,
+  text: PropTypes.string.isRequired
+};
 
 export default Button;

@@ -65,16 +65,14 @@ class Register extends Component {
   // TODO?: improve validation
   validatePasswords = user => {
     return new Promise((resolve, reject) => {
-      user.password !== user.password2
-        ? reject('Passwords do not match.')
-        : resolve(user);
+      user.password !== user.password2 ? reject('Passwords do not match.') : resolve(user);
     });
   };
 
   render() {
     const { message, registrationSuccess } = this.state;
 
-    if (registrationSuccess) return <Redirect to="/login" />;
+    if (registrationSuccess) return <Redirect to='/login' />;
 
     return (
       <Card className={styles.registerFormContainer}>
@@ -86,39 +84,39 @@ class Register extends Component {
         <form onSubmit={this.handleSubmit} className={styles.registerForm}>
           <label>Name:</label>
           <input
-            type="text"
-            name="name"
+            type='text'
+            name='name'
             onChange={this.handleChange}
             value={this.state.name}
             required
           />
           <label>Email:</label>
           <input
-            type="email"
-            name="email"
+            type='email'
+            name='email'
             onChange={this.handleChange}
             value={this.state.email}
             required
           />
           <label>Password:</label>
           <input
-            type="password"
-            name="password"
+            type='password'
+            name='password'
             onChange={this.handleChange}
             value={this.state.password}
             required
-            minLength="6"
+            minLength='6'
           />
           <label>Repeat Password:</label>
           <input
-            type="password"
-            name="password2"
+            type='password'
+            name='password2'
             onChange={this.handleChange}
             value={this.state.password2}
             required
-            minLength="6"
+            minLength='6'
           />
-          <Button text="Register" />
+          <Button text='Register' />
         </form>
       </Card>
     );

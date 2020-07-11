@@ -1,7 +1,8 @@
-import React from 'react'
-import styles from './recipe-card-horizontal.module.scss'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './recipe-card-horizontal.module.scss';
 
-import Card from '../Card'
+import Card from '../Card';
 
 const RecipeCardHorizontal = ({ recipe }) => {
   return (
@@ -16,7 +17,17 @@ const RecipeCardHorizontal = ({ recipe }) => {
         </div>
       </div>
     </Card>
-  )
-}
+  );
+};
 
-export default RecipeCardHorizontal
+RecipeCardHorizontal.propTypes = {
+  recipe: PropTypes.shape({
+    cook_time: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    img_url: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    prep_time: PropTypes.string.isRequired
+  }).isRequired
+};
+
+export default RecipeCardHorizontal;

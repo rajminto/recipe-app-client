@@ -1,15 +1,16 @@
-import React from 'react'
-import styles from './profile-header.module.scss'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './profile-header.module.scss';
 
-import Card from '../../../shared/Card'
+import Card from '../../../shared/Card';
 
 const ProfileHeader = ({ user }) => {
   return (
     <Card className={styles.profileHeaderContainer}>
       <h1>Welcome, {user.name}!</h1>
       <div className={styles.headerContent}>
-        <div className={styles.userImage}>
-          <img src={user.avatar_url} alt=""/>
+        <div className={styles.headerCard}>
+          <img src={user.avatar_url} alt='' />
         </div>
         <div className={styles.headerCard}>
           <h2>About Me</h2>
@@ -26,7 +27,15 @@ const ProfileHeader = ({ user }) => {
         </Card> */}
       </div>
     </Card>
-  )
-}
+  );
+};
 
-export default ProfileHeader
+ProfileHeader.propTypes = {
+  user: PropTypes.shape({
+    avatar_url: PropTypes.string.isRequired,
+    bio: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired
+  }).isRequired
+};
+
+export default ProfileHeader;

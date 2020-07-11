@@ -20,7 +20,9 @@ class Card extends Component {
   render() {
     return (
       <div
-        ref={container => (this.container = container)}
+        ref={container => {
+          this.container = container;
+        }}
         className={`${styles.cardContainer} ${this.props.className}`}
       >
         {this.props.children}
@@ -30,10 +32,12 @@ class Card extends Component {
 }
 
 Card.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.shape({})),
   className: PropTypes.string
 };
 
 Card.defaultProps = {
+  children: [],
   className: ''
 };
 

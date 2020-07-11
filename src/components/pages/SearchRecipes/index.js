@@ -8,7 +8,7 @@ import SearchRecipesHeader from './SearchRecipesHeader';
 import RecipesListScroll from '../../shared/RecipesListScroll';
 import Loader from '../../shared/Loader';
 
-export class SearchRecipes extends Component {
+class SearchRecipes extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,34 +23,43 @@ export class SearchRecipes extends Component {
   }
 
   componentDidMount() {
-    this.setState({ isLoaded: true });
+    this.setState({
+      isLoaded: true
+    });
   }
 
   fetchMoreRecipes = () => {
     const { offset, limit, recipes, searchType, searchQuery } = this.state;
     // Set new offset on state for subsequent queries
-    this.setState({ offset: offset + limit });
+    this.setState({
+      offset: offset + limit
+    });
     fetch(
       `${baseUrl}/api/recipes?offset=${offset}&limit=${limit}&type=${searchType}&query=${searchQuery}`
     )
       .then(res => res.json())
-      .then(response =>
-        this.handleFetchMoreRecipesResponse(response, recipes, offset, limit)
-      )
+      .then(response => this.handleFetchMoreRecipesResponse(response, recipes, offset, limit))
+      // eslint-disable-next-line no-console
       .catch(console.error);
   };
 
   handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
+    this.setState({
+      [e.target.name]: e.target.value
+    });
   };
 
   searchRecipes = () => {
     const { searchType, searchQuery } = this.state;
     // Ensure offset and limit on state are reset
-    this.setState({ offset: 0, limit: 20 });
+    this.setState({
+      offset: 0,
+      limit: 20
+    });
     fetch(`${baseUrl}/api/recipes?type=${searchType}&query=${searchQuery}`)
       .then(res => res.json())
       .then(this.handleSearchResponse)
+      // eslint-disable-next-line no-console
       .catch(console.error);
   };
 
@@ -80,7 +89,10 @@ export class SearchRecipes extends Component {
       });
     } else {
       // No recipes found: reset recipes to empty array to display 'No recipes found' in RecipesListScroll
-      this.setState({ moreRecipes: false, recipes: [] });
+      this.setState({
+        moreRecipes: false,
+        recipes: []
+      });
     }
   };
 
@@ -103,7 +115,11 @@ export class SearchRecipes extends Component {
       });
     } else {
       // No recipes found: reset offset and limit
-      this.setState({ moreRecipes: false, offset: 0, limit: 20 });
+      this.setState({
+        moreRecipes: false,
+        offset: 0,
+        limit: 20
+      });
     }
   };
 
@@ -120,7 +136,7 @@ export class SearchRecipes extends Component {
           handleSubmit={this.handleSubmit}
         />
         <RecipesListScroll
-          title="Results"
+          title='Results'
           recipes={recipes}
           moreRecipes={moreRecipes}
           fetchMoreRecipes={this.fetchMoreRecipes}

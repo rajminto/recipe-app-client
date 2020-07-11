@@ -1,8 +1,9 @@
-import React from 'react'
-import styles from './search-recipes-header.module.scss'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styles from './search-recipes-header.module.scss';
 
-import Card from '../../../shared/Card'
-import Button from '../../../shared/Button'
+import Card from '../../../shared/Card';
+import Button from '../../../shared/Button';
 
 const SearchRecipesHeader = ({ searchQuery, handleChange, handleSubmit }) => {
   return (
@@ -19,11 +20,17 @@ const SearchRecipesHeader = ({ searchQuery, handleChange, handleSubmit }) => {
           onChange={handleChange}
         />
         <div>
-          <Button text={'Submit'}/>
+          <Button text='Submit' />
         </div>
       </form>
     </Card>
-  )
-}
+  );
+};
 
-export default SearchRecipesHeader
+SearchRecipesHeader.propTypes = {
+  searchQuery: PropTypes.string.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired
+};
+
+export default SearchRecipesHeader;
