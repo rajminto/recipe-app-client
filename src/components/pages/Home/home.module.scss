@@ -1,20 +1,20 @@
 @import '../../../styles/mixins';
 @import '../../../styles/variables';
 
-.homeContainer{
+.homeContainer {
   @include flex-center;
   position: relative;
 
-  .welcomePanel{
+  .welcomePanel {
     @include flex-center;
     flex-direction: column;
 
-    .splashTitle{
+    .splashTitle {
       font-size: 8rem;
     }
 
-    .homeButtonWrapper{
-      button{
+    .homeButtonWrapper {
+      button {
         margin: 1rem;
         width: 17rem;
         // background-color: $dark-base;
@@ -22,7 +22,7 @@
     }
   }
 }
-.homeContainer:before{
+.homeContainer:before {
   content: ' ';
   display: block;
   position: absolute;
@@ -35,25 +35,24 @@
   background-image: url('../../../assets/svgs/food.svg');
   background-size: contain;
   background-repeat: no-repeat;
-  background-position: 40% 0;
+  background-position: 40% 50%;
 }
 
-@media only screen and (max-width: 450px){
-  .homeContainer{
-    .welcomePanel{
-
-      .splashTitle{
+@media only screen and (max-width: 450px) {
+  .homeContainer {
+    .welcomePanel {
+      .splashTitle {
         font-size: 3rem;
         margin-bottom: 2rem;
-      }  
+      }
 
-      .homeButtonWrapper{        
+      .homeButtonWrapper {
         display: flex;
         flex-direction: column;
       }
     }
   }
-  .homeContainer:before{
+  .homeContainer:before {
     background-image: url('../../../assets/svgs/food.svg');
     background-size: contain;
     background-repeat: no-repeat;
