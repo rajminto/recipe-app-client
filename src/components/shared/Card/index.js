@@ -32,12 +32,12 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.shape({})),
+  children: PropTypes.node,
   className: PropTypes.string
 };
 
 Card.defaultProps = {
-  children: [],
+  children: null,
   className: ''
 };
 

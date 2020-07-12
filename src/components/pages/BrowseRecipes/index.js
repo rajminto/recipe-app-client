@@ -26,7 +26,6 @@ const BrowseRecipes = () => {
     recipesCard,
     singleTag,
     tagsContainer,
-    tagsHeader,
     tagSelected
   } = styles;
 
@@ -50,7 +49,6 @@ const BrowseRecipes = () => {
   };
 
   const renderRecipeCards = () => {
-    // eslint-disable-next-line consistent-return
     const recipeCards = recipeData?.map(recipe => {
       const recipeSpecificTags = [];
       recipe.tags.map(tag => recipeSpecificTags.push(tag.name));
@@ -61,6 +59,7 @@ const BrowseRecipes = () => {
           </NavLink>
         );
       }
+      return null;
     });
     return recipeCards;
   };
@@ -103,7 +102,6 @@ const BrowseRecipes = () => {
 
   const tagsDasboard = (
     <Card>
-      <h2 className={tagsHeader}>Tags List</h2>
       <div className={tagsContainer}>
         {tagsMap.map(({ label, svgComponent, data_stamp }) => (
           <div
