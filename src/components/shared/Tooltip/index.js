@@ -17,11 +17,11 @@ const Tooltip = ({ tooltipPositionProps, showTooltip }) => {
       TweenMax.set(tooltipRef, { left: tooltipPositionProps.left - tooltipWidth });
       TweenMax.to(tooltipRef, 0.3, {
         autoAlpha: 1,
-        delay: 1
+        delay: 2
       });
     } else if (!showTooltip) {
       TweenMax.killTweensOf(tooltipRef);
-      TweenMax.to(tooltipRef, 0.3, {
+      TweenMax.to(tooltipRef, 0.1, {
         autoAlpha: 0
       });
     }
