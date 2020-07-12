@@ -108,11 +108,7 @@ const BrowseRecipes = () => {
     const currentTagRef = tagsRef.current[index];
     const currentTagDims = currentTagRef.getBoundingClientRect();
     const tooltipDimProps = {
-      x: currentTagDims.x,
-      y: currentTagDims.y,
-      top: currentTagDims.top,
       left: currentTagDims.left,
-      bottom: currentTagDims.bottom,
       label: tagsMap[index].label
     };
     setTooltipPositionProps(tooltipDimProps);
