@@ -1,0 +1,14 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.tooltipContainer {
+  // opacity: 1;
+  position: absolute;
+  border: 1px solid black;
+  width: 10rem;
+  height: 2rem;
+  @include flex-center;
+  p {
+    color: red;
+  }
+}

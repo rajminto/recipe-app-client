@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, createRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import styles from './BrowseRecipes.module.scss';
 import { ReactComponent as DairySVG } from '../../../assets/svgs/dairy.svg';
@@ -10,6 +10,7 @@ import { ReactComponent as VegetableSVG } from '../../../assets/svgs/vegetable.s
 // Components
 import Card from '../../shared/Card';
 import RecipeCardSmall from '../../shared/RecipeCardSmall';
+import Tooltip from '../../shared/Tooltip';
 
 // Utils
 import { baseUrl } from '../../../api';
@@ -17,7 +18,8 @@ import { baseUrl } from '../../../api';
 const BrowseRecipes = () => {
   const [recipeData, setRecipeData] = useState();
   const [chosenTags, setChosenTags] = useState([]);
-
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [tooltipPositionProps, setTooltipPositionProps] = useState({});
   const {
     browseRecipesContainer,
     headerTitle,
@@ -28,6 +30,36 @@ const BrowseRecipes = () => {
     tagsContainer,
     tagSelected
   } = styles;
+
+  const tagsMap = [
+    {
+      label: 'Contains Poultry',
+      svgComponent: <PoultrySVG />,
+      data_stamp: 'contains-poultry'
+    },
+    {
+      label: 'Contains Fish',
+      svgComponent: <FishSVG />,
+      data_stamp: 'contains-fish'
+    },
+    {
+      label: 'Contains Dairy',
+      svgComponent: <DairySVG />,
+      data_stamp: 'contains-dairy'
+    },
+    {
+      label: 'Contains Meat',
+      svgComponent: <MeatSVG />,
+      data_stamp: 'contains-meat'
+    },
+    {
+      label: 'Vegetarian',
+      svgComponent: <VegetableSVG />,
+      data_stamp: 'vegetarian'
+    }
+  ];
+
+  const tagsRef = useRef(tagsMap.map(() => createRef()));
 
   const getRecipes = () => {
     const url = `${baseUrl}/api/recipes`;
@@ -64,34 +96,6 @@ const BrowseRecipes = () => {
     return recipeCards;
   };
 
-  const tagsMap = [
-    {
-      label: 'Contains Poultry',
-      svgComponent: <PoultrySVG />,
-      data_stamp: 'contains-poultry'
-    },
-    {
-      label: 'Contains Fish',
-      svgComponent: <FishSVG />,
-      data_stamp: 'contains-fish'
-    },
-    {
-      label: 'Contains Dairy',
-      svgComponent: <DairySVG />,
-      data_stamp: 'contains-dairy'
-    },
-    {
-      label: 'Contains Meat',
-      svgComponent: <MeatSVG />,
-      data_stamp: 'contains-meat'
-    },
-    {
-      label: 'Vegetarian',
-      svgComponent: <VegetableSVG />,
-      data_stamp: 'vegetarian'
-    }
-  ];
-
   const handleTagToggle = stamp => {
     if (chosenTags.includes(stamp)) {
       setChosenTags(chosenTags.filter(e => e !== stamp));
@@ -100,18 +104,43 @@ const BrowseRecipes = () => {
     }
   };
 
+  const handleTagHover = index => {
+    const currentTagRef = tagsRef.current[index];
+    const currentTagDims = currentTagRef.getBoundingClientRect();
+    const tooltipDimProps = {
+      x: currentTagDims.x,
+      y: currentTagDims.y,
+      top: currentTagDims.top,
+      left: currentTagDims.left,
+      bottom: currentTagDims.bottom,
+      label: tagsMap[index].label
+    };
+    setTooltipPositionProps(tooltipDimProps);
+    setShowTooltip(true);
+  };
+
   const tagsDasboard = (
     <Card>
       <div className={tagsContainer}>
-        {tagsMap.map(({ label, svgComponent, data_stamp }) => (
+        {tagsMap.map(({ label, svgComponent, data_stamp }, index) => (
           <div
             className={`${singleTag} ${chosenTags.includes(data_stamp) && tagSelected}`}
             key={label}
             onClick={() => handleTagToggle(data_stamp)}
+            onMouseEnter={() => handleTagHover(index)}
+            onMouseLeave={() => setShowTooltip(false)}
+            onFocus={() => {}}
+            // eslint-disable-next-line no-return-assign
+            ref={el => (tagsRef.current[index] = el)}
           >
             {svgComponent}
           </div>
         ))}
+        <Tooltip
+          tooltipPositionProps={tooltipPositionProps}
+          setShowTooltip={setShowTooltip}
+          showTooltip={showTooltip}
+        />
       </div>
     </Card>
   );
