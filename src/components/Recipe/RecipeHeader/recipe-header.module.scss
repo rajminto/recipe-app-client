@@ -33,6 +33,14 @@ div.recipeHeaderContainer {
   }
 
   img {
-    max-width: 100%;  
+    max-width: 100%;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  div.recipeHeaderContainer {
+    .cardsContainer {
+      grid-template-columns: 1fr;
+    }
   }
 }

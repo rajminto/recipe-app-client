@@ -26,7 +26,7 @@ const Navigator = () => {
               home
             </NavLink>
             <NavLink
-              to='/add'
+              to='/recipes/create'
               className='nav-link'
               onClick={() => {
                 context.toggleMenu();
@@ -36,7 +36,17 @@ const Navigator = () => {
               add recipe
             </NavLink>
             <NavLink
-              to='/search'
+              to='/recipes/browse'
+              className='nav-link'
+              onClick={() => {
+                context.toggleMenu();
+                context.state.funcLoaded();
+              }}
+            >
+              browse recipes
+            </NavLink>
+            <NavLink
+              to='/recipes/search'
               className='nav-link'
               onClick={() => {
                 context.toggleMenu();

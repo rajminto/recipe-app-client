@@ -1,0 +1,15 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.tooltipContainer {
+  position: absolute;
+  border-radius: 0.2em;
+  background-color: $dark-grey-menu;
+  width: 10rem;
+  height: 2rem;
+  z-index: 1;
+  @include flex-center;
+  p {
+    color: $sunburn;
+  }
+}

@@ -16,8 +16,8 @@ const Home = () => {
       <div className={welcomePanel}>
         <h1 className={splashTitle}>SAVVORED</h1>
         <div className={homeButtonWrapper}>
-          <Button text='Browse Recipes' clickFunc={() => handleMainBtnClick('/recipes')} />
-          <Button text='Create Recipe' clickFunc={() => handleMainBtnClick('/add')} />
+          <Button text='Browse Recipes' clickFunc={() => handleMainBtnClick('/recipes/browse')} />
+          <Button text='Create Recipe' clickFunc={() => handleMainBtnClick('/recipes/create')} />
         </div>
       </div>
     </div>

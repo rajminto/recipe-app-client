@@ -1,8 +1,14 @@
-.recipe-container{
+.recipe-container {
   width: 90vw;
 }
-.bot-recipe-info{
+.bot-recipe-info {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1rem;
+}
+
+@media only screen and (max-width: 450px) {
+  .bot-recipe-info {
+    grid-template-columns: 1fr;
+  }
 }

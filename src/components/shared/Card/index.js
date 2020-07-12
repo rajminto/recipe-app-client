@@ -12,7 +12,6 @@ class Card extends Component {
   componentDidMount() {
     TweenLite.from(this.container, 0.7, {
       autoAlpha: 0,
-      y: 100,
       ease: Back.easeInOut
     });
   }
@@ -32,12 +31,12 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.shape({})),
+  children: PropTypes.node,
   className: PropTypes.string
 };
 
 Card.defaultProps = {
-  children: [],
+  children: null,
   className: ''
 };
 
