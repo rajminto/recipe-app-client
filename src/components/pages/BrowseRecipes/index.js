@@ -132,17 +132,17 @@ const BrowseRecipes = () => {
             {svgComponent}
           </div>
         ))}
-        <Tooltip
-          tooltipPositionProps={tooltipPositionProps}
-          setShowTooltip={setShowTooltip}
-          showTooltip={showTooltip}
-        />
       </div>
     </Card>
   );
 
   return (
     <div className={browseRecipesContainer}>
+      <Tooltip
+        tooltipPositionProps={tooltipPositionProps}
+        setShowTooltip={setShowTooltip}
+        showTooltip={showTooltip}
+      />
       {tagsDasboard}
       <Card className={recipesCard}>
         <h1 className={headerTitle}>Browse Recipes</h1>

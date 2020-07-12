@@ -12,7 +12,6 @@ class Card extends Component {
   componentDidMount() {
     TweenLite.from(this.container, 0.7, {
       autoAlpha: 0,
-      y: 100,
       ease: Back.easeInOut
     });
   }
