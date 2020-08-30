@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { string } from 'prop-types';
 import styles from './toggle-button.module.scss';
 import { ReactComponent as DeleteIcon } from '../../../assets/svgs/delete.svg';
 import { ReactComponent as AddNewIcon } from '../../../assets/svgs/plus.svg';
@@ -10,7 +10,7 @@ const ToggleButton = ({ variant }) => {
 };
 
 ToggleButton.propTypes = {
-  variant: PropTypes.string
+  variant: string
 };
 
 ToggleButton.defaultProps = {

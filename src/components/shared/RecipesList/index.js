@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { arrayOf, shape, string } from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import styles from './recipes-list.module.scss';
 
@@ -21,8 +21,8 @@ const RecipesList = ({ title, recipes }) => {
 };
 
 RecipesList.propTypes = {
-  recipes: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  title: PropTypes.string.isRequired
+  recipes: arrayOf(shape({})).isRequired,
+  title: string.isRequired
 };
 
 export default RecipesList;

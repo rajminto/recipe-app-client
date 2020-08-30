@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { string } from 'prop-types';
 import styles from './recipe-header.module.scss';
 
 import Card from '../../shared/Card';
@@ -24,12 +24,12 @@ const RecipeHeader = ({ name, user_name, img_url, description, prep_time, cook_t
 );
 
 RecipeHeader.propTypes = {
-  name: PropTypes.string.isRequired,
-  user_name: PropTypes.string.isRequired,
-  img_url: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  prep_time: PropTypes.string.isRequired,
-  cook_time: PropTypes.string.isRequired
+  name: string.isRequired,
+  user_name: string.isRequired,
+  img_url: string.isRequired,
+  description: string.isRequired,
+  prep_time: string.isRequired,
+  cook_time: string.isRequired
 };
 
 export default RecipeHeader;

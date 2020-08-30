@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { TimelineMax, TweenMax, Power1 } from 'gsap';
+import { bool } from 'prop-types';
+import { gsap } from 'gsap';
 import { Transition } from 'react-transition-group';
-import { DrawSVGPlugin } from '../../../utils/gsap/DrawSVGPlugin';
+import { DrawSVGPlugin } from 'gsap/DrawSVGPlugin';
 import styles from './check-animation.module.scss';
 
 class CheckAnimation extends Component {
@@ -13,9 +13,13 @@ class CheckAnimation extends Component {
     this.check = null;
   }
 
+  componentDidMount() {
+    gsap.registerPlugin(DrawSVGPlugin);
+  }
+
   setCheck = () => {
-    TweenMax.set(this.circle, { drawSVG: '0%' });
-    TweenMax.set(this.check, {
+    gsap.set(this.circle, { drawSVG: '0%' });
+    gsap.set(this.check, {
       drawSVG: '0%',
       onComplete: () => {
         this.animateCheck();
@@ -24,17 +28,18 @@ class CheckAnimation extends Component {
   };
 
   animateCheck = () => {
-    const tl = new TimelineMax();
-    tl.to(this.circle, 0.6, { drawSVG: '0% 100%', ease: Power1.easeIn }).to(this.check, 0.4, {
-      drawSVG: '0% 100%',
-      ease: Power1.easeIn
-    });
+    const tl = gsap.timeline();
+    tl.to(this.circle, { duration: 0.6, drawSVG: '0% 100%', ease: 'power1.easeIn' }).to(
+      this.check,
+      {
+        duration: 0.4,
+        drawSVG: '0% 100%',
+        ease: 'power1.easeIn'
+      }
+    );
   };
 
   render() {
-    // TODO:: this wont be an issue once we refactor to GSAP 3
-    // eslint-disable-next-line no-console
-    console.log(DrawSVGPlugin);
     const { animationContainer, circle, check } = styles;
     return (
       <Transition
@@ -44,7 +49,7 @@ class CheckAnimation extends Component {
         onEntering={this.setCheck}
         in={this.props.formValid}
         onExit={node => {
-          TweenMax.to(node, 0.5, { autoAlpha: 0 });
+          gsap.to(node, { duration: 0.5, autoAlpha: 0 });
         }}
       >
         <div className={animationContainer}>
@@ -74,6 +79,6 @@ class CheckAnimation extends Component {
 }
 
 CheckAnimation.propTypes = {
-  formValid: PropTypes.bool.isRequired
+  formValid: bool.isRequired
 };
 export default CheckAnimation;

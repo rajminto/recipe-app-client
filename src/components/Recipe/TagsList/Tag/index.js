@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { string } from 'prop-types';
 import styles from './tag.module.scss';
 
 const Tag = ({ name }) => (
@@ -9,7 +9,7 @@ const Tag = ({ name }) => (
 );
 
 Tag.propTypes = {
-  name: PropTypes.string.isRequired
+  name: string.isRequired
 };
 
 export default Tag;

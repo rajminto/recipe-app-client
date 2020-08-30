@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { arrayOf, bool, func, shape, string } from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import styles from './recipes-list-scroll.module.scss';
@@ -34,10 +34,10 @@ const RecipesListScroll = ({ title, recipes, fetchMoreRecipes, moreRecipes }) =>
 };
 
 RecipesListScroll.propTypes = {
-  fetchMoreRecipes: PropTypes.func.isRequired,
-  moreRecipes: PropTypes.bool.isRequired,
-  recipes: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-  title: PropTypes.string.isRequired
+  fetchMoreRecipes: func.isRequired,
+  moreRecipes: bool.isRequired,
+  recipes: arrayOf(shape({})).isRequired,
+  title: string.isRequired
 };
 
 export default RecipesListScroll;

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { arrayOf, shape } from 'prop-types';
 import styles from './tags-list.module.scss';
 
 // Component Imports
@@ -12,7 +12,7 @@ const TagsList = ({ tags }) => {
 };
 
 TagsList.propTypes = {
-  tags: PropTypes.arrayOf(PropTypes.shape({})).isRequired
+  tags: arrayOf(shape({})).isRequired
 };
 
 export default TagsList;

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { shape, string } from 'prop-types';
 import styles from './profile-header.module.scss';
 
 import Card from '../../../shared/Card';
@@ -31,10 +31,10 @@ const ProfileHeader = ({ user }) => {
 };
 
 ProfileHeader.propTypes = {
-  user: PropTypes.shape({
-    avatar_url: PropTypes.string.isRequired,
-    bio: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired
+  user: shape({
+    avatar_url: string.isRequired,
+    bio: string.isRequired,
+    name: string.isRequired
   }).isRequired
 };
 

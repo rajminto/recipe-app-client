@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { TweenLite, Back } from 'gsap';
+import { node, string } from 'prop-types';
+import { gsap } from 'gsap';
 import styles from './card.module.scss';
 
 class Card extends Component {
@@ -10,9 +10,10 @@ class Card extends Component {
   }
 
   componentDidMount() {
-    TweenLite.from(this.container, 0.7, {
+    gsap.from(this.container, {
+      duration: 0.7,
       autoAlpha: 0,
-      ease: Back.easeInOut
+      ease: 'back.easeInOut'
     });
   }
 
@@ -31,8 +32,8 @@ class Card extends Component {
 }
 
 Card.propTypes = {
-  children: PropTypes.node,
-  className: PropTypes.string
+  children: node,
+  className: string
 };
 
 Card.defaultProps = {

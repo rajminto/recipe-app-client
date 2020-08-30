@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TimelineMax, TweenLite, Power3 } from 'gsap';
+import { gsap } from 'gsap';
 import styles from './loader.module.scss';
 
 class Loader extends Component {
@@ -12,32 +12,32 @@ class Loader extends Component {
   }
 
   componentDidMount() {
-    TweenLite.set(this.leftFlame, { autoAlpha: 0 });
-    TweenLite.set(this.rightFlame, { autoAlpha: 0 });
-    TweenLite.set(this.centerFlame, { autoAlpha: 0 });
+    gsap.set(this.leftFlame, { autoAlpha: 0 });
+    gsap.set(this.rightFlame, { autoAlpha: 0 });
+    gsap.set(this.centerFlame, { autoAlpha: 0 });
     this.fireAnimation();
   }
 
   fireAnimation = () => {
-    const tl = new TimelineMax({ repeat: -1 });
+    const tl = gsap.timeline({ repeat: -1 });
     const flames = [this.leftFlame, this.rightFlame, this.centerFlame];
-    tl.staggerTo(
+    tl.to(
       flames,
-      0.5,
       {
+        duration: 0.5,
         autoAlpha: 1,
-        ease: Power3.easeInOut
+        stagger: 0.13,
+        ease: 'power3.easeInOut'
       },
-      0.13,
       '-=.1'
-    ).staggerTo(
+    ).to(
       flames,
-      0.5,
       {
+        duration: 0.5,
+        stagger: 0.13,
         autoAlpha: 0,
-        ease: Power3.easeInOut
+        ease: 'power3.easeInOut'
       },
-      0.13,
       '-=.1'
     );
   };

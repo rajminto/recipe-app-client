@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { TweenMax, Back } from 'gsap';
+import { bool, func, string } from 'prop-types';
+import { gsap } from 'gsap';
 import { Transition } from 'react-transition-group';
 import styles from './alert.module.scss';
 import Button from '../Button';
@@ -21,10 +21,11 @@ class Alert extends Component {
         unmountOnExit
         in={showAlert}
         addEndListener={(node, done) => {
-          TweenMax.to(node, 0.5, {
+          gsap.to(node, {
+            duration: 0.5,
             y: showAlert ? 0 : 400,
             autoAlpha: showAlert ? 1 : 0,
-            ease: showAlert ? Back.easeOut : Back.easeIn,
+            ease: showAlert ? 'back.easeOut' : 'back.easeIn',
             onComplete: done
           });
         }}
@@ -40,10 +41,10 @@ class Alert extends Component {
 }
 
 Alert.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  showAlert: PropTypes.bool.isRequired,
-  subText: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired
+  onClose: func.isRequired,
+  showAlert: bool.isRequired,
+  subText: string.isRequired,
+  text: string.isRequired
 };
 
 export default Alert;

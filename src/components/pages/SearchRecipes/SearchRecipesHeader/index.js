@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { func, string } from 'prop-types';
 import styles from './search-recipes-header.module.scss';
 
 import Card from '../../../shared/Card';
@@ -28,9 +28,9 @@ const SearchRecipesHeader = ({ searchQuery, handleChange, handleSubmit }) => {
 };
 
 SearchRecipesHeader.propTypes = {
-  searchQuery: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  handleSubmit: PropTypes.func.isRequired
+  searchQuery: string.isRequired,
+  handleChange: func.isRequired,
+  handleSubmit: func.isRequired
 };
 
 export default SearchRecipesHeader;
