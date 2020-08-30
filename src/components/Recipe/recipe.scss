@@ -32,4 +32,11 @@
   .bot-recipe-info {
     grid-template-columns: 1fr;
   }
+
+  .tags-container {
+    .single-tag {
+      height: 2rem;
+      width: 2rem;
+    }
+  }
 }
