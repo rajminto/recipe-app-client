@@ -1,0 +1,22 @@
+@import '../../../styles/variables';
+@import '../../../styles/mixins';
+
+.starContainer {
+  height: 4rem;
+  width: 4rem;
+
+  svg {
+    height: 90%;
+    width: 90%;
+    stroke: $dark-highlight;
+    fill: $dark-grey-base;
+    stroke-width: 2rem;
+    transition: 0.3s ease-in-out;
+  }
+}
+.filled {
+  svg {
+    fill: $dark-highlight;
+    transition: 0.3s ease-in-out;
+  }
+}

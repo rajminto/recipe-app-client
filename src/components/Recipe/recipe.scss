@@ -1,3 +1,6 @@
+@import '../../styles/mixins';
+@import '../../styles/variables';
+
 .recipe-container {
   width: 90vw;
 }
@@ -7,8 +10,33 @@
   grid-gap: 1rem;
 }
 
+.tags-container {
+  display: flex;
+  justify-content: space-around;
+
+  .single-tag {
+    height: 5rem;
+    width: 5rem;
+    @include flex-center;
+
+    svg {
+      height: 100%;
+      width: 100%;
+      fill: $dark-highlight;
+      transition: fill 0.2s;
+    }
+  }
+}
+
 @media only screen and (max-width: 450px) {
   .bot-recipe-info {
     grid-template-columns: 1fr;
+  }
+
+  .tags-container {
+    .single-tag {
+      height: 2rem;
+      width: 2rem;
+    }
   }
 }

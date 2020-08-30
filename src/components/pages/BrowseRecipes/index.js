@@ -6,6 +6,7 @@ import { ReactComponent as FishSVG } from '../../../assets/svgs/fish.svg';
 import { ReactComponent as MeatSVG } from '../../../assets/svgs/meat.svg';
 import { ReactComponent as PoultrySVG } from '../../../assets/svgs/meat2.svg';
 import { ReactComponent as VegetableSVG } from '../../../assets/svgs/vegetable.svg';
+import { ReactComponent as BreadSVG } from '../../../assets/svgs/bread.svg';
 
 // Components
 import Card from '../../shared/Card';
@@ -56,6 +57,11 @@ const BrowseRecipes = () => {
       label: 'Vegetarian',
       svgComponent: <VegetableSVG />,
       data_stamp: 'vegetarian'
+    },
+    {
+      label: 'Contains Bread',
+      svgComponent: <BreadSVG />,
+      data_stamp: 'contains-gluten'
     }
   ];
 

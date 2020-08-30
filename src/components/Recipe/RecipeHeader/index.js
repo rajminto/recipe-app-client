@@ -3,9 +3,13 @@ import { string } from 'prop-types';
 import styles from './recipe-header.module.scss';
 
 import Card from '../../shared/Card';
+import Star from '../../shared/Star';
 
 const RecipeHeader = ({ name, user_name, img_url, description, prep_time, cook_time }) => (
   <Card className={styles.recipeHeaderContainer}>
+    <div className={styles.starWrap}>
+      <Star handleStarClick={() => console.log('star clicked')} />
+    </div>
     <div className={styles.title}>
       <h1> {name} </h1> <h3> By: {user_name} </h3>
     </div>
