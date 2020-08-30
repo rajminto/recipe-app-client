@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { func, string } from 'prop-types';
 import styles from './button.module.scss';
 
 const Button = ({ clickFunc, text }) => {
@@ -13,8 +13,8 @@ const Button = ({ clickFunc, text }) => {
 };
 
 Button.propTypes = {
-  clickFunc: PropTypes.func,
-  text: PropTypes.string.isRequired
+  clickFunc: func,
+  text: string.isRequired
 };
 
 Button.defaultProps = {

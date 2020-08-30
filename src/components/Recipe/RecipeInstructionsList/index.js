@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { arrayOf, shape } from 'prop-types';
 import styles from './recipe-instructions-list.module.scss';
 
 // Component Imports
@@ -24,7 +24,7 @@ const RecipeInstructionsList = ({ instructions }) => {
 };
 
 RecipeInstructionsList.propTypes = {
-  instructions: PropTypes.arrayOf(PropTypes.shape({})).isRequired
+  instructions: arrayOf(shape({})).isRequired
 };
 
 export default RecipeInstructionsList;

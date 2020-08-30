@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { arrayOf, number, shape, string } from 'prop-types';
 import styles from './recipe-ingredients-list.module.scss';
 
 // Component imports
@@ -20,10 +20,10 @@ const RecipeIngredientsList = ({ ingredients }) => {
 };
 
 RecipeIngredientsList.propTypes = {
-  ingredients: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired
+  ingredients: arrayOf(
+    shape({
+      name: string.isRequired,
+      id: number.isRequired
     })
   ).isRequired
 };

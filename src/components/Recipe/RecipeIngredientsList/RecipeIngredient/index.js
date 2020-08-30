@@ -1,16 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { string } from 'prop-types';
 import './recipe-ingredient.module.scss';
 
-const RecipeIngredient = ({ name, quantity }) => (
-  <p>
-    {quantity} {name}
-  </p>
-);
+const RecipeIngredient = ({ name }) => {
+  return <p>{name}</p>;
+};
 
 RecipeIngredient.propTypes = {
-  name: PropTypes.string.isRequired,
-  quantity: PropTypes.string.isRequired
+  name: string.isRequired
 };
 
 export default RecipeIngredient;

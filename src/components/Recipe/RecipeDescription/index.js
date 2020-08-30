@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { string } from 'prop-types';
 import styles from './recipe-description.module.scss';
 
 const RecipeDescription = ({ description, prep_time, cook_time }) => {
@@ -14,9 +14,9 @@ const RecipeDescription = ({ description, prep_time, cook_time }) => {
 };
 
 RecipeDescription.propTypes = {
-  description: PropTypes.string.isRequired,
-  prep_time: PropTypes.string.isRequired,
-  cook_time: PropTypes.string.isRequired
+  description: string.isRequired,
+  prep_time: string.isRequired,
+  cook_time: string.isRequired
 };
 
 export default RecipeDescription;

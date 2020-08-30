@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { arrayOf, shape, string } from 'prop-types';
 import './recipe.scss';
 
 // Component Imports
@@ -40,18 +40,20 @@ const Recipe = ({ recipe }) => {
 };
 
 Recipe.propTypes = {
-  recipe: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    instructions: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-    ingredients: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
-    description: PropTypes.string.isRequired,
-    img_url: PropTypes.string.isRequired,
-    prep_time: PropTypes.string.isRequired,
-    cook_time: PropTypes.string.isRequired,
-    tags: PropTypes.arrayOf(PropTypes.string).isRequired,
-    users: PropTypes.shape({
-      name: PropTypes.string.isRequired
-    }).isRequired
+  recipe: shape({
+    name: string.isRequired,
+    instructions: arrayOf(shape({})).isRequired,
+    ingredients: arrayOf(shape({})).isRequired,
+    description: string.isRequired,
+    img_url: string.isRequired,
+    prep_time: string.isRequired,
+    cook_time: string.isRequired,
+    tags: arrayOf(shape({})).isRequired,
+    users: arrayOf(
+      shape({
+        name: string.isRequired
+      })
+    ).isRequired
   }).isRequired
 };
 

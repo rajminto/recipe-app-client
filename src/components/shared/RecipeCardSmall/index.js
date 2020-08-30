@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import { shape, string } from 'prop-types';
 import styles from './recipe-card-small.module.scss';
 
 import Card from '../Card';
@@ -16,11 +16,11 @@ const RecipeCardSmall = ({ recipe }) => {
 };
 
 RecipeCardSmall.propTypes = {
-  recipe: PropTypes.shape({
-    cook_time: PropTypes.string.isRequired,
-    img_url: PropTypes.string.isRequired,
-    name: PropTypes.string.isRequired,
-    prep_time: PropTypes.string.isRequired
+  recipe: shape({
+    cook_time: string.isRequired,
+    img_url: string.isRequired,
+    name: string.isRequired,
+    prep_time: string.isRequired
   }).isRequired
 };
 

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { shape, string } from 'prop-types';
 import { baseUrl } from '../../../api';
 
 // Component imports
 import Recipe from '../../Recipe';
-import Alert from '../../shared/Alert';
 import Loader from '../../shared/Loader';
 
 class RecipeDetail extends Component {
@@ -15,7 +14,7 @@ class RecipeDetail extends Component {
       isLoaded: false,
       error: false,
       message: '',
-      showAlert: false
+      showAlert: true
     };
   }
 
@@ -62,11 +61,6 @@ class RecipeDetail extends Component {
 
     return (
       <div className='home-container'>
-        <Alert
-          showAlert={this.state.showAlert}
-          subText='Please Create A Recipe'
-          onClose={this.onClose}
-        />
         {isLoaded ? <Recipe recipe={this.state.recipe} /> : <Loader />}
       </div>
     );
@@ -74,9 +68,9 @@ class RecipeDetail extends Component {
 }
 
 RecipeDetail.propTypes = {
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      id: PropTypes.number.isRequired
+  match: shape({
+    params: shape({
+      id: string.isRequired
     }).isRequired
   }).isRequired
 };
