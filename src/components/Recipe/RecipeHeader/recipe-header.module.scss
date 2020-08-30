@@ -4,11 +4,19 @@ div.recipeHeaderContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
 
   .title {
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+
+  .starWrap {
+    position: absolute;
+    top: 2.2em;
+    right: 2.2em;
+    cursor: pointer;
   }
 
   .cardsContainer {

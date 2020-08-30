@@ -3,62 +3,66 @@
 
 /* PARTIALS IMPORTS */
 @import 'variables';
+@import 'mixins';
 @import 'add-recipe';
 
-*{
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  -webkit-tap-highlight-color:  rgba(255, 255, 255, 0); 
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
 }
 
-html{
+html {
   background-color: $dark-base;
   font-family: $main-font;
 }
 
-h1, h2, h3, p, li, label{
+h1,
+h2,
+h3,
+p,
+li,
+label {
   color: $text-color;
 }
 
-h1{
+h1 {
   font-size: 2.2rem;
   color: $dark-highlight;
 }
 
-h2{
+h2 {
   font-size: 1.5rem;
 }
 
-h3{
+h3 {
   font-size: 1.3rem;
 }
 
-p{
+p {
   font-size: 1.1rem;
   line-height: 1.5;
 }
 
-li{
+li {
   font-size: 1.1rem;
-  margin-top: .6rem;
+  margin-top: 0.6rem;
   //ADD POTENTIAL RIGHT MARGIN TO BEFORE's
 }
 
-input, textarea{
+input,
+textarea {
   background-color: $light-grey-base;
   border: none;
   color: $text-color;
 
-  input:focus, textarea:focus{
+  input:focus,
+  textarea:focus {
     outline: none;
     border: none;
   }
 }
-
-
-
-
 
 /* TRANSITION GROUP CLASSES */
 
