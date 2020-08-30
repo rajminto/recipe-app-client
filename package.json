@@ -20,7 +20,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && surge ./build https://recipe-app-client.surge.sh"
+    "deploy": "npm run build && surge ./build https://recipe-app-client.surge.sh",
+    "test_coverage": "npm run test -- --coverage --watchAll=false"
   },
   "browserslist": [
     ">0.2%",
