@@ -20,7 +20,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && surge ./build https://recipe-app-client.surge.sh"
+    "deploy": "npm run build && surge ./build https://recipe-app-client.surge.sh",
+    "test_coverage": "npm run test -- --coverage --watchAll=false"
   },
   "browserslist": [
     ">0.2%",
@@ -29,6 +30,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^10.4.9",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
