@@ -29,6 +29,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@testing-library/react": "^10.4.9",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.10.0",
@@ -46,5 +47,10 @@
     "jsxSingleQuote": true,
     "tabWidth": 2,
     "useTabs": false
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!(gsap/DrawSVGPlugin)/)"
+    ]
   }
 }
