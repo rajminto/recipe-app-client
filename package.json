@@ -50,7 +50,7 @@
   },
   "jest": {
     "transformIgnorePatterns": [
-      "node_modules/(?!(gsap/DrawSVGPlugin)/)"
+      "node_modules/(?!(gsap|DrawSVGPlugin)/)"
     ]
   }
 }
