@@ -6,6 +6,12 @@ import Card from '../../shared/Card';
 import Button from '../../shared/Button';
 import ToggleButton from '../../shared/ToggleButton';
 import { baseUrl } from '../../../api';
+import { ReactComponent as DairySVG } from '../../../assets/svgs/dairy.svg';
+import { ReactComponent as FishSVG } from '../../../assets/svgs/fish.svg';
+import { ReactComponent as MeatSVG } from '../../../assets/svgs/meat.svg';
+import { ReactComponent as PoultrySVG } from '../../../assets/svgs/meat2.svg';
+import { ReactComponent as VegetableSVG } from '../../../assets/svgs/vegetable.svg';
+import { ReactComponent as BreadSVG } from '../../../assets/svgs/bread.svg';
 
 const AddRecipe = () => {
   const {
@@ -15,7 +21,11 @@ const AddRecipe = () => {
     deleteButtonWrapper,
     ingredientInstructionInput,
     ingredientInstructionInputWrapper,
-    toggleSwitchContainer
+    toggleSwitchContainer,
+    tagsContainer,
+    tagsSection,
+    tagSelected,
+    tagWrapper
   } = styles;
 
   const [recipeInfo, setRecipeInfo] = useState({
@@ -31,6 +41,34 @@ const AddRecipe = () => {
   const [isRecipePrivate, setRecipePrivate] = useState(false);
   const [ingredients, setIngredients] = useState([{ name: '' }]);
   const [instructions, setInstructions] = useState([{ description: '' }]);
+  const [tags, setTags] = useState([]);
+
+  const tagIconMap = [
+    {
+      name: 'contains-poultry',
+      icon: <PoultrySVG />
+    },
+    {
+      name: 'contains-fish',
+      icon: <FishSVG />
+    },
+    {
+      name: 'contains-dairy',
+      icon: <DairySVG />
+    },
+    {
+      name: 'contains-meat',
+      icon: <MeatSVG />
+    },
+    {
+      name: 'vegetarian',
+      icon: <VegetableSVG />
+    },
+    {
+      name: 'contains-gluten',
+      icon: <BreadSVG />
+    }
+  ];
 
   const handleInputChange = e => {
     setRecipeInfo({ ...recipeInfo, [e.target.name]: e.target.value });
@@ -49,9 +87,11 @@ const AddRecipe = () => {
     setRecipePrivate(false);
     setInstructions([{ description: '' }]);
     setIngredients([{ name: '' }]);
+    setTags([]);
   };
 
   const postNewRecipe = async recipe => {
+    console.log('RECIPE::', recipe);
     const options = {
       method: 'POST',
       credentials: 'include',
@@ -79,9 +119,9 @@ const AddRecipe = () => {
         instruction.order = i + 1;
         return instruction;
       }),
-      isPrivate: isRecipePrivate
+      isPrivate: isRecipePrivate,
+      tags
     };
-    // console.log(recipe);
     postNewRecipe(recipe);
   };
 
@@ -133,6 +173,12 @@ const AddRecipe = () => {
   const deleteInstruction = index => {
     const newInstructions = instructions.filter((instruction, i) => i !== index);
     setInstructions(newInstructions);
+  };
+
+  const handleToggleTag = name => {
+    !tags.includes(name)
+      ? setTags([...tags, name])
+      : setTags(tags.filter(tagName => tagName !== name));
   };
 
   const { name, description, img_url, prep_time, cook_time } = recipeInfo;
@@ -189,6 +235,20 @@ const AddRecipe = () => {
             />
             <span className={`${styles.slider} ${styles.round}`} />
           </label>
+        </div>
+        <div className={tagsSection}>
+          <label>Select Tags:</label>
+          <div className={tagsContainer}>
+            {tagIconMap.map((tag, index) => (
+              <div
+                key={index}
+                className={`${tagWrapper} ${tags.includes(tag.name) && tagSelected}`}
+                onClick={() => handleToggleTag(tag.name)}
+              >
+                {tag.icon}
+              </div>
+            ))}
+          </div>
         </div>
         <h1>Add Ingredients</h1>
         {ingredients.map((ingredient, i) => (
