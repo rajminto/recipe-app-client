@@ -3,8 +3,8 @@ import Recipe from './index';
 import { setEditModeActivated } from './store/recipeCreationSlice';
 
 const mapState = state => ({
-  editModeActivated: state.createRecipe,
-  recipe: state.createRecipe
+  editModeActivated: state.createRecipe.recipeCreationSlice.editModeActivated,
+  recipe: state.createRecipe.recipeCreationSlice.recipe
 });
 
 const mapDispatch = {

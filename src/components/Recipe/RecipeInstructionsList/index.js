@@ -8,12 +8,12 @@ import RecipeInstruction from './RecipeInstruction';
 import Card from '../../shared/Card';
 import EditRecipeInstruction from './EditRecipeInstruction';
 
-const RecipeInstructionsList = ({ instructions }) => {
+const RecipeInstructionsList = ({ instructions, editModeActivated }) => {
   const context = useContext(Context);
   const { container, instructionsListCard } = styles;
 
   const instructionsCompononents = instructions.map(instruction => {
-    if (context.state.editModeActivated) {
+    if (editModeActivated) {
       return (
         <EditRecipeInstruction
           key={instruction.id}

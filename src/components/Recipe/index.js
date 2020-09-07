@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { arrayOf, shape, string } from 'prop-types';
+import { arrayOf, bool, shape, string, func } from 'prop-types';
 import './recipe.scss';
 import { gsap } from 'gsap';
 
@@ -15,7 +15,7 @@ import { ReactComponent as PoultrySVG } from '../../assets/svgs/meat2.svg';
 import { ReactComponent as VegetableSVG } from '../../assets/svgs/vegetable.svg';
 import { ReactComponent as BreadSVG } from '../../assets/svgs/bread.svg';
 
-const Recipe = ({ recipe, recipeInfo, editModeActivated }) => {
+const Recipe = ({ recipe, recipeInfo, editModeActivated, setEditModeActivated }) => {
   const {
     name,
     description,
@@ -27,6 +27,8 @@ const Recipe = ({ recipe, recipeInfo, editModeActivated }) => {
     ingredients,
     tags
   } = recipeInfo;
+
+  console.log(editModeActivated);
 
   const getIcon = type => {
     switch (type) {
@@ -61,6 +63,8 @@ const Recipe = ({ recipe, recipeInfo, editModeActivated }) => {
         description={description}
         prep_time={prep_time}
         cook_time={cook_time}
+        editModeActivated={editModeActivated}
+        setEditModeActivated={setEditModeActivated}
       />
       <Card>
         <div className='tags-container'>
@@ -72,15 +76,24 @@ const Recipe = ({ recipe, recipeInfo, editModeActivated }) => {
         </div>
       </Card>
       <div className='bot-recipe-info'>
-        <RecipeIngredientsList ingredients={ingredients} />
-        <RecipeInstructionsList instructions={instructions} />
+        <RecipeIngredientsList
+          ingredients={ingredients}
+          editModeActivated={editModeActivated}
+          setEditModeActivated={setEditModeActivated}
+        />
+        <RecipeInstructionsList
+          instructions={instructions}
+          editModeActivated={editModeActivated}
+          setEditModeActivated={setEditModeActivated}
+        />
       </div>
     </div>
   );
 };
 
 Recipe.propTypes = {
-  recipe: shape({
+  recipe: shape({}).isRequired,
+  recipeInfo: shape({
     name: string.isRequired,
     instructions: arrayOf(shape({})).isRequired,
     ingredients: arrayOf(shape({})).isRequired,
@@ -94,7 +107,9 @@ Recipe.propTypes = {
         name: string.isRequired
       })
     ).isRequired
-  }).isRequired
+  }).isRequired,
+  editModeActivated: bool.isRequired,
+  setEditModeActivated: func.isRequired
 };
 
 export default Recipe;

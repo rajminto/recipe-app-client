@@ -7,7 +7,16 @@ import { Context } from '../../../context';
 import Card from '../../shared/Card';
 import Star from '../../shared/Star';
 
-const RecipeHeader = ({ name, user_name, img_url, description, prep_time, cook_time }) => {
+const RecipeHeader = ({
+  name,
+  user_name,
+  img_url,
+  description,
+  prep_time,
+  cook_time,
+  editModeActivated,
+  setEditModeActivated
+}) => {
   const [editModeChosen, setEditModeChosen] = useState(false);
   const context = useContext(Context);
   const {
@@ -32,8 +41,9 @@ const RecipeHeader = ({ name, user_name, img_url, description, prep_time, cook_t
         <div
           className={`${editIcon} ${editModeChosen && editIconSelected}`}
           onClick={() => {
+            console.log(editModeActivated);
             handleToggleEditMode();
-            context.toggleEditModeActivation();
+            setEditModeActivated(!editModeActivated);
           }}
         >
           <EditPencilSVG />

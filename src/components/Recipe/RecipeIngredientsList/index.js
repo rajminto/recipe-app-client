@@ -8,11 +8,11 @@ import RecipeIngredient from './RecipeIngredient';
 import Card from '../../shared/Card';
 import EditRecipeIngredient from './EditRecipeIngredient';
 
-const RecipeIngredientsList = ({ ingredients }) => {
+const RecipeIngredientsList = ({ ingredients, editModeActivated }) => {
   const context = useContext(Context);
 
   const ingredientComponents = ingredients.map(ingredient => {
-    if (context.state.editModeActivated) {
+    if (editModeActivated) {
       return <EditRecipeIngredient key={ingredient.id} name={ingredient.name} />;
     }
     return <RecipeIngredient key={ingredient.id} name={ingredient.name} />;
