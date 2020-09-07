@@ -3,7 +3,7 @@ import { shape, string } from 'prop-types';
 import { baseUrl } from '../../../api';
 
 // Component imports
-import Recipe from '../../Recipe';
+import Recipe from '../../Recipe/Recipe.connector';
 import Loader from '../../shared/Loader';
 
 class RecipeDetail extends Component {
@@ -61,7 +61,7 @@ class RecipeDetail extends Component {
 
     return (
       <div className='home-container'>
-        {isLoaded ? <Recipe recipe={this.state.recipe} /> : <Loader />}
+        {isLoaded ? <Recipe recipeInfo={this.state.recipe} /> : <Loader />}
       </div>
     );
   }

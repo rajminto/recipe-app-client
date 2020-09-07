@@ -1,24 +1,40 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { arrayOf, shape } from 'prop-types';
 import styles from './recipe-instructions-list.module.scss';
+import { Context } from '../../../context';
 
 // Component Imports
 import RecipeInstruction from './RecipeInstruction';
 import Card from '../../shared/Card';
+import EditRecipeInstruction from './EditRecipeInstruction';
 
 const RecipeInstructionsList = ({ instructions }) => {
-  const instructionsCompononents = instructions.map(instruction => (
-    <RecipeInstruction
-      key={instruction.id}
-      description={instruction.description}
-      order={instruction.order}
-    />
-  ));
+  const context = useContext(Context);
+  const { container, instructionsListCard } = styles;
+
+  const instructionsCompononents = instructions.map(instruction => {
+    if (context.state.editModeActivated) {
+      return (
+        <EditRecipeInstruction
+          key={instruction.id}
+          description={instruction.description}
+          order={instruction.order}
+        />
+      );
+    }
+    return (
+      <RecipeInstruction
+        key={instruction.id}
+        description={instruction.description}
+        order={instruction.order}
+      />
+    );
+  });
 
   return (
-    <Card className={styles.container}>
+    <Card className={container}>
       <h2>Instructions</h2>
-      <Card className={styles.instructionsListCard}>{instructionsCompononents}</Card>
+      <Card className={instructionsListCard}>{instructionsCompononents}</Card>
     </Card>
   );
 };

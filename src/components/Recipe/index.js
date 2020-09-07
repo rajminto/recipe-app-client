@@ -15,7 +15,7 @@ import { ReactComponent as PoultrySVG } from '../../assets/svgs/meat2.svg';
 import { ReactComponent as VegetableSVG } from '../../assets/svgs/vegetable.svg';
 import { ReactComponent as BreadSVG } from '../../assets/svgs/bread.svg';
 
-const Recipe = ({ recipe }) => {
+const Recipe = ({ recipe, recipeInfo, editModeActivated }) => {
   const {
     name,
     description,
@@ -26,7 +26,7 @@ const Recipe = ({ recipe }) => {
     instructions,
     ingredients,
     tags
-  } = recipe;
+  } = recipeInfo;
 
   const getIcon = type => {
     switch (type) {
