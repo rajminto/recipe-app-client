@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { string } from 'prop-types';
 import styles from './recipe-header.module.scss';
 import { ReactComponent as EditPencilSVG } from '../../../assets/svgs/pencil.svg';
+import { Context } from '../../../context';
 
 import Card from '../../shared/Card';
 import Star from '../../shared/Star';
 
 const RecipeHeader = ({ name, user_name, img_url, description, prep_time, cook_time }) => {
   const [editModeChosen, setEditModeChosen] = useState(false);
+  const context = useContext(Context);
   const {
     editIcon,
     editIconSelected,
@@ -29,7 +31,10 @@ const RecipeHeader = ({ name, user_name, img_url, description, prep_time, cook_t
       <div className={headerIconWrap}>
         <div
           className={`${editIcon} ${editModeChosen && editIconSelected}`}
-          onClick={handleToggleEditMode}
+          onClick={() => {
+            handleToggleEditMode();
+            context.toggleEditModeActivation();
+          }}
         >
           <EditPencilSVG />
         </div>

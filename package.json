@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^1.4.0",
     "gsap": "file:src/utils/gsap/gsap-bonus.tgz",
     "node-sass": "^4.11.0",
     "prop-types": "^15.7.2",
+    "ramda": "^0.27.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-infinite-scroll-component": "^4.5.2",
@@ -20,7 +22,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "deploy": "npm run build && surge ./build https://savvored.com",
+    "deploy": "npm run build && mv ./build/index.html ./build/200.html && surge ./build 'savvored.com'",
     "test_coverage": "npm run test -- --coverage --watchAll=false"
   },
   "browserslist": [

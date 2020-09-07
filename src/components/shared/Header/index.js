@@ -1,41 +1,31 @@
-import React, { Component } from 'react';
+import React, { useContext, useState } from 'react';
 import styles from './header.module.scss';
-import { Consumer, Context } from '../../../context';
+import { Context } from '../../../context';
 import MenuIcon from '../MenuIcon';
 import { ReactComponent as CarrotSVG } from '../../../assets/svgs/food.svg';
 
-class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      menuOpen: false
-    };
-  }
+const Header = () => {
+  const [menuOpen] = useState(false);
+  const context = useContext(Context);
 
-  render() {
-    const { carrotSvgWrap, container, iconBox, closed, companyName, mainLogo } = styles;
+  const { carrotSvgWrap, container, iconBox, closed, companyName, mainLogo } = styles;
 
-    return (
-      <Consumer>
-        {context => (
-          <div className={container}>
-            <div
-              className={context.state.isMenuOpen ? iconBox : `${iconBox} ${closed}`}
-              onClick={context.toggleMenu}
-            >
-              <MenuIcon menuOpen={this.state.menuOpen} />
-            </div>
-            <div className={mainLogo}>
-              <h1 className={companyName}>SAVVORED</h1>
-              <div className={carrotSvgWrap}>
-                <CarrotSVG />
-              </div>
-            </div>
-          </div>
-        )}
-      </Consumer>
-    );
-  }
-}
-Header.contextType = Context;
+  return (
+    <div className={container}>
+      <div
+        className={context.state.isMenuOpen ? iconBox : `${iconBox} ${closed}`}
+        onClick={context.toggleMenu}
+      >
+        <MenuIcon menuOpen={menuOpen} />
+      </div>
+      <div className={mainLogo}>
+        <h1 className={companyName}>SAVVORED</h1>
+        <div className={carrotSvgWrap}>
+          <CarrotSVG />
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default Header;

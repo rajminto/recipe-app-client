@@ -7,7 +7,8 @@ export class Provider extends Component {
   state = {
     isMenuOpen: false,
     // eslint-disable-next-line react/no-unused-state
-    funcLoaded: null
+    funcLoaded: null,
+    editModeActivated: false
   };
 
   sendToContextState = (key, value) => {
@@ -23,6 +24,12 @@ export class Provider extends Component {
     this.setState({ funcLoaded: ammoFunc });
   };
 
+  toggleEditModeActivation = () => {
+    this.setState({
+      editModeActivated: !this.state.editModeActivated
+    });
+  };
+
   render() {
     return (
       <Context.Provider
@@ -30,7 +37,8 @@ export class Provider extends Component {
           state: this.state,
           sendToContextState: this.sendToContextState,
           toggleMenu: this.toggleMenu,
-          funcGun: this.funcGun
+          funcGun: this.funcGun,
+          toggleEditModeActivation: this.toggleEditModeActivation
         }}
       >
         {this.props.children}
