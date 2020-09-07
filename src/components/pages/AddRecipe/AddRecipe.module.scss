@@ -73,7 +73,6 @@
     .addNewButtonWrapper {
       display: flex;
       align-items: center;
-      justify-content: flex-end;
       border-radius: 0.3em;
 
       label {
@@ -83,10 +82,9 @@
     .toggleSwitchContainer {
       display: flex;
       align-items: center;
-      justify-content: space-between;
 
       label:first-child {
-        margin-right: 1rem;
+        margin-right: 3rem;
       }
     }
 
@@ -180,6 +178,12 @@
             width: 100%;
           }
         }
+      }
+      .toggleSwitchContainer {
+        justify-content: space-between;
+      }
+      .addNewButtonWrapper {
+        justify-content: flex-end;
       }
     }
   }

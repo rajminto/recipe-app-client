@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { arrayOf, shape, string } from 'prop-types';
 import './recipe.scss';
+import { gsap } from 'gsap';
 
 // Component Imports
 import Card from '../shared/Card';
@@ -45,6 +46,10 @@ const Recipe = ({ recipe }) => {
         return null;
     }
   };
+
+  useEffect(() => {
+    gsap.from('.single-tag', { duration: 1, x: -1000, autoAlpha: 0, stagger: '0.5' }, '-=.5');
+  }, []);
 
   return (
     <div className='recipe-container'>
