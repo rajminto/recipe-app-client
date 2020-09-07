@@ -1,31 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { string } from 'prop-types';
 import styles from './recipe-header.module.scss';
+import { ReactComponent as EditPencilSVG } from '../../../assets/svgs/pencil.svg';
 
 import Card from '../../shared/Card';
 import Star from '../../shared/Star';
 
-const RecipeHeader = ({ name, user_name, img_url, description, prep_time, cook_time }) => (
-  <Card className={styles.recipeHeaderContainer}>
-    <div className={styles.starWrap}>
-      <Star handleStarClick={() => console.log('star clicked')} />
-    </div>
-    <div className={styles.title}>
-      <h1> {name} </h1> <h3> By: {user_name} </h3>
-    </div>
-    <div className={styles.cardsContainer}>
-      <Card className={styles.headerCard}>
-        <img src={img_url} className={styles.recThumb} alt='food_pic' />
-      </Card>
-      <Card className={styles.headerCard}>
-        <p> {description} </p>
-        <div className={styles.timesContainer}>
-          <p> Prep: {prep_time} </p> <p> Cook: {cook_time} </p>
+const RecipeHeader = ({ name, user_name, img_url, description, prep_time, cook_time }) => {
+  const [editModeChosen, setEditModeChosen] = useState(false);
+  const {
+    editIcon,
+    editIconSelected,
+    cardsContainer,
+    headerCard,
+    timesContainer,
+    recThumb,
+    headerIconWrap,
+    recipeHeaderContainer,
+    title
+  } = styles;
+
+  const handleToggleEditMode = () => {
+    setEditModeChosen(!editModeChosen);
+  };
+
+  return (
+    <Card className={recipeHeaderContainer}>
+      <div className={headerIconWrap}>
+        <div
+          className={`${editIcon} ${editModeChosen && editIconSelected}`}
+          onClick={handleToggleEditMode}
+        >
+          <EditPencilSVG />
         </div>
-      </Card>
-    </div>
-  </Card>
-);
+        <Star handleStarClick={() => console.log('star clicked')} />
+      </div>
+      <div className={title}>
+        <h1> {name} </h1> <h3> By: {user_name} </h3>
+      </div>
+      <div className={cardsContainer}>
+        <Card className={headerCard}>
+          <img src={img_url} className={recThumb} alt='food_pic' />
+        </Card>
+        <Card className={headerCard}>
+          <p> {description} </p>
+          <div className={timesContainer}>
+            <p> Prep: {prep_time} </p> <p> Cook: {cook_time} </p>
+          </div>
+        </Card>
+      </div>
+    </Card>
+  );
+};
 
 RecipeHeader.propTypes = {
   name: string.isRequired,

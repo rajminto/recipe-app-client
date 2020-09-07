@@ -12,11 +12,32 @@ div.recipeHeaderContainer {
     align-items: center;
   }
 
-  .starWrap {
+  .headerIconWrap {
     position: absolute;
+    display: flex;
+    align-items: center;
     top: 2.2em;
     right: 2.2em;
     cursor: pointer;
+
+    .editIcon {
+      height: 3rem;
+      width: 3rem;
+      margin-right: 1rem;
+
+      svg {
+        height: 100%;
+        width: 100%;
+        fill: $dark-highlight;
+        transition: fill 0.3s ease-in-out;
+      }
+    }
+    .editIconSelected {
+      svg {
+        fill: $dark-highlight-2;
+        transition: fill 0.3s ease-in-out;
+      }
+    }
   }
 
   .cardsContainer {
