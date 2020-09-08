@@ -11,7 +11,7 @@ import Login from '../pages/Login';
 import Profile from '../pages/Profile';
 import Navigator from '../shared/Navigator';
 import SearchRecipes from '../pages/SearchRecipes';
-import RecipeDetail from '../pages/RecipeDetail';
+import RecipeDetail from '../pages/RecipeDetail/RecipeDetail.connector';
 import BrowseRecipes from '../pages/BrowseRecipes';
 
 const PageContent = () => {

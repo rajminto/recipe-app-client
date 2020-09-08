@@ -4,11 +4,17 @@
 .editInputWrapper {
   display: flex;
   align-items: center;
+  width: 90%;
 
-  p {
+  .editOrderNumber {
     margin-right: 0.3rem;
+    width: 1rem;
   }
+
   .editInput {
+    margin: 0;
+    margin-right: 1rem;
+    margin-left: 1rem;
     margin-bottom: 1rem;
     font-size: 1rem;
     height: 2rem;

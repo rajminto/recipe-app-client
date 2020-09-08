@@ -3,6 +3,9 @@
 
 .editInputWrapper {
   display: flex;
+  p {
+    margin-right: 0.3rem;
+  }
   .editInput {
     margin-bottom: 1rem;
     font-size: 1rem;

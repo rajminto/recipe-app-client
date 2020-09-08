@@ -1,8 +1,7 @@
-import React, { useContext, useState } from 'react';
-import { string } from 'prop-types';
+import React, { useState } from 'react';
+import { string, bool, func } from 'prop-types';
 import styles from './recipe-header.module.scss';
 import { ReactComponent as EditPencilSVG } from '../../../assets/svgs/pencil.svg';
-import { Context } from '../../../context';
 
 import Card from '../../shared/Card';
 import Star from '../../shared/Star';
@@ -18,7 +17,6 @@ const RecipeHeader = ({
   setEditModeActivated
 }) => {
   const [editModeChosen, setEditModeChosen] = useState(false);
-  const context = useContext(Context);
   const {
     editIcon,
     editIconSelected,
@@ -41,7 +39,6 @@ const RecipeHeader = ({
         <div
           className={`${editIcon} ${editModeChosen && editIconSelected}`}
           onClick={() => {
-            console.log(editModeActivated);
             handleToggleEditMode();
             setEditModeActivated(!editModeActivated);
           }}
@@ -69,6 +66,8 @@ const RecipeHeader = ({
 };
 
 RecipeHeader.propTypes = {
+  editModeActivated: bool.isRequired,
+  setEditModeActivated: func.isRequired,
   name: string.isRequired,
   user_name: string.isRequired,
   img_url: string.isRequired,

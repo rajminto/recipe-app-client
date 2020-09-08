@@ -1,25 +1,55 @@
-import React, { useContext } from 'react';
-import { arrayOf, shape } from 'prop-types';
+import React, { useState } from 'react';
+import { arrayOf, shape, bool } from 'prop-types';
 import styles from './recipe-instructions-list.module.scss';
-import { Context } from '../../../context';
 
 // Component Imports
 import RecipeInstruction from './RecipeInstruction';
+import ToggleButton from '../../shared/ToggleButton';
 import Card from '../../shared/Card';
 import EditRecipeInstruction from './EditRecipeInstruction';
 
-const RecipeInstructionsList = ({ instructions, editModeActivated }) => {
-  const context = useContext(Context);
-  const { container, instructionsListCard } = styles;
+const RecipeInstructionsList = ({ instructions, editModeActivated, setRecipeInfo, recipeInfo }) => {
+  const {
+    container,
+    instructionsListCard,
+    ingredientInstructionInput,
+    deleteButtonWrapper
+  } = styles;
 
-  const instructionsCompononents = instructions.map(instruction => {
+  const deleteInstruction = index => {
+    const newInstructions = instructions.filter((instruction, i) => i !== index);
+    setRecipeInfo({ ...recipeInfo, instructions: newInstructions });
+  };
+
+  const updateInstructionList = (id, value) => {
+    const newInstructions = instructions.map((instruction, i) => {
+      if (i === id) {
+        instruction.description = value;
+      }
+      return instruction;
+    });
+    setRecipeInfo({ ...recipeInfo, instructions: newInstructions });
+  };
+
+  const handleInstructionChange = (value, id) => {
+    updateInstructionList(id, value);
+  };
+
+  const instructionsCompononents = instructions.map((instruction, i) => {
     if (editModeActivated) {
       return (
-        <EditRecipeInstruction
-          key={instruction.id}
-          description={instruction.description}
-          order={instruction.order}
-        />
+        <div className={ingredientInstructionInput} key={instruction.id}>
+          <EditRecipeInstruction
+            instructionId={instruction.id}
+            description={instruction.description}
+            order={instruction.order}
+            handleInstructionChange={handleInstructionChange}
+            recipeInfo={recipeInfo}
+          />
+          <div className={deleteButtonWrapper} onClick={() => deleteInstruction(i)}>
+            <ToggleButton variant='delete' />
+          </div>
+        </div>
       );
     }
     return (
@@ -40,6 +70,7 @@ const RecipeInstructionsList = ({ instructions, editModeActivated }) => {
 };
 
 RecipeInstructionsList.propTypes = {
+  editModeActivated: bool.isRequired,
   instructions: arrayOf(shape({})).isRequired
 };
 

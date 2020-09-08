@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { func, shape, string, number, bool, arrayOf } from 'prop-types';
 import styles from './AddRecipe.module.scss';
 import Card from '../../shared/Card';
@@ -13,7 +13,7 @@ import { ReactComponent as PoultrySVG } from '../../../assets/svgs/meat2.svg';
 import { ReactComponent as VegetableSVG } from '../../../assets/svgs/vegetable.svg';
 import { ReactComponent as BreadSVG } from '../../../assets/svgs/bread.svg';
 
-const AddRecipe = ({ postNewRecipe, recipeInfo, setRecipeInfo }) => {
+const AddRecipe = ({ postNewRecipe, recipeInfo, setRecipeInfo, clearForm }) => {
   const {
     addNewButtonWrapper,
     createRecipeForm,
@@ -67,25 +67,13 @@ const AddRecipe = ({ postNewRecipe, recipeInfo, setRecipeInfo }) => {
     }
   ];
 
+  useEffect(() => {
+    clearForm();
+  });
+
   const handleInputChange = e => {
     setRecipeInfo({ ...recipeInfo, [e.target.name]: e.target.value });
   };
-
-  // const clearForm = () => {
-  //   setRecipeInfo({
-  //     name: '',
-  //     description: '',
-  //     img_url:
-  //       'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/190130-tacos-al-pastor-horizontal-1-1549571422.png',
-  //     prep_time: '',
-  //     cook_time: '',
-  //     userId: null
-  //   });
-  //   setRecipePrivate(false);
-  //   setInstructions([{ description: '' }]);
-  //   setIngredients([{ name: '' }]);
-  //   setTags([]);
-  // };
 
   const handleFormSubmit = e => {
     e.preventDefault();
@@ -274,6 +262,7 @@ const AddRecipe = ({ postNewRecipe, recipeInfo, setRecipeInfo }) => {
 };
 
 AddRecipe.propTypes = {
+  clearForm: func.isRequired,
   postNewRecipe: func.isRequired,
   recipeInfo: shape({
     name: string,

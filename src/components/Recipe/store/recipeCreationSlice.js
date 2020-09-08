@@ -12,6 +12,7 @@ const initialState = {
     prep_time: '',
     cook_time: '',
     userId: null,
+    users: [],
     isPrivate: false,
     ingredients: [{ name: '' }],
     instructions: [{ description: '' }],
@@ -23,8 +24,8 @@ const reducers = {
   setEditModeActivated(state, { payload }) {
     return R.assoc('editModeActivated', payload, state);
   },
-  clearForm(state, { payload }) {
-    return R.assoc('recipe', payload, state);
+  clearForm(state) {
+    return R.assoc('recipeInfo', initialState.recipeInfo, state);
   },
   setInstructionsList(state, { payload }) {
     return R.assoc('instructions', payload, state);

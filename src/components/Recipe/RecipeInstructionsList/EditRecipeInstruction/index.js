@@ -1,16 +1,18 @@
 import React from 'react';
-import { string } from 'prop-types';
+import { func, number, shape } from 'prop-types';
 import styles from './EditRecipeInstruction.module.scss';
 
-const EditRecipeInstruction = ({ description, order }) => {
+const EditRecipeInstruction = ({ order, handleInstructionChange, instructionId, recipeInfo }) => {
+  const { editInputWrapper, editInput, editOrderNumber } = styles;
+
   return (
-    <div className={styles.editInputWrapper}>
-      <p>{order}.</p>
+    <div className={editInputWrapper}>
+      <p className={editOrderNumber}>{order}.</p>
       <input
-        className={styles.editInput}
+        className={editInput}
         type='text'
-        value={description}
-        onChange={() => console.log('clicked')}
+        value={recipeInfo.instructions[instructionId - 1].description}
+        onChange={e => handleInstructionChange(e.target.value, instructionId)}
         required
       />
     </div>
@@ -18,8 +20,10 @@ const EditRecipeInstruction = ({ description, order }) => {
 };
 
 EditRecipeInstruction.propTypes = {
-  description: string.isRequired,
-  order: string.isRequired
+  order: number.isRequired,
+  recipeInfo: shape({}).isRequired,
+  handleInstructionChange: func.isRequired,
+  instructionId: number.isRequired
 };
 
 export default EditRecipeInstruction;

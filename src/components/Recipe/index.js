@@ -8,7 +8,7 @@ import { gsap } from 'gsap';
 import Card from '../shared/Card';
 import RecipeHeader from './RecipeHeader';
 import RecipeIngredientsList from './RecipeIngredientsList';
-import RecipeInstructionsList from './RecipeInstructionsList';
+import RecipeInstructionsList from './RecipeInstructionsList/RecipeInstructionList.connector';
 import { ReactComponent as DairySVG } from '../../assets/svgs/dairy.svg';
 import { ReactComponent as FishSVG } from '../../assets/svgs/fish.svg';
 import { ReactComponent as MeatSVG } from '../../assets/svgs/meat.svg';
@@ -19,7 +19,7 @@ import { ReactComponent as BreadSVG } from '../../assets/svgs/bread.svg';
 // Utils
 import { tagList } from '../../const';
 
-const Recipe = ({ recipe, recipeInfo, editModeActivated, setEditModeActivated }) => {
+const Recipe = ({ recipeInfo, editModeActivated, setEditModeActivated }) => {
   const {
     name,
     description,
@@ -55,14 +55,16 @@ const Recipe = ({ recipe, recipeInfo, editModeActivated, setEditModeActivated })
   };
 
   useEffect(() => {
-    gsap.from('.single-tag', { duration: 1, x: -1000, autoAlpha: 0, stagger: '0.5' }, '-=.5');
+    if (tags.length) {
+      gsap.from('.single-tag', { duration: 1, x: -1000, autoAlpha: 0, stagger: '0.5' }, '-=.5');
+    }
   }, []);
 
   return (
     <div className='recipe-container'>
       <RecipeHeader
         name={name}
-        user_name={users[0].name}
+        user_name={users[0]?.name}
         img_url={img_url}
         tags={tags}
         description={description}
@@ -74,12 +76,12 @@ const Recipe = ({ recipe, recipeInfo, editModeActivated, setEditModeActivated })
       <Card>
         <div className='tags-container'>
           {!editModeActivated
-            ? tags.map(({ id, name: icon_name }) => (
+            ? tags?.map(({ id, name: icon_name }) => (
                 <div className='single-tag' key={id} onFocus={() => {}}>
                   {getIcon(icon_name)}
                 </div>
               ))
-            : tagList.map(tag => (
+            : tagList?.map(tag => (
                 <div
                   className={
                     tagListPlucked.includes(tag) ? 'single-tag selected-tag' : 'single-tag'
@@ -109,7 +111,6 @@ const Recipe = ({ recipe, recipeInfo, editModeActivated, setEditModeActivated })
 };
 
 Recipe.propTypes = {
-  recipe: shape({}).isRequired,
   recipeInfo: shape({
     name: string.isRequired,
     instructions: arrayOf(shape({})).isRequired,
