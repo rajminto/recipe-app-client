@@ -4,7 +4,7 @@ import { baseUrl } from '../../../api';
 
 const initialState = {
   editModeActivated: false,
-  recipe: {
+  recipeInfo: {
     name: '',
     description: '',
     img_url:
@@ -12,9 +12,9 @@ const initialState = {
     prep_time: '',
     cook_time: '',
     userId: null,
-    isPrivate: null,
-    ingredients: [],
-    instructions: [],
+    isPrivate: false,
+    ingredients: [{ name: '' }],
+    instructions: [{ description: '' }],
     tags: []
   }
 };
@@ -31,6 +31,12 @@ const reducers = {
   },
   setIngredientsList(state, { payload }) {
     return R.assoc('ingredients', payload, state);
+  },
+  setRecipePrivate(state, { payload }) {
+    return R.assoc('isPrivate', payload, state);
+  },
+  setRecipeInfo(state, { payload }) {
+    return R.assoc('recipeInfo', payload, state);
   }
 };
 
@@ -40,7 +46,14 @@ const { actions, reducer } = createSlice({
   reducers
 });
 
-export const { clearForm, setEditModeActivated, setInstructionsList, setIngredientsList } = actions;
+export const {
+  clearForm,
+  setEditModeActivated,
+  setInstructionsList,
+  setIngredientsList,
+  setRecipePrivate,
+  setRecipeInfo
+} = actions;
 
 export const postNewRecipe = recipe => async dispatch => {
   const options = {
@@ -55,7 +68,7 @@ export const postNewRecipe = recipe => async dispatch => {
     const res = await fetch(`${baseUrl}/api/recipes`, options);
     const response = await res.json();
     if (response.success) {
-      dispatch(clearForm(initialState.recipe)); // TODO: Update UI in failure conditions
+      dispatch(clearForm(initialState.recipeInfo)); // TODO: Update UI in failure conditions
     }
   } catch (err) {
     // eslint-disable-next-line no-console

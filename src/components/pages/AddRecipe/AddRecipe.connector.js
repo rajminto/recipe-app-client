@@ -1,13 +1,14 @@
 import { connect } from 'react-redux';
 import AddRecipe from './index';
-import { postNewRecipe } from '../../Recipe/store/recipeCreationSlice';
+import { postNewRecipe, setRecipeInfo } from '../../Recipe/store/recipeCreationSlice';
 
 const mapState = state => ({
-  recipe: state.createRecipe.recipeCreationSlice.recipe
+  recipeInfo: state.createRecipe.recipeCreationSlice.recipeInfo
 });
 
 const mapDispatch = {
-  postNewRecipe
+  postNewRecipe,
+  setRecipeInfo
 };
 
 export default connect(mapState, mapDispatch)(AddRecipe);

@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
-import { func } from 'prop-types';
+import React from 'react';
+import { func, shape, string, number, bool, arrayOf } from 'prop-types';
 import styles from './AddRecipe.module.scss';
 import Card from '../../shared/Card';
 import Button from '../../shared/Button';
@@ -13,7 +13,7 @@ import { ReactComponent as PoultrySVG } from '../../../assets/svgs/meat2.svg';
 import { ReactComponent as VegetableSVG } from '../../../assets/svgs/vegetable.svg';
 import { ReactComponent as BreadSVG } from '../../../assets/svgs/bread.svg';
 
-const AddRecipe = ({ postNewRecipe }) => {
+const AddRecipe = ({ postNewRecipe, recipeInfo, setRecipeInfo }) => {
   const {
     addNewButtonWrapper,
     createRecipeForm,
@@ -28,20 +28,17 @@ const AddRecipe = ({ postNewRecipe }) => {
     tagWrapper
   } = styles;
 
-  const [recipeInfo, setRecipeInfo] = useState({
-    name: '',
-    description: '',
-    img_url:
-      'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/190130-tacos-al-pastor-horizontal-1-1549571422.png',
-    prep_time: '',
-    cook_time: '',
-    userId: null
-  });
-
-  const [isRecipePrivate, setRecipePrivate] = useState(false);
-  const [ingredients, setIngredients] = useState([{ name: '' }]);
-  const [instructions, setInstructions] = useState([{ description: '' }]);
-  const [tags, setTags] = useState([]);
+  const {
+    ingredients,
+    instructions,
+    isPrivate,
+    tags,
+    name,
+    description,
+    img_url,
+    prep_time,
+    cook_time
+  } = recipeInfo;
 
   const tagIconMap = [
     {
@@ -74,21 +71,21 @@ const AddRecipe = ({ postNewRecipe }) => {
     setRecipeInfo({ ...recipeInfo, [e.target.name]: e.target.value });
   };
 
-  const clearForm = () => {
-    setRecipeInfo({
-      name: '',
-      description: '',
-      img_url:
-        'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/190130-tacos-al-pastor-horizontal-1-1549571422.png',
-      prep_time: '',
-      cook_time: '',
-      userId: null
-    });
-    setRecipePrivate(false);
-    setInstructions([{ description: '' }]);
-    setIngredients([{ name: '' }]);
-    setTags([]);
-  };
+  // const clearForm = () => {
+  //   setRecipeInfo({
+  //     name: '',
+  //     description: '',
+  //     img_url:
+  //       'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/190130-tacos-al-pastor-horizontal-1-1549571422.png',
+  //     prep_time: '',
+  //     cook_time: '',
+  //     userId: null
+  //   });
+  //   setRecipePrivate(false);
+  //   setInstructions([{ description: '' }]);
+  //   setIngredients([{ name: '' }]);
+  //   setTags([]);
+  // };
 
   const handleFormSubmit = e => {
     e.preventDefault();
@@ -99,14 +96,14 @@ const AddRecipe = ({ postNewRecipe }) => {
         instruction.order = i + 1;
         return instruction;
       }),
-      isPrivate: isRecipePrivate,
+      isPrivate,
       tags
     };
     postNewRecipe(recipe);
   };
 
   const handleIsPrivate = () => {
-    setRecipePrivate(!isRecipePrivate);
+    setRecipeInfo({ ...recipeInfo, isPrivate: !isPrivate });
   };
 
   const updateIngredientList = (index, value) => {
@@ -116,7 +113,7 @@ const AddRecipe = ({ postNewRecipe }) => {
       }
       return ingredient;
     });
-    setIngredients(newIngredients);
+    setRecipeInfo({ ...recipeInfo, ingredients: newIngredients });
   };
 
   const handleIngredientChange = (value, i) => {
@@ -124,12 +121,12 @@ const AddRecipe = ({ postNewRecipe }) => {
   };
 
   const addNewIngredient = () => {
-    setIngredients([...ingredients, { name: '' }]);
+    setRecipeInfo({ ...recipeInfo, ingredients: [...ingredients, { name: '' }] });
   };
 
   const deleteIngredient = index => {
     const newIngredients = ingredients.filter((ingredient, i) => i !== index);
-    setIngredients(newIngredients);
+    setRecipeInfo({ ...recipeInfo, ingredients: newIngredients });
   };
 
   const updateInstructionList = (index, value) => {
@@ -139,7 +136,7 @@ const AddRecipe = ({ postNewRecipe }) => {
       }
       return instruction;
     });
-    setInstructions(newInstructions);
+    setRecipeInfo({ ...recipeInfo, instructions: newInstructions });
   };
 
   const handleInstructionChange = (value, i) => {
@@ -147,21 +144,19 @@ const AddRecipe = ({ postNewRecipe }) => {
   };
 
   const addNewInstruction = () => {
-    setInstructions([...instructions, { description: '' }]);
+    setRecipeInfo({ ...recipeInfo, instructions: [...instructions, { description: '' }] });
   };
 
   const deleteInstruction = index => {
     const newInstructions = instructions.filter((instruction, i) => i !== index);
-    setInstructions(newInstructions);
+    setRecipeInfo({ ...recipeInfo, instructions: newInstructions });
   };
 
-  const handleToggleTag = name => {
-    !tags.includes(name)
-      ? setTags([...tags, name])
-      : setTags(tags.filter(tagName => tagName !== name));
+  const handleToggleTag = tag => {
+    !tags.includes(tag)
+      ? setRecipeInfo({ ...recipeInfo, tags: [...tags, tag] })
+      : setRecipeInfo({ ...recipeInfo, tags: tags.filter(tagName => tagName !== name) });
   };
-
-  const { name, description, img_url, prep_time, cook_time } = recipeInfo;
 
   return (
     <Card className={createRecipeFormContainer}>
@@ -210,8 +205,8 @@ const AddRecipe = ({ postNewRecipe }) => {
               type='checkbox'
               name='isPrivate'
               onChange={handleIsPrivate}
-              checked={isRecipePrivate}
-              value={isRecipePrivate}
+              checked={isPrivate}
+              value={isPrivate}
             />
             <span className={`${styles.slider} ${styles.round}`} />
           </label>
@@ -222,7 +217,7 @@ const AddRecipe = ({ postNewRecipe }) => {
             {tagIconMap.map((tag, index) => (
               <div
                 key={index}
-                className={`${tagWrapper} ${tags.includes(tag.name) && tagSelected}`}
+                className={`${tagWrapper} ${tags?.includes(tag.name) && tagSelected}`}
                 onClick={() => handleToggleTag(tag.name)}
               >
                 {tag.icon}
@@ -231,7 +226,7 @@ const AddRecipe = ({ postNewRecipe }) => {
           </div>
         </div>
         <h1>Add Ingredients</h1>
-        {ingredients.map((ingredient, i) => (
+        {ingredients?.map((ingredient, i) => (
           <div className={ingredientInstructionInputWrapper} key={i}>
             <label>{i + 1}. </label>
             <div className={ingredientInstructionInput}>
@@ -252,7 +247,7 @@ const AddRecipe = ({ postNewRecipe }) => {
           <ToggleButton variant='plus' />
         </div>
         <h1>Add Instructions</h1>
-        {instructions.map((instruction, i) => (
+        {instructions?.map((instruction, i) => (
           <div className={ingredientInstructionInputWrapper} key={i}>
             <label>{i + 1}. </label>
             <div className={ingredientInstructionInput}>
@@ -279,7 +274,19 @@ const AddRecipe = ({ postNewRecipe }) => {
 };
 
 AddRecipe.propTypes = {
-  postNewRecipe: func.isRequired
+  postNewRecipe: func.isRequired,
+  recipeInfo: shape({
+    name: string,
+    description: string,
+    img_url: string,
+    prep_time: string,
+    cook_time: string,
+    userId: number,
+    isPrivate: bool,
+    ingredients: arrayOf(shape({})),
+    instructions: arrayOf(shape({}))
+  }).isRequired,
+  setRecipeInfo: func.isRequired
 };
 
 export default AddRecipe;
