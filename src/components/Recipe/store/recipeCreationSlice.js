@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import * as R from 'ramda';
+import { baseUrl } from '../../../api';
 
 const initialState = {
   editModeActivated: false,
@@ -21,6 +22,15 @@ const initialState = {
 const reducers = {
   setEditModeActivated(state, { payload }) {
     return R.assoc('editModeActivated', payload, state);
+  },
+  clearForm(state, { payload }) {
+    return R.assoc('recipe', payload, state);
+  },
+  setInstructionsList(state, { payload }) {
+    return R.assoc('instructions', payload, state);
+  },
+  setIngredientsList(state, { payload }) {
+    return R.assoc('ingredients', payload, state);
   }
 };
 
@@ -30,6 +40,27 @@ const { actions, reducer } = createSlice({
   reducers
 });
 
-export const { setEditModeActivated } = actions;
+export const { clearForm, setEditModeActivated, setInstructionsList, setIngredientsList } = actions;
+
+export const postNewRecipe = recipe => async dispatch => {
+  const options = {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(recipe)
+  };
+  try {
+    const res = await fetch(`${baseUrl}/api/recipes`, options);
+    const response = await res.json();
+    if (response.success) {
+      dispatch(clearForm(initialState.recipe)); // TODO: Update UI in failure conditions
+    }
+  } catch (err) {
+    // eslint-disable-next-line no-console
+    console.log('Error:', err);
+  }
+};
 
 export default reducer;

@@ -4,7 +4,7 @@ import styles from './page-content.module.scss';
 
 // COMPONENT IMPORT //
 import Home from '../pages/Home';
-import AddRecipe from '../pages/AddRecipe';
+import AddRecipe from '../pages/AddRecipe/AddRecipe.connector';
 import NotFound from '../pages/NotFound';
 import Register from '../pages/Register';
 import Login from '../pages/Login';

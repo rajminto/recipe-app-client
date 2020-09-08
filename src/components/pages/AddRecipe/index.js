@@ -1,11 +1,11 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useState } from 'react';
+import { func } from 'prop-types';
 import styles from './AddRecipe.module.scss';
 import Card from '../../shared/Card';
 import Button from '../../shared/Button';
 import ToggleButton from '../../shared/ToggleButton';
-import { baseUrl } from '../../../api';
 import { ReactComponent as DairySVG } from '../../../assets/svgs/dairy.svg';
 import { ReactComponent as FishSVG } from '../../../assets/svgs/fish.svg';
 import { ReactComponent as MeatSVG } from '../../../assets/svgs/meat.svg';
@@ -13,7 +13,7 @@ import { ReactComponent as PoultrySVG } from '../../../assets/svgs/meat2.svg';
 import { ReactComponent as VegetableSVG } from '../../../assets/svgs/vegetable.svg';
 import { ReactComponent as BreadSVG } from '../../../assets/svgs/bread.svg';
 
-const AddRecipe = () => {
+const AddRecipe = ({ postNewRecipe }) => {
   const {
     addNewButtonWrapper,
     createRecipeForm,
@@ -88,26 +88,6 @@ const AddRecipe = () => {
     setInstructions([{ description: '' }]);
     setIngredients([{ name: '' }]);
     setTags([]);
-  };
-
-  const postNewRecipe = async recipe => {
-    console.log('RECIPE::', recipe);
-    const options = {
-      method: 'POST',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(recipe)
-    };
-    try {
-      const res = await fetch(`${baseUrl}/api/recipes`, options);
-      const response = await res.json();
-      if (response.success) clearForm(); // TODO: Update UI in failure conditions
-    } catch (err) {
-      // eslint-disable-next-line no-console
-      console.log('Error:', err);
-    }
   };
 
   const handleFormSubmit = e => {
@@ -297,6 +277,11 @@ const AddRecipe = () => {
     </Card>
   );
 };
+
+AddRecipe.propTypes = {
+  postNewRecipe: func.isRequired
+};
+
 export default AddRecipe;
 
 // ***PARAMS*** //
