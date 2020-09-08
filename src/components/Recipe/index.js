@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { arrayOf, bool, shape, string, func } from 'prop-types';
+import * as R from 'ramda';
 import './recipe.scss';
 import { gsap } from 'gsap';
 
@@ -15,6 +16,9 @@ import { ReactComponent as PoultrySVG } from '../../assets/svgs/meat2.svg';
 import { ReactComponent as VegetableSVG } from '../../assets/svgs/vegetable.svg';
 import { ReactComponent as BreadSVG } from '../../assets/svgs/bread.svg';
 
+// Utils
+import { tagList } from '../../const';
+
 const Recipe = ({ recipe, recipeInfo, editModeActivated, setEditModeActivated }) => {
   const {
     name,
@@ -28,7 +32,8 @@ const Recipe = ({ recipe, recipeInfo, editModeActivated, setEditModeActivated })
     tags
   } = recipeInfo;
 
-  console.log(editModeActivated);
+  // returns an array of just the tag 'name's :: string
+  const tagListPlucked = R.pluck('name', tags);
 
   const getIcon = type => {
     switch (type) {
@@ -68,11 +73,23 @@ const Recipe = ({ recipe, recipeInfo, editModeActivated, setEditModeActivated })
       />
       <Card>
         <div className='tags-container'>
-          {tags.map(({ id, name: icon_name }) => (
-            <div className='single-tag' key={id} onFocus={() => {}}>
-              {getIcon(icon_name)}
-            </div>
-          ))}
+          {!editModeActivated
+            ? tags.map(({ id, name: icon_name }) => (
+                <div className='single-tag' key={id} onFocus={() => {}}>
+                  {getIcon(icon_name)}
+                </div>
+              ))
+            : tagList.map(tag => (
+                <div
+                  className={
+                    tagListPlucked.includes(tag) ? 'single-tag selected-tag' : 'single-tag'
+                  }
+                  key={tag}
+                  onFocus={() => {}}
+                >
+                  {getIcon(tag)}
+                </div>
+              ))}
         </div>
       </Card>
       <div className='bot-recipe-info'>

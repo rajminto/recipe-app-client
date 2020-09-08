@@ -26,6 +26,12 @@
       transition: fill 0.2s;
     }
   }
+  .selected-tag {
+    svg {
+      fill: $dark-highlight-2;
+      transition: fill 0.2s;
+    }
+  }
 }
 
 @media only screen and (max-width: 450px) {
