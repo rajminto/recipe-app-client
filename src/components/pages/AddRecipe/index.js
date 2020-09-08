@@ -1,6 +1,6 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { func, shape, string, number, bool, arrayOf } from 'prop-types';
 import styles from './AddRecipe.module.scss';
 import Card from '../../shared/Card';
@@ -40,6 +40,9 @@ const AddRecipe = ({ postNewRecipe, recipeInfo, setRecipeInfo, clearForm }) => {
     cook_time
   } = recipeInfo;
 
+  const [instructionsList, setInstructionsList] = useState([{ description: '' }]);
+  const [ingredientsList, setIngredientsList] = useState([{ name: '' }]);
+
   const tagIconMap = [
     {
       name: 'contains-poultry',
@@ -69,7 +72,7 @@ const AddRecipe = ({ postNewRecipe, recipeInfo, setRecipeInfo, clearForm }) => {
 
   useEffect(() => {
     clearForm();
-  });
+  }, []);
 
   const handleInputChange = e => {
     setRecipeInfo({ ...recipeInfo, [e.target.name]: e.target.value });
@@ -95,13 +98,13 @@ const AddRecipe = ({ postNewRecipe, recipeInfo, setRecipeInfo, clearForm }) => {
   };
 
   const updateIngredientList = (index, value) => {
-    const newIngredients = ingredients.map((ingredient, i) => {
+    const newIngredients = ingredientsList.map((ingredient, i) => {
       if (i === index) {
         ingredient.name = value;
       }
       return ingredient;
     });
-    setRecipeInfo({ ...recipeInfo, ingredients: newIngredients });
+    setIngredientsList(newIngredients);
   };
 
   const handleIngredientChange = (value, i) => {
@@ -118,13 +121,13 @@ const AddRecipe = ({ postNewRecipe, recipeInfo, setRecipeInfo, clearForm }) => {
   };
 
   const updateInstructionList = (index, value) => {
-    const newInstructions = instructions.map((instruction, i) => {
+    const newInstructions = instructionsList.map((instruction, i) => {
       if (i === index) {
         instruction.description = value;
       }
       return instruction;
     });
-    setRecipeInfo({ ...recipeInfo, instructions: newInstructions });
+    setInstructionsList(newInstructions);
   };
 
   const handleInstructionChange = (value, i) => {
@@ -214,13 +217,13 @@ const AddRecipe = ({ postNewRecipe, recipeInfo, setRecipeInfo, clearForm }) => {
           </div>
         </div>
         <h1>Add Ingredients</h1>
-        {ingredients?.map((ingredient, i) => (
+        {ingredients.map((ingredient, i) => (
           <div className={ingredientInstructionInputWrapper} key={i}>
             <label>{i + 1}. </label>
             <div className={ingredientInstructionInput}>
               <input
                 type='text'
-                value={ingredients[i].name}
+                value={ingredientsList[i].name}
                 onChange={e => handleIngredientChange(e.target.value, i)}
                 required
               />
@@ -235,13 +238,13 @@ const AddRecipe = ({ postNewRecipe, recipeInfo, setRecipeInfo, clearForm }) => {
           <ToggleButton variant='plus' />
         </div>
         <h1>Add Instructions</h1>
-        {instructions?.map((instruction, i) => (
+        {instructionsList.map((instruction, i) => (
           <div className={ingredientInstructionInputWrapper} key={i}>
             <label>{i + 1}. </label>
             <div className={ingredientInstructionInput}>
               <input
                 type='text'
-                value={instructions[i].description}
+                value={instructionsList[i].description}
                 onChange={e => handleInstructionChange(e.target.value, i)}
                 required
               />
