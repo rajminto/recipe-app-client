@@ -1,15 +1,28 @@
-import React from 'react';
-import { string } from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { func, number, shape } from 'prop-types';
 import styles from './EditRecipeIngredient.module.scss';
 
-const EditRecipeIngredient = ({ name }) => {
+const EditRecipeIngredient = ({ recipeInfo, ingredientIndex, handleIngredientChange }) => {
+  const [text, setText] = useState(recipeInfo?.ingredients[ingredientIndex]?.name);
+
+  useEffect(() => {
+    setText(recipeInfo.ingredients[ingredientIndex]?.name);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleNewTextChange = editText => {
+    setText(editText);
+  };
   return (
     <div className={styles.editInputWrapper}>
       <input
         className={styles.editInput}
         type='text'
-        value={name}
-        onChange={() => console.log('clicked')}
+        value={text}
+        onChange={e => {
+          handleIngredientChange(e.target.value, ingredientIndex);
+          handleNewTextChange(e.target.value);
+        }}
         required
       />
     </div>
@@ -17,7 +30,9 @@ const EditRecipeIngredient = ({ name }) => {
 };
 
 EditRecipeIngredient.propTypes = {
-  name: string.isRequired
+  recipeInfo: shape({}).isRequired,
+  handleIngredientChange: func.isRequired,
+  ingredientIndex: number.isRequired
 };
 
 export default EditRecipeIngredient;

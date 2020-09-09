@@ -7,7 +7,7 @@ import { gsap } from 'gsap';
 // Component Imports
 import Card from '../shared/Card';
 import RecipeHeader from './RecipeHeader';
-import RecipeIngredientsList from './RecipeIngredientsList';
+import RecipeIngredientsList from './RecipeIngredientsList/RecipeIngredientList.connector';
 import RecipeInstructionsList from './RecipeInstructionsList/RecipeInstructionList.connector';
 import { ReactComponent as DairySVG } from '../../assets/svgs/dairy.svg';
 import { ReactComponent as FishSVG } from '../../assets/svgs/fish.svg';
@@ -20,7 +20,7 @@ import { ReactComponent as BreadSVG } from '../../assets/svgs/bread.svg';
 import { tagList } from '../../const';
 
 const Recipe = ({ recipeInfo, editModeActivated, setEditModeActivated }) => {
-  const { name, description, img_url, prep_time, cook_time, users, ingredients, tags } = recipeInfo;
+  const { name, description, img_url, prep_time, cook_time, users, tags } = recipeInfo;
 
   // returns an array of just the tag 'name's :: string
   const tagListPlucked = R.pluck('name', tags);
@@ -87,7 +87,6 @@ const Recipe = ({ recipeInfo, editModeActivated, setEditModeActivated }) => {
       </Card>
       <div className='bot-recipe-info'>
         <RecipeIngredientsList
-          ingredients={ingredients}
           editModeActivated={editModeActivated}
           setEditModeActivated={setEditModeActivated}
         />

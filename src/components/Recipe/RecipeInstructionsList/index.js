@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { arrayOf, shape, bool, number, func } from 'prop-types';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import styles from './recipe-instructions-list.module.scss';
 
 // Component Imports
@@ -14,12 +15,12 @@ const RecipeInstructionsList = ({
   recipeInfo,
   setEditedInstructionList
 }) => {
-  const {
-    container,
-    instructionsListCard,
-    ingredientInstructionInput,
-    deleteButtonWrapper
-  } = styles;
+  // const {
+  //   container,
+  //   instructionsListCard,
+  //   ingredientInstructionInput,
+  //   deleteButtonWrapper
+  // } = styles;
 
   const [newList, setNewList] = useState([]);
 
@@ -57,18 +58,33 @@ const RecipeInstructionsList = ({
     if (editModeActivated) {
       return (
         // eslint-disable-next-line react/no-array-index-key
-        <div className={ingredientInstructionInput} key={i}>
-          <EditRecipeInstruction
-            instructionIndex={i}
-            description={instruction.description}
-            order={instruction.order}
-            handleInstructionChange={handleInstructionChange}
-            recipeInfo={recipeInfo}
-          />
-          <div className={deleteButtonWrapper} onClick={() => deleteInstruction(i)}>
-            <ToggleButton variant='delete' />
-          </div>
-        </div>
+        <TransitionGroup>
+          <CSSTransition
+            key={i}
+            timeout={1000}
+            mountOnEnter
+            unmountOnExit
+            classNames={{
+              enter: styles['fade-enter'],
+              exit: styles['fade-exit'],
+              enterActive: styles['fade-enter-active'],
+              exitActive: styles['fade-exit-active']
+            }}
+          >
+            <div className={styles.ingredientInstructionInput} key={i}>
+              <EditRecipeInstruction
+                instructionIndex={i}
+                description={instruction.description}
+                order={instruction.order}
+                handleInstructionChange={handleInstructionChange}
+                recipeInfo={recipeInfo}
+              />
+              <div className={styles.deleteButtonWrapper} onClick={() => deleteInstruction(i)}>
+                <ToggleButton variant='delete' />
+              </div>
+            </div>
+          </CSSTransition>
+        </TransitionGroup>
       );
     }
     return (
@@ -78,9 +94,9 @@ const RecipeInstructionsList = ({
   });
 
   return (
-    <Card className={container}>
+    <Card className={styles.container}>
       <h2>Instructions</h2>
-      <Card className={instructionsListCard}>{instructionsCompononents}</Card>
+      <Card className={styles.instructionsListCard}>{instructionsCompononents}</Card>
     </Card>
   );
 };
