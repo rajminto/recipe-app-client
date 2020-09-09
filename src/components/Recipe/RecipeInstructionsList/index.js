@@ -15,13 +15,6 @@ const RecipeInstructionsList = ({
   recipeInfo,
   setEditedInstructionList
 }) => {
-  // const {
-  //   container,
-  //   instructionsListCard,
-  //   ingredientInstructionInput,
-  //   deleteButtonWrapper
-  // } = styles;
-
   const [newList, setNewList] = useState([]);
 
   useEffect(() => {

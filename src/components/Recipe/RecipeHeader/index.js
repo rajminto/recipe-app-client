@@ -55,9 +55,42 @@ const RecipeHeader = ({
           <img src={img_url} className={recThumb} alt='food_pic' />
         </Card>
         <Card className={headerCard}>
-          <p> {description} </p>
+          {editModeActivated ? (
+            <div className={styles.editInputWrapper}>
+              <input
+                className={styles.editInput}
+                type='text'
+                value={description}
+                onChange={e => console.log(e.target.value)}
+                required
+              />
+            </div>
+          ) : (
+            <p> {description} </p>
+          )}
           <div className={timesContainer}>
-            <p> Prep: {prep_time} </p> <p> Cook: {cook_time} </p>
+            {editModeActivated ? (
+              <div className={styles.editInputWrapper}>
+                <input
+                  className={styles.editInput}
+                  type='text'
+                  value={prep_time}
+                  onChange={e => console.log(e.target.value)}
+                  required
+                />
+                <input
+                  className={styles.editInput}
+                  type='text'
+                  value={cook_time}
+                  onChange={e => console.log(e.target.value)}
+                  required
+                />
+              </div>
+            ) : (
+              <>
+                <p> Prep: {prep_time} </p> <p> Cook: {cook_time} </p>
+              </>
+            )}
           </div>
         </Card>
       </div>
