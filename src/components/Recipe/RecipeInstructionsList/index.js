@@ -51,7 +51,7 @@ const RecipeInstructionsList = ({
     if (editModeActivated) {
       return (
         // eslint-disable-next-line react/no-array-index-key
-        <TransitionGroup>
+        <TransitionGroup key={i}>
           <CSSTransition
             key={i}
             timeout={1000}

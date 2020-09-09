@@ -50,6 +50,7 @@ const RecipeIngredientsList = ({
       // eslint-disable-next-line react/no-array-index-key
       return (
         <EditRecipeIngredient
+          key={i}
           ingredientIndex={i}
           name={ingredient.name}
           handleIngredientChange={handleIngredientChange}
