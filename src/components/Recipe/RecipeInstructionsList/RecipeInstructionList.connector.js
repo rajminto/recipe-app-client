@@ -1,13 +1,15 @@
 import { connect } from 'react-redux';
 import RecipeInstructionsList from './index';
-import { setRecipeInfo } from '../store/recipeCreationSlice';
+import { setEditedInstructionList, setRecipeInfo } from '../store/recipeCreationSlice';
 
 const mapState = state => ({
-  recipeInfo: state.createRecipe.recipeCreationSlice.recipeInfo
+  recipeInfo: state.createRecipe.recipeCreationSlice.recipeInfo,
+  editedInstructionList: state.createRecipe.recipeCreationSlice.editedInstructionList
 });
 
 const mapDispatch = {
-  setRecipeInfo
+  setRecipeInfo,
+  setEditedInstructionList
 };
 
 export default connect(mapState, mapDispatch)(RecipeInstructionsList);

@@ -8,11 +8,13 @@ import Card from '../../shared/Card';
 import EditRecipeIngredient from './EditRecipeIngredient';
 
 const RecipeIngredientsList = ({ ingredients, editModeActivated }) => {
-  const ingredientComponents = ingredients.map(ingredient => {
+  const ingredientComponents = ingredients.map((ingredient, i) => {
     if (editModeActivated) {
-      return <EditRecipeIngredient key={ingredient.id} name={ingredient.name} />;
+      // eslint-disable-next-line react/no-array-index-key
+      return <EditRecipeIngredient key={i} name={ingredient.name} />;
     }
-    return <RecipeIngredient key={ingredient.id} name={ingredient.name} />;
+    // eslint-disable-next-line react/no-array-index-key
+    return <RecipeIngredient key={i} name={ingredient.name} />;
   });
 
   return (
@@ -28,7 +30,7 @@ RecipeIngredientsList.propTypes = {
   ingredients: arrayOf(
     shape({
       name: string.isRequired,
-      id: number.isRequired
+      id: number
     })
   ).isRequired
 };

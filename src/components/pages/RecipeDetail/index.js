@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { shape, string } from 'prop-types';
+import { func } from 'prop-types';
 import { baseUrl } from '../../../api';
 
 // Component imports
@@ -41,6 +41,7 @@ const RecipeDetail = ({ setRecipeInfo }) => {
     } else {
       fetchRecipeById(id);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -56,11 +57,7 @@ const RecipeDetail = ({ setRecipeInfo }) => {
 };
 
 RecipeDetail.propTypes = {
-  match: shape({
-    params: shape({
-      id: string.isRequired
-    }).isRequired
-  }).isRequired
+  setRecipeInfo: func.isRequired
 };
 
 export default RecipeDetail;

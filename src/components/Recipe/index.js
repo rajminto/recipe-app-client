@@ -20,17 +20,7 @@ import { ReactComponent as BreadSVG } from '../../assets/svgs/bread.svg';
 import { tagList } from '../../const';
 
 const Recipe = ({ recipeInfo, editModeActivated, setEditModeActivated }) => {
-  const {
-    name,
-    description,
-    img_url,
-    prep_time,
-    cook_time,
-    users,
-    instructions,
-    ingredients,
-    tags
-  } = recipeInfo;
+  const { name, description, img_url, prep_time, cook_time, users, ingredients, tags } = recipeInfo;
 
   // returns an array of just the tag 'name's :: string
   const tagListPlucked = R.pluck('name', tags);
@@ -58,6 +48,7 @@ const Recipe = ({ recipeInfo, editModeActivated, setEditModeActivated }) => {
     if (tags.length) {
       gsap.from('.single-tag', { duration: 1, x: -1000, autoAlpha: 0, stagger: '0.5' }, '-=.5');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -101,7 +92,6 @@ const Recipe = ({ recipeInfo, editModeActivated, setEditModeActivated }) => {
           setEditModeActivated={setEditModeActivated}
         />
         <RecipeInstructionsList
-          instructions={instructions}
           editModeActivated={editModeActivated}
           setEditModeActivated={setEditModeActivated}
         />

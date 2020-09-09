@@ -14,10 +14,13 @@ const initialState = {
     userId: null,
     users: [],
     isPrivate: false,
-    ingredients: [{ name: '' }],
-    instructions: [{ description: '' }],
-    tags: []
-  }
+    ingredients: [{ id: null, name: '' }],
+    instructions: [{ description: '', order: null }],
+    tags: [],
+    user_name: ''
+  },
+  editedIngredientList: [],
+  editedInstructionList: [{ description: '', order: null }]
 };
 
 const reducers = {
@@ -27,17 +30,17 @@ const reducers = {
   clearForm(state) {
     return R.assoc('recipeInfo', initialState.recipeInfo, state);
   },
-  setInstructionsList(state, { payload }) {
-    return R.assoc('instructions', payload, state);
-  },
-  setIngredientsList(state, { payload }) {
-    return R.assoc('ingredients', payload, state);
-  },
   setRecipePrivate(state, { payload }) {
     return R.assoc('isPrivate', payload, state);
   },
   setRecipeInfo(state, { payload }) {
     return R.assoc('recipeInfo', payload, state);
+  },
+  setEditedIngredientList(state, { payload }) {
+    return R.assoc('editedIngredientList', payload, state);
+  },
+  setEditedInstructionList(state, { payload }) {
+    return R.assoc('editedInstructionList', payload, state);
   }
 };
 
@@ -50,8 +53,8 @@ const { actions, reducer } = createSlice({
 export const {
   clearForm,
   setEditModeActivated,
-  setInstructionsList,
-  setIngredientsList,
+  setEditedInstructionList,
+  setEditedIngredientList,
   setRecipePrivate,
   setRecipeInfo
 } = actions;

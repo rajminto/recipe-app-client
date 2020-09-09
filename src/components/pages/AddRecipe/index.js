@@ -29,8 +29,8 @@ const AddRecipe = ({ postNewRecipe, recipeInfo, setRecipeInfo, clearForm }) => {
   } = styles;
 
   const {
-    ingredients,
-    instructions,
+    // ingredients,
+    // instructions,
     isPrivate,
     tags,
     name,
@@ -72,6 +72,7 @@ const AddRecipe = ({ postNewRecipe, recipeInfo, setRecipeInfo, clearForm }) => {
 
   useEffect(() => {
     clearForm();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleInputChange = e => {
@@ -82,8 +83,8 @@ const AddRecipe = ({ postNewRecipe, recipeInfo, setRecipeInfo, clearForm }) => {
     e.preventDefault();
     const recipe = {
       ...recipeInfo,
-      ingredients,
-      instructions: instructions.map((instruction, i) => {
+      ingredients: ingredientsList,
+      instructions: instructionsList.map((instruction, i) => {
         instruction.order = i + 1;
         return instruction;
       }),
@@ -91,6 +92,7 @@ const AddRecipe = ({ postNewRecipe, recipeInfo, setRecipeInfo, clearForm }) => {
       tags
     };
     postNewRecipe(recipe);
+    setRecipeInfo(recipe);
   };
 
   const handleIsPrivate = () => {
@@ -112,12 +114,12 @@ const AddRecipe = ({ postNewRecipe, recipeInfo, setRecipeInfo, clearForm }) => {
   };
 
   const addNewIngredient = () => {
-    setRecipeInfo({ ...recipeInfo, ingredients: [...ingredients, { name: '' }] });
+    setIngredientsList([...ingredientsList, { name: '' }]);
   };
 
   const deleteIngredient = index => {
-    const newIngredients = ingredients.filter((ingredient, i) => i !== index);
-    setRecipeInfo({ ...recipeInfo, ingredients: newIngredients });
+    const newIngredients = ingredientsList.filter((ingredient, i) => i !== index);
+    setIngredientsList(newIngredients);
   };
 
   const updateInstructionList = (index, value) => {
@@ -135,12 +137,12 @@ const AddRecipe = ({ postNewRecipe, recipeInfo, setRecipeInfo, clearForm }) => {
   };
 
   const addNewInstruction = () => {
-    setRecipeInfo({ ...recipeInfo, instructions: [...instructions, { description: '' }] });
+    setInstructionsList([...instructionsList, { description: '' }]);
   };
 
   const deleteInstruction = index => {
-    const newInstructions = instructions.filter((instruction, i) => i !== index);
-    setRecipeInfo({ ...recipeInfo, instructions: newInstructions });
+    const newInstructions = instructionsList.filter((instruction, i) => i !== index);
+    setInstructionsList(newInstructions);
   };
 
   const handleToggleTag = tag => {
@@ -217,7 +219,7 @@ const AddRecipe = ({ postNewRecipe, recipeInfo, setRecipeInfo, clearForm }) => {
           </div>
         </div>
         <h1>Add Ingredients</h1>
-        {ingredients.map((ingredient, i) => (
+        {ingredientsList.map((ingredient, i) => (
           <div className={ingredientInstructionInputWrapper} key={i}>
             <label>{i + 1}. </label>
             <div className={ingredientInstructionInput}>

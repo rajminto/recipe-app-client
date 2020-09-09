@@ -69,11 +69,15 @@ RecipeHeader.propTypes = {
   editModeActivated: bool.isRequired,
   setEditModeActivated: func.isRequired,
   name: string.isRequired,
-  user_name: string.isRequired,
+  user_name: string,
   img_url: string.isRequired,
   description: string.isRequired,
   prep_time: string.isRequired,
   cook_time: string.isRequired
+};
+
+RecipeHeader.defaultProps = {
+  user_name: ''
 };
 
 export default RecipeHeader;
