@@ -15,8 +15,6 @@ const RecipeIngredientsList = ({
 }) => {
   const [newList, setNewList] = useState([]);
 
-  console.log('FUCK:', recipeInfo);
-
   useEffect(() => {
     if (recipeInfo) {
       setNewList(recipeInfo.ingredients);
@@ -78,10 +76,14 @@ RecipeIngredientsList.propTypes = {
       name: string.isRequired,
       id: number
     })
-  ).isRequired,
+  ),
   recipeInfo: shape({}).isRequired,
-  setRecipeInfo: func.isRequired,
+  // setRecipeInfo: func.isRequired,
   setEditedIngredientList: func.isRequired
+};
+
+RecipeIngredientsList.defaultProps = {
+  ingredients: []
 };
 
 export default RecipeIngredientsList;
