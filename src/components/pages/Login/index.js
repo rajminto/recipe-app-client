@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect } from 'react-router-dom';
 import styles from './login.module.scss';
 
@@ -9,61 +9,35 @@ import CheckAnimation from '../../shared/CheckAnimation';
 import { baseUrl } from '../../../api';
 
 // TODO?: use context api to control form
-class Login extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      message: '',
-      loginSuccess: false,
-      formValid: false,
-      form: {
-        email: '',
-        password: ''
-      }
-    };
-  }
+const Login = () => {
+  const [message, setMessage] = useState('');
+  const [loginSuccess, setLoginSuccess] = useState(false);
+  const [formValid, setFormValid] = useState(false);
+  const [user, setUser] = useState({
+    email: '',
+    password: ''
+  });
 
-  handleChange = e => {
-    this.setState(
-      {
-        form: {
-          ...this.state.form,
-          [e.target.name]: e.target.value
-        }
-      },
-      () => this.isFormValid()
-    );
+  const handleChange = e => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value
+    });
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-    const user = this.state.form;
-
-    this.submitUser(user)
-      .then(res => res.json())
-      .then(response => {
-        // eslint-disable-next-line no-console
-        console.log(response);
-        // Login succeeded: redirect to signup page
-        // Login failed: display response message
-        response.success
-          ? this.setState({ loginSuccess: true })
-          : this.setState({ message: response.message });
-      })
-      .catch(err => {
-        if (typeof err === 'string') this.setState({ message: err });
-      });
-  };
-
-  isFormValid = () => {
-    if (this.state.form.password.length > 5 && this.state.formValid === false) {
-      this.setState({ formValid: true });
-    } else if (this.state.form.password.length <= 5 && this.state.formValid === true) {
-      this.setState({ formValid: false });
+  const isFormValid = () => {
+    if (user.password.length > 5 && formValid === false) {
+      setFormValid(true);
+    } else if (user.password.length <= 5 && formValid === true) {
+      setFormValid(false);
     }
   };
 
-  submitUser = user => {
+  useEffect(() => {
+    isFormValid();
+  }, [user]);
+
+  const submitUser = newUser => {
     return fetch(`${baseUrl}/api/auth/login`, {
       method: 'POST',
       credentials: 'include',
@@ -71,48 +45,51 @@ class Login extends Component {
         'content-type': 'application/json',
         accept: 'application/json'
       },
-      body: JSON.stringify(user)
+      body: JSON.stringify(newUser)
     });
   };
 
-  render() {
-    const { message, loginSuccess, formValid } = this.state;
+  const handleSubmit = e => {
+    e.preventDefault();
 
-    if (loginSuccess) return <Redirect to='/profile' />;
-    // console.log('render from parent')
-    return (
-      <Card className={styles.loginFormContainer}>
-        <div className={styles.validator}>
-          <h1>Login to Account</h1>
-          <CheckAnimation formValid={formValid} />
-        </div>
+    submitUser(user)
+      .then(res => res.json())
+      .then(response => {
+        // Login succeeded: redirect to signup page
+        // Login failed: display response message
+        response.success ? setLoginSuccess(true) : setMessage(response.message);
+      })
+      .catch(err => typeof err === 'string' && setMessage(err));
+  };
 
-        {/* TODO: refactor to use a Message component */}
-        {message && <h3>{this.state.message}</h3>}
+  if (loginSuccess) return <Redirect to='/profile' />;
 
-        <form onSubmit={this.handleSubmit} className={styles.loginForm}>
-          <label>Email:</label>
-          <input
-            type='email'
-            name='email'
-            onChange={this.handleChange}
-            value={this.state.email}
-            required
-          />
-          <label>Password:</label>
-          <input
-            type='password'
-            name='password'
-            onChange={this.handleChange}
-            value={this.state.password}
-            required
-            minLength='6'
-          />
-          <Button text='Login' />
-        </form>
-      </Card>
-    );
-  }
-}
+  return (
+    <Card className={styles.loginFormContainer}>
+      <div className={styles.validator}>
+        <h1>Login to Account</h1>
+        <CheckAnimation formValid={formValid} />
+      </div>
+
+      {/* TODO: refactor to use a Message component */}
+      {message && <h3>{message}</h3>}
+
+      <form onSubmit={handleSubmit} className={styles.loginForm}>
+        <label>Email:</label>
+        <input type='email' name='email' onChange={handleChange} value={user.email} required />
+        <label>Password:</label>
+        <input
+          type='password'
+          name='password'
+          onChange={handleChange}
+          value={user.password}
+          required
+          minLength='6'
+        />
+        <Button text='Login' />
+      </form>
+    </Card>
+  );
+};
 
 export default Login;
