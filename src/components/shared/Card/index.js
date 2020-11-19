@@ -1,35 +1,30 @@
-import React, { Component } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { node, string } from 'prop-types';
 import { gsap } from 'gsap';
 import styles from './card.module.scss';
 
-class Card extends Component {
-  constructor(props) {
-    super(props);
-    this.container = null;
-  }
+const Card = ({ className, children }) => {
+  let containerRef = useRef(null);
 
-  componentDidMount() {
-    gsap.from(this.container, {
+  useEffect(() => {
+    gsap.from(containerRef, {
       duration: 0.7,
       autoAlpha: 0,
       ease: 'back.easeInOut'
     });
-  }
+  }, []);
 
-  render() {
-    return (
-      <div
-        ref={container => {
-          this.container = container;
-        }}
-        className={`${styles.cardContainer} ${this.props.className}`}
-      >
-        {this.props.children}
-      </div>
-    );
-  }
-}
+  return (
+    <div
+      ref={container => {
+        containerRef = container;
+      }}
+      className={`${styles.cardContainer} ${className}`}
+    >
+      {children}
+    </div>
+  );
+};
 
 Card.propTypes = {
   children: node,
